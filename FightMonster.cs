@@ -16,13 +16,13 @@ namespace Dungeon_Crawler
                     room.Monster.AttackPlayer(player);
                 } else if (room.Monster.Health <= 0)
                 {
-                    // Add xp to player inventory
+                    // Add xp to player
                     // Write message
                     battleRunning = false;
                 }
                 if (player.Health > 0)
                 {
-                    //  Three battke actions
+                    //  Three battle actions
 
                 } 
             }

@@ -3,8 +3,8 @@ namespace Dungeon_Crawler
 {
     public class Player
     {
-        // Player position
         public string Name { get; set; }
+        // Player position
         public int PlayerX { get; set; } = 0;
         public int PlayerY { get; set; } = 0;
         public List<Room> ExploredRooms { get; set; } = new List<Room>();
@@ -27,6 +27,10 @@ namespace Dungeon_Crawler
                 player.Health -= damage;
             }
         }
+        //  Flee
+        //  Mana Blast 
+        //  Menu to print all three
+
         //  Move
         //  Dodge
 
