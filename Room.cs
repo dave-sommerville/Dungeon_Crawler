@@ -22,7 +22,7 @@
         {
             X = x;
             Y = y;
-            Description = "You are in a room.";// Access from a large random array 
+            Description = "You are in a room.";
         }
         public void AddLoot(Player player)
         {
