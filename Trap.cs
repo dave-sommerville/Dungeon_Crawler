@@ -10,7 +10,14 @@
             Description = "You have triggered a trap!";
         }
         public delegate void TrapHandler(Player player);
-        public event TrapHandler OnTrapTriggered;
-
+        public event TrapHandler TrapTriggering;
+        public void TrapTrigger(Player player)
+        {   // Logic and activity here 
+            OnTrapTrigger(player);
+        }
+        protected virtual void OnTrapTrigger(Player player)
+        {
+            TrapTriggering?.Invoke(player);
+        }
     }
 }

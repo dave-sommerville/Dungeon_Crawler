@@ -10,7 +10,7 @@ namespace Dungeon_Crawler
         public List<Room> ExploredRooms { get; set; } = new List<Room>();
         public int ArmorClass { get; set; } = 10;
         public int Health { get; set; } = 100;
-        public int Gold { get; set; } = 0;
+        public int XP { get; set; } = 0;
         public int Mana { get; set; } = 3;
         public int Attack { get; set; } = 10;
         public int Modifiers { get; set; } = 0;
@@ -19,14 +19,7 @@ namespace Dungeon_Crawler
         {
             Name = name;
         }
-        public void AttackMonster(Player player)
-        {
-            int damage = Attack - player.ArmorClass;
-            if (damage > 0)
-            {
-                player.Health -= damage;
-            }
-        }
+
         //  Flee
         //  Mana Blast 
         //  Menu to print all three
