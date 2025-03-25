@@ -8,17 +8,14 @@ namespace Dungeon_Crawler
         private readonly int _nextId;
         public string Name { get; set; }
         public int RoomId { get; set; }
-        // Player position
-        //public int PlayerX { get; set; } = 0;
-        //public int PlayerY { get; set; } = 0;
-        //public List<Room> ExploredRooms { get; set; } = new List<Room>();
-        public int ArmorClass { get; set; } = 10;
+
+        public int ArmorClass { get; set; } = 2;
         public int Health { get; set; } = 100;
-        //public int XP { get; set; } = 0;
         public int Mana { get; set; } = 3;
         public int Attack { get; set; } = 10;
+        public List<string> Inventory { get; set; } = new List<string>();
         //public int Modifiers { get; set; } = 0;
-        public string[] Inventory { get; set; } = new string[5];
+        //public int XP { get; set; } = 0;
         public Player(string name)
         {
             RoomId = _nextId++;
@@ -30,7 +27,7 @@ namespace Dungeon_Crawler
         public event MonsterActions OnFlee;
         public delegate void TrapActions(Player player); // Will likely need a string array or dictionary to hold descriptions 
         public event TrapActions OnTrigger;
-        public delegate void SearchActions(Player player); // Will likely need a string array or dictionary to hold descriptions 
+        public delegate void SearchActions(Player player, string[] relics); // Will likely need a string array or dictionary to hold descriptions 
         public event SearchActions OnSearch;
 
         public void Battle(Player player, Monster monster)
@@ -80,9 +77,37 @@ namespace Dungeon_Crawler
             {
                 OnTrigger(player);
             }
-        } 
-        //  OnExplore
-            //  OnTrap
-            //  OnSearch
+        }
+
+        public void Search(Player player, string[] relics)
+        {
+            SearchRoom(player, relics);
+        }
+        protected virtual void SearchRoom(Player player, string[] relics)
+        {
+            if(OnSearch != null)
+            {
+                OnSearch(player, relics);
+            }
+        }
+        //Print player
+        public void PlayerAttack(Monster monster)
+        {
+            Random random = new Random();
+            if (Attack >= monster.ArmorClass)
+            {
+                int damage = random.Next(5, 20);
+                monster.Health -= damage;
+                Console.WriteLine($"The {monster.Name} is hit! Its health is reduced by {damage}, it still has {monster.Health}");
+                if(monster.Health <= 0)
+                {
+                    Console.WriteLine("The monster has been killed");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Player Attack missed");
+            }
+        }
     }
 }

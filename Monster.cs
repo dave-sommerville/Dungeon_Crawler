@@ -19,9 +19,18 @@ namespace Dungeon_Crawler
             Attack = random.Next(0, 5) + 7;
             ArmorClass = random.Next(0, 5) + 10;
         }
-        public void MonsterAttack()
+        public void MonsterAttack(Player player)
         {
-
+            Random random = new Random();
+            if(Attack >= player.ArmorClass)
+            {
+                int damage = random.Next(5, 20);
+                player.Health -= damage;
+                Console.WriteLine($"Player hit! Player's health reduced by {damage}");
+            } else
+            {
+                Console.WriteLine("Monster Attack missed");
+            }
         }
     }
 }

@@ -16,8 +16,8 @@
         public int Y { get; set; } = 0;
         public int X { get; set; } = 0;
         public string Description { get; set; }
-        public Monster Monster { get; set; }
-        public int? TrapId { get; set; }
+        public bool HasMonster { get; set; } = false;
+        public bool HasTrap { get; set; }
         public Room()
         {
             Description = "You are in a room.";
