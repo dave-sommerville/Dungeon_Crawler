@@ -8,10 +8,8 @@ namespace Dungeon_Crawler
         public string Name { get; set; }
         public int Mana { get; set; } = 3;
         public List<string> Inventory { get; set; } = new List<string>();
-        public int Gold { get; set; }
-        //public int Modifiers { get; set; } = 0;
-        //public int XP { get; set; } = 0;
-        //Explored room tracker  
+        public int Gold { get; set; } 
+        public int LocationId { get; set; }
         public Player(string name) : base()
         {
             Name = name;
@@ -20,6 +18,7 @@ namespace Dungeon_Crawler
             Attack = 10;
             Gold = 10;
             Mana = 3;
+            LocationId = 0;
         }
         public delegate void MonsterActions(Player player, Monster monster);
         public event MonsterActions OnBattle;
@@ -63,7 +62,6 @@ namespace Dungeon_Crawler
                 OnFlee(player, monster);
             }
         }
-
         public void Trigger(Player player)
         {
             TriggerTrap(player);
@@ -75,7 +73,6 @@ namespace Dungeon_Crawler
                 OnTrigger(player);
             }
         }
-
         public void Search(Player player)
         {
             SearchRoom(player);
@@ -115,6 +112,22 @@ namespace Dungeon_Crawler
             else
             {
                 Console.WriteLine("Player Attack missed");
+            }
+        }
+        public void Move(string direction, Dungeon dungeon)
+        {
+            Chamber currentChamber = dungeon.GetChamber(LocationId);
+
+            if (currentChamber.Exits.ContainsKey(direction))
+            {
+                LocationId = currentChamber.Exits[direction];
+                Console.WriteLine($"You move {direction} into Room {LocationId}.");
+            }
+            else
+            {
+                int newRoomId = dungeon.GenerateChamber(LocationId, direction);
+                LocationId = newRoomId;
+                Console.WriteLine($"You venture {direction} into an uncharted area... Room {newRoomId}.");
             }
         }
     }

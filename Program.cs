@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Dungeon_Crawler
 {
@@ -59,21 +60,7 @@ namespace Dungeon_Crawler
             "A Glove That Writes on Walls When Worn"
         };
 
-        public static List<string> DungeonChambers = new List<string>
-        {
-            "A damp stone chamber with flickering torchlight and ancient carvings on the walls.",
-            "A musty library filled with rotting scrolls and a single intact tome on a pedestal.",
-            "A circular room with a pit in the center, from which strange whispers echo.",
-            "A flooded chamber where only the tops of broken pillars emerge from the dark water.",
-            "A crypt-like hall lined with sarcophagi, some of which are slightly ajar.",
-            "A cavernous space where glowing mushrooms cling to the ceiling, casting eerie light.",
-            "A blacksmith's forge, long abandoned, with rusted weapons scattered across the floor.",
-            "A small chamber filled with ominous statues, their hollow eyes seeming to watch you.",
-            "A throne room in ruins, with a tattered banner hanging above a cracked stone seat.",
-            "A treasury looted long ago, save for a single, locked chest in the corner.",
-            "A corridor with shifting walls, revealing hidden doors and long-forgotten passageways.",
-            "A ritual chamber with a bloodstained altar and a lingering scent of incense."
-        };
+
         public static List<string> CloseCallTraps = new List<string>
         {
             "A pressure plate clicks underfoot, but you leap away just in time.",
@@ -104,6 +91,27 @@ namespace Dungeon_Crawler
         static void Main(string[] args)
         {
             GameLaunch();
+            /*
+            while (true)
+            {
+                Room currentRoom = dungeon.GetRoom(player.CurrentRoomId);
+                Console.WriteLine($"\n{currentRoom.Description}");
+
+                if (!currentRoom.IsCleared)
+                {
+                    Console.WriteLine("You clear the room!");
+                    currentRoom.IsCleared = true;
+                }
+
+                Console.WriteLine("Exits: " + string.Join(", ", currentRoom.Exits.Keys));
+
+                Console.Write("Enter a direction (north, south, east, west): ");
+                string direction = Console.ReadLine().ToLower();
+
+                if (direction == "quit") break;
+
+                player.Move(direction, dungeon);
+            }*/
         }
         public static void GameLaunch()
         {
@@ -115,8 +123,6 @@ namespace Dungeon_Crawler
             player.OnSearch += SearchForRelics;
             player.OnSearch += SearchForGold;
             player.OnSearch += SearchForPotions;
-
-
             bool IsRunning = true;
             while(IsRunning && player.Health > 0)
             {
@@ -126,7 +132,6 @@ namespace Dungeon_Crawler
                 {
                     case 1:
                         Console.WriteLine("You proceed to the next room");
-                        // Describe room
                         ExploreDungeon(player);
                         break;
                     case 2:
@@ -144,7 +149,6 @@ namespace Dungeon_Crawler
                         break;
                 }
             }
-
         }
         private static int PrintMenu(int options)
         {
