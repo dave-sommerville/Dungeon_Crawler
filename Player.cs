@@ -3,36 +3,35 @@ using System.Diagnostics;
 
 namespace Dungeon_Crawler
 {
-    public class Player
+    public class Player : Character
     {
-        private readonly int _nextId;
         public string Name { get; set; }
-        public int RoomId { get; set; }
-
-        public int ArmorClass { get; set; } = 2;
-        public int Health { get; set; } = 100;
         public int Mana { get; set; } = 3;
-        public int Attack { get; set; } = 10;
         public List<string> Inventory { get; set; } = new List<string>();
+        public int Gold { get; set; }
         //public int Modifiers { get; set; } = 0;
         //public int XP { get; set; } = 0;
-        public Player(string name)
+        //Explored room tracker  
+        public Player(string name) : base()
         {
-            RoomId = _nextId++;
             Name = name;
+            ArmorClass = 8;
+            Health = 100;
+            Attack = 10;
+            Gold = 10;
+            Mana = 3;
         }
         public delegate void MonsterActions(Player player, Monster monster);
         public event MonsterActions OnBattle;
         public event MonsterActions OnBlast;
         public event MonsterActions OnFlee;
-        public delegate void TrapActions(Player player); // Will likely need a string array or dictionary to hold descriptions 
+        public delegate void TrapActions(Player player); 
         public event TrapActions OnTrigger;
-        public delegate void SearchActions(Player player, string[] relics); // Will likely need a string array or dictionary to hold descriptions 
+        public delegate void SearchActions(Player player); 
         public event SearchActions OnSearch;
 
         public void Battle(Player player, Monster monster)
         {
-            // Line optional
             BattleMonster(player, monster);
         }
         protected virtual void BattleMonster(Player player, Monster monster)
@@ -44,7 +43,6 @@ namespace Dungeon_Crawler
         }
         public void Blast(Player player, Monster monster)
         {
-            // Line optional
             BlastMonster(player, monster);
         }
         protected virtual void BlastMonster(Player player, Monster monster)
@@ -56,7 +54,6 @@ namespace Dungeon_Crawler
         }
         public void Flee(Player player, Monster monster)
         {
-            // Line optional
             FleeMonster(player, monster);
         }
         protected virtual void FleeMonster(Player player, Monster monster)
@@ -79,18 +76,29 @@ namespace Dungeon_Crawler
             }
         }
 
-        public void Search(Player player, string[] relics)
+        public void Search(Player player)
         {
-            SearchRoom(player, relics);
+            SearchRoom(player);
         }
-        protected virtual void SearchRoom(Player player, string[] relics)
+        protected virtual void SearchRoom(Player player)
         {
             if(OnSearch != null)
             {
-                OnSearch(player, relics);
+                OnSearch(player);
             }
         }
-        //Print player
+        //  Other player methods
+        public void PrintPlayerDetails()
+        {
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");
+            Console.WriteLine($"Attack: {Attack}");
+            Console.WriteLine($"Mana: {Mana}");
+            for(int i = 0; i < Inventory.Count; i++)
+            {
+                Console.Write(Inventory[i].ToString());
+            }
+        }
         public void PlayerAttack(Monster monster)
         {
             Random random = new Random();
@@ -98,7 +106,7 @@ namespace Dungeon_Crawler
             {
                 int damage = random.Next(5, 20);
                 monster.Health -= damage;
-                Console.WriteLine($"The {monster.Name} is hit! Its health is reduced by {damage}, it still has {monster.Health}");
+                Console.WriteLine($"The {monster.Species} is hit! Its health is reduced by {damage}, it still has {monster.Health}");
                 if(monster.Health <= 0)
                 {
                     Console.WriteLine("The monster has been killed");

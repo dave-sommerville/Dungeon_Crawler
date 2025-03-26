@@ -1,23 +1,17 @@
 ﻿
 namespace Dungeon_Crawler
 {
-    public class Monster
+    public class Monster : Character
     {
-        private readonly int _nextId;
         private readonly Random random = new Random();
         private readonly string[] MonsterNames = { "Goblin", "Orc", "Troll", "Dragon" };
-        public int MonsterId { get; set; }
-        public string Name { get; set; }
-        public int Health { get; set; }
-        public int Attack { get; set; }
-        public int ArmorClass { get; set; }
-        public Monster()
+        public string Species { get; set; }
+        public Monster() : base()
         {
-            MonsterId = _nextId++;
-            Name = MonsterNames[random.Next(0,3)];
+            Species = MonsterNames[random.Next(0,3)];
             Health = random.Next(0,5) + 10;
             Attack = random.Next(0, 5) + 7;
-            ArmorClass = random.Next(0, 5) + 10;
+            ArmorClass = random.Next(0, 5) + 2;
         }
         public void MonsterAttack(Player player)
         {
