@@ -123,6 +123,8 @@
                 switch(decision)
                 {
                     case 1:
+                        Console.WriteLine("You proceed to the next room");
+                        Console.WriteLine($"{dungeonChambers[Random.Next(0, dungeonChambers.Count)]}");
                         ExploreDungeon(player);
                         break;
                     case 2:
@@ -159,17 +161,11 @@
         }
         public static void ExploreDungeon(Player player)
         {
-            Random random = new Random();
-            Console.WriteLine("You proceed to the next room");
-            Console.WriteLine($"{dungeonChambers[random.Next(0, dungeonChambers.Count)]}");
-            int randIndex = random.Next(1, 4);
-            if (randIndex == 1)
+            int rand = Random.Next(1,4);
+            if (rand == 1)
             {
                 MonsterMenu(player);
-            } else if (randIndex == 2)
-            {
-                player.Trigger(player);
-            } else if(randIndex >= 3)
+            } else if (rand == 2)
             {
                 Console.WriteLine("Room is clear");
                 Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
@@ -178,6 +174,10 @@
                 {
                     player.Search(player);
                 }
+            } else if(rand == 3)
+            {
+                Console.WriteLine("Trap triggered");
+                player.Trigger(player);
             }
         }
         public static void MonsterMenu(Player player)
