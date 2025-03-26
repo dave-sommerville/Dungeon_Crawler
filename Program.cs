@@ -3,18 +3,107 @@
     internal class Program
     {
         public static Random Random = new Random();
-        public static string[] Inventory { get; private set; }
-        public static List<string> Relics { get; private set; } = new List<string>
+        public static List<string> Relics = new List<string>
         {
-            "Big",
-            "Small"
+            "Rusty Iron Sword",
+            "Moldy Leather Pouch of Copper Coins",
+            "Silver Goblet with Ruby Inlay",
+            "Broken Wooden Shield",
+            "Ancient Bronze Helmet",
+            "Cracked Crystal Orb",
+            "Tarnished Silver Dagger",
+            "Gold Necklace with a Missing Gem",
+            "Bundle of Old Arrows",
+            "Ornate Key with Strange Markings",
+            "Small Pouch of Bone Dice",
+            "Steel Warhammer with Dwarven Runes",
+            "Jeweled Ring of Unknown Origin",
+            "Set of Rusted Lockpicks",
+            "Bloodstained Bandages",
+            "Carved Wooden Idol of a Forgotten Deity",
+            "Chipped Sapphire Pendant",
+            "Bronze Bell with an Eerie Chime",
+            "Obsidian Dagger with a Serpentine Handle",
+            "Scroll Case Containing Illegible Writings",
+            "Silver Chainmail Shirt, Slightly Damaged",
+            "Tattered Map Marking a Lost Crypt",
+            "A Jar of Preserved Eyeballs",
+            "Glowing Blue Crystal Shard",
+            "Ancient Coin Stamped with an Unknown Emperor",
+            "Black Iron Gauntlets, Warm to the Touch",
+            "Bundle of Moth-Eaten Spellbooks",
+            "A Locked Music Box Playing a Haunting Melody",
+            "Dragon Bone Dice Set",
+            "Golden Arrow with No Fletching",
+            "A Flask of Ever-Chilled Water",
+            "Pair of Silent Iron Boots",
+            "Engraved Copper Bracelet",
+            "A Severed Hand Clutching a Gemstone",
+            "Rusted Lantern that Still Burns with Green Flame",
+            "A Box of Teeth, Each Carved with Symbols",
+            "Mummified Finger in a Small Silk Pouch",
+            "An Unfinished Stone Chess Set",
+            "A Cloak Stitched with Moving Constellations",
+            "An Empty Book that Absorbs Ink",
+            "A Wooden Mask That Whispers When Worn",
+            "A Dagger That Drips Blood, Even When Cleaned",
+            "An Hourglass That Reverses Time Slightly When Flipped",
+            "A Blackened Crown that Feels Heavy with Regret",
+            "A Set of Bone Flutes That Play Themselves",
+            "An Unfired Clay Figurine That Warms in Your Hands",
+            "A Candle That Burns Without Melting",
+            "A Set of Silver Coins That Always Total 13",
+            "A Helm That Echoes the Voices of the Dead",
+            "A Glove That Writes on Walls When Worn"
         };
-        public static List<Monster> Monsters { get; set; }
+
+        public static List<string> dungeonChambers = new List<string>
+        {
+            "A damp stone chamber with flickering torchlight and ancient carvings on the walls.",
+            "A musty library filled with rotting scrolls and a single intact tome on a pedestal.",
+            "A circular room with a pit in the center, from which strange whispers echo.",
+            "A flooded chamber where only the tops of broken pillars emerge from the dark water.",
+            "A crypt-like hall lined with sarcophagi, some of which are slightly ajar.",
+            "A cavernous space where glowing mushrooms cling to the ceiling, casting eerie light.",
+            "A blacksmith's forge, long abandoned, with rusted weapons scattered across the floor.",
+            "A small chamber filled with ominous statues, their hollow eyes seeming to watch you.",
+            "A throne room in ruins, with a tattered banner hanging above a cracked stone seat.",
+            "A treasury looted long ago, save for a single, locked chest in the corner.",
+            "A corridor with shifting walls, revealing hidden doors and long-forgotten passageways.",
+            "A ritual chamber with a bloodstained altar and a lingering scent of incense."
+        };
+        public static List<string> closeCallTraps = new List<string>
+        {
+            "A pressure plate clicks underfoot, but you leap away just in time.",
+            "A hidden arrow whizzes past your ear, embedding itself in the wall.",
+            "A floor panel tilts beneath you, nearly sending you into a pit of spikes.",
+            "A pendulum blade swings down, stopping inches from your face.",
+            "A ceiling panel shifts, releasing a shower of sand instead of expected boulders.",
+            "You step back just as the ground splits open, revealing a pit beneath.",
+            "A burst of flame erupts from a nearby statue, but you dodge behind cover.",
+            "An iron cage drops from above, narrowly missing you as it slams shut.",
+            "A swarm of mechanical saw blades whirs to life but halts before striking.",
+            "A poisonous gas fills the chamber, but a hidden vent clears the air just in time."
+        };
+        public static List<string> damagingTraps = new List<string>
+        {
+            "A row of spears shoots up from the floor, piercing anything above them.",
+            "A jet of green flame bursts from the wall, searing everything in its path.",
+            "A massive spiked log swings down from the ceiling, smashing into you.",
+            "Barbed chains lash out from the walls, wrapping around you with cruel force.",
+            "The floor electrifies with a sudden jolt, sending shocks through your body.",
+            "A hidden blade slices up from the ground, cutting deep into your legs.",
+            "A swarm of venomous darts rains down, leaving painful welts and poison.",
+            "The ceiling suddenly collapses, sending jagged stones crashing onto you.",
+            "A spinning saw blade erupts from the floor, carving through flesh and bone.",
+            "An acidic mist fills the room, burning your skin and making it hard to breathe."
+        };
+
         static void Main(string[] args)
         {
-            userInterface();
+            GameLaunch();
         }
-        public static void userInterface()
+        public static void GameLaunch()
         {
             Player player = new Player("Player");
             player.OnBattle += MonsterBattle;
@@ -72,16 +161,17 @@
         {
             Random random = new Random();
             Console.WriteLine("You proceed to the next room");
-            //Console.WriteLine($"{descriptions[random.Next(0, descriptions.Count)]}");
+            Console.WriteLine($"{dungeonChambers[random.Next(0, dungeonChambers.Count)]}");
             int randIndex = random.Next(1, 4);
-            if (randIndex <= 2)
+            if (randIndex == 1)
             {
                 MonsterMenu(player);
-            } else if (randIndex == 3)
+            } else if (randIndex == 2)
             {
                 player.Trigger(player);
-            } else
+            } else if(randIndex >= 3)
             {
+                Console.WriteLine("Room is clear");
                 Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
                 int decision = PrintMenu(2);
                 if (decision == 1)
@@ -95,21 +185,19 @@
             Monster newMonster = new Monster();
             Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
             Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
-            //while (newMonster.Health > 0) {
-                int decision = PrintMenu(3);
-                switch (decision)
-                {
-                    case 1:
-                        player.Battle(player, newMonster);
-                        break;
-                    case 2:
-                        player.Blast(player, newMonster);
-                        break;
-                    case 3:
-                        player.Flee(player, newMonster);
-                        break;
-                }
-            //}
+            int decision = PrintMenu(3);
+            switch (decision)
+            {
+                case 1:
+                    player.Battle(player, newMonster);
+                    break;
+                case 2:
+                    player.Blast(player, newMonster);
+                    break;
+                case 3:
+                    player.Flee(player, newMonster);
+                    break;
+            }
         }
 
         //  Delegate subscriptions 
@@ -154,6 +242,7 @@
 
         public static void TriggerTrap(Player player)
         {
+
         }
         public static void SearchForRelics(Player player)
         {
@@ -178,7 +267,7 @@
             } else if(randSelect <= 9 && randSelect > 7)
             {
                 int hp = Random.Next(1, 3);
-                player.Health += hp;
+                player.Health += hp;//Should have a max xp 
                 Console.WriteLine($"{player.Name} found a dark green potion. Upon drinking it, they gained {hp} Health");
             } else
             {
