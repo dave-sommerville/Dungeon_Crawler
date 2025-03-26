@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler
+﻿using System.Runtime.CompilerServices;
+
+namespace Dungeon_Crawler
 {
     internal class Program
     {
@@ -57,7 +59,7 @@
             "A Glove That Writes on Walls When Worn"
         };
 
-        public static List<string> dungeonChambers = new List<string>
+        public static List<string> DungeonChambers = new List<string>
         {
             "A damp stone chamber with flickering torchlight and ancient carvings on the walls.",
             "A musty library filled with rotting scrolls and a single intact tome on a pedestal.",
@@ -72,7 +74,7 @@
             "A corridor with shifting walls, revealing hidden doors and long-forgotten passageways.",
             "A ritual chamber with a bloodstained altar and a lingering scent of incense."
         };
-        public static List<string> closeCallTraps = new List<string>
+        public static List<string> CloseCallTraps = new List<string>
         {
             "A pressure plate clicks underfoot, but you leap away just in time.",
             "A hidden arrow whizzes past your ear, embedding itself in the wall.",
@@ -85,7 +87,7 @@
             "A swarm of mechanical saw blades whirs to life but halts before striking.",
             "A poisonous gas fills the chamber, but a hidden vent clears the air just in time."
         };
-        public static List<string> damagingTraps = new List<string>
+        public static List<string> DamagingTraps = new List<string>
         {
             "A row of spears shoots up from the floor, piercing anything above them.",
             "A jet of green flame bursts from the wall, searing everything in its path.",
@@ -124,7 +126,7 @@
                 {
                     case 1:
                         Console.WriteLine("You proceed to the next room");
-                        Console.WriteLine($"{dungeonChambers[Random.Next(0, dungeonChambers.Count)]}");
+                        // Describe room
                         ExploreDungeon(player);
                         break;
                     case 2:
@@ -199,7 +201,12 @@
                     break;
             }
         }
-
+        public static int GetRandomIndex(int min, int max)
+        {
+            Random random = new Random();
+            int randomInt = random.Next(min, max);
+            return randomInt;
+        }
         //  Delegate subscriptions 
         public static void MonsterBattle(Player player, Monster monster)
         {
@@ -242,7 +249,16 @@
 
         public static void TriggerTrap(Player player)
         {
-
+            int randIndex = GetRandomIndex(1,3);
+            if (randIndex == 1)
+            {
+                int arrInd = GetRandomIndex(0, DamagingTraps.Count());
+                string trapDescription = DamagingTraps[arrInd];
+                Console.WriteLine($"{trapDescription}");
+            } else {
+                int arrInd = GetRandomIndex(0, CloseCallTraps.Count());
+                Console.WriteLine($"{player.Name} narrowly avoids taking damage.");
+            } 
         }
         public static void SearchForRelics(Player player)
         {

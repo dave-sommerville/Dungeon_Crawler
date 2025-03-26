@@ -5,28 +5,28 @@ namespace Dungeon_Crawler
     {
         private readonly Random random = new Random();
         private readonly List<string> MonsterNames = new List<string>
-{
-    "Goblin",
-    "Orc",
-    "Troll",
-    "Kobold",
-    "Giant Rat",
-    "Skeleton",
-    "Zombie",
-    "Ghoul",
-    "Wraith",
-    "Mimic",
-    "Gargoyle",
-    "Ogre",
-    "Basilisk",
-    "Minotaur",
-    "Lich",
-    "Hobgoblin",
-    "Giant Spider",
-    "Wyvern",
-    "Dark Elf",
-    "Slime"
-};
+    {
+        "Goblin",
+        "Orc",
+        "Troll",
+        "Kobold",
+        "Giant Rat",
+        "Skeleton",
+        "Zombie",
+        "Ghoul",
+        "Wraith",
+        "Mimic",
+        "Gargoyle",
+        "Ogre",
+        "Basilisk",
+        "Minotaur",
+        "Lich",
+        "Hobgoblin",
+        "Giant Spider",
+        "Wyvern",
+        "Dark Elf",
+        "Slime"
+    };
 
         public string Species { get; set; }
         public Monster() : base()
