@@ -4,7 +4,7 @@ namespace Dungeon_Crawler
 {
     public class Dungeon
     {
-        private  Dictionary<int, Chamber> Chambers { get; set; }
+        public  Dictionary<int, Chamber> ExploredChambers { get; set; }
         private Random Random { get; set; }
         private readonly int _nextId;
         public static string[] DungeonChambers =
@@ -26,11 +26,12 @@ namespace Dungeon_Crawler
         {
             "north", "south", "east", "west"
         };
+        public Chamber StartingPoint { get; set; } = new Chamber("And so we begin");
         public Dungeon()
         {
-            Chambers = new Dictionary<int, Chamber>();
+            ExploredChambers = new Dictionary<int, Chamber>();
             Random = new Random();
-            Chamber startingRoom = new Chamber("And so we begin");
+            ExploredChambers.Add(0, StartingPoint);
         }
 
 
@@ -39,14 +40,17 @@ namespace Dungeon_Crawler
             Chamber newChamber = new Chamber(DungeonChambers[Random.Next(DungeonChambers.Length)]);
             newChamber.AddExit(OppositeDirection(direction), fromRoomId);
             int chamberRef = newChamber.ChamberId;
-            Chambers[chamberRef] = newChamber;
-            Chambers[fromRoomId].AddExit(direction, chamberRef);
-
+            ExploredChambers[chamberRef] = newChamber;
+            ExploredChambers[fromRoomId].AddExit(direction, chamberRef);
+            foreach (var kvp in ExploredChambers)
+            {
+                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            }
             return chamberRef;
         }
         public Chamber GetChamber(int id)
         {
-            return Chambers.ContainsKey(id) ? Chambers[id] : null;
+            return ExploredChambers.ContainsKey(id) ? ExploredChambers[id] : null;
         }
         private string OppositeDirection(string direction)
         {
@@ -58,6 +62,17 @@ namespace Dungeon_Crawler
                 "west" => "east",
                 _ => ""
             };
+        }
+        public void DisplayRoomExits(int locationId)
+        {
+            if (ExploredChambers.ContainsKey(locationId))
+            {
+                Console.WriteLine("Exits:");
+                foreach (var exit in ExploredChambers[locationId].Exits)
+                {
+                    Console.WriteLine($"- {exit.Key}");
+                }
+            }
         }
     }
 }

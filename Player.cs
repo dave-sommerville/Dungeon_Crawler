@@ -5,6 +5,7 @@ namespace Dungeon_Crawler
 {
     public class Player : Character
     {
+        public Random random = new Random();
         public string Name { get; set; }
         public int Mana { get; set; } = 3;
         public List<string> Inventory { get; set; } = new List<string>();
@@ -96,6 +97,22 @@ namespace Dungeon_Crawler
                 Console.Write(Inventory[i].ToString());
             }
         }
+
+        public void Move(string direction, Dungeon dungeon)
+        {
+            if (dungeon.ExploredChambers.ContainsKey(LocationId) &&
+                dungeon.ExploredChambers[LocationId].Exits.TryGetValue(direction, out int newLocation))
+            {
+                LocationId = newLocation;
+                Console.WriteLine($"You move {direction} to room {LocationId}.");
+                dungeon.DisplayRoomExits(LocationId);
+                ClearChamber(this);
+            }
+            else
+            {
+                Console.WriteLine("You can't go that way!");
+            }
+        }
         public void PlayerAttack(Monster monster)
         {
             Random random = new Random();
@@ -114,21 +131,29 @@ namespace Dungeon_Crawler
                 Console.WriteLine("Player Attack missed");
             }
         }
-        public void Move(string direction, Dungeon dungeon)
+        public void ClearChamber(Player player)
         {
-            Chamber currentChamber = dungeon.GetChamber(LocationId);
-
-            if (currentChamber.Exits.ContainsKey(direction))
+            int rand = Program.Random.Next(1, 4);
+            if (rand == 1)
             {
-                LocationId = currentChamber.Exits[direction];
-                Console.WriteLine($"You move {direction} into Room {LocationId}.");
+                EncounterMonster();
             }
-            else
+            else if (rand == 2)
             {
-                int newRoomId = dungeon.GenerateChamber(LocationId, direction);
-                LocationId = newRoomId;
-                Console.WriteLine($"You venture {direction} into an uncharted area... Room {newRoomId}.");
+                Console.WriteLine("Room is clear");
+                Console.WriteLine("Choose an action:\n1) Search the room\n2) Continue exploring");
+                int decision = Program.PrintMenu(2);
+                if (decision == 1)
+                {
+                    Search(player);
+                }
+            }
+            else if (rand == 3)
+            {
+                Console.WriteLine("Trap triggered!");
+                Trigger(player);
             }
         }
+
     }
 }

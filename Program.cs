@@ -1,7 +1,4 @@
-﻿using System.Numerics;
-using System.Runtime.CompilerServices;
-
-namespace Dungeon_Crawler
+﻿namespace Dungeon_Crawler
 {
     internal class Program
     {
@@ -91,30 +88,13 @@ namespace Dungeon_Crawler
         static void Main(string[] args)
         {
             GameLaunch();
-            /*
-            while (true)
-            {
-                Room currentRoom = dungeon.GetRoom(player.CurrentRoomId);
-                Console.WriteLine($"\n{currentRoom.Description}");
 
-                if (!currentRoom.IsCleared)
-                {
-                    Console.WriteLine("You clear the room!");
-                    currentRoom.IsCleared = true;
-                }
-
-                Console.WriteLine("Exits: " + string.Join(", ", currentRoom.Exits.Keys));
-
-                Console.Write("Enter a direction (north, south, east, west): ");
-                string direction = Console.ReadLine().ToLower();
-
-                if (direction == "quit") break;
-
-                player.Move(direction, dungeon);
-            }*/
         }
+
         public static void GameLaunch()
         {
+            Dungeon dungeon = new Dungeon();
+            dungeon.ExploredChambers[0].Exits.Add("west", 1);
             Player player = new Player("Player");
             player.OnBattle += MonsterBattle;
             player.OnBlast += MonsterBlast;
@@ -126,22 +106,30 @@ namespace Dungeon_Crawler
             bool IsRunning = true;
             while(IsRunning && player.Health > 0)
             {
-                Console.WriteLine("Please select option\n1) Explore Dungeon\n2) Display Player details\n3) Show instructions\n4) Exit Game");
-                int decision = PrintMenu(4);
-                switch(decision)
+                Console.WriteLine("\nYou are in room " + player.LocationId);
+                dungeon.DisplayRoomExits(player.LocationId);
+
+                Console.WriteLine("Options:");
+                Console.WriteLine("n) Move North");
+                Console.WriteLine("s) Move South");
+                Console.WriteLine("e) Move East");
+                Console.WriteLine("w) Move West");
+                Console.WriteLine("p) Display Player Details");
+                Console.WriteLine("x) Exit Game");
+
+                string decision = Console.ReadLine()?.ToLower();
+                switch (decision)
                 {
-                    case 1:
-                        Console.WriteLine("You proceed to the next room");
-                        ExploreDungeon(player);
+                    case "n":
+                    case "s":
+                    case "e":
+                    case "w":
+                        player.Move(decision, dungeon);
                         break;
-                    case 2:
+                    case "p":
                         player.PrintPlayerDetails();
                         break;
-                    case 3:
-                        Console.WriteLine("Instructions");
-                        break;
-                    case 4:
-                        Console.WriteLine("Exiting game");
+                    case "x":
                         IsRunning = false;
                         break;
                     default:
@@ -150,7 +138,7 @@ namespace Dungeon_Crawler
                 }
             }
         }
-        private static int PrintMenu(int options)
+        public static int PrintMenu(int options)
         {
             int intDecision;
             bool isValid;
@@ -165,27 +153,27 @@ namespace Dungeon_Crawler
             } while (!isValid);
             return intDecision;
         }
-        public static void ExploreDungeon(Player player)
-        {
-            int rand = Random.Next(1,4);
-            if (rand == 1)
-            {
-                MonsterMenu(player);
-            } else if (rand == 2)
-            {
-                Console.WriteLine("Room is clear");
-                Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
-                int decision = PrintMenu(2);
-                if (decision == 1)
-                {
-                    player.Search(player);
-                }
-            } else if(rand == 3)
-            {
-                Console.WriteLine("Trap triggered");
-                player.Trigger(player);
-            }
-        }
+        //public static void ClearChamber(Player player)
+        //{
+        //    int rand = Random.Next(1,4);
+        //    if (rand == 1)
+        //    {
+        //        MonsterMenu(player);
+        //    } else if (rand == 2)
+        //    {
+        //        Console.WriteLine("Room is clear");
+        //        Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
+        //        int decision = PrintMenu(2);
+        //        if (decision == 1)
+        //        {
+        //            player.Search(player);
+        //        }
+        //    } else if(rand == 3)
+        //    {
+        //        Console.WriteLine("Trap triggered");
+        //        player.Trigger(player);
+        //    }
+        //}
         public static void MonsterMenu(Player player)
         {
             Monster newMonster = new Monster();
@@ -248,7 +236,6 @@ namespace Dungeon_Crawler
         public static void FleeMonster(Player player, Monster monster)
         {
             monster.MonsterAttack(player);
-            ExploreDungeon(player);
         }
 
         public static void TriggerTrap(Player player)
