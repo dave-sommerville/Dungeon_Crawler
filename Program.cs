@@ -95,7 +95,7 @@
             Monster newMonster = new Monster();
             Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
             Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
-            while (newMonster.Health > 0) {
+            //while (newMonster.Health > 0) {
                 int decision = PrintMenu(3);
                 switch (decision)
                 {
@@ -109,7 +109,7 @@
                         player.Flee(player, newMonster);
                         break;
                 }
-            }
+            //}
         }
 
         //  Delegate subscriptions 
