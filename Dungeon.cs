@@ -22,10 +22,7 @@ namespace Dungeon_Crawler
             "A corridor with shifting walls, revealing hidden doors and long-forgotten passageways.",
             "A ritual chamber with a bloodstained altar and a lingering scent of incense."
         };
-        public static string[] Directions =
-        {
-            "north", "south", "east", "west"
-        };
+        
         public Chamber StartingPoint { get; set; }
         public Dungeon()
         {

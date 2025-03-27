@@ -14,6 +14,7 @@ namespace Dungeon_Crawler
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
+        //Want to return to add xp mechanic 
         public Player(string name) : base()
         {
             Name = name;
@@ -34,7 +35,6 @@ namespace Dungeon_Crawler
         public event TrapActions OnTrigger;
         public delegate void SearchActions(Player player); 
         public event SearchActions OnSearch;
-
         public void Battle(Player player, Monster monster)
         {
             BattleMonster(player, monster);
@@ -97,6 +97,7 @@ namespace Dungeon_Crawler
             Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");
             Console.WriteLine($"Attack: {Attack}");
             Console.WriteLine($"Mana: {Mana}");
+            Console.WriteLine("Inventory:");
             for(int i = 0; i < Inventory.Count; i++)
             {
                 Console.Write(Inventory[i].ToString());
@@ -115,7 +116,7 @@ namespace Dungeon_Crawler
                         break;
                     } else
                     {
-                        Console.Write("You can't go this way");
+                        Console.Write("You can't go this way\n");
                         break;
                     }
                 case "s":
@@ -126,7 +127,7 @@ namespace Dungeon_Crawler
                     }
                     else
                     {
-                        Console.Write("You can't go this way");
+                        Console.Write("You can't go this way\n");
                         break;
                     }
                 case "w":
@@ -137,7 +138,7 @@ namespace Dungeon_Crawler
                     }
                     else
                     {
-                        Console.Write("You can't go this way");
+                        Console.Write("You can't go this way\n");
                         break;
                     }
                 case "e":
@@ -148,7 +149,7 @@ namespace Dungeon_Crawler
                     }
                     else
                     {
-                        Console.Write("You can't go this way");
+                        Console.Write("You can't go this way\n");
                         break;
                     }
                 default:

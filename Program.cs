@@ -56,8 +56,6 @@
             "A Helm That Echoes the Voices of the Dead",
             "A Glove That Writes on Walls When Worn"
         };
-
-
         public static List<string> CloseCallTraps = new List<string>
         {
             "A pressure plate clicks underfoot, but you leap away just in time.",
@@ -90,11 +88,15 @@
             GameLaunch();
 
         }
-
         public static void GameLaunch()
         {
             Dungeon dungeon = new Dungeon();
-            Player player = new Player("Player");
+            Console.WriteLine("Welcome to my Dungeon");
+            Console.WriteLine("Enter your name to begin");
+            Console.WriteLine("");
+
+            string playerName = Console.ReadLine();
+            Player player = new Player(playerName);
             player.OnBattle += MonsterBattle;
             player.OnBlast += MonsterBlast;
             player.OnFlee += FleeMonster;
@@ -102,22 +104,20 @@
             player.OnSearch += SearchForRelics;
             player.OnSearch += SearchForGold;
             player.OnSearch += SearchForPotions;
+            Console.WriteLine("Follow the instructions to move through the dungeon");
+            Console.WriteLine("Walls are invisible currently, so you may not be able to go every direction");
+            Console.WriteLine("You can always flee an enemy, but they'll attack as you go. Use your mana blast's wisely, as they bring certain death but you only have so many");
             bool IsRunning = true;
             while(IsRunning && player.Health > 0)
             {
                 Console.WriteLine("\nYou are in room " + player.LocationId);
-                Console.WriteLine("Options:");
-
                 dungeon.StartingPoint.DisplayDescription();
                 Console.WriteLine("n) Move North");
                 Console.WriteLine("s) Move South");
                 Console.WriteLine("e) Move East");
                 Console.WriteLine("w) Move West");
-
-
                 Console.WriteLine("p) Display Player Details");
                 Console.WriteLine("x) Exit Game");
-
                 string decision = Console.ReadLine()?.ToLower();
                 switch (decision)
                 {
@@ -139,31 +139,6 @@
                 }
             }
         }
-
-        //public static void ClearChamber(Player player)
-        //{
-        //    int rand = Random.Next(1, 4);
-        //    if (rand == 1)
-        //    {
-        //        MonsterMenu(player);
-        //    }
-        //    else if (rand == 2)
-        //    {
-        //        Console.WriteLine("Room is clear");
-        //        Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
-        //        int decision = PrintMenu(2);
-        //        if (decision == 1)
-        //        {
-        //            player.Search(player);
-        //        }
-        //    }
-        //    else if (rand == 3)
-        //    {
-        //        Console.WriteLine("Trap triggered");
-        //        player.Trigger(player);
-        //    }
-        //}
-
         public static int GetRandomIndex(int min, int max)
         {
             Random random = new Random();
@@ -217,6 +192,9 @@
                 int arrInd = GetRandomIndex(0, DamagingTraps.Count());
                 string trapDescription = DamagingTraps[arrInd];
                 Console.WriteLine($"{trapDescription}");
+                int damage = GetRandomIndex(5,25);
+                player.Health -= damage;
+                Console.WriteLine($"{player.Name}'s health reduced by {damage}");
             } else {
                 int arrInd = GetRandomIndex(0, CloseCallTraps.Count());
                 Console.WriteLine($"{player.Name} narrowly avoids taking damage.");
@@ -245,7 +223,7 @@
             } else if(randSelect <= 9 && randSelect > 7)
             {
                 int hp = Random.Next(1, 3);
-                player.Health += hp;//Should have a max xp 
+                player.Health += hp;//Should have a max hp
                 Console.WriteLine($"{player.Name} found a dark green potion. Upon drinking it, they gained {hp} Health");
             } else
             {
