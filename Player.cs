@@ -6,11 +6,14 @@ namespace Dungeon_Crawler
     public class Player : Character
     {
         public Random random = new Random();
+        private int _nextId = 1;
         public string Name { get; set; }
         public int Mana { get; set; } = 3;
         public List<string> Inventory { get; set; } = new List<string>();
         public int Gold { get; set; } 
-        public int LocationId { get; set; }
+        public int Y { get; set; }
+        public int X { get; set; }
+        public string LocationId { get; set; }
         public Player(string name) : base()
         {
             Name = name;
@@ -18,8 +21,10 @@ namespace Dungeon_Crawler
             Health = 100;
             Attack = 10;
             Gold = 10;
+            Y = 0;
+            X = 0;
+            LocationId = "00";
             Mana = 3;
-            LocationId = 0;
         }
         public delegate void MonsterActions(Player player, Monster monster);
         public event MonsterActions OnBattle;
@@ -97,20 +102,84 @@ namespace Dungeon_Crawler
                 Console.Write(Inventory[i].ToString());
             }
         }
-
-        public void Move(string direction, Dungeon dungeon)
+        public void MovePlayer(string decision, Dungeon dungeon)
         {
-            if (dungeon.ExploredChambers.ContainsKey(LocationId) &&
-                dungeon.ExploredChambers[LocationId].Exits.TryGetValue(direction, out int newLocation))
+            Chamber currentChamber = dungeon.ExploredChambers[LocationId];
+            string locationRef = LocationId;
+            switch (decision)
             {
-                LocationId = newLocation;
-                Console.WriteLine($"You move {direction} to room {LocationId}.");
-                dungeon.DisplayRoomExits(LocationId);
-                ClearChamber(this);
-            }
-            else
+                case "n":
+                    if (currentChamber.NorthPassage)
+                    {
+                        Y += 1;
+                        break;
+                    } else
+                    {
+                        Console.Write("You can't go this way");
+                        break;
+                    }
+                case "s":
+                    if (currentChamber.SouthPassage)
+                    {
+                        Y -= 1;
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("You can't go this way");
+                        break;
+                    }
+                case "w":
+                    if (currentChamber.WestPassage)
+                    {
+                        X -= 1;
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("You can't go this way");
+                        break;
+                    }
+                case "e":
+                    if (currentChamber.EastPassage)
+                    {
+                        X += 1;
+                        break;
+                    }
+                    else
+                    {
+                        Console.Write("You can't go this way");
+                        break;
+                    }
+                default:
+                            break;
+                        }
+            LocationId = $"{Y}{X}";
+
+            if(dungeon.ExploredChambers.ContainsKey(LocationId))
             {
-                Console.WriteLine("You can't go that way!");
+               Console.WriteLine("You've already explored this room");
+               currentChamber.DisplayDescription();
+            } else
+            {
+                Chamber newChamber = dungeon.GenerateChamber(LocationId);
+                switch(decision)
+                {
+                    case "n":
+                        dungeon.ExploredChambers[locationRef].SouthPassage = true;
+                        break;
+                    case "s":
+                        dungeon.ExploredChambers[locationRef].NorthPassage = true; 
+                        break;
+                    case "e":
+                        dungeon.ExploredChambers[locationRef].WestPassage = true;
+                        break;
+                    case "w":
+                        dungeon.ExploredChambers[locationRef].EastPassage = true;
+                        break;
+                }
+                newChamber.DisplayDescription();
+                ClearChamber(newChamber);
             }
         }
         public void PlayerAttack(Monster monster)
@@ -120,10 +189,13 @@ namespace Dungeon_Crawler
             {
                 int damage = random.Next(5, 20);
                 monster.Health -= damage;
-                Console.WriteLine($"The {monster.Species} is hit! Its health is reduced by {damage}, it still has {monster.Health}");
+                Console.WriteLine($"The {monster.Species} is hit! Its health is reduced by {damage}.");
                 if(monster.Health <= 0)
                 {
                     Console.WriteLine("The monster has been killed");
+                } else
+                {
+                    Console.WriteLine($"It still has {monster.Health}");
                 }
             }
             else
@@ -131,29 +203,59 @@ namespace Dungeon_Crawler
                 Console.WriteLine("Player Attack missed");
             }
         }
-        public void ClearChamber(Player player)
+        public static void MonsterMenu(Player player)
         {
-            int rand = Program.Random.Next(1, 4);
+            Monster newMonster = new Monster();
+            Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
+            Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
+            int decision = PrintMenu(3);
+            switch (decision)
+            {
+                case 1:
+                    player.Battle(player, newMonster);
+                    break;
+                case 2:
+                    player.Blast(player, newMonster);
+                    break;
+                case 3:
+                    player.Flee(player, newMonster);
+                    break;
+            }
+        }
+        public void ClearChamber(Chamber chamber)
+        {
+            int rand = random.Next(1, 4);
             if (rand == 1)
             {
-                EncounterMonster();
+                MonsterMenu(this);
             }
             else if (rand == 2)
             {
+                Console.WriteLine("Trap triggered!");
+                Trigger(this);
+            }
                 Console.WriteLine("Room is clear");
                 Console.WriteLine("Choose an action:\n1) Search the room\n2) Continue exploring");
-                int decision = Program.PrintMenu(2);
+                int decision = PrintMenu(2);
                 if (decision == 1)
                 {
-                    Search(player);
+                    Search(this);
                 }
-            }
-            else if (rand == 3)
-            {
-                Console.WriteLine("Trap triggered!");
-                Trigger(player);
-            }
         }
-
+        public static int PrintMenu(int options)
+        {
+            int intDecision;
+            bool isValid;
+            do
+            {
+                string decision = Console.ReadLine();
+                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
+                if (!isValid)
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+            } while (!isValid);
+            return intDecision;
+        }
     }
 }

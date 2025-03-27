@@ -94,7 +94,6 @@
         public static void GameLaunch()
         {
             Dungeon dungeon = new Dungeon();
-            dungeon.ExploredChambers[0].Exits.Add("west", 1);
             Player player = new Player("Player");
             player.OnBattle += MonsterBattle;
             player.OnBlast += MonsterBlast;
@@ -107,13 +106,15 @@
             while(IsRunning && player.Health > 0)
             {
                 Console.WriteLine("\nYou are in room " + player.LocationId);
-                dungeon.DisplayRoomExits(player.LocationId);
-
                 Console.WriteLine("Options:");
+
+                dungeon.StartingPoint.DisplayDescription();
                 Console.WriteLine("n) Move North");
                 Console.WriteLine("s) Move South");
                 Console.WriteLine("e) Move East");
                 Console.WriteLine("w) Move West");
+
+
                 Console.WriteLine("p) Display Player Details");
                 Console.WriteLine("x) Exit Game");
 
@@ -124,7 +125,7 @@
                     case "s":
                     case "e":
                     case "w":
-                        player.Move(decision, dungeon);
+                        player.MovePlayer(decision, dungeon);
                         break;
                     case "p":
                         player.PrintPlayerDetails();
@@ -138,28 +139,15 @@
                 }
             }
         }
-        public static int PrintMenu(int options)
-        {
-            int intDecision;
-            bool isValid;
-            do
-            {
-                string decision = Console.ReadLine();
-                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
-                if (!isValid)
-                {
-                    Console.WriteLine("Invalid input. Please try again.");
-                }
-            } while (!isValid);
-            return intDecision;
-        }
+
         //public static void ClearChamber(Player player)
         //{
-        //    int rand = Random.Next(1,4);
+        //    int rand = Random.Next(1, 4);
         //    if (rand == 1)
         //    {
         //        MonsterMenu(player);
-        //    } else if (rand == 2)
+        //    }
+        //    else if (rand == 2)
         //    {
         //        Console.WriteLine("Room is clear");
         //        Console.WriteLine("Choose an action:\n1) Search the room\n2)Continue exploring");
@@ -168,31 +156,14 @@
         //        {
         //            player.Search(player);
         //        }
-        //    } else if(rand == 3)
+        //    }
+        //    else if (rand == 3)
         //    {
         //        Console.WriteLine("Trap triggered");
         //        player.Trigger(player);
         //    }
         //}
-        public static void MonsterMenu(Player player)
-        {
-            Monster newMonster = new Monster();
-            Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
-            Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
-            int decision = PrintMenu(3);
-            switch (decision)
-            {
-                case 1:
-                    player.Battle(player, newMonster);
-                    break;
-                case 2:
-                    player.Blast(player, newMonster);
-                    break;
-                case 3:
-                    player.Flee(player, newMonster);
-                    break;
-            }
-        }
+
         public static int GetRandomIndex(int min, int max)
         {
             Random random = new Random();
@@ -261,7 +232,7 @@
                 Console.WriteLine($"{player.Name} has added {foundRelic} to their inventory");
             } else
             {
-                Console.WriteLine("Nothing found");
+                Console.WriteLine("No items of note");
             }
         }
         public static void SearchForPotions(Player player)

@@ -2,21 +2,38 @@
 {
     public class Chamber
     {
-        private readonly int _nextId;
-        public int ChamberId { get; set; }
+        public string ChamberId { get; set; }
         public string Description { get; set; }
-        public bool IsCleared { get; set; }
-        public Dictionary<string, int> Exits { get; set; } = new Dictionary<string, int>();
-
-        public Chamber(string description)
+        public bool NorthPassage { get; set; }
+        public bool SouthPassage { get; set; }
+        public bool EastPassage { get; set; }
+        public bool WestPassage { get; set; }
+        public Chamber(string id, string description)
         {
-            ChamberId = _nextId++;
+            ChamberId = id;
             Description = description;
-            IsCleared = false;
+            NorthPassage = true;
+            SouthPassage = false;
+            EastPassage = true;
+            WestPassage = true;
         }
-        public void AddExit(string direction, int id)
+
+        public void DisplayDescription()
         {
-            Exits[direction] = id;
+            Console.WriteLine(Description);
         }
+        public bool FiftyFifty()
+        {
+            return new Random().NextDouble() < 0.5;
+        }
+
+        public void RandomizePassages()
+        {
+            NorthPassage = FiftyFifty();
+            SouthPassage= FiftyFifty();
+            EastPassage= FiftyFifty();
+            WestPassage= FiftyFifty();
+        }
+
     }
 }

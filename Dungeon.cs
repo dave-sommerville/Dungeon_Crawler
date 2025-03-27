@@ -4,9 +4,9 @@ namespace Dungeon_Crawler
 {
     public class Dungeon
     {
-        public  Dictionary<int, Chamber> ExploredChambers { get; set; }
+        public  Dictionary<string, Chamber> ExploredChambers { get; set; }
         private Random Random { get; set; }
-        private readonly int _nextId;
+        private readonly int _nextId = 1;
         public static string[] DungeonChambers =
         {
             "A damp stone chamber with flickering torchlight and ancient carvings on the walls.",
@@ -26,53 +26,22 @@ namespace Dungeon_Crawler
         {
             "north", "south", "east", "west"
         };
-        public Chamber StartingPoint { get; set; } = new Chamber("And so we begin");
+        public Chamber StartingPoint { get; set; }
         public Dungeon()
         {
-            ExploredChambers = new Dictionary<int, Chamber>();
+            StartingPoint = new Chamber("00", "And so we begin");
+            ExploredChambers = new Dictionary<string, Chamber>();
             Random = new Random();
-            ExploredChambers.Add(0, StartingPoint);
+            ExploredChambers.Add("00", StartingPoint);
         }
+        public Chamber GenerateChamber(string newRoomId)
+        {
+            string description = DungeonChambers[Random.Next(DungeonChambers.Length)];
+            Chamber newChamber = new Chamber(newRoomId, description);
+            ExploredChambers[newRoomId] = newChamber;
+            newChamber.RandomizePassages();
 
-
-        public int GenerateChamber(int fromRoomId, string direction)
-        {
-            Chamber newChamber = new Chamber(DungeonChambers[Random.Next(DungeonChambers.Length)]);
-            newChamber.AddExit(OppositeDirection(direction), fromRoomId);
-            int chamberRef = newChamber.ChamberId;
-            ExploredChambers[chamberRef] = newChamber;
-            ExploredChambers[fromRoomId].AddExit(direction, chamberRef);
-            foreach (var kvp in ExploredChambers)
-            {
-                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-            }
-            return chamberRef;
-        }
-        public Chamber GetChamber(int id)
-        {
-            return ExploredChambers.ContainsKey(id) ? ExploredChambers[id] : null;
-        }
-        private string OppositeDirection(string direction)
-        {
-            return direction switch
-            {
-                "north" => "south",
-                "south" => "north",
-                "east" => "west",
-                "west" => "east",
-                _ => ""
-            };
-        }
-        public void DisplayRoomExits(int locationId)
-        {
-            if (ExploredChambers.ContainsKey(locationId))
-            {
-                Console.WriteLine("Exits:");
-                foreach (var exit in ExploredChambers[locationId].Exits)
-                {
-                    Console.WriteLine($"- {exit.Key}");
-                }
-            }
+            return newChamber;
         }
     }
 }
