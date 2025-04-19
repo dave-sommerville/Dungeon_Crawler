@@ -198,7 +198,7 @@
             } else {
                 int arrInd = GetRandomIndex(0, CloseCallTraps.Count());
                 Console.WriteLine($"{player.Name} narrowly avoids taking damage.");
-            } 
+            }
         }
         public static void SearchForRelics(Player player)
         {

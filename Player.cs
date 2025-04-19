@@ -6,21 +6,22 @@ namespace Dungeon_Crawler
     public class Player : Character
     {
         public Random random = new Random();
-        private int _nextId = 1;
-        public string Name { get; set; }
-        public int Mana { get; set; } = 3;
-        public List<string> Inventory { get; set; } = new List<string>();
-        public int Gold { get; set; } 
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
-        //Want to return to add xp mechanic 
-        public Player(string name) : base()
+        public int Modifer { get; set; } = 0;
+        public int Sanity { get; set; } = 100;
+        public int Dexterity { get; set; } = 0;
+        public int Athletics { get; set; } = 0;
+        public int Perception { get; set; } = 0;
+        public int XP { get; set; } = 0;
+        public int Mana { get; set; } = 3;
+        public int Gold { get; set; }
+        public List<string> Inventory { get; set; } = new List<string>();
+        public Player(string name) : base(name)
         {
-            Name = name;
             ArmorClass = 8;
             Health = 100;
-            Attack = 10;
             Gold = 10;
             Y = 0;
             X = 0;

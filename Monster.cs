@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Dungeon_Crawler
 {
     public class Monster : Character
@@ -6,32 +8,32 @@ namespace Dungeon_Crawler
         private readonly Random random = new Random();
         private readonly List<string> MonsterNames = new List<string>
     {
-        "Goblin",
         "Orc",
         "Troll",
         "Kobold",
         "Giant Rat",
         "Skeleton",
-        "Zombie",
-        "Ghoul",
         "Wraith",
-        "Mimic",
         "Gargoyle",
         "Ogre",
-        "Basilisk",
         "Minotaur",
-        "Lich",
         "Hobgoblin",
         "Giant Spider",
         "Wyvern",
-        "Dark Elf",
-        "Slime"
+        "Wight",
+        "Mummy",
+        "Otyugh",
+        "Roper",
+        "Chimera",
+        "Yuan-Ti",
+        "Minotaur",
+        "Purple Worm",
+        "Troglodyte"
     };
+        public int Attack { get; set; }
 
-        public string Species { get; set; }
-        public Monster() : base()
+        public Monster(string name) : base(name)
         {
-            Species = MonsterNames[random.Next(0,MonsterNames.Count())];
             Health = random.Next(0,5) + 10;
             Attack = random.Next(0, 5) + 7;
             ArmorClass = random.Next(0, 5) + 2;
