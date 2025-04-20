@@ -9,7 +9,7 @@
         // Move triggers weighted randomness trees, first between models then between offering of models
         // With the exception of certain triggers that require a certain room
         // Special event, trap, attack, empty 
-        // Special events: Merchant, NPC(special(prisoner, mini-bosses) and generic), Rust monsters, Slimes
+        // Merchant, NPC(special(prisoner, mini-bosses) and generic), Rust monsters, Slimes, Boss, Mini-boss
         // Monsters: Monster attack must adjust based on player xp, traps must scale damage based on xp or hp 
         public static List<string> Relics = new List<string>
         {
