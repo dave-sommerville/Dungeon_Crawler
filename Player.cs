@@ -1,5 +1,6 @@
 ﻿
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dungeon_Crawler
 {
@@ -18,7 +19,7 @@ namespace Dungeon_Crawler
         public int Mana { get; set; } = 3;
         public int Gold { get; set; }
         public List<string> Inventory { get; set; } = new List<string>();
-        public Player(string name) : base(name)
+        public Player(string name, string description) : base(name, description)
         {
             ArmorClass = 8;
             Health = 100;
