@@ -29,6 +29,7 @@ namespace Dungeon_Crawler
             LocationId = "00";
             Mana = 3;
         }
+
         public delegate void MonsterActions(Player player, Monster monster);
         public event MonsterActions OnBattle;
         public event MonsterActions OnBlast;
@@ -41,6 +42,8 @@ namespace Dungeon_Crawler
         {
             BattleMonster(player, monster);
         }
+        //Level up function needed
+        //WIth a tier list
         protected virtual void BattleMonster(Player player, Monster monster)
         {
             if(OnBattle != null)
@@ -93,11 +96,25 @@ namespace Dungeon_Crawler
             }
         }
         //  Other player methods
+        public static int PrintMenu(int options)
+        {
+            int intDecision;
+            bool isValid;
+            do
+            {
+                string decision = Console.ReadLine();
+                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
+                if (!isValid)
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+            } while (!isValid);
+            return intDecision;
+        }
         public void PrintPlayerDetails()
         {
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");
-            Console.WriteLine($"Attack: {Attack}");
             Console.WriteLine($"Mana: {Mana}");
             Console.WriteLine("Inventory:");
             for(int i = 0; i < Inventory.Count; i++)
@@ -208,7 +225,6 @@ namespace Dungeon_Crawler
         }
         public static void MonsterMenu(Player player)
         {
-            Monster newMonster = new Monster();
             Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
             Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
             int decision = PrintMenu(3);
@@ -244,21 +260,6 @@ namespace Dungeon_Crawler
                 {
                     Search(this);
                 }
-        }
-        public static int PrintMenu(int options)
-        {
-            int intDecision;
-            bool isValid;
-            do
-            {
-                string decision = Console.ReadLine();
-                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
-                if (!isValid)
-                {
-                    Console.WriteLine("Invalid input. Please try again.");
-                }
-            } while (!isValid);
-            return intDecision;
         }
     }
 }
