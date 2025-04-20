@@ -3,6 +3,14 @@
     internal class Program
     {
         public static Random Random = new Random();
+        // All templates will be moved to classes 
+        // Flags on Program (IsCursed, PrisonerFreed, )
+        // Events manage p[layer movement and rest, everything else can be object based 
+        // Move triggers weighted randomness trees, first between models then between offering of models
+        // With the exception of certain triggers that require a certain room
+        // Special event, trap, attack, empty 
+        // Special events: Merchant, NPC(special(prisoner, mini-bosses) and generic), Rust monsters, Slimes
+        // Monsters: Monster attack must adjust based on player xp, traps must scale damage based on xp or hp 
         public static List<string> Relics = new List<string>
         {
             "Rusty Iron Sword",

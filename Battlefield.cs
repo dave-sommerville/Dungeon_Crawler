@@ -8,15 +8,12 @@ namespace Dungeon_Crawler
 {
     public class Battlefield : Chamber
     {
-
+        public Boss LevelBoss { get; set; }
         public Battlefield(string id, string description) : base(id, description)
         {
             ChamberId = id;
             Description = description;
-            NorthPassage = true;
-            SouthPassage = false;
-            EastPassage = true;
-            WestPassage = true;
+
         }
         public void DisplayBattlefield()
         {

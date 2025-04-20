@@ -31,13 +31,15 @@ namespace Dungeon_Crawler
         "Troglodyte"
     };
         public int Attack { get; set; }
-
-        public Monster(string name) : base(name)
+        public int NumberOfAttacks { get; set; }
+        public Monster(string name, string description) : base(name, description)
         {
             Health = random.Next(0,5) + 10;
             Attack = random.Next(0, 5) + 7;
             ArmorClass = random.Next(0, 5) + 2;
+            NumberOfAttacks = 1;
         }
+        // Probably override this from character 
         public void MonsterAttack(Player player)
         {
             Random random = new Random();
@@ -51,5 +53,6 @@ namespace Dungeon_Crawler
                 Console.WriteLine("Monster Attack missed");
             }
         }
+        // Offer three special abilities to monsters, one to target each of the stat properties 
     }
 }
