@@ -71,10 +71,21 @@ namespace Dungeon_Crawler
                 Console.WriteLine("Nothing happens.");
             }
         }
+        public Trap TrapEvent()
+        {
+            Trap trap = new Trap();
+            return trap;
+        }
+        public Monster MonsterAttack()
+        {
+            Monster monster = new Monster("Goblin", "A small, green-skinned creature with a nasty disposition.", 1);
+            return monster;
+        }
         public static void SpecialEventsTree()
         {
 
         }
+        // Special Event Functions
         public static void RustMonsterEvent()
         {
 
@@ -82,6 +93,33 @@ namespace Dungeon_Crawler
         public static void SlimeEvent()
         {
 
+        }
+
+        public Battlefield BossBattle()
+        { // Will actually insert the battle field in place of the generated chamber
+            Battlefield battlefield = new Battlefield("BossBattle", "A dark chamber filled with the echoes of past battles.");
+            return battlefield;
+        }
+        public NPC Merchant()
+        { // Can populate inventory from items list in dungeon 
+            NPC merchant = new NPC("Merchant", "A shady figure with a glint in their eye.");
+            merchant.Items = new int[] { 1, 2, 3 }; // Placeholder for item IDs
+            merchant.Locations = new int[] { 1, 2, 3 }; // Placeholder for location IDs
+            return merchant;
+        }
+        public NPC Prisoner()
+        {
+            NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
+            prisoner.Items = new int[] { 1, 2, 3 }; // Placeholder for item IDs
+            prisoner.Locations = new int[] { 1, 2, 3 }; // Placeholder for location IDs
+            return prisoner;
+        }
+        public NPC NpcGeneric()
+        {
+            NPC npc = new NPC("NPC", "A mysterious figure.");
+            npc.Items = new int[] { 1, 2, 3 }; // Placeholder for item IDs
+            npc.Locations = new int[] { 1, 2, 3 }; // Placeholder for location IDs
+            return npc;
         }
         // Choose opponents by CR
 

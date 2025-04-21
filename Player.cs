@@ -10,6 +10,8 @@ namespace Dungeon_Crawler
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
+        public Armor? Armor { get; set; }
+        public Weapon? Weapon { get; set; }
         public int Modifer { get; set; } = 0;
         public int Sanity { get; set; } = 100;
         public int Dexterity { get; set; } = 0;
@@ -48,7 +50,7 @@ namespace Dungeon_Crawler
             } while (!isValid);
             return intDecision;
         }
-        public void PrintPlayerDetails()
+        public void PrintPlayerDetails() // Needs expanding 
         {
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");

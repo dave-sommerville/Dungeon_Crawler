@@ -8,6 +8,7 @@
         public bool SouthPassage { get; set; }
         public bool EastPassage { get; set; }
         public bool WestPassage { get; set; }
+        public NPC? Merchant { get; set; }
         public Chamber(string id, string description)
         {
             ChamberId = id;

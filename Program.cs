@@ -3,9 +3,19 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Unwritten mechanics: Rust monsters, slimes, battlefields, merchant shop, fights, mini-bosses
-        // (regions in general), relics/lore, dialogue trees, traps, spells,
-        // prisoner, curse, levelling, and rest
+        // Merchant(NPC method)
+        // Fights
+        // Armor/weapons
+        // Potions
+        // Bosses
+        // Battlefields
+        // Traps
+        // Dialogue trees
+        // Other triggers 
+        //   Search, XP boost, levelling, and rest
+        // Later
+        // Relics/lore?
+        // Spells
 
 
         static void Main(string[] args)
