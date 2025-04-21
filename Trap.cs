@@ -10,13 +10,13 @@
         public bool Athletics { get; set; }
         public bool Dexterity { get; set; }
         
-        public Trap(string description, int difficulty, int damage, bool athletics, bool dexterity)
+        public Trap()
         {
-            Description = description;
-            HiddenDifficulty = difficulty;
-            Damage = damage;
-            Athletics = athletics;
-            Dexterity = dexterity;
+            Description = "Trap";
+            HiddenDifficulty = 1;
+            Damage = 1;
+            Athletics = true;
+            Dexterity = false;
         }
         public void TrapCheck(Player player)
         {

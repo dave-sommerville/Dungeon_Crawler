@@ -151,6 +151,8 @@ namespace Dungeon_Crawler
                         break;
                 }
                 newChamber.DisplayDescription();
+                // Check conditionals first 
+                newChamber.MasterEventsTree(this);
             }
         }
 
@@ -158,9 +160,8 @@ namespace Dungeon_Crawler
         {
 
         }
-        public void MonsterFight()
+        public void MonsterFight(Monster monster)
         {
-            Monster monster = new Monster("Monster", "A generic monster");
             do
             {
                 Attack(monster);
