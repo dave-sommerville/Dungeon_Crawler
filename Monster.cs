@@ -66,30 +66,42 @@ namespace Dungeon_Crawler
             "Two Enslaved Duergar and Two Grimlocks",
             "One Mind Flayer with One Thrall Mage and Two Grimlocks",
             "One Mind Flayer with One Enslaved Quaggoth and Two Duergar"
-        };
+        }; // This is good for control, but they are hard wired for monsters. Either they need to be set by method
+        // or they need to be set by the constructor ooooor I add a public modifer property
+        private readonly int minAttack = 0;
+        private readonly int maxAttack = 0;
+        private readonly int minDamage = 0;
+        private readonly int maxDamage = 0;
+        private readonly int minHealth = 0;
+        private readonly int maxHealth = 0;
+        private readonly int minArmorClass = 0;
+        private readonly int maxArmorClass = 0;
 
-
-        public int Attack { get; set; }
         public int NumberOfAttacks { get; set; }
-        public Monster(string name, string description, int numberOfAttacks) : base(name, description)
+        public Monster(string name, string description) : base(name, description)
         {
-            Health = random.Next(0,5) + 10;
-            Attack = random.Next(0, 5) + 7;
-            ArmorClass = random.Next(0, 5) + 2;
-            NumberOfAttacks = numberOfAttacks;
+            Health = random.Next(minHealth,maxHealth);
+            ArmorClass = random.Next(minArmorClass, maxArmorClass);
         }
-        // Probably override this from character 
-        public void MonsterAttack(Player player)
+        public override void Attack(Character targetCharacter)
         {
-            Random random = new Random();
-            if(Attack >= player.ArmorClass)
+            if (Health <= 0)
             {
-                int damage = random.Next(5, 20);
-                player.Health -= damage;
-                Console.WriteLine($"Player hit! Player's health reduced by {damage}");
-            } else
+                return;
+            }
+            else
             {
-                Console.WriteLine("Monster Attack missed");
+                int attack = random.Next(minAttack, maxAttack);
+                int damage = random.Next(minDamage, maxDamage);
+                if (attack > targetCharacter.ArmorClass)
+                {
+                    Console.WriteLine($"{Name} attacked {targetCharacter.Name} and hit for {attack} damage");
+                    targetCharacter.Health -= attack;
+                }
+                else
+                {
+                    Console.WriteLine($"{Name} attacked but missed");
+                }
             }
         }
         // Offer three special abilities to monsters, one to target each of the stat properties 

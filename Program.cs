@@ -86,7 +86,7 @@
             Console.WriteLine("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
-        public static void ApplySkillPoint(Player player)
+        public static void ApplySkillPoint(Player player) //SB in Player
         {
             string skill = Console.ReadLine().Trim().ToLower();
             switch(skill)

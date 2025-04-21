@@ -10,6 +10,7 @@ namespace Dungeon_Crawler
     {
         // Potion ideas (Healing (max, extra), mana, ac(for a while), skill point(super rare),
         // Rest, Damage??)
+        public Random random = new Random();
         public int Potency { get; set; }
         public Potion() : base()
         {
@@ -18,7 +19,7 @@ namespace Dungeon_Crawler
             Durability = 1;
             Potency = 10; // Default potency
         }
-        public void UsePotion(Player player)
+        public override void UseItem(Player player)
         {
             if (Durability > 0)
             {

@@ -20,6 +20,7 @@
         }
         // Needs to also show passageway descriptions
         // Random strings lists belong here (including new ones for the passageway descriptions)
+        // I think I could include the monsters, traps, and NPCs here (Character?)
         public void DisplayDescription()
         {
             Console.WriteLine(Description);

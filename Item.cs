@@ -11,7 +11,7 @@
             Description = "This is an item.";
             Durability = 1;
         }
-        public virtual void UseItem()
+        public virtual void UseItem(Player player)
         {
 
         }

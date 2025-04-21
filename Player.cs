@@ -34,7 +34,10 @@ namespace Dungeon_Crawler
             LocationId = "00";
             Mana = 3;
         }
-
+        private readonly int minAttack = 0;
+        private readonly int maxAttack = 0;
+        private readonly int minDamage = 0;
+        private readonly int maxDamage = 0;
         public static int PrintMenu(int options)
         {
             int intDecision;
@@ -155,6 +158,53 @@ namespace Dungeon_Crawler
         {
 
         }
+        public void MonsterFight()
+        {
+            Monster monster = new Monster("Monster", "A generic monster");
+            do
+            {
+                Attack(monster);
+                monster.Attack(this);
+                PlayerDeathCheck();
+            } while (monster.Health > 0);
+        }
+        public override void Attack(Character targetCharacter)
+        {
+            if (Health <= 0)
+            {
+                return;
+            }
+            else
+            {
+                int attack = random.Next(minAttack, maxAttack) + Modifer;
+                int damage = random.Next(minDamage, maxDamage) + Modifer;
+                if (attack > targetCharacter.ArmorClass)
+                {
+                    Console.WriteLine($"You attacked the {targetCharacter.Name} and hit for {attack} damage");
+                    targetCharacter.Health -= attack; 
+                    if (targetCharacter.Health <= 0)
+                    {
+                        Console.WriteLine($"You killed the {targetCharacter.Name}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"You attacked but missed");
+                }
+            }
+        }
+        public void Flee()
+        {
 
+        }
+        // Maybe turn into a bool
+        public void PlayerDeathCheck()
+        {
+
+        }
+        public void XpLevelUp()
+        {
+
+        }
     }
 }
