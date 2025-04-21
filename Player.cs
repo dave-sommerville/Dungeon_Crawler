@@ -18,84 +18,21 @@ namespace Dungeon_Crawler
         public int XP { get; set; } = 0;
         public int Mana { get; set; } = 3;
         public int Gold { get; set; }
-        public List<string> Inventory { get; set; } = new List<string>();
+        public Item[] Inventory { get; set; } = new Item[10];
         public Player(string name, string description) : base(name, description)
         {
             ArmorClass = 8;
             Health = 100;
             Gold = 10;
+            Dexterity = 0;
+            Athletics = 0;
+            Perception = 0;
             Y = 0;
             X = 0;
             LocationId = "00";
             Mana = 3;
         }
 
-        public delegate void MonsterActions(Player player, Monster monster);
-        public event MonsterActions OnBattle;
-        public event MonsterActions OnBlast;
-        public event MonsterActions OnFlee;
-        public delegate void TrapActions(Player player); 
-        public event TrapActions OnTrigger;
-        public delegate void SearchActions(Player player); 
-        public event SearchActions OnSearch;
-        public void Battle(Player player, Monster monster)
-        {
-            BattleMonster(player, monster);
-        }
-        //Level up function needed
-        //WIth a tier list
-        protected virtual void BattleMonster(Player player, Monster monster)
-        {
-            if(OnBattle != null)
-            {
-                OnBattle(player, monster);
-            }
-        }
-        public void Blast(Player player, Monster monster)
-        {
-            BlastMonster(player, monster);
-        }
-        protected virtual void BlastMonster(Player player, Monster monster)
-        {
-            if (OnBlast != null)
-            {
-                OnBlast(player, monster);
-            }
-        }
-        public void Flee(Player player, Monster monster)
-        {
-            FleeMonster(player, monster);
-        }
-        protected virtual void FleeMonster(Player player, Monster monster)
-        {
-            if (OnFlee != null)
-            {
-                OnFlee(player, monster);
-            }
-        }
-        public void Trigger(Player player)
-        {
-            TriggerTrap(player);
-        }
-        protected virtual void TriggerTrap(Player player)
-        {
-            if (OnTrigger != null)
-            {
-                OnTrigger(player);
-            }
-        }
-        public void Search(Player player)
-        {
-            SearchRoom(player);
-        }
-        protected virtual void SearchRoom(Player player)
-        {
-            if(OnSearch != null)
-            {
-                OnSearch(player);
-            }
-        }
-        //  Other player methods
         public static int PrintMenu(int options)
         {
             int intDecision;
@@ -117,23 +54,18 @@ namespace Dungeon_Crawler
             Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");
             Console.WriteLine($"Mana: {Mana}");
             Console.WriteLine("Inventory:");
-            for(int i = 0; i < Inventory.Count; i++)
-            {
-                Console.Write(Inventory[i].ToString());
-            }
+
         }
-        public void MovePlayer(string decision, Dungeon dungeon)
+        public void NavCase(string decision, Chamber currentChamber)
         {
-            Chamber currentChamber = dungeon.ExploredChambers[LocationId];
-            string locationRef = LocationId;
-            switch (decision)
-            {
+            switch (decision) {
                 case "n":
                     if (currentChamber.NorthPassage)
                     {
                         Y += 1;
                         break;
-                    } else
+                    }
+                    else
                     {
                         Console.Write("You can't go this way\n");
                         break;
@@ -172,14 +104,29 @@ namespace Dungeon_Crawler
                         break;
                     }
                 default:
-                            break;
-                        }
+                    break;
+            }
+
+        }
+        public void MovePlayer(string decision, Dungeon dungeon)
+        {
+            Chamber currentChamber = dungeon.ExploredChambers[LocationId];
+            string locationRef = LocationId;
+            NavCase(decision, currentChamber);
             LocationId = $"{Y}{X}";
 
             if(dungeon.ExploredChambers.ContainsKey(LocationId))
             {
-               Console.WriteLine("You've already explored this room");
-               currentChamber.DisplayDescription();
+                Console.WriteLine("You've already explored this room");
+                Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
+                int viewDesicion = PrintMenu(2);
+                if(viewDesicion == 1)
+                {
+                    currentChamber.DisplayDescription();
+                } else
+                {
+                    return;
+                }
             } else
             {
                 Chamber newChamber = dungeon.GenerateChamber(LocationId);
@@ -199,67 +146,13 @@ namespace Dungeon_Crawler
                         break;
                 }
                 newChamber.DisplayDescription();
-                ClearChamber(newChamber);
             }
         }
-        public void PlayerAttack(Monster monster)
+
+        public static void AddToInventory()
         {
-            Random random = new Random();
-            if (Attack >= monster.ArmorClass)
-            {
-                int damage = random.Next(5, 20);
-                monster.Health -= damage;
-                Console.WriteLine($"The {monster.Species} is hit! Its health is reduced by {damage}.");
-                if(monster.Health <= 0)
-                {
-                    Console.WriteLine("The monster has been killed");
-                } else
-                {
-                    Console.WriteLine($"It still has {monster.Health}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Player Attack missed");
-            }
+
         }
-        public static void MonsterMenu(Player player)
-        {
-            Console.WriteLine($"A {newMonster.Species} appears in front of you. What do you do?");
-            Console.WriteLine("1) Battle Monster\n2) Use a Mana blast against monster\n3) Flee Monster");
-            int decision = PrintMenu(3);
-            switch (decision)
-            {
-                case 1:
-                    player.Battle(player, newMonster);
-                    break;
-                case 2:
-                    player.Blast(player, newMonster);
-                    break;
-                case 3:
-                    player.Flee(player, newMonster);
-                    break;
-            }
-        }
-        public void ClearChamber(Chamber chamber)
-        {
-            int rand = random.Next(1, 4);
-            if (rand == 1)
-            {
-                MonsterMenu(this);
-            }
-            else if (rand == 2)
-            {
-                Console.WriteLine("Trap triggered!");
-                Trigger(this);
-            }
-                Console.WriteLine("Room is clear");
-                Console.WriteLine("Choose an action:\n1) Search the room\n2) Continue exploring");
-                int decision = PrintMenu(2);
-                if (decision == 1)
-                {
-                    Search(this);
-                }
-        }
+
     }
 }

@@ -8,6 +8,8 @@ namespace Dungeon_Crawler
 {
     public class Potion : Item 
     {
+        // Potion ideas (Healing (max, extra), mana, ac(for a while), skill point(super rare),
+        // Rest, Damage??)
         public int Potency { get; set; }
         public Potion() : base()
         {

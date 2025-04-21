@@ -9,7 +9,11 @@
         {
             Name = "Item"; // Kinda silly default values 
             Description = "This is an item.";
-            Durability = 100;
+            Durability = 1;
+        }
+        public virtual void UseItem()
+        {
+
         }
     }
 }

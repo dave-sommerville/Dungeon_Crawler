@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Dungeon_Crawler
 {
     public class NPC : Character
     {
         public string[] Dialogues { get; set; }
-        public int[] Quests { get; set; }
         public int[] Items { get; set; }
         public int[] Locations { get; set; }
         public NPC(string name, string description) : base(name, description)

@@ -17,7 +17,8 @@
             EastPassage = true;
             WestPassage = true;
         }
-
+        // Needs to also show passageway descriptions
+        // Random strings lists belong here (including new ones for the passageway descriptions)
         public void DisplayDescription()
         {
             Console.WriteLine(Description);
@@ -34,6 +35,5 @@
             EastPassage= FiftyFifty();
             WestPassage= FiftyFifty();
         }
-
     }
 }
