@@ -9,7 +9,6 @@
         // Potions
         // Bosses
         // Battlefields
-        // Traps
         // Dialogue trees
         // Other triggers 
         //   Search, XP boost, levelling, and rest

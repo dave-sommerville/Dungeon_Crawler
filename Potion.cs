@@ -8,29 +8,24 @@ namespace Dungeon_Crawler
 {
     public class Potion : Item 
     {
-        // Potion ideas (Healing (max, extra), mana, ac(for a while), skill point(super rare),
-        // Rest, Damage??)
         public Random random = new Random();
         public int Potency { get; set; }
         public Potion() : base()
         {
-            Name = "Potion"; // Need to change the naming of the potions to be controller by the method
-            Description = "A healing potion.";
+            Name = "Potion of Healing"; //I think I will need to add classes to add more potion effects, but this'll do for now
+            Description = "Healing potion";
             Durability = 1;
             Potency = 10; // Default potency
         }
-        public override void UseItem(Player player)
+        public override void DisplayItem()
         {
-            if (Durability > 0)
-            {
-                player.Health += Potency;
-                Durability--; // Remove from inventory after use
-                Console.WriteLine($"{player.Name} used a {Name}. Health increased by {Potency}. Remaining durability: {Durability}");
-            }
-            else
-            {
-                Console.WriteLine($"{Name} is empty and cannot be used.");
-            }
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Worth {Potency} healing points");
+        }
+        public override void EquipItem(Player player)
+        {
+            player.Health += Potency;
+            Console.WriteLine($"You drink the {Name} and heal {Potency} health points.");
         }
     }
 }

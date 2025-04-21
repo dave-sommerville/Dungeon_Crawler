@@ -222,11 +222,11 @@ namespace Dungeon_Crawler
         // Maybe turn into a bool
         public void PlayerDeathCheck()
         {
-
+            //Prisoner ending 
         }
         public void XpLevelUp()
         {
-
+            // Modifer, HP, Skill Point, HP, Mana, HP
         }
     }
 }

@@ -11,9 +11,10 @@
             Description = "This is an item.";
             Durability = 1;
         }
-        public virtual void UseItem(Player player)
+        public virtual void DisplayItem()
         {
-
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Description: {Description}");
         }
         public virtual void EquipItem(Player player)
         {
