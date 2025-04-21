@@ -158,10 +158,6 @@ namespace Dungeon_Crawler
         {
 
         }
-        public bool IsSurprised()
-        {
-            return false;
-        }
         public void MonsterFight()
         {
             Monster monster = new Monster("Monster", "A generic monster");

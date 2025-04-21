@@ -76,10 +76,16 @@ namespace Dungeon_Crawler
             Trap trap = new Trap();
             return trap;
         }
-        public Monster MonsterAttack()
+        public Monster MonsterEvent()
         {
             Monster monster = new Monster("Goblin", "A small, green-skinned creature with a nasty disposition.", 1);
             return monster;
+        }
+        public static void ConditionalEvents()
+        {
+            //Miniboss region
+            //Cursed
+            //
         }
         public static void SpecialEventsTree()
         {

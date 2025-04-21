@@ -3,9 +3,9 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Merchant(NPC method)
-        // Fights
-        // Armor/weapons
+        // Merchant
+        // Inventory management 
+        // Armor/weapon/potion/trap/chamber generation
         // Potions
         // Bosses
         // Battlefields
@@ -13,10 +13,12 @@
         // Dialogue trees
         // Other triggers 
         //   Search, XP boost, levelling, and rest
-        // Later
-        // Relics/lore?
-        // Spells
 
+        // Later
+            // Relics/lore?
+            // Spells
+            // Journal
+            // Map
 
         static void Main(string[] args)
         {
