@@ -15,5 +15,9 @@
         {
 
         }
+        public virtual void EquipItem(Player player)
+        {
+            Console.WriteLine("This item can't be used this way");
+        }
     }
 }

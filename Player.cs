@@ -158,6 +158,10 @@ namespace Dungeon_Crawler
         {
 
         }
+        public bool IsSurprised()
+        {
+            return false;
+        }
         public void MonsterFight()
         {
             Monster monster = new Monster("Monster", "A generic monster");
@@ -167,6 +171,22 @@ namespace Dungeon_Crawler
                 monster.Attack(this);
                 PlayerDeathCheck();
             } while (monster.Health > 0);
+        }
+        public void UseWeapon()
+        {
+            if (Weapon != null)
+            {
+                Weapon.Durability -= 1;
+                if (Weapon.Durability <= 0)
+                {
+                    Console.WriteLine($"Weapon is broken and cannot be used.");
+                    Weapon = null;
+                }
+            }
+            else
+            {
+                Console.WriteLine("You don't have a weapon to use.");
+            }
         }
         public override void Attack(Character targetCharacter)
         {
@@ -178,10 +198,16 @@ namespace Dungeon_Crawler
             {
                 int attack = random.Next(minAttack, maxAttack) + Modifer;
                 int damage = random.Next(minDamage, maxDamage) + Modifer;
+                if (Weapon != null)
+                {
+                    attack += Weapon.Boost;
+                    damage += Weapon.Boost;
+                }
                 if (attack > targetCharacter.ArmorClass)
                 {
-                    Console.WriteLine($"You attacked the {targetCharacter.Name} and hit for {attack} damage");
-                    targetCharacter.Health -= attack; 
+                    UseWeapon();
+                    Console.WriteLine($"You attacked the {targetCharacter.Name} and hit for {damage} damage");
+                    targetCharacter.Health -= damage;
                     if (targetCharacter.Health <= 0)
                     {
                         Console.WriteLine($"You killed the {targetCharacter.Name}");

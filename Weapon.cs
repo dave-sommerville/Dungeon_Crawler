@@ -2,19 +2,32 @@
 {
     public class Weapon : Item
     {
-        public int Damage { get; set; }
-        public int Range { get; set; }
-        public Weapon(string name, string description, int durability, int damage, int range) : base()
+        public int Boost { get; set; }
+        public Weapon(string name, string description, int durability, int boost) : base()
         {
             Name = name;
             Description = description;
             Durability = durability;
-            Damage = damage;
-            Range = range;
+            Boost = boost;
         }
-        public void Attack() // Need to adjust 
+        public override void EquipItem(Player player)
         {
-            Console.WriteLine($"Attacking with {Name} for {Damage} damage.");
+            if (Durability <= 0)
+            {
+                Console.WriteLine($"{Name} is broken and cannot be equipped.");
+                return;
+            }
+            Console.WriteLine("Are you sure you want to equip this weapon? Anything there will be replaced?");
+            Console.WriteLine("1) Equip item 2) Cancel");
+            int decision = Player.PrintMenu(2);
+            if (decision == 1)
+            {
+                player.Weapon = this;
+            }
+            else
+            {
+                Console.WriteLine("Item not equipped.");
+            }
         }
     }
 }
