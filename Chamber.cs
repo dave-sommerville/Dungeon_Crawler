@@ -133,30 +133,29 @@
             Monster monster = new Monster("Goblin", "A small, green-skinned creature with a nasty disposition.");
             return monster;
         }
-        public static void ConditionalEvents()
+        public static void ConditionalEvents(Player player)
         {
-            //Miniboss region/final boss trigger
-            //Cursed
-            //Rest
-            //Prisoner
+            player.CheckRegion();
+            player.CurseTracker();
         }
-        public static void SpecialEventsTree()
+        public static void SpecialEventsTree(Player player)
         {
             int specialEventSelector = GetRandomIndex(1, 10);
             switch(specialEventSelector)
             {
                 case 1:
-                    RustMonsterEvent();
+                    RustMonsterEvent(player);
                     break;
                 case 2:
                     SlimeEvent();
                     break;
-
+                case 3:                         //Can build this out more elsewhere, but this'll do for now
+                    NPC merchant = new NPC("Merchant Frank", "A shady figure with a glint in their eye.");
+                    merchant.MarketPlace(player);
+                    break;
             }
-            //Rustmonsters 
-            //Slimes
+            //Prionser in cell (Chamer premade)
             //NPC generic
-            //Merchant
         }
         // Special Event Functions
         public static void RustMonsterEvent(Player player)
@@ -164,12 +163,20 @@
             Console.WriteLine("Oh no, Rust Monsters!!\nThese disgusting critters couldn't care less about hurting you");
             Console.WriteLine("Unfortunately, they have a ravenous appetite for your weapons and armor.");
             Console.WriteLine();
+            Console.WriteLine("**You are swarmed by these creatures and your weapon and shield dissolve in front of your eyes**");
+            player.Weapon = null;
+            player.Armor = null;
         }
         public static void SlimeEvent()
         {
 
         }
 
+        public static List<Item> GetLoot()
+        {
+            List<Item> loot = new List<Item>();
+            return loot;
+        }
         public Battlefield BossBattle()
         { // Will actually insert the battle field in place of the generated chamber
             Battlefield battlefield = new Battlefield("BossBattle", "A dark chamber filled with the echoes of past battles.");

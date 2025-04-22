@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler
+﻿using Dungeon_Crawlerx;
+
+namespace Dungeon_Crawler
 {
     public class Battlefield : Chamber
     {

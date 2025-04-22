@@ -26,9 +26,7 @@
         {
             Dungeon dungeon = new Dungeon();
             bool IsRunning = true;
-            bool IsCursed = false;
-            bool PrisonerReleased = false;
-            int RestCounter = 0;
+
             while(IsRunning && player.Health > 0)
             {
                 Console.WriteLine("\nYou are in room " + player.LocationId);

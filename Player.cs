@@ -7,6 +7,9 @@ namespace Dungeon_Crawler
     public class Player : Character
     {
         public Random random = new Random();
+        private bool IsCursed = false;
+        private bool PrisonerReleased = false;
+        private int RestCounter = 0;
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
@@ -156,7 +159,26 @@ namespace Dungeon_Crawler
             }
         }
 
-        public static void AddToInventory()
+        public void AddToInventory(Item item)
+        {
+            bool InventoryFull = true;
+            for(int i = 0; i < Inventory.Length; i++)
+            {
+                if (Inventory[i] == null)
+                {
+                    Inventory[i] = item;
+                    InventoryFull = false;
+                }
+            }
+            if (InventoryFull) 
+            {
+                Console.WriteLine("Inventory is currently full, please select an item to discard");
+                PrintInventory();
+                int decision = PrintMenu(Inventory.Length) - 1;
+
+            }
+        }
+        public void PrintInventory()
         {
 
         }
@@ -228,6 +250,14 @@ namespace Dungeon_Crawler
         public void XpLevelUp()
         {
             // Modifer, HP, Skill Point, HP, Mana, HP
+        }
+        public void CheckRegion()
+        {
+
+        }
+        public void CurseTracker()
+        {
+
         }
     }
 }
