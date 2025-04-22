@@ -1,5 +1,7 @@
 ﻿
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dungeon_Crawler
@@ -21,6 +23,11 @@ namespace Dungeon_Crawler
         public int Athletics { get; set; } = 0;
         public int Perception { get; set; } = 0;
         public int XP { get; set; } = 0;
+        public int PlayerLevel { get; set; } = 1;
+        public int PlotOneLvl { get; set; } = 1;
+        public int PlotTwoLvl { get; set; } = 1;
+        public int PlotThreeLvl { get; set; } = 1;
+        public bool IsPlaying { get; set; } = true;
         public int Mana { get; set; } = 3;
         public int Gold { get; set; }
         public Item[] Inventory { get; set; } = new Item[10];
@@ -238,18 +245,69 @@ namespace Dungeon_Crawler
                 }
             }
         }
+        public void RegionTracker()
+        {
+            //
+        }
         public void Flee()
         {
 
         }
-        // Maybe turn into a bool
         public void PlayerDeathCheck()
         {
             //Prisoner ending 
         }
+        public void GainXp()
+        {
+
+        }
+        public void GainHP()
+        {
+
+        }
         public void XpLevelUp()
         {
-            // Modifer, HP, Skill Point, HP, Mana, HP
+            // Modifier, HP, Skill Point, HP, Mana, HP, Modifier, HP, Skill Point, HP(something bigger)
+            //if (XP >= 500 && Level < 1) { Level = 1; IncreaseHP(10); }
+            //if (XP >= 1000 && Level < 2) { Level = 2; IncreaseHP(10); IncreaseSkillPoints(1); }
+            // etc.
+
+            if (XP > 500)
+            {
+
+            }
+            else if (XP > 1000)
+            {
+                // 
+            }
+            else if (XP > 1500)
+            {
+                // 
+            }
+            else if (XP > 2000)
+            {
+                // 
+            }
+            else if (XP > 2500)
+            {
+                // 
+            }
+            else if (XP > 3000)
+            {
+                // 
+            } else if(XP > 3500)
+            {
+
+            } else if(XP > 4000)
+            {
+
+            } else if(XP > 4500)
+            {
+
+            } else if(XP > 5000)
+            {
+
+            }
         }
         public void CheckRegion()
         {

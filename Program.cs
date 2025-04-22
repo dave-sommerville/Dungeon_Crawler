@@ -3,16 +3,30 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Merchant
-        // Inventory management 
+        // Fix passageway display function (or movement function??)
+        // Slime event design
         // Armor/weapon/potion/trap/chamber generation
-        // Bosses
-        // Battlefields
-        // Dialogue trees
-        // Other triggers 
-        //   Search, XP boost, levelling, and rest
+        // Dialogue
+            // Specialty
+            // Mushroom men
+        // Search
+        // XP boost
+            // Levelling
+        // Rest
+        // Submenu in merchant loop
+        // PlayerDeath check after damage
+            // Prisoner rescue ending
+        // XP Levels (Levelling and tracking the boons)
+        // Further fight actions 
+            // Dodge
+            // Mana Blast
+            // Flee
+        //Check Region (Weighted encounters)
+        // Curse dynamic
+       // Loot generation
 
         // Later
+            // Bosses/Battlefields
             // Relics/lore?
             // Spells
             // Journal
