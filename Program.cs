@@ -7,30 +7,40 @@
         // Slime event design
         // Armor/weapon/potion/trap/chamber generation
         // Dialogue
-            // Specialty
-            // Mushroom men
+        // Specialty
+        // Mushroom men
         // Search
         // XP boost
-            // Levelling
+        // Levelling
         // Rest
         // Submenu in merchant loop
-        // PlayerDeath check after damage
-            // Prisoner rescue ending
-        // XP Levels (Levelling and tracking the boons)
-        // Further fight actions 
+        // Loot generation
+
+        // To Be hard coded
+        // - Plot Lines with bosses (Dungeon)
+        // - Bosses and descriptions (Dungeon)
+        // - Dialogue trees (NPC)
+        // - Chamber descriptions (Chamber) 
+        // - Prisoner dialogue/description (NPC)
+        // - Merchant dialogue/description (NPC)
+        // - Item descriptions (Item subclasses)
+        // - Enemy descriptions (Monster)
+        // - Trap descriptions (Trap)
+
+
+
+        // Later
+            // Relics
+            // Artifacts 
+            // Further fight actions 
             // Dodge
             // Mana Blast
             // Flee
-        //Check Region (Weighted encounters)
-        // Curse dynamic
-       // Loot generation
-
-        // Later
-            // Bosses/Battlefields
-            // Relics/lore?
             // Spells
             // Journal
             // Map
+            // Curses
+
 
         static void Main(string[] args)
         {
@@ -93,35 +103,11 @@
             Console.WriteLine("You have the keys to your own destiny. You have two skills points you can spend now.");
             Console.WriteLine("You may spend them on Athletics, Perception, or Dexterity");
             Console.WriteLine("Please enter which skill you choose first");
-            ApplySkillPoint(player);
+            player.ApplySkillPoint();
             Console.WriteLine("Please enter which skill you choose second");
-            ApplySkillPoint(player);
+            player.ApplySkillPoint();
             Console.WriteLine("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
-        public static void ApplySkillPoint(Player player) //SB in Player
-        {
-            string skill = Console.ReadLine().Trim().ToLower();
-            switch(skill)
-            {
-                case "athletics":
-                case "ath":
-                    player.Athletics += 1;
-                    break;
-                case "perception":
-                case "per":
-                    player.Perception += 1;
-                    break;
-                case "dexterity":
-                case "dex":
-                    player.Dexterity += 1;
-                    break;
-                default:
-                    Console.WriteLine("Invalid skill");
-                    break;
-            }
-        }
-
-
     }
 }

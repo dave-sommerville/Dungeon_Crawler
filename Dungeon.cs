@@ -41,6 +41,21 @@ namespace Dungeon_Crawler
 
             return newChamber;
         }
+        public Battlefield GeneratePlotOneBattlefield(int plotLvl, string newRoomId)
+        {
+            Battlefield battlefield = new Battlefield(4, "First battle");
+            return battlefield;
+        }
+        public Battlefield GeneratePlotTwoBattlefield()
+        {
+            Battlefield battlefield = new Battlefield(4, "First battle");
+            return battlefield;
+        }
+        public Battlefield GeneratePlotThreeBattlefield()
+        {
+            Battlefield battlefield = new Battlefield(4, "First battle");
+            return battlefield;
+        }
         // Choose opponents by CR
 
         //int GetBaseEnemyRangeStart(int xp)

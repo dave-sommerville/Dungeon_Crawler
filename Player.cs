@@ -9,8 +9,8 @@ namespace Dungeon_Crawler
     public class Player : Character
     {
         public Random random = new Random();
-        private bool IsCursed = false;
-        private bool PrisonerReleased = false;
+        //private bool IsCursed = false;
+        public bool PrisonerReleased = false;
         private int RestCounter = 0;
         public int Y { get; set; }
         public int X { get; set; }
@@ -142,27 +142,30 @@ namespace Dungeon_Crawler
                 {
                     return;
                 }
-            } else
+            } 
             {
-                Chamber newChamber = dungeon.GenerateChamber(LocationId);
-                switch(decision)
-                {
-                    case "n":
-                        dungeon.ExploredChambers[locationRef].SouthPassage = true;
-                        break;
-                    case "s":
-                        dungeon.ExploredChambers[locationRef].NorthPassage = true; 
-                        break;
-                    case "e":
-                        dungeon.ExploredChambers[locationRef].WestPassage = true;
-                        break;
-                    case "w":
-                        dungeon.ExploredChambers[locationRef].EastPassage = true;
-                        break;
+                bool trigger = false;
+                PlotTrigger(trigger, dungeon);
+                if (!trigger) {
+                    Chamber newChamber = dungeon.GenerateChamber(LocationId);
+                    switch (decision)
+                    {
+                        case "n":
+                            dungeon.ExploredChambers[locationRef].SouthPassage = true;
+                            break;
+                        case "s":
+                            dungeon.ExploredChambers[locationRef].NorthPassage = true;
+                            break;
+                        case "e":
+                            dungeon.ExploredChambers[locationRef].WestPassage = true;
+                            break;
+                        case "w":
+                            dungeon.ExploredChambers[locationRef].EastPassage = true;
+                            break;
+                    }
+                    newChamber.DisplayDescription();
+                    newChamber.MasterEventsTree(this);
                 }
-                newChamber.DisplayDescription();
-                // Check conditionals first 
-                newChamber.MasterEventsTree(this);
             }
         }
 
@@ -182,12 +185,32 @@ namespace Dungeon_Crawler
                 Console.WriteLine("Inventory is currently full, please select an item to discard");
                 PrintInventory();
                 int decision = PrintMenu(Inventory.Length) - 1;
-
+                Console.WriteLine($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
+                string discardDecision = Console.ReadLine().ToLower();
+                if (discardDecision == "y")
+                {
+                    Inventory[decision] = item;
+                    Console.WriteLine($"{item.Name} has been added to your inventory");
+                }
+                else
+                {
+                    Console.WriteLine("Item not added to inventory");
+                }
             }
         }
         public void PrintInventory()
         {
-
+            Console.WriteLine($"{Name}'s Inventory:");
+            foreach(Item item in Inventory)
+            {
+                if (item != null)
+                {
+                    Console.WriteLine($"- {item.Name}");
+                } else
+                {
+                    Console.WriteLine("Empty Slot");
+                }
+            }
         }
         public void MonsterFight(Monster monster)
         {
@@ -245,9 +268,38 @@ namespace Dungeon_Crawler
                 }
             }
         }
-        public void RegionTracker()
+        public void PlotTrigger(bool trigger, Dungeon dungeon)
         {
-            //
+
+            if(X > 5 && Y < 5 && PlotOneLvl == 1)
+            {
+                PlotOneLvl = 2;
+                trigger = true;
+            }else if(X > 10 && Y < 5 && PlotOneLvl == 2)
+            {
+                PlotOneLvl = 3;
+                trigger = true;
+            }
+            else if(X < -5 && Y < 5 && PlotTwoLvl == 1)
+            {
+                PlotTwoLvl = 2;
+                trigger = true;
+            }
+            else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
+            {
+                PlotTwoLvl = 3;
+                trigger = true;
+            }
+            else if (Y > 5 && PlotThreeLvl == 1)
+            {
+                PlotThreeLvl = 2;
+                trigger = true;
+            }
+            else if(Y > 10 && PlotThreeLvl == 2)
+            {
+                PlotThreeLvl = 3;
+                trigger = true;
+            }
         }
         public void Flee()
         {
@@ -256,6 +308,28 @@ namespace Dungeon_Crawler
         public void PlayerDeathCheck()
         {
             //Prisoner ending 
+        }
+        public void ApplySkillPoint() 
+        {
+            string skill = Console.ReadLine().Trim().ToLower();
+            switch (skill)
+            {
+                case "athletics":
+                case "ath":
+                    Athletics += 1;
+                    break;
+                case "perception":
+                case "per":
+                    Perception += 1;
+                    break;
+                case "dexterity":
+                case "dex":
+                    Dexterity += 1;
+                    break;
+                default:
+                    Console.WriteLine("Invalid skill");
+                    break;
+            }
         }
         public void GainXp()
         {
@@ -309,13 +383,9 @@ namespace Dungeon_Crawler
 
             }
         }
-        public void CheckRegion()
-        {
+        //public void CurseTracker()
+        //{
 
-        }
-        public void CurseTracker()
-        {
-
-        }
+        //}
     }
 }

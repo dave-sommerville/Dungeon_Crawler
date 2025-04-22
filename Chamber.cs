@@ -45,7 +45,7 @@
         public bool SouthPassage { get; set; }
         public bool EastPassage { get; set; }
         public bool WestPassage { get; set; }
-        public NPC? Merchant { get; set; }
+        public NPC? NPC { get; set; }
         public Trap? Trap { get; set; }
         public Monster? Monster { get; set; }
         public Chamber(string id, string description)
@@ -133,11 +133,6 @@
             Monster monster = new Monster("Goblin", "A small, green-skinned creature with a nasty disposition.");
             return monster;
         }
-        public static void ConditionalEvents(Player player)
-        {
-            player.CheckRegion();
-            player.CurseTracker();
-        }
         public static void SpecialEventsTree(Player player)
         {
             int specialEventSelector = GetRandomIndex(1, 10);
@@ -154,10 +149,7 @@
                     merchant.MarketPlace(player);
                     break;
             }
-            //Prionser in cell (Chamer premade)
-            //NPC generic
         }
-        // Special Event Functions
         public static void RustMonsterEvent(Player player)
         {
             Console.WriteLine("Oh no, Rust Monsters!!\nThese disgusting critters couldn't care less about hurting you");
@@ -177,12 +169,14 @@
             List<Item> loot = new List<Item>();
             return loot;
         }
-        public Battlefield BossBattle()
-        { // Will actually insert the battle field in place of the generated chamber
-            Battlefield battlefield = new Battlefield("BossBattle", "A dark chamber filled with the echoes of past battles.");
-            return battlefield;
+        public void PrisonerDilemma(Player player, Dungeon dungeon)
+        {
+            if (player.PlayerLevel >= 5 && random.Next(1,5) > 2) 
+            {
+                player.PrisonerReleased = true;
+                NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
+                NPC = prisoner;
+            }
         }
-
-
     }
 }
