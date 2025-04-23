@@ -142,11 +142,12 @@ namespace Dungeon_Crawler
                 {
                     return;
                 }
-            } 
+            } else
             {
                 bool trigger = false;
                 PlotTrigger(trigger, dungeon);
-                if (!trigger) {
+                if (!trigger)
+                {
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
                     switch (decision)
                     {
@@ -165,7 +166,9 @@ namespace Dungeon_Crawler
                     }
                     newChamber.DisplayDescription();
                     newChamber.MasterEventsTree(this);
+                    Console.WriteLine("The room is safe. What would you like to do next?");
                 }
+                
             }
         }
 
@@ -220,6 +223,8 @@ namespace Dungeon_Crawler
                 monster.Attack(this);
                 PlayerDeathCheck();
             } while (monster.Health > 0);
+            GainXp(monster);
+            XpLevelUp();
         }
         public void UseWeapon()
         {
@@ -273,41 +278,58 @@ namespace Dungeon_Crawler
 
             if(X > 5 && Y < 5 && PlotOneLvl == 1)
             {
+                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
                 PlotOneLvl = 2;
                 trigger = true;
             }else if(X > 10 && Y < 5 && PlotOneLvl == 2)
             {
+                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
                 PlotOneLvl = 3;
                 trigger = true;
             }
             else if(X < -5 && Y < 5 && PlotTwoLvl == 1)
             {
+                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
                 PlotTwoLvl = 2;
                 trigger = true;
             }
             else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
             {
+                Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
                 PlotTwoLvl = 3;
                 trigger = true;
             }
             else if (Y > 5 && PlotThreeLvl == 1)
             {
+                Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
                 PlotThreeLvl = 2;
                 trigger = true;
             }
             else if(Y > 10 && PlotThreeLvl == 2)
             {
+                Battlefield PlotThreeBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
                 PlotThreeLvl = 3;
                 trigger = true;
             }
         }
-        public void Flee()
-        {
+        //public void Flee()
+        //{
 
-        }
+        //}
         public void PlayerDeathCheck()
         {
-            //Prisoner ending 
+            if (Health <= 0)
+            {
+                if(PrisonerReleased)
+                {
+                    Console.WriteLine("Your vision grows dim as you feel the life begin to drain from you.");
+                    Console.WriteLine("Then you see a familiar face, that of the prisoner you released");
+                    Console.WriteLine("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
+                    Health += 50;
+                }
+                Console.WriteLine("You have died");
+                IsPlaying = false;
+            }
         }
         public void ApplySkillPoint() 
         {
@@ -331,9 +353,10 @@ namespace Dungeon_Crawler
                     break;
             }
         }
-        public void GainXp()
+        public void GainXp(Monster monster)
         {
-
+            int xp = monster.XP;
+            XP += xp;
         }
         public void GainHP()
         {
@@ -348,39 +371,39 @@ namespace Dungeon_Crawler
 
             if (XP > 500)
             {
-
+                PlayerLevel = 1;
             }
             else if (XP > 1000)
             {
-                // 
+                PlayerLevel = 2;
             }
             else if (XP > 1500)
             {
-                // 
+                PlayerLevel = 3;
             }
             else if (XP > 2000)
             {
-                // 
+                PlayerLevel = 4;
             }
             else if (XP > 2500)
             {
-                // 
+                PlayerLevel = 5;
             }
             else if (XP > 3000)
             {
-                // 
+                PlayerLevel = 6;
             } else if(XP > 3500)
             {
-
+                PlayerLevel = 7;
             } else if(XP > 4000)
             {
-
+                PlayerLevel = 8;
             } else if(XP > 4500)
             {
-
+                PlayerLevel = 9;
             } else if(XP > 5000)
             {
-
+                PlayerLevel = 10;
             }
         }
         //public void CurseTracker()

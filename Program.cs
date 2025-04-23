@@ -10,11 +10,9 @@
         // Specialty
         // Mushroom men
         // Search
-        // XP boost
         // Levelling
         // Rest
         // Submenu in merchant loop
-        // Loot generation
 
         // To Be hard coded
         // - Plot Lines with bosses (Dungeon)
@@ -27,16 +25,14 @@
         // - Enemy descriptions (Monster)
         // - Trap descriptions (Trap)
 
-
-
         // Later
             // Relics
             // Artifacts 
             // Further fight actions 
-            // Dodge
-            // Mana Blast
-            // Flee
-            // Spells
+                // Dodge
+                // Mana Blast
+                // Flee
+                // Spells
             // Journal
             // Map
             // Curses

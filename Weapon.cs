@@ -3,11 +3,8 @@
     public class Weapon : Item
     {
         public int Boost { get; set; }
-        public Weapon(string name, string description, int durability, int boost) : base()
+        public Weapon(int boost) : base()
         {
-            Name = name;
-            Description = description;
-            Durability = durability;
             Boost = boost;
         }
         public override void EquipItem(Player player)

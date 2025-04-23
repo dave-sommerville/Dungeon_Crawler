@@ -10,6 +10,7 @@ namespace Dungeon_Crawler
         public string Description { get; set; }
         public int ArmorClass { get; set; }
         public int Health { get; set; }
+        public int XP { get; set; } = 0;
 
         public Character(string name, string description)
         {
@@ -31,7 +32,7 @@ namespace Dungeon_Crawler
                 if (attack > targetCharacter.ArmorClass)
                 {
                     Console.WriteLine($"{Name} attacked {targetCharacter.Name} and hit for {attack} damage");
-                    targetCharacter.Health -= attack; // Shoud check target's health 
+                    targetCharacter.Health -= attack; // Should check target's health 
                 }
                 else
                 {

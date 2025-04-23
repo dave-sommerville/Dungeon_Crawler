@@ -17,7 +17,7 @@ namespace Dungeon_Crawler
         private readonly int minArmorClass = 0;
         private readonly int maxArmorClass = 0;
 
-        public int NumberOfAttacks { get; set; }
+        
         public Monster(string name, string description) : base(name, description)
         {
             Health = random.Next(minHealth,maxHealth);
