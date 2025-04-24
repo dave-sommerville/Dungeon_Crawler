@@ -17,7 +17,7 @@ namespace Dungeon_Crawler
         public string LocationId { get; set; }
         public Armor? Armor { get; set; }
         public Weapon? Weapon { get; set; }
-        public int Modifer { get; set; } = 0;
+        public int Modifier { get; set; } = 0;
         public int Sanity { get; set; } = 100;
         public int Dexterity { get; set; } = 0;
         public int Athletics { get; set; } = 0;
@@ -44,10 +44,10 @@ namespace Dungeon_Crawler
             LocationId = "00";
             Mana = 3;
         }
-        private readonly int minAttack = 0;
-        private readonly int maxAttack = 0;
-        private readonly int minDamage = 0;
-        private readonly int maxDamage = 0;
+        private readonly int minAttack = 8;
+        private readonly int maxAttack = 12;
+        private readonly int minDamage = 8;
+        private readonly int maxDamage = 12;
         public static int PrintMenu(int options)
         {
             int intDecision;
@@ -171,11 +171,11 @@ namespace Dungeon_Crawler
                             newChamber.EastPassage = true;
                             break;
                     }
-                Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
-                newChamber.DisplayDescription();
+                    Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
+                    newChamber.DisplayDescription();
+                    RestCounter += 1;
 
-
-                    newChamber.MasterEventsTree(this);
+                newChamber.MasterEventsTree(this);
                     Console.WriteLine("The room is safe. What would you like to do next?");
                 dungeon.ExploredChambers[LocationId] = newChamber;
 
@@ -231,13 +231,27 @@ namespace Dungeon_Crawler
         {
             do
             {
-                Attack(monster);
+                Console.WriteLine("What attack action do you wish to take?");
+                Console.WriteLine("1) Attack 2) Mana Blast");
+                int decision = PrintMenu(2);
+                if (decision == 1) {
+                    Attack(monster);
+                } else if (decision == 2)
+                {
+                    Console.WriteLine("You have used a mana blast");
+                }
                 monster.Attack(this);
                 PlayerDeathCheck();
             } while (monster.Health > 0);
             GainXp(monster);
             XpLevelUp();
+            RestCounter += 1;
         }
+        public void FightActions(Monster monster)
+        {
+
+        }
+
         public void UseWeapon()
         {
             if (Weapon != null)
@@ -262,8 +276,8 @@ namespace Dungeon_Crawler
             }
             else
             {
-                int attack = random.Next(minAttack, maxAttack) + Modifer;
-                int damage = random.Next(minDamage, maxDamage) + Modifer;
+                int attack = random.Next(minAttack, maxAttack) + Modifier;
+                int damage = random.Next(minDamage, maxDamage) + Modifier;
                 if (Weapon != null)
                 {
                     attack += Weapon.Boost;

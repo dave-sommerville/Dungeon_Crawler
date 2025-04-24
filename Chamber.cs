@@ -123,11 +123,11 @@
             }
             return chamberLoot;
         }
-        private readonly int TierOne = 8;
-        private readonly int TierTwo = 20;
-        private readonly int TierThree = 40;
-        private readonly int TierFour = 45;
-        private readonly int TierFive = 50;
+        private readonly int TierOne = 3;
+        private readonly int TierTwo = 4;
+        private readonly int TierThree = 80;
+        private readonly int TierFour = 90;
+        private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
 
         public void MasterEventsTree(Player player)
