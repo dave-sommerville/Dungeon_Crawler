@@ -123,10 +123,10 @@
             }
             return chamberLoot;
         }
-        private readonly int TierOne = 3;
-        private readonly int TierTwo = 8;
-        private readonly int TierThree = 16;
-        private readonly int TierFour = 32;
+        private readonly int TierOne = 8;
+        private readonly int TierTwo = 20;
+        private readonly int TierThree = 40;
+        private readonly int TierFour = 45;
         private readonly int TierFive = 50;
         private readonly int MasterIndex = 100;
 
@@ -135,24 +135,29 @@
             int randomEvent = GetRandomIndex(1, MasterIndex);
             if (randomEvent >= 1 && randomEvent <= TierOne)
             {
+                Console.WriteLine("You encounter a hazard in the chamber.");
                 HazardEvent(player);
             }
             else if (randomEvent > TierOne && randomEvent <= TierTwo)
             {
+                Console.WriteLine("You trigger a trap in the chamber.");
                 Trap chamberTrap = TrapEvent(player);
                 chamberTrap.TrapCheck(player);
             }
-            else if (randomEvent < TierTwo && randomEvent <= TierThree)
+            else if (randomEvent > TierTwo && randomEvent <= TierThree)
             {
+                Console.WriteLine("You encounter a monster in the chamber.");
                 Monster chamberMonster = MonsterEvent(player);
                 player.MonsterFight(chamberMonster);
             }
-            else if(randomEvent < TierThree && randomEvent <= TierFour)
+            else if(randomEvent > TierThree && randomEvent <= TierFour)
             {
+                Console.WriteLine("You encounter an NPC in the chamber.");
                 NPC chamberNpc = NpcEvent(player);
                 player.Name = chamberNpc.Name;
-            } else if (randomEvent < TierFour && randomEvent <= TierFive)
+            } else if (randomEvent > TierFour && randomEvent <= TierFive)
             {
+                Console.WriteLine("You encounter a merchant in the chamber.");
                 NPC chamberMerchant = MerchantEvent(player);
             }
             else 
@@ -162,7 +167,7 @@
         }
         public Trap TrapEvent(Player player)
         {
-            Trap trap = new Trap();
+            Trap trap = new Trap(player.PlayerLevel);
             Trap = trap;
             return trap;
         }//
