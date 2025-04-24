@@ -44,8 +44,8 @@ namespace Dungeon_Crawler
         {
             new Armor(),
             new Armor(),
-            new Weapon(1),
-            new Weapon(1),
+            new Weapon(),
+            new Weapon(),
             new Potion(),
             new Potion()
         };
@@ -252,7 +252,11 @@ namespace Dungeon_Crawler
                     Console.WriteLine($"You find a {item.Name}.");
                     player.AddToInventory(item);
                 }
+                int gold = random.Next(1, 100);
+                Console.WriteLine($"You find {gold} gold coins.");
+                player.Gold += gold;
             }
+
         }
     }
 }
