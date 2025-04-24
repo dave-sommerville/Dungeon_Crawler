@@ -7,7 +7,8 @@ namespace Dungeon_Crawler
     {
         private readonly Random random = new Random();
         // This is good for control, but they are hard wired for monsters. Either they need to be set by method
-        // or they need to be set by the constructor ooooor I add a public modifer property
+        // or they need to be set by the constructor ooooor I add a public modifer property 
+        private readonly int attackBase = 8;
         private readonly int minAttack = 8;
         private readonly int maxAttack = 12;
         private readonly int minDamage = 8;
@@ -70,27 +71,28 @@ namespace Dungeon_Crawler
             "Titanic worm with a gaping maw, capable of devouring adventurers whole."
         };
 
-
-        public Monster(int challengeRating) : base()
+        public int ChallengeRating = 0;
+        public Monster(int playerLvl) : base()
         {
-            Health = random.Next(minHealth,maxHealth);
-            ArmorClass = random.Next(minArmorClass, maxArmorClass);
-            int challengeRatingLow = challengeRating - 1;
-            int challengeRatingHigh = challengeRating + 4;
-            int monsterIndex = random.Next(challengeRating, Math.Min(challengeRatingHigh, monsters.Length));
+            ChallengeRating = playerLvl - 1;
+            int challengeRatingHigh = ChallengeRating + 5;
+            int monsterIndex = random.Next(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
             Description = monsterDescriptions[monsterIndex];
+            Health = random.Next(minHealth, maxHealth) + (ChallengeRating * 2);
+            ArmorClass = random.Next(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
         }
         public override void Attack(Character targetCharacter)
         {
+            int max = Math.Min((ChallengeRating * 2), 12);
             if (Health <= 0)
             {
                 return;
             }
             else
             {
-                int attack = random.Next(minAttack, maxAttack);
-                int damage = random.Next(minDamage, maxDamage);
+                int attack = random.Next(max) + 5;
+                int damage = random.Next(max) + 5;
                 if (attack > targetCharacter.ArmorClass)
                 {
                     Console.WriteLine($"{Name} attacked {targetCharacter.Name} and hit for {damage} damage");

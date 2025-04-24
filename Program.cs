@@ -12,7 +12,6 @@
         // Armor/weapon/potion generation
         // Levelling
         // More potion types
-        // Market
         // Proper menus for both strings and int depending on situation (Fights and inventory int)
         // Further fight actions 
             // Dodge
