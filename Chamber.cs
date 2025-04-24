@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler
+﻿using System.Numerics;
+
+namespace Dungeon_Crawler
 {
     public class Chamber
     {
@@ -176,7 +178,22 @@
         {
             Monster monster = new Monster(player.PlayerLevel);
             return monster;
-        }//
+        }
+        public void Rest(Player player)
+        {
+            Console.WriteLine("You prepare the room to sleep for the night");
+            int restEncounter = GetRandomIndex(1, 10);
+            if (restEncounter <= 3)
+            {
+                Console.WriteLine("You are ambushed while you sleep! You get no rest and the monster is attacking.");
+                Monster chamberMonster = MonsterEvent(player);
+                player.MonsterFight(chamberMonster);
+            } else
+            {
+                Console.WriteLine("You have a peaceful sleep. You feel fully rested.");
+                player.RestCounter = 0;
+            }
+        }
         public NPC NpcEvent(Player player)
         {
             NPC npc = new NPC("Merchant", "A shady figure with a glint in their eye.");
@@ -184,7 +201,7 @@
         }//
         public NPC MerchantEvent(Player player)
         {
-            NPC merchant = new NPC("Merchant", "A shady figure with a glint in their eye.");
+            NPC merchant = new NPC();
             return merchant;
         }//
         public void HazardEvent(Player player)//

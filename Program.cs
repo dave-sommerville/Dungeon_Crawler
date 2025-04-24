@@ -6,13 +6,10 @@
         // Creating utility case with static methods for all the generic ones 
         // More details in the player profile
         // Create dialogue tree mechanic 
-        // Monster CR system
-        // Incorporating the search/rest mechanic in cleared rooms 
         // Slime event design
         // Armor/weapon/potion generation
         // Levelling
         // More potion types
-        // Proper menus for both strings and int depending on situation (Fights and inventory int)
         // Further fight actions 
             // Dodge
             // Mana Blast

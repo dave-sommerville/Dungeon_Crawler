@@ -11,7 +11,7 @@ namespace Dungeon_Crawler
         public Random random = new Random();
         //private bool IsCursed = false;
         public bool PrisonerReleased = false;
-        private int RestCounter = 0;
+        public int RestCounter = 0;
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
@@ -246,8 +246,11 @@ namespace Dungeon_Crawler
                 PlayerDeathCheck();
             } while (monster.Health > 0);
             UseAmor();
-            GainXp(monster);
-            XpLevelUp();
+            if (RestCounter < 5)
+            {
+                GainXp(monster);
+                XpLevelUp();
+            }
             RestCounter += 1;
         }
         //public void FightActions(Monster monster)
@@ -453,6 +456,7 @@ namespace Dungeon_Crawler
                 PlayerLevel = 10;
             }
         }
+
         //public void CurseTracker()
         //{
 

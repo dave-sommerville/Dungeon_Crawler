@@ -7,15 +7,15 @@ namespace Dungeon_Crawler
         // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
         public string[] Dialogues { get; set; }
         public List<Item> Items { get; set; }
-        public NPC(string name, string description) : base(name, description)
+        public NPC() : base()
         {
             Description = "A mysterious figure.";
-            Dialogues = new string[] { "Hello, traveler!", "What brings you here?", "I have a quest for you." };
+            Dialogues = new string[] { "Hello, traveler, What brings you here?", "I have a quest for you." };
         }
 
         public NPC Prisoner()
         {
-            NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
+            NPC prisoner = new NPC();
             return prisoner;
         }
         public void MarketPlace(Player player) // Expand to allow for descriptions/reconsiderations
@@ -50,6 +50,10 @@ namespace Dungeon_Crawler
             {
                 Console.WriteLine("So what's shakin, bacon?");
             }
+        }
+        public void Interact()
+        {
+
         }
     }
 }

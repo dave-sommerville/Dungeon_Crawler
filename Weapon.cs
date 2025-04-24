@@ -2,11 +2,55 @@
 {
     public class Weapon : Item
     {
-        public int Boost { get; set; }
-        public Weapon(int boost) : base()
+        Random random = new Random();
+        private readonly string[] midMeleeWeapons = new string[]
         {
-            Boost = boost;
+            "Iron Club",
+            "Worn Shortsword",
+            "Cracked Mace",
+            "Rusty Hatchet",
+            "Dull Saber",
+            "Stone Axe",
+            "Bent Spear",
+            "Jagged Blade",
+            "Splintered Staff",
+            "Basic Cutlass"
+        };
+
+        private readonly string[] goodMeleeWeapons = new string[]
+        {
+            "Stormforged Blade",
+            "Voidfang Saber",
+            "Crimson Reaver",
+            "Runesteel Axe",
+            "Obsidian Halberd",
+            "Echofang Katana",
+            "Titan's Maul",
+            "Soulpiercer Spear",
+            "Frostbrand Sword",
+            "Nightshade Scythe"
+        };
+
+        public int Boost { get; set; }
+        public Weapon() : base()
+        {
+            bool IsGood = FiftyFifty();
+            if(IsGood) { 
+                Name = goodMeleeWeapons[random.Next(goodMeleeWeapons.Length)];
+                Boost = 3;
+            }
+            else
+            {
+                Name = midMeleeWeapons[random.Next(midMeleeWeapons.Length)];
+                Boost = 1;
+            }
+
         }
+        public bool FiftyFifty()
+        {
+            return new Random().NextDouble() < 0.5;
+        }
+
         public override void EquipItem(Player player)
         {
             if (Durability <= 0)
