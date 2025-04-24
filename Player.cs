@@ -176,9 +176,10 @@ namespace Dungeon_Crawler
                     RestCounter += 1;
 
                 newChamber.MasterEventsTree(this);
-                    Console.WriteLine("The room is safe. What would you like to do next?");
+                Console.WriteLine("The room is safe. What would you like to do next?");
+                Console.WriteLine("1) Search Room\n2) Rest Here"); 
                 dungeon.ExploredChambers[LocationId] = newChamber;
-
+                
                 //}
 
             }

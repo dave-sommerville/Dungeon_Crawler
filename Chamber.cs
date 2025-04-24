@@ -159,6 +159,7 @@
             {
                 Console.WriteLine("You encounter a merchant in the chamber.");
                 NPC chamberMerchant = MerchantEvent(player);
+                chamberMerchant.MarketPlace(player);
             }
             else 
                 {
@@ -188,7 +189,14 @@
         }//
         public void HazardEvent(Player player)//
         {
-            // Rust monster and slime events held here
+            int hazardType = GetRandomIndex(1,5);
+            if(hazardType == 1)
+            {
+                RustMonsterEvent(player);
+            } else
+            {
+                SlimeEvent();
+            }
         }
         public static void RustMonsterEvent(Player player)
         {
@@ -214,6 +222,11 @@
         }
         public void SearchForLoot(Player player)
         {
+            int trapTrigger = random.Next(1, 10);
+            if (trapTrigger < 3)
+            {
+                TrapEvent(player);
+            }
             if ((player.Perception + random.Next(7,10)) > 5)
             {
                 Console.WriteLine("You search the chamber and discover the following");

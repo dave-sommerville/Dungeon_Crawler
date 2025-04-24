@@ -61,6 +61,9 @@
                     case "p":
                         player.PrintPlayerDetails();
                         break;
+                    case "i":
+                        dungeon.ExploredChambers[player.LocationId].SearchForLoot(player);
+                        break;
                     case "x":
                         IsRunning = false;
                         break;
