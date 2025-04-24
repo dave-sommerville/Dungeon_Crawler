@@ -82,7 +82,7 @@ namespace Dungeon_Crawler
             Health = random.Next(minHealth, maxHealth) + (ChallengeRating * 2);
             ArmorClass = random.Next(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
         }
-        public override void Attack(Character targetCharacter)
+        public override void Attack(Character targetCharacter, bool dodge)
         {
             int max = Math.Min((ChallengeRating * 2), 12);
             if (Health <= 0)
@@ -93,6 +93,10 @@ namespace Dungeon_Crawler
             {
                 int attack = random.Next(max) + 5;
                 int damage = random.Next(max) + 5;
+                if(dodge)
+                {
+                    attack = attack / 2;
+                }
                 if (attack > targetCharacter.ArmorClass)
                 {
                     Console.WriteLine($"{Name} attacked {targetCharacter.Name} and hit for {damage} damage");

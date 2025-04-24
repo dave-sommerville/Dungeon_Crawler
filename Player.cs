@@ -143,8 +143,8 @@ namespace Dungeon_Crawler
                 Chamber currentChamber = dungeon.ExploredChambers[LocationId];
                 Console.WriteLine("You've already explored this room");
                 Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
-                int viewDesicion = PrintMenu(2);
-                if(viewDesicion == 1)
+                int viewDecision = PrintMenu(2);
+                if(viewDecision == 1)
                 {
                     currentChamber.DisplayDescription();
                 } else
@@ -234,15 +234,36 @@ namespace Dungeon_Crawler
             do
             {
                 Console.WriteLine("What attack action do you wish to take?");
-                Console.WriteLine("1) Attack 2) Mana Blast");
+                Console.WriteLine("1) Attack 2) Mana Blast 3) Dodge");
                 int decision = PrintMenu(2);
                 if (decision == 1) {
                     Attack(monster);
-                } else if (decision == 2)
-                {
-                    Console.WriteLine("You have used a mana blast");
+                    monster.Attack(this, false);
                 }
-                monster.Attack(this);
+                else if (decision == 2)
+                {
+                    if (Mana <= 0)
+                    {
+                        Console.WriteLine("You have no mana to use a mana blast");
+                        continue;
+                    } else
+                    {
+                        int manaDamage = PlayerLevel * 10;
+                        Console.WriteLine($"You have used a mana blast for {manaDamage} points of damage");
+                        monster.Health -= manaDamage;
+                        if (monster.Health <= 0)
+                        {
+                            Console.WriteLine($"You killed the {monster.Name}");
+                        }
+                        Mana -= 1;
+
+                    }
+                    monster.Attack(this, false);
+                } else if (decision == 3)
+                {
+                    monster.Attack(this, true);
+                    Console.WriteLine("You have attempt to dodge the attack");
+                }
                 PlayerDeathCheck();
             } while (monster.Health > 0);
             UseAmor();

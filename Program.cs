@@ -3,22 +3,23 @@
     internal class Program
     {
         public static Random Random = new Random();
+        // Singular plot events 
+          // Mind Shard
+          // Cursed Object
+          // Prisoner
         // Creating utility case with static methods for all the generic ones 
         // More details in the player profile
         // Create dialogue tree mechanic 
         // Slime event design
-        // Armor/weapon/potion generation
+        // Potion generation
         // Levelling
-        // More potion types
-        // Further fight actions 
-            // Dodge
-            // Mana Blast
-            // Flee
-            // Spells
-
+        // Spells
+          // Stun
+          // Evade
         // Later
             // Bosses
             // Battlefields
+            // More potion classes
             // Artifacts
             // Relics
             // Journal

@@ -23,7 +23,30 @@ namespace Dungeon_Crawler
             "A corridor with shifting walls, revealing hidden doors and long-forgotten passageways.",
             "A ritual chamber with a bloodstained altar and a lingering scent of incense."
         };
-        
+        public static Battlefield[] PlotOneBattles { get; set; } = new Battlefield[]
+        {
+            new Battlefield("", "First battle"),
+            new Battlefield("", "Second battle"),
+            new Battlefield("", "Third battle"),
+            new Battlefield("", "Fourth battle"),
+            new Battlefield("", "Fifth battle")
+        };
+        public static Battlefield[] PlotTwoBattles { get; set; } = new Battlefield[]
+{
+            new Battlefield("", "First battle"),
+            new Battlefield("", "Second battle"),
+            new Battlefield("", "Third battle"),
+            new Battlefield("", "Fourth battle"),
+            new Battlefield("", "Fifth battle")
+        };
+        public static Battlefield[] PlotThreeBattles { get; set; } = new Battlefield[]
+{
+            new Battlefield("", "First battle"),
+            new Battlefield("", "Second battle"),
+            new Battlefield("", "Third battle"),
+            new Battlefield("", "Fourth battle"),
+            new Battlefield("", "Fifth battle")
+        };
         public Chamber StartingPoint { get; set; }
         public Dungeon()
         {                                       //Needs to be an actual description 
