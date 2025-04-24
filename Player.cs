@@ -242,15 +242,15 @@ namespace Dungeon_Crawler
                 monster.Attack(this);
                 PlayerDeathCheck();
             } while (monster.Health > 0);
+            UseAmor();
             GainXp(monster);
             XpLevelUp();
             RestCounter += 1;
         }
-        public void FightActions(Monster monster)
-        {
+        //public void FightActions(Monster monster)
+        //{
 
-        }
-
+        //}
         public void UseWeapon()
         {
             if (Weapon != null)
@@ -265,6 +265,19 @@ namespace Dungeon_Crawler
             else
             {
                 Console.WriteLine("You don't have a weapon to use.");
+            }
+        }
+        public void UseAmor()
+        {
+            if (Armor != null)
+            {
+                Armor.Durability -= 1;
+                if (Weapon.Durability <= 0)
+                {
+                    Console.WriteLine($"Weapon is broken and cannot be used.");
+                    ArmorClass -= Armor.AC;
+                    Armor = null;
+                }
             }
         }
         public override void Attack(Character targetCharacter)

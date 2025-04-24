@@ -5,15 +5,14 @@
         public static Random Random = new Random();
         // Creating utility case with static methods for all the generic ones 
         // More details in the player profile
-        // Error catch for apply skill point
         // Create dialogue tree mechanic 
         // Monster CR system
         // Incorporating the search/rest mechanic in cleared rooms 
         // Slime event design
         // Armor/weapon/potion generation
         // Levelling
+        // More potion types
         // Market
-        // AC from armor (spell?)
         // Proper menus for both strings and int depending on situation (Fights and inventory int)
         // Further fight actions 
             // Dodge
@@ -21,8 +20,9 @@
             // Flee
             // Spells
 
-
         // Later
+        // Bosses
+        // Battlefields
         // Artifacts
         // Relics
         // Journal
@@ -46,6 +46,8 @@
                 Console.WriteLine("e) Move East");
                 Console.WriteLine("w) Move West");
                 Console.WriteLine("p) Display Player Details");
+                // Later - show map
+                // Where possible interact with NPC
                 Console.WriteLine("x) Exit Game");
                 string decision = Console.ReadLine()?.ToLower();
                 switch (decision)

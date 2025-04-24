@@ -23,6 +23,7 @@
             if (decision == 1)
             {
                 player.Armor = this;
+                player.ArmorClass += AC;
             }
             else
             {
