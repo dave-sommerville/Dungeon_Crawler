@@ -29,7 +29,6 @@ namespace Dungeon_Crawler
         }
         public void MarketPlace(Player player) // Expand to allow for descriptions/reconsiderations
         {
-            Items = Chamber.GetLoot();
             bool TransactionInProgress = true;
             do
             {

@@ -3,13 +3,9 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Fix passageway display function (or movement function??)
         // Slime event design
         // Armor/weapon/potion/trap/chamber generation
         // Dialogue
-        // Specialty
-        // Mushroom men
-        // Search
         // Levelling
         // Rest
         // Submenu in merchant loop
@@ -49,8 +45,6 @@
 
             while(IsRunning && player.Health > 0)
             {
-                Console.WriteLine("\nYou are in room " + player.LocationId);
-                dungeon.StartingPoint.DisplayDescription();
                 Console.WriteLine("n) Move North");
                 Console.WriteLine("s) Move South");
                 Console.WriteLine("e) Move East");

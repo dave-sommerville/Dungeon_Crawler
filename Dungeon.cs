@@ -36,9 +36,7 @@ namespace Dungeon_Crawler
         {
             string description = DungeonChambers[Random.Next(DungeonChambers.Length)];
             Chamber newChamber = new Chamber(newRoomId, description);
-            ExploredChambers[newRoomId] = newChamber;
             newChamber.RandomizePassages();
-
             return newChamber;
         }
         public Battlefield GeneratePlotOneBattlefield(int plotLvl, string newRoomId)

@@ -78,10 +78,12 @@ namespace Dungeon_Crawler
                     if (currentChamber.NorthPassage)
                     {
                         Y += 1;
+                        Console.WriteLine($"{Y}{X}");
                         break;
                     }
                     else
                     {
+
                         Console.Write("You can't go this way\n");
                         break;
                     }
@@ -89,6 +91,8 @@ namespace Dungeon_Crawler
                     if (currentChamber.SouthPassage)
                     {
                         Y -= 1;
+                        Console.WriteLine($"{Y}{X}");
+
                         break;
                     }
                     else
@@ -100,6 +104,7 @@ namespace Dungeon_Crawler
                     if (currentChamber.WestPassage)
                     {
                         X -= 1;
+                        Console.WriteLine($"{Y}{X}");
                         break;
                     }
                     else
@@ -111,6 +116,7 @@ namespace Dungeon_Crawler
                     if (currentChamber.EastPassage)
                     {
                         X += 1;
+                        Console.WriteLine($"{Y}{X}");
                         break;
                     }
                     else
@@ -125,13 +131,14 @@ namespace Dungeon_Crawler
         }
         public void MovePlayer(string decision, Dungeon dungeon)
         {
-            Chamber currentChamber = dungeon.ExploredChambers[LocationId];
+            Chamber previousChamber = dungeon.ExploredChambers[LocationId];
             string locationRef = LocationId;
-            NavCase(decision, currentChamber);
+            NavCase(decision, previousChamber);
             LocationId = $"{Y}{X}";
 
             if(dungeon.ExploredChambers.ContainsKey(LocationId))
             {
+                Chamber currentChamber = dungeon.ExploredChambers[LocationId];
                 Console.WriteLine("You've already explored this room");
                 Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
                 int viewDesicion = PrintMenu(2);
@@ -144,31 +151,36 @@ namespace Dungeon_Crawler
                 }
             } else
             {
-                bool trigger = false;
-                PlotTrigger(trigger, dungeon);
-                if (!trigger)
-                {
+                //bool trigger = false;
+                //PlotTrigger(trigger, dungeon);
+                //if (!trigger)
+                //{
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
                     switch (decision)
                     {
                         case "n":
-                            dungeon.ExploredChambers[locationRef].SouthPassage = true;
+                            newChamber.SouthPassage = true;
                             break;
                         case "s":
-                            dungeon.ExploredChambers[locationRef].NorthPassage = true;
+                            newChamber.NorthPassage = true;
                             break;
                         case "e":
-                            dungeon.ExploredChambers[locationRef].WestPassage = true;
+                            newChamber.WestPassage = true;
                             break;
                         case "w":
-                            dungeon.ExploredChambers[locationRef].EastPassage = true;
+                            newChamber.EastPassage = true;
                             break;
                     }
-                    newChamber.DisplayDescription();
+                Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
+                newChamber.DisplayDescription();
+
+
                     newChamber.MasterEventsTree(this);
                     Console.WriteLine("The room is safe. What would you like to do next?");
-                }
-                
+                dungeon.ExploredChambers[LocationId] = newChamber;
+
+                //}
+
             }
         }
 
