@@ -31,8 +31,10 @@ namespace Dungeon_Crawler
         public int Mana { get; set; } = 3;
         public int Gold { get; set; }
         public Item[] Inventory { get; set; } = new Item[10];
-        public Player(string name, string description) : base(name, description)
+        public Player(string name, string description) : base()
         {
+            Name = name;
+            Description = description;
             ArmorClass = 8;
             Health = 100;
             Gold = 10;

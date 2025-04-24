@@ -16,12 +16,70 @@ namespace Dungeon_Crawler
         private readonly int maxHealth = 40;
         private readonly int minArmorClass = 7;
         private readonly int maxArmorClass = 10;
+        public string[] monsters = new string[]
+        {
+            "Giant Rat",
+            "Giant Spider",
+            "Skeleton Warrior",
+            "Kobold",
+            "Deep Gnome",
+            "Grimlock",
+            "Troglodyte",
+            "Goblin Scout",
+            "Spectre",
+            "Wight",
+            "Ogre",
+            "Cave Troll",
+            "Stone Golem",
+            "Mummy",
+            "Pit Crawler",
+            "Bone Naga",
+            "Land Shark",
+            "Death Knight",
+            "Drake",
+            "Hydra",
+            "Chimera",
+            "Wyvern",
+            "Purple Worm"
+        };
 
-        
-        public Monster(string name, string description) : base(name, description)
+        public string[] monsterDescriptions = new string[]
+        {
+            "Vermin the size of dogs, often swarming and spreading disease.",
+            "Web-weaving predator with venomous fangs and cunning ambush tactics.",
+            "Reanimated bones clad in rusted armor, driven by dark will.",
+            "Small reptilian humanoid with a knack for traps and cowardly tactics.",
+            "Clever subterranean dweller skilled in stealth and illusion magic.",
+            "Blind, brutish humanoid with an acute sense of smell and aggression.",
+            "Primitive reptilian humanoid, reeks of musk and savagery.",
+            "Fast and elusive scout, often the eyes and ears of larger goblin warbands.",
+            "Ghostly apparition that drains warmth and life from nearby souls.",
+            "Undead warrior with cursed strength and a hunger for the living.",
+            "Massive, dim-witted brute with a club that can shatter stone.",
+            "Thick-skinned giant dwelling in caves, extremely strong and territorial.",
+            "Magical construct of immense weight and force, nearly impervious to blades.",
+            "Wrapped in ancient linens, cursed to protect tombs with dark magic.",
+            "Sinister, skittering horror that burrows through walls and flesh alike.",
+            "Serpentine undead with spellcasting power and a gaze that chills the spine.",
+            "Massive beast with armored hide and a hunger for anything that moves underground.",
+            "Fallen champion clad in blackened armor, wielding unholy powers and blades.",
+            "Wingless draconic creature with elemental breath and raw fury.",
+            "Many-headed serpent beast; cut one head off, two may take its place.",
+            "Three-headed monstrosity that breathes fire, roars thunder, and strikes with venom.",
+            "Flying reptile with a venomous stinger and a taste for meat.",
+            "Titanic worm with a gaping maw, capable of devouring adventurers whole."
+        };
+
+
+        public Monster(int challengeRating) : base()
         {
             Health = random.Next(minHealth,maxHealth);
             ArmorClass = random.Next(minArmorClass, maxArmorClass);
+            int challengeRatingLow = challengeRating - 1;
+            int challengeRatingHigh = challengeRating + 4;
+            int monsterIndex = random.Next(challengeRating, Math.Min(challengeRatingHigh, monsters.Length));
+            Name = monsters[monsterIndex];
+            Description = monsterDescriptions[monsterIndex];
         }
         public override void Attack(Character targetCharacter)
         {

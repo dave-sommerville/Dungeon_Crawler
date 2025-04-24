@@ -21,13 +21,13 @@
             // Spells
 
         // Later
-        // Bosses
-        // Battlefields
-        // Artifacts
-        // Relics
-        // Journal
-        // Map
-        // Curses
+            // Bosses
+            // Battlefields
+            // Artifacts
+            // Relics
+            // Journal
+            // Map
+            // Curses
 
 
         static void Main(string[] args)

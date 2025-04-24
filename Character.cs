@@ -12,11 +12,11 @@ namespace Dungeon_Crawler
         public int Health { get; set; }
         public int XP { get; set; } = 0;
 
-        public Character(string name, string description)
+        public Character()
         {
             Id = _nextId++;
-            Name = name;
-            Description = description;
+            Name = "Blank Character";
+            Description = "Generic description";
             ArmorClass = 0;
             Health = 0;
         }

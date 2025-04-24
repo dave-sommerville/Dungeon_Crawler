@@ -34,6 +34,7 @@ namespace Dungeon_Crawler
                         Console.WriteLine($"{item.Name}: {item.Value} Gold Pieces");
                     }
                     Console.WriteLine("What would you like to buy?\nSelect an item");
+                    Console.WriteLine("Be careful what you choose, I don't ask twice");
                     int selectedItem = Player.PrintMenu(Items.Count) - 1;
                     if (selectedItem == -1) TransactionInProgress = false;
                     if (player.Gold >= Items[selectedItem].Value)

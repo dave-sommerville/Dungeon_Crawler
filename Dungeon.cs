@@ -54,40 +54,5 @@ namespace Dungeon_Crawler
             Battlefield battlefield = new Battlefield("4", "First battle");
             return battlefield;
         }
-        // Choose opponents by CR
-
-        //int GetBaseEnemyRangeStart(int xp)
-        //{
-        //    int chunkSize = 5;
-        //    int index = Math.Min(xp / 10, (baseEnemies.Length / chunkSize) - 1); // Clamp max
-        //    return index * chunkSize;
-        //}
-        //Enemy GetRandomEnemy(Player player)
-        //{
-        //    List<Enemy> encounterPool = new List<Enemy>();
-
-        //    // Add base enemies based on XP tier
-        //    int start = GetBaseEnemyRangeStart(player.XP);
-        //    for (int i = start; i < start + 5; i++)
-        //        encounterPool.Add(baseEnemies[i]);
-
-        //    // Check for special region
-        //    if (IsInSpecialRegion(player))
-        //    {
-        //        // Weight logic: add some from special array
-        //        int weight = Math.Min((player.X - 50) / 5, specialEnemies.Length); // Scale weight
-
-        //        for (int i = 0; i < weight; i++)
-        //        {
-        //            // Clamp to array bounds
-        //            int index = i % specialEnemies.Length;
-        //            encounterPool.Add(specialEnemies[index]);
-        //        }
-        //    }
-
-        //    // Return random enemy from pool
-        //    Random rand = new Random();
-        //    return encounterPool[rand.Next(encounterPool.Count)];
-
     }
-    }
+}

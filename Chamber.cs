@@ -174,7 +174,7 @@
         }//
         public Monster MonsterEvent(Player player)
         {
-            Monster monster = new Monster("Goblin", "A small, green-skinned creature with a nasty disposition.");
+            Monster monster = new Monster(player.PlayerLevel);
             return monster;
         }//
         public NPC NpcEvent(Player player)
