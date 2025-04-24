@@ -3,35 +3,31 @@
     internal class Program
     {
         public static Random Random = new Random();
+        // Creating utility case with static methods for all the generic ones 
+        // More details in the player profile
+        // Error catch for apply skill point
+        // Create dialogue tree mechanic 
+        // Monster CR system
+        // Incorporating the search/rest mechanic in cleared rooms 
         // Slime event design
-        // Armor/weapon/potion/trap/chamber generation
-        // Dialogue
+        // Armor/weapon/potion generation
         // Levelling
-        // Rest
-        // Submenu in merchant loop
+        // Market
+        // AC from armor (spell?)
+        // Proper menus for both strings and int depending on situation (Fights and inventory int)
+        // Further fight actions 
+            // Dodge
+            // Mana Blast
+            // Flee
+            // Spells
 
-        // To Be hard coded
-        // - Plot Lines with bosses (Dungeon)
-        // - Bosses and descriptions (Dungeon)
-        // - Dialogue trees (NPC)
-        // - Chamber descriptions (Chamber) 
-        // - Prisoner dialogue/description (NPC)
-        // - Merchant dialogue/description (NPC)
-        // - Item descriptions (Item subclasses)
-        // - Enemy descriptions (Monster)
-        // - Trap descriptions (Trap)
 
         // Later
-            // Relics
-            // Artifacts 
-            // Further fight actions 
-                // Dodge
-                // Mana Blast
-                // Flee
-                // Spells
-            // Journal
-            // Map
-            // Curses
+        // Artifacts
+        // Relics
+        // Journal
+        // Map
+        // Curses
 
 
         static void Main(string[] args)

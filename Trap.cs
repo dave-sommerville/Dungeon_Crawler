@@ -98,6 +98,7 @@
             }
             player.Health -= Damage;
             Console.WriteLine($"The trap deals {Damage}");
+            player.PlayerDeathCheck();
         }
     }
 }

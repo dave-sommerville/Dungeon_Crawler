@@ -183,7 +183,6 @@ namespace Dungeon_Crawler
 
             }
         }
-
         public void AddToInventory(Item item)
         {
             bool InventoryFull = true;
@@ -359,24 +358,30 @@ namespace Dungeon_Crawler
         }
         public void ApplySkillPoint() 
         {
-            string skill = Console.ReadLine().Trim().ToLower();
-            switch (skill)
-            {
-                case "athletics":
-                case "ath":
-                    Athletics += 1;
-                    break;
-                case "perception":
-                case "per":
-                    Perception += 1;
-                    break;
-                case "dexterity":
-                case "dex":
-                    Dexterity += 1;
-                    break;
-                default:
-                    Console.WriteLine("Invalid skill");
-                    break;
+            bool skillApplied = false;
+            while (!skillApplied) {
+                string skill = Console.ReadLine().Trim().ToLower();
+                switch (skill)
+                {
+                    case "athletics":
+                    case "ath":
+                        Athletics += 1;
+                        skillApplied = true;
+                        break;
+                    case "perception":
+                    case "per":
+                        Perception += 1;
+                        skillApplied = true;
+                        break;
+                    case "dexterity":
+                    case "dex":
+                        Dexterity += 1;
+                        skillApplied = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid skill");
+                        break;
+                }
             }
         }
         public void GainXp(Monster monster)
