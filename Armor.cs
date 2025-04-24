@@ -1,14 +1,48 @@
-﻿namespace Dungeon_Crawler
+﻿using Dungeon_Crawlerx;
+using System;
+
+namespace Dungeon_Crawler
 {
     public class Armor : Item
     {
+        Random random = new Random();
+        private readonly string[] midArmorMaterials = new string[]
+        {
+            "Leather",
+            "Chainmail",
+            "Bronze",
+            "Iron"
+        };
+
+        private readonly string[] goodArmorMaterials = new string[]
+        {
+            "Mythril",
+            "Dragonhide",
+            "Adamantite",
+            "Runesteel"
+        };
+
         public int AC { get; set; } 
+
         public Armor() : base()
         {
-            Name = "Armor"; // Kinda silly default values 
-            Description = "This is an armor.";
-            Durability = 100;
-            AC = 0;
+            Durability = 10;
+            bool IsGood = FiftyFifty();
+            if (IsGood)
+            {
+                Name = goodArmorMaterials[random.Next(goodArmorMaterials.Length)];
+                AC = 3;
+            }
+            else
+            {
+                Name = midArmorMaterials[random.Next(midArmorMaterials.Length)];
+                AC = 1;
+            }
+
+        }
+        public bool FiftyFifty()
+        {
+            return new Random().NextDouble() < 0.5;
         }
         public override void EquipItem(Player player)
         {
