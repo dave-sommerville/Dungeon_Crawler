@@ -4,29 +4,30 @@
     {
         public static Random Random = new Random();
         // Singular plot events 
-          // Mind Shard
-          // Cursed Object
-          // Prisoner
-          // Beholder/mind fucks
+        // Mind Shard
+        // Cursed Object
+        // Prisoner
+        // Beholder/mind fucks
         // Creating utility class with static methods for all the generic ones 
         // More details in the player profile
         // Create dialogue tree mechanic 
         // Slime event design
         // Levelling
         // Spells
-          // Stun
-          // Evade
+        // Stun
+        // Evade
         // Later
-            // Bosses
-            // Battlefields
-            // More potion classes
-            // Artifacts
-            // Relics
-            // Journal
-            // Map
-            // Curses
+        // Bosses
+        // Battlefields
+        // More potion classes
+        // Artifacts
+        // Relics
+        // Journal
+        // Map
+        // Curses
 
-
+        //  HP, maxHP, Armor Class, skills, spells known, gold,  location, sanity
+        // Print Inventory, map, spells, 
         static void Main(string[] args)
         {
             GameLaunch(CreatePlayer());

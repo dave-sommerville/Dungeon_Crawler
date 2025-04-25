@@ -25,6 +25,7 @@ namespace Dungeon_Crawler
         public int Athletics { get; set; } = 0;
         public int Perception { get; set; } = 0;
         public int XP { get; set; } = 0;
+        public int MaxHP { get; set; } = 100;
         public int PlayerLevel { get; set; } = 1;
         public int PlotOneLvl { get; set; } = 1;
         public int PlotTwoLvl { get; set; } = 1;
@@ -69,11 +70,33 @@ namespace Dungeon_Crawler
         }
         public void PrintPlayerDetails() // Needs expanding 
         {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"AC: {ArmorClass}\nHP: {Health}");
-            Console.WriteLine($"Mana: {Mana}");
-            Console.WriteLine("Inventory:");
-
+            Console.WriteLine();
+            Console.WriteLine($"Player: {Name} - Level: {PlayerLevel}({XP}xp)");
+            Console.WriteLine($"Location: {LocationId} - Gold: {Gold}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Current Health: {Health} - Maximum Health: {MaxHP}");
+            Console.WriteLine($"Mana: {Mana} - Sanity: {Sanity}");
+            Console.WriteLine($"Skills:");
+            if (Charisma > 1) Console.Write($"Charisma: {Charisma}");
+            if (Athletics > 1) Console.Write($"Athletics: {Athletics}");
+            if (Perception > 1) Console.Write($"Perception: {Perception}");
+            if (Dexterity > 1) Console.Write($"Charisma: {Dexterity}");
+            Console.WriteLine($"AC: {ArmorClass} - Modifier: {Modifier}");
+            if(Armor != null)
+            {
+                Console.WriteLine($"Armor Current Equipped: {Armor.Name} - AC Bonus: {Armor.AC}");
+            } else
+            {
+                Console.WriteLine("No armor currently equipped");
+            }
+            if (Weapon != null)
+            {
+                Console.WriteLine($"Armor Current Equipped: {Weapon.Name} - Attack Bonus: {Weapon.Boost}");
+            }
+            else
+            {
+                Console.WriteLine("No weapon currently equipped");
+            }
         }
         public void NavCase(string decision, Chamber currentChamber)
         {
