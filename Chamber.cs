@@ -155,8 +155,7 @@ namespace Dungeon_Crawler
             else if(randomEvent > TierThree && randomEvent <= TierFour)
             {
                 Console.WriteLine("You encounter an NPC in the chamber.");
-                NPC chamberNpc = NpcEvent(player);
-                player.Name = chamberNpc.Name;
+                NpcEvent(player);
             } else if (randomEvent > TierFour && randomEvent <= TierFive)
             {
                 Console.WriteLine("You encounter a merchant in the chamber.");
@@ -194,11 +193,18 @@ namespace Dungeon_Crawler
                 player.RestCounter = 0;
             }
         }
-        public NPC NpcEvent(Player player)
+        public void NpcEvent(Player player)
         {
-            NPC npc = new NPC("Merchant", "A shady figure with a glint in their eye.");
-            return npc;
-        }//
+            if (player.MushroomMan == null)
+            {
+                NPC mushroomMan = new NPC();
+                player.MushroomMan = mushroomMan;
+                mushroomMan.InteractWithNpc(player);
+            } else
+            {
+                player.MushroomMan.InteractWithNpc(player);
+            }
+        }
         public NPC MerchantEvent(Player player)
         {
             NPC merchant = new NPC();

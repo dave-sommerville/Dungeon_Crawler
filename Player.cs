@@ -16,6 +16,7 @@ namespace Dungeon_Crawler
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
+        public NPC? MushroomMan { get; set; }
         public Armor? Armor { get; set; }
         public Weapon? Weapon { get; set; }
         public int Modifier { get; set; } = 0;

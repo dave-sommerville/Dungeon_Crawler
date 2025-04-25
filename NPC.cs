@@ -7,6 +7,9 @@ namespace Dungeon_Crawler
         Random random = new Random();
         // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
         private readonly string[][] _npcDialogue = new string[][]
+        // Oh, I'm sorry, I'm a little chatty sometimes. I try to talk while the people are
+        // still alive, their skeletons are much less talkative. I mean, except to the North. 
+
         {
             // Initial encounter will include constructor and extra, likely hardwritten, dialogue options
             // It is held in an if above the npc event, not with the special events as NPCs should be fairly common? 
@@ -26,7 +29,7 @@ namespace Dungeon_Crawler
             Console.WriteLine("You encounter a familiar creature in this room.");
             Console.WriteLine(Description);
             Console.WriteLine(_npcDialogue[0][random.Next(_npcDialogue[0].Length)]);
-            bool InteractionInProgress = true;
+            bool interactionInProgress = true;
             do
             {
                 Console.WriteLine($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
@@ -36,17 +39,20 @@ namespace Dungeon_Crawler
                 {
                     case 1:
                         Console.WriteLine(_npcDialogue[1][0]);
-
+                        interactionInProgress = DialogueNode(player);
+                        player.Charisma += 1;
                         break;
                     case 2:
                         Console.WriteLine(_npcDialogue[1][1]);
+                        player.Charisma -= 1;
                         break;
                     case 3:
                         Console.WriteLine(_npcDialogue[7][random.Next(_npcDialogue[7].Length)]);
                         break;
                     case 4:
                         Console.WriteLine("You kill him instantly, you monster");
-                        InteractionInProgress = false;
+                        player.Charisma = -5;
+                        interactionInProgress = false;
                         break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
@@ -54,9 +60,9 @@ namespace Dungeon_Crawler
                 }
                 Console.WriteLine();
                 Console.WriteLine();
-            } while (InteractionInProgress);
+            } while (interactionInProgress);
         }
-        public bool DialogueNode()
+        public bool DialogueNode(Player player)
         {
             int dialogueIndex = random.Next(0, _npcDialogue[2].Length);
             int userChoice = dialogueIndex + 3;
@@ -64,20 +70,21 @@ namespace Dungeon_Crawler
             Console.WriteLine("1) Yes\n2) No");
             int decision = Player.PrintMenu(2);
             if (decision == 1)
-            {
+            { 
+                player.Charisma += 1;
                 Console.WriteLine(_npcDialogue[dialogueIndex][userChoice]);
                 // Need to trigger another print menu if there's an object to give (Charisma a recent tracker comparision)
                 return true;
             }
             else
             {
+                player.Charisma -= 1;
                 Console.WriteLine(_npcDialogue[4][dialogueIndex]);
                 return false;
             }
         }
 
-        public string[] Dialogues { get; set; }
-        public List<Item> Items { get; set; }
+        public Item Item { get; set; }
         public NPC() : base()
         {
             Description = "A mysterious figure.";
@@ -132,41 +139,83 @@ namespace Dungeon_Crawler
                 Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
                 Console.WriteLine("2) Say 'Why hello there, what might your name be?");
                 Console.WriteLine("3) Ignore the creature and continue on your way");
-                Console.WriteLine("4) Attack the creature");
                 int decision = Player.PrintMenu(3);
-                // Has to give NPC a way to 
                 switch (decision)
                 {
                     case 1:
-                        Console.WriteLine("What kind of adventure are you on?");
-                        //-Seeking treasure and fortune *
-                        //-Seeking acknowledgement and renown *
-                        //-Seeking knowledge and relics *
-                        // Cool cool cool. I just sort of hang out. 
-                        // Random question 
-                        //-What do you mean by that? -1
-                        // Oh, I'm sorry, I'm a little chatty sometimes. I try to talk while the people are
-                        // still alive, their skeletons are much less talkative. I mean, except to the North. 
-                        //-Why don't you mind your own business? -1
+                        AdventureQuestion(player);
                         break;
                     case 2:
                         Console.WriteLine("What's a name? Can you give me a name?");
+                        AdventureQuestion(player);
                         break;
                     case 3:
                         Console.WriteLine("'Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnooooooo, you're all high and mighty. OK, that's fine.' the creature says passive aggressively");
-                        player.Charisma -= 1;
-                        //Can just keep looping until the player interacts with or attacks the creature
                         break;
-                    case 4:
-                        Console.WriteLine("You attack the creature, smashing it into a pulp with barely any effort.");
-                        player.Charisma = -5;
-                        InteractionInProgress = false;
-                        break;
+
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
                         break;
                 }
             } while (InteractionInProgress);
+        }
+        public Item GivePlayerItem() // Will eventually have to take off a list of items (Will be able to use this for both sets of interaction)
+        {
+            Item item = new Item();
+            item.Name = "A shiny object";
+            item.Value = 10;
+            return item;
+        }
+        public void AdventureQuestion(Player player)
+        {
+            Console.WriteLine("What kind of adventure are you on?");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("What do you say?");
+            Console.WriteLine("1) Seeking treasure and fortune");
+            Console.WriteLine("2) Seeking acknowledgement and renown");
+            Console.WriteLine("3) Seeking knowledge and relics");
+            Console.WriteLine("4) Why don't you mind your own business");
+            string endResult = "";
+            bool onQuestion = true;
+            do
+            {
+                int choice = Player.PrintMenu(4);
+                switch(choice) {
+                    case 1:
+                        player.Charisma += 1;
+                        endResult = "Seeking treasure and fortune";
+                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        player.AddToInventory(GivePlayerItem());
+                        break;
+                    case 2:
+                        player.Charisma += 1;
+
+                        endResult = "Seeking acknowledgement and renown";
+                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        player.AddToInventory(GivePlayerItem());
+                        break;
+                    case 3:
+                        player.Charisma += 1;
+
+                        endResult = "Seeking knowledge and relics";
+                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        player.AddToInventory(GivePlayerItem());
+
+                        break;
+                    case 4:
+                        Console.WriteLine("Well, kinda rude. I just have this cool rock that I was gonna give you.");
+                        Console.WriteLine("Ah, whatever! Here you go.");
+                        player.AddToInventory(GivePlayerItem());
+                        player.Charisma -= 1;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+                
+            } while (onQuestion);
         }
     }
 }
