@@ -4,13 +4,83 @@ namespace Dungeon_Crawler
 {
     public class NPC : Character
     {
+        Random random = new Random();
         // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
+        private readonly string[][] _npcDialogue = new string[][]
+        {
+            // Initial encounter will include constructor and extra, likely hardwritten, dialogue options
+            // It is held in an if above the npc event, not with the special events as NPCs should be fairly common? 
+            new string[] { "" }, // Initial statement [0][Rand]
+            new string[] { "" }, // Only piece of user dialogue, two way to respond(potentially more) [1][0,1]
+                                 // No effect on the next
+            new string[] { "" }, // Three dialogue themes, 1 at random for user menu (y/n) [0][Rand]
+            // The index here has to be referenced by the three next indices 
+            new string[] { "" }, // Dialogue Theme One [Output][Rand]
+            new string[] { "" }, // Dialogue Theme Two [Output][Rand]
+            new string[] { "" }, // Dialogue Theme Three [Output][Rand]
+            new string[] { "" }, // Friendly goodbye 
+            new string[] { "" }, // Being ignored text
+        };
+        public void InteractWithNpc(Player player)
+        {
+            Console.WriteLine("You encounter a familiar creature in this room.");
+            Console.WriteLine(Description);
+            Console.WriteLine(_npcDialogue[0][random.Next(_npcDialogue[0].Length)]);
+            bool InteractionInProgress = true;
+            do
+            {
+                Console.WriteLine($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
+                Console.WriteLine("3) Ignore\n4) Attack");
+                int choice = Player.PrintMenu(4);
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine(_npcDialogue[1][0]);
+
+                        break;
+                    case 2:
+                        Console.WriteLine(_npcDialogue[1][1]);
+                        break;
+                    case 3:
+                        Console.WriteLine(_npcDialogue[7][random.Next(_npcDialogue[7].Length)]);
+                        break;
+                    case 4:
+                        Console.WriteLine("You kill him instantly, you monster");
+                        InteractionInProgress = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+            } while (InteractionInProgress);
+        }
+        public bool DialogueNode()
+        {
+            int dialogueIndex = random.Next(0, _npcDialogue[2].Length);
+            int userChoice = dialogueIndex + 3;
+            Console.WriteLine(_npcDialogue[2][dialogueIndex]);
+            Console.WriteLine("1) Yes\n2) No");
+            int decision = Player.PrintMenu(2);
+            if (decision == 1)
+            {
+                Console.WriteLine(_npcDialogue[dialogueIndex][userChoice]);
+                // Need to trigger another print menu if there's an object to give (Charisma a recent tracker comparision)
+                return true;
+            }
+            else
+            {
+                Console.WriteLine(_npcDialogue[4][dialogueIndex]);
+                return false;
+            }
+        }
+
         public string[] Dialogues { get; set; }
         public List<Item> Items { get; set; }
         public NPC() : base()
         {
             Description = "A mysterious figure.";
-            Dialogues = new string[] { "Hello, traveler, What brings you here?", "I have a quest for you." };
         }
 
         public NPC Prisoner()
