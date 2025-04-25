@@ -51,9 +51,52 @@ namespace Dungeon_Crawler
                 Console.WriteLine("So what's shakin, bacon?");
             }
         }
-        public void Interact()
+        public void Interact(Player player)
         {
-
+            bool InteractionInProgress = true;
+            do
+            {
+                Console.WriteLine(Description);
+                Console.WriteLine("'Hello there', a small and slightly shrill voice calls out to you");
+                Console.WriteLine("What do you do?");
+                Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
+                Console.WriteLine("2) Say 'Why hello there, what might your name be?");
+                Console.WriteLine("3) Ignore the creature and continue on your way");
+                Console.WriteLine("4) Attack the creature");
+                int decision = Player.PrintMenu(3);
+                // Has to give NPC a way to 
+                switch (decision)
+                {
+                    case 1:
+                        Console.WriteLine("What kind of adventure are you on?");
+                        //-Seeking treasure and fortune *
+                        //-Seeking acknowledgement and renown *
+                        //-Seeking knowledge and relics *
+                        // Cool cool cool. I just sort of hang out. 
+                        // Random question 
+                        //-What do you mean by that? -1
+                        // Oh, I'm sorry, I'm a little chatty sometimes. I try to talk while the people are
+                        // still alive, their skeletons are much less talkative. I mean, except to the North. 
+                        //-Why don't you mind your own business? -1
+                        break;
+                    case 2:
+                        Console.WriteLine("What's a name? Can you give me a name?");
+                        break;
+                    case 3:
+                        Console.WriteLine("'Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnooooooo, you're all high and mighty. OK, that's fine.' the creature says passive aggressively");
+                        player.Charisma -= 1;
+                        //Can just keep looping until the player interacts with or attacks the creature
+                        break;
+                    case 4:
+                        Console.WriteLine("You attack the creature, smashing it into a pulp with barely any effort.");
+                        player.Charisma = -5;
+                        InteractionInProgress = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, please try again.");
+                        break;
+                }
+            } while (InteractionInProgress);
         }
     }
 }

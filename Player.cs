@@ -12,6 +12,7 @@ namespace Dungeon_Crawler
         //private bool IsCursed = false;
         public bool PrisonerReleased = false;
         public int RestCounter = 0;
+        public bool ShieldActive = false;
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
@@ -19,6 +20,7 @@ namespace Dungeon_Crawler
         public Weapon? Weapon { get; set; }
         public int Modifier { get; set; } = 0;
         public int Sanity { get; set; } = 100;
+        public int Charisma { get; set; } = 0;
         public int Dexterity { get; set; } = 0;
         public int Athletics { get; set; } = 0;
         public int Perception { get; set; } = 0;

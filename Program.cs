@@ -7,11 +7,11 @@
           // Mind Shard
           // Cursed Object
           // Prisoner
-        // Creating utility case with static methods for all the generic ones 
+          // Beholder/mind fucks
+        // Creating utility class with static methods for all the generic ones 
         // More details in the player profile
         // Create dialogue tree mechanic 
         // Slime event design
-        // Potion generation
         // Levelling
         // Spells
           // Stun
