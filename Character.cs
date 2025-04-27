@@ -42,5 +42,9 @@ namespace Dungeon_Crawler
                 }
             }
         }
+        public virtual void PrintInventory()
+        {
+
+        }
     }
 }

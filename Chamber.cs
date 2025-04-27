@@ -72,18 +72,6 @@ namespace Dungeon_Crawler
             Console.WriteLine(Description);
             DisplayPassages();
         }
-        //public bool FiftyFifty()
-        //{
-        //    int randomInt = Utility.GetRandomIndex(0, 1);
-        //    if (randomInt == 0)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
         public void RandomizePassages()
         {
             NorthPassage = Utility.FiftyFifty();
@@ -110,12 +98,6 @@ namespace Dungeon_Crawler
                 Console.WriteLine("To the West " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
         }
-        //public static int GetRandomIndex(int min, int max)
-        //{
-        //    Random random = new Random();
-        //    int randomInt = random.Next(min, max);
-        //    return randomInt;
-        //}
         public List<Item> AddLootToChamber()
         {
             List<Item> chamberLoot = new List<Item>();

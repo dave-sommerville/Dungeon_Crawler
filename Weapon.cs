@@ -2,7 +2,6 @@
 {
     public class Weapon : Item
     {
-        Random random = new Random();
         private readonly string[] midMeleeWeapons = new string[]
         {
             "Iron Club",
@@ -34,23 +33,18 @@
         public int Boost { get; set; }
         public Weapon() : base()
         {
-            bool IsGood = FiftyFifty();
+            bool IsGood = Utility.FiftyFifty();
             if(IsGood) { 
-                Name = goodMeleeWeapons[random.Next(goodMeleeWeapons.Length)];
+                Name = goodMeleeWeapons[Utility.GetRandomIndex(0, goodMeleeWeapons.Length)];
                 Boost = 3;
             }
             else
             {
-                Name = midMeleeWeapons[random.Next(midMeleeWeapons.Length)];
+                Name = midMeleeWeapons[Utility.GetRandomIndex(0, midMeleeWeapons.Length)];
                 Boost = 1;
             }
 
         }
-        public bool FiftyFifty()
-        {
-            return new Random().NextDouble() < 0.5;
-        }
-
         public override void EquipItem(Player player)
         {
             if (Durability <= 0)
@@ -60,7 +54,7 @@
             }
             Console.WriteLine("Are you sure you want to equip this weapon? Anything there will be replaced?");
             Console.WriteLine("1) Equip item 2) Cancel");
-            int decision = Player.PrintMenu(2);
+            int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
                 player.Weapon = this;

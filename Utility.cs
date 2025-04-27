@@ -22,6 +22,21 @@
                 return false;
             }
         }
+        public static int PrintMenu(int options)
+        {
+            int intDecision;
+            bool isValid;
+            do
+            {
+                string decision = Console.ReadLine();
+                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
+                if (!isValid)
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+            } while (!isValid);
+            return intDecision;
+        }
 
     }
 }

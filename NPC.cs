@@ -40,7 +40,7 @@ namespace Dungeon_Crawler
             {
                 Console.WriteLine($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
                 Console.WriteLine("3) Ignore\n4) Attack");
-                int choice = Player.PrintMenu(4);
+                int choice = Utility.PrintMenu(4);
                 switch (choice)
                 {
                     case 1:
@@ -74,7 +74,7 @@ namespace Dungeon_Crawler
             int userChoice = dialogueIndex + 3;
             Console.WriteLine(_npcDialogue[2][dialogueIndex]);
             Console.WriteLine("1) Yes\n2) No");
-            int decision = Player.PrintMenu(2);
+            int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
                 player.Charisma += 1;
@@ -100,7 +100,7 @@ namespace Dungeon_Crawler
             Console.WriteLine($"Hello adventurer, how brave to come this far.");
             Console.WriteLine($"I am the humble {Name}, and I have a few items for sale. Do you want to see them?");
             Console.WriteLine("1) Yes 2) Talk to merchant");
-            int decision = Player.PrintMenu(2);
+            int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
                 bool TransactionInProgress = true;
@@ -112,7 +112,7 @@ namespace Dungeon_Crawler
                     }
                     Console.WriteLine("What would you like to buy?\nSelect an item");
                     Console.WriteLine("Be careful what you choose, I don't ask twice");
-                    int selectedItem = Player.PrintMenu(Inventory.Length) - 1;
+                    int selectedItem = Utility.PrintMenu(Inventory.Length) - 1;
                     if (selectedItem == -1) TransactionInProgress = false;
                     if (player.Gold >= Inventory[selectedItem].Value)
                     {
@@ -139,7 +139,7 @@ namespace Dungeon_Crawler
                 Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
                 Console.WriteLine("2) Say 'Why hello there, what might your name be?");
                 Console.WriteLine("3) Ignore the creature and continue on your way");
-                int decision = Player.PrintMenu(3);
+                int decision = Utility.PrintMenu(3);
                 switch (decision)
                 {
                     case 1:
@@ -181,7 +181,7 @@ namespace Dungeon_Crawler
             bool onQuestion = true;
             do
             {
-                int choice = Player.PrintMenu(4);
+                int choice = Utility.PrintMenu(4);
                 switch(choice) {
                     case 1:
                         player.Charisma += 1;

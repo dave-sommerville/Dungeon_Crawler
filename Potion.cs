@@ -8,7 +8,6 @@ namespace Dungeon_Crawler
 {
     public class Potion : Item 
     {
-        public Random random = new Random();
         public int Potency { get; set; }
         public Potion() : base()
         {

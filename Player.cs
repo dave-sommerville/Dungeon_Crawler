@@ -53,22 +53,7 @@ namespace Dungeon_Crawler
         private readonly int maxAttack = 12;
         private readonly int minDamage = 8;
         private readonly int maxDamage = 12;
-        public static int PrintMenu(int options)
-        {
-            int intDecision;
-            bool isValid;
-            do
-            {
-                string decision = Console.ReadLine();
-                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
-                if (!isValid)
-                {
-                    Console.WriteLine("Invalid input. Please try again.");
-                }
-            } while (!isValid);
-            return intDecision;
-        }
-        public void PrintPlayerDetails() // Needs expanding 
+        public void PrintPlayerDetails()
         {
             Console.WriteLine();
             Console.WriteLine($"Player: {Name} - Level: {PlayerLevel}({XP}xp)");
@@ -168,7 +153,7 @@ namespace Dungeon_Crawler
                 Chamber currentChamber = dungeon.ExploredChambers[LocationId];
                 Console.WriteLine("You've already explored this room");
                 Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
-                int viewDecision = PrintMenu(2);
+                int viewDecision = Utility.PrintMenu(2);
                 if(viewDecision == 1)
                 {
                     currentChamber.DisplayDescription();
@@ -226,7 +211,7 @@ namespace Dungeon_Crawler
             {
                 Console.WriteLine("Inventory is currently full, please select an item to discard");
                 PrintInventory();
-                int decision = PrintMenu(Inventory.Length) - 1;
+                int decision = Utility.PrintMenu(Inventory.Length) - 1;
                 Console.WriteLine($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
                 string discardDecision = Console.ReadLine().ToLower();
                 if (discardDecision == "y")
@@ -240,27 +225,13 @@ namespace Dungeon_Crawler
                 }
             }
         }
-        public void PrintInventory()
-        {
-            Console.WriteLine($"{Name}'s Inventory:");
-            foreach(Item item in Inventory)
-            {
-                if (item != null)
-                {
-                    Console.WriteLine($"- {item.Name}");
-                } else
-                {
-                    Console.WriteLine("Empty Slot");
-                }
-            }
-        }
         public void MonsterFight(Monster monster)
         {
             do
             {
                 Console.WriteLine("What attack action do you wish to take?");
                 Console.WriteLine("1) Attack 2) Mana Blast 3) Dodge");
-                int decision = PrintMenu(2);
+                int decision = Utility.PrintMenu(2);
                 if (decision == 1) {
                     Attack(monster);
                     monster.Attack(this);
