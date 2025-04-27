@@ -5,6 +5,7 @@ namespace Dungeon_Crawler
     public class Character
     {
         private readonly int _nextId;
+        public bool IsDodging = false;
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
