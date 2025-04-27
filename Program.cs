@@ -97,5 +97,16 @@
             Console.WriteLine("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
+        public void PrintIntro()
+        {
+            Utility.PrintLines();
+            Console.WriteLine("WELCOME TO\nTHE DUNGEON OF BLEEPBLORPP");
+            Utility.PrintLines();
+            for (int i = 0; i < Utility.EntranceArt.Length; i++)
+            {
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine(Utility.EntranceArt[i]);
+            }
+        }
     }
 }

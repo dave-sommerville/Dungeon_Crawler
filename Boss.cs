@@ -9,7 +9,7 @@ namespace Dungeon_Crawlerx
 {
     public class Boss : Monster
     {
-        public Boss(string name, string description) : base(name, description)
+        public Boss(string name, string description, int challengeRating) : base(challengeRating)
         {
         }
     }

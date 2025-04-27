@@ -3,7 +3,21 @@
     public class Utility
     {
         public Random random = new Random();
+        public static string[] EntranceArt = new string[]
+{
+            "          ____    ___    ____           ",
+            "         /    \\__/   \\__/    \\         ",
+            "        /      /       \\      \\        ",
+            "       /      /         \\      \\       ",
+            "      |      |           |      |      ",
+            "  ____|      |   ____    |      |____  ",
+            " /    |      |  /    \\   |      |    \\ ",
+            "/     |      | |      |  |      |     \\",
+            "\\     |      | |      |  |      |     /",
+            " \\____|______|_|______|__|______|____/ "
+};
 
+        public static int Delay = 120;
         public static int GetRandomIndex(int min, int max)
         {
             Random random = new Random();
@@ -37,6 +51,13 @@
             } while (!isValid);
             return intDecision;
         }
-
+        public static void PrintLines()
+        {
+            int lines = 10;
+            for (int i = 0; i < lines; i++)
+            {
+                Console.WriteLine();
+            }
+        }
     }
 }
