@@ -6,7 +6,6 @@ namespace Dungeon_Crawler
     {
         public  Dictionary<string, Chamber> ExploredChambers { get; set; }
         // List of monsters by challenge rating, monsters by storyline, battlefields, 
-        private Random Random { get; set; }
         private readonly int _nextId = 1; // Descriptions belong in the chambers class, should be generated at creation (as well as passageway descriptions)
         public static string[] DungeonChambers =
         {
@@ -52,12 +51,11 @@ namespace Dungeon_Crawler
         {                                       //Needs to be an actual description 
             StartingPoint = new Chamber("00", "And so we begin");
             ExploredChambers = new Dictionary<string, Chamber>();
-            Random = new Random();
             ExploredChambers.Add("00", StartingPoint);
         }
         public Chamber GenerateChamber(string newRoomId)
         {
-            string description = DungeonChambers[Random.Next(DungeonChambers.Length)];
+            string description = DungeonChambers[Utility.GetRandomIndex(0, DungeonChambers.Length)];
             Chamber newChamber = new Chamber(newRoomId, description);
             newChamber.RandomizePassages();
             return newChamber;

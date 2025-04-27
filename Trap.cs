@@ -2,7 +2,6 @@
 {//Mimic
     public class Trap
     {
-        public Random random = new Random();
         private readonly string[] dexterityTraps = {
             "A narrow pit suddenly opens beneath your feet, requiring a quick jump to avoid falling.",
             "A series of swinging blades cross the hallway, needing precise timing to dodge.",
@@ -37,25 +36,21 @@
         
         public Trap(int trapLvl)
         {
-            Athletics = FiftyFifty();
+            Athletics = Utility.FiftyFifty();
             Dexterity = !Athletics;
             Description = DescribeTrap();
             HiddenDifficulty = 12;
             Damage = trapLvl * 10;
-        }
-        public bool FiftyFifty()
-        {
-            return new Random().NextDouble() < 0.5;
         }
         public string DescribeTrap()
         {
             string description = "";
             if(Athletics)
             {
-                description = strengthTraps[random.Next(strengthTraps.Length)];
+                description = strengthTraps[Utility.GetRandomIndex(0, strengthTraps.Length)];
             } else if(Dexterity)
             {
-                description = dexterityTraps[random.Next(dexterityTraps.Length)];
+                description = dexterityTraps[Utility.GetRandomIndex(0, dexterityTraps.Length)];
             }
             return description;
         }
@@ -67,7 +62,7 @@
                 Console.WriteLine("You see a trap.");
                 modifer = 4;
             }
-            int trapCheck = random.Next(1, modifer);
+            int trapCheck = Utility.GetRandomIndex(1, modifer);
             if(trapCheck == 1)
             {
                 return;

@@ -4,8 +4,6 @@ namespace Dungeon_Crawler
 {
     public class Chamber
     {
-        public Random random = new Random();
-
         private readonly string[] dungeonPassages = new string[]
         {
             "A narrow stone archway leads into the next chamber.",
@@ -74,52 +72,60 @@ namespace Dungeon_Crawler
             Console.WriteLine(Description);
             DisplayPassages();
         }
-        public bool FiftyFifty()
-        {
-            return new Random().NextDouble() < 0.5;
-        }
+        //public bool FiftyFifty()
+        //{
+        //    int randomInt = Utility.GetRandomIndex(0, 1);
+        //    if (randomInt == 0)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         public void RandomizePassages()
         {
-            NorthPassage = FiftyFifty();
-            SouthPassage= FiftyFifty();
-            EastPassage= FiftyFifty();
-            WestPassage= FiftyFifty();
+            NorthPassage = Utility.FiftyFifty();
+            SouthPassage= Utility.FiftyFifty();
+            EastPassage= Utility.FiftyFifty();
+            WestPassage= Utility.FiftyFifty();
         }
         public void DisplayPassages()
         {
             if (NorthPassage)
             {
-                Console.WriteLine("To the North " + dungeonPassages[random.Next(dungeonPassages.Length)]);
+                Console.WriteLine("To the North " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (SouthPassage)
             {
-                Console.WriteLine("To the South " + dungeonPassages[random.Next(dungeonPassages.Length)]);
+                Console.WriteLine("To the South " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (EastPassage)
             {
-                Console.WriteLine("To the East " + dungeonPassages[random.Next(dungeonPassages.Length)]);
+                Console.WriteLine("To the East " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (WestPassage)
             {
-                Console.WriteLine("To the West " + dungeonPassages[random.Next(dungeonPassages.Length)]);
+                Console.WriteLine("To the West " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
         }
-        public static int GetRandomIndex(int min, int max)
-        {
-            Random random = new Random();
-            int randomInt = random.Next(min, max);
-            return randomInt;
-        }
+        //public static int GetRandomIndex(int min, int max)
+        //{
+        //    Random random = new Random();
+        //    int randomInt = random.Next(min, max);
+        //    return randomInt;
+        //}
         public List<Item> AddLootToChamber()
         {
             List<Item> chamberLoot = new List<Item>();
-            int lootIndex = GetRandomIndex(0, 3);
+            int lootIndex = Utility.GetRandomIndex(0, 3);
             if (lootIndex == 0)
             {
-                int lootCount = GetRandomIndex(1, 3);
+                int lootCount = Utility.GetRandomIndex(1, 3);
                 for (int i = 0; i < lootCount; i++)
                 {
-                    Item lootItem = PossibleLoot[GetRandomIndex(0, PossibleLoot.Count)];
+                    Item lootItem = PossibleLoot[Utility.GetRandomIndex(0, PossibleLoot.Count)];
                     chamberLoot.Add(lootItem);
                 }
             }
@@ -134,7 +140,7 @@ namespace Dungeon_Crawler
 
         public void MasterEventsTree(Player player)
         {
-            int randomEvent = GetRandomIndex(1, MasterIndex);
+            int randomEvent = Utility.GetRandomIndex(1, MasterIndex);
             if (randomEvent >= 1 && randomEvent <= TierOne)
             {
                 Console.WriteLine("You encounter a hazard in the chamber.");
@@ -181,7 +187,7 @@ namespace Dungeon_Crawler
         public void Rest(Player player)
         {
             Console.WriteLine("You prepare the room to sleep for the night");
-            int restEncounter = GetRandomIndex(1, 10);
+            int restEncounter = Utility.GetRandomIndex(1, 10);
             if (restEncounter <= 3)
             {
                 Console.WriteLine("You are ambushed while you sleep! You get no rest and the monster is attacking.");
@@ -212,7 +218,7 @@ namespace Dungeon_Crawler
         }//
         public void HazardEvent(Player player)//
         {
-            int hazardType = GetRandomIndex(1,5);
+            int hazardType = Utility.GetRandomIndex(1,5);
             if(hazardType == 1)
             {
                 RustMonsterEvent(player);
@@ -234,23 +240,23 @@ namespace Dungeon_Crawler
         {
 
         }
-        public void PrisonerDilemma(Player player, Dungeon dungeon)
-        {
-            if (player.PlayerLevel >= 5 && random.Next(1,5) > 2) 
-            {
-                player.PrisonerReleased = true;
-                NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
-                NPC = prisoner;
-            }
-        }
+        //public void PrisonerDilemma(Player player, Dungeon dungeon)
+        //{
+        //    if (player.PlayerLevel >= 5 && random.Next(1,5) > 2) 
+        //    {
+        //        player.PrisonerReleased = true;
+        //        NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
+        //        NPC = prisoner;
+        //    }
+        //}
         public void SearchForLoot(Player player)
         {
-            int trapTrigger = random.Next(1, 10);
+            int trapTrigger = Utility.GetRandomIndex(1, 10);
             if (trapTrigger < 3)
             {
                 TrapEvent(player);
             }
-            if ((player.Perception + random.Next(7,10)) > 5)
+            if ((player.Perception + Utility.GetRandomIndex(7,10)) > 5)
             {
                 Console.WriteLine("You search the chamber and discover the following");
                 foreach(Item item in ChamberLoot)
@@ -258,7 +264,7 @@ namespace Dungeon_Crawler
                     Console.WriteLine($"You find a {item.Name}.");
                     player.AddToInventory(item);
                 }
-                int gold = random.Next(1, 100);
+                int gold = Utility.GetRandomIndex(1,100);
                 Console.WriteLine($"You find {gold} gold coins.");
                 player.Gold += gold;
             }

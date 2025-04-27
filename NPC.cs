@@ -4,7 +4,6 @@ namespace Dungeon_Crawler
 {
     public class NPC : Character
     {
-        Random random = new Random();
         // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
         private readonly string[][] _npcDialogue = new string[][]
         // Oh, I'm sorry, I'm a little chatty sometimes. I try to talk while the people are
@@ -24,11 +23,18 @@ namespace Dungeon_Crawler
             new string[] { "" }, // Friendly goodbye 
             new string[] { "" }, // Being ignored text
         };
+
+        public Item Item { get; set; }
+        public NPC() : base()
+        {
+            Description = "A mysterious figure.";
+        }
+
         public void InteractWithNpc(Player player)
         {
             Console.WriteLine("You encounter a familiar creature in this room.");
             Console.WriteLine(Description);
-            Console.WriteLine(_npcDialogue[0][random.Next(_npcDialogue[0].Length)]);
+            Console.WriteLine(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
             bool interactionInProgress = true;
             do
             {
@@ -47,7 +53,7 @@ namespace Dungeon_Crawler
                         player.Charisma -= 1;
                         break;
                     case 3:
-                        Console.WriteLine(_npcDialogue[7][random.Next(_npcDialogue[7].Length)]);
+                        Console.WriteLine(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
                         break;
                     case 4:
                         Console.WriteLine("You kill him instantly, you monster");
@@ -64,13 +70,13 @@ namespace Dungeon_Crawler
         }
         public bool DialogueNode(Player player)
         {
-            int dialogueIndex = random.Next(0, _npcDialogue[2].Length);
+            int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
             int userChoice = dialogueIndex + 3;
             Console.WriteLine(_npcDialogue[2][dialogueIndex]);
             Console.WriteLine("1) Yes\n2) No");
             int decision = Player.PrintMenu(2);
             if (decision == 1)
-            { 
+            {
                 player.Charisma += 1;
                 Console.WriteLine(_npcDialogue[dialogueIndex][userChoice]);
                 // Need to trigger another print menu if there's an object to give (Charisma a recent tracker comparision)
@@ -82,12 +88,6 @@ namespace Dungeon_Crawler
                 Console.WriteLine(_npcDialogue[4][dialogueIndex]);
                 return false;
             }
-        }
-
-        public Item Item { get; set; }
-        public NPC() : base()
-        {
-            Description = "A mysterious figure.";
         }
 
         public NPC Prisoner()

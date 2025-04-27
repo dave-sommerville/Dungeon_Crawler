@@ -5,7 +5,6 @@ namespace Dungeon_Crawler
 {
     public class Monster : Character
     {
-        private readonly Random random = new Random();
         // This is good for control, but they are hard wired for monsters. Either they need to be set by method
         // or they need to be set by the constructor ooooor I add a public modifer property 
         private readonly int attackBase = 8;
@@ -91,8 +90,8 @@ namespace Dungeon_Crawler
             }
             else
             {
-                int attack = random.Next(max) + 5;
-                int damage = random.Next(max) + 5;
+                int attack = Utility.GetRandomIndex(0, max) + 5;
+                int damage = Utility.GetRandomIndex(0, max) + 5;
                 if(dodge)
                 {
                     attack = attack / 2;

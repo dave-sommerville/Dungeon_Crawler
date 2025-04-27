@@ -8,7 +8,7 @@ namespace Dungeon_Crawler
 {
     public class Player : Character
     {
-        public Random random = new Random();
+        //public Random random = new Random();
         //private bool IsCursed = false;
         public bool PrisonerReleased = false;
         public int RestCounter = 0;
@@ -341,8 +341,8 @@ namespace Dungeon_Crawler
             }
             else
             {
-                int attack = random.Next(minAttack, maxAttack) + Modifier;
-                int damage = random.Next(minDamage, maxDamage) + Modifier;
+                int attack = Utility.GetRandomIndex(minAttack, maxAttack) + Modifier;
+                int damage = Utility.GetRandomIndex(minDamage, maxDamage) + Modifier;
                 if (Weapon != null)
                 {
                     attack += Weapon.Boost;
