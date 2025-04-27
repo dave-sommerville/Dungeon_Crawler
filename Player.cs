@@ -34,7 +34,6 @@ namespace Dungeon_Crawler
         public bool IsPlaying { get; set; } = true;
         public int Mana { get; set; } = 3;
         public int Gold { get; set; }
-        public Item[] Inventory { get; set; } = new Item[10];
         public Player(string name, string description) : base()
         {
             Name = name;
@@ -264,7 +263,7 @@ namespace Dungeon_Crawler
                 int decision = PrintMenu(2);
                 if (decision == 1) {
                     Attack(monster);
-                    monster.Attack(this, false);
+                    monster.Attack(this);
                 }
                 else if (decision == 2)
                 {
@@ -284,10 +283,10 @@ namespace Dungeon_Crawler
                         Mana -= 1;
 
                     }
-                    monster.Attack(this, false);
+                    monster.Attack(this);
                 } else if (decision == 3)
                 {
-                    monster.Attack(this, true);
+                    monster.Attack(this);
                     Console.WriteLine("You have attempt to dodge the attack");
                 }
                 PlayerDeathCheck();

@@ -75,11 +75,11 @@ namespace Dungeon_Crawler
         {
             ChallengeRating = playerLvl - 1;
             int challengeRatingHigh = ChallengeRating + 5;
-            int monsterIndex = random.Next(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
+            int monsterIndex = Utility.GetRandomIndex(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
             Description = monsterDescriptions[monsterIndex];
-            Health = random.Next(minHealth, maxHealth) + (ChallengeRating * 2);
-            ArmorClass = random.Next(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
+            Health = Utility.GetRandomIndex(minHealth, maxHealth) + (ChallengeRating * 2);
+            ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
         }
         public override void Attack(Character targetCharacter)
         {
@@ -95,6 +95,7 @@ namespace Dungeon_Crawler
                 if (targetCharacter.IsDodging)
                 {
                     attack = attack / 2;
+                    targetCharacter.IsDodging = false;
                 }
                 if (attack > targetCharacter.ArmorClass)
                 {

@@ -12,6 +12,7 @@ namespace Dungeon_Crawler
         public int ArmorClass { get; set; }
         public int Health { get; set; }
         public int XP { get; set; } = 0;
+        public Item[] Inventory { get; set; } = new Item[10];
 
         public Character()
         {
