@@ -8,7 +8,6 @@
             // Cursed Object
             // Prisoner
             // Beholder/mind fucks
-        // Creating utility class with static methods for all the generic ones 
         // Create dialogue tree mechanic 
         // Slime event design
         // Levelling
