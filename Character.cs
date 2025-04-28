@@ -6,6 +6,7 @@ namespace Dungeon_Crawler
     {
         private readonly int _nextId;
         public bool IsDodging = false;
+        public bool IsStunned = false;
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

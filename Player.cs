@@ -12,7 +12,6 @@ namespace Dungeon_Crawler
         //private bool IsCursed = false;
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
-        public bool ShieldActive = false;
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
@@ -331,45 +330,45 @@ namespace Dungeon_Crawler
                 }
             }
         }
-        public void PlotTrigger(bool trigger, Dungeon dungeon)
-        {
+        //public void PlotTrigger(bool trigger, Dungeon dungeon)
+        //{
 
-            if(X > 5 && Y < 5 && PlotOneLvl == 1)
-            {
-                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
-                PlotOneLvl = 2;
-                trigger = true;
-            }else if(X > 10 && Y < 5 && PlotOneLvl == 2)
-            {
-                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
-                PlotOneLvl = 3;
-                trigger = true;
-            }
-            else if(X < -5 && Y < 5 && PlotTwoLvl == 1)
-            {
-                Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
-                PlotTwoLvl = 2;
-                trigger = true;
-            }
-            else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
-            {
-                Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
-                PlotTwoLvl = 3;
-                trigger = true;
-            }
-            else if (Y > 5 && PlotThreeLvl == 1)
-            {
-                Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
-                PlotThreeLvl = 2;
-                trigger = true;
-            }
-            else if(Y > 10 && PlotThreeLvl == 2)
-            {
-                Battlefield PlotThreeBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
-                PlotThreeLvl = 3;
-                trigger = true;
-            }
-        }
+        //    if(X > 5 && Y < 5 && PlotOneLvl == 1)
+        //    {
+        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
+        //        PlotOneLvl = 2;
+        //        trigger = true;
+        //    }else if(X > 10 && Y < 5 && PlotOneLvl == 2)
+        //    {
+        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
+        //        PlotOneLvl = 3;
+        //        trigger = true;
+        //    }
+        //    else if(X < -5 && Y < 5 && PlotTwoLvl == 1)
+        //    {
+        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
+        //        PlotTwoLvl = 2;
+        //        trigger = true;
+        //    }
+        //    else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
+        //    {
+        //        Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
+        //        PlotTwoLvl = 3;
+        //        trigger = true;
+        //    }
+        //    else if (Y > 5 && PlotThreeLvl == 1)
+        //    {
+        //        Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
+        //        PlotThreeLvl = 2;
+        //        trigger = true;
+        //    }
+        //    else if(Y > 10 && PlotThreeLvl == 2)
+        //    {
+        //        Battlefield PlotThreeBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
+        //        PlotThreeLvl = 3;
+        //        trigger = true;
+        //    }
+        //}
         public void PlayerDeathCheck()
         {
             if (Health <= 0)

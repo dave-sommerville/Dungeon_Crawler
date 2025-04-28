@@ -71,6 +71,7 @@ namespace Dungeon_Crawler
         };
 
         public int ChallengeRating = 0;
+        public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
             ChallengeRating = playerLvl - 1;

@@ -13,15 +13,7 @@
         // Write Prisoner event
         // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
         // Bosses
-        // More potion classes
-
-
-        // Spells (Static methods class(For now at least))
-            // Stun
-            // Shield/Dodge(Blur?)
-            // Heal
-            // Fireball
-            // Petrify
+            // More potion classes
 
         // Later
             // Artifacts
