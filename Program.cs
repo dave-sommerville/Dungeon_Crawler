@@ -3,25 +3,34 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Balance dialogue tree mechanic 
         // Reorganize player properties
+        // Add color and typing effects 
+        // Add effect and trigger for insanity (Will need offset for madness as well)
+        // Structure relationship between health and max health
+        // Allow player to describe their boss kills
+        // Add use item and flee mechanics to monster fight
+        // Add folder structure
         // Write Prisoner event
-        // NPC Item events
+        // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
+        // Bosses
+        // More potion classes
 
-        // Spells
+
+        // Spells (Static methods class(For now at least))
             // Stun
-            // Evade
+            // Shield/Dodge(Blur?)
+            // Heal
+            // Fireball
+            // Petrify
 
         // Later
-            // Bosses
-            // Battlefields
-            // More potion classes
             // Artifacts
-            // Journal/Spellbook
             // Map
-            // Possible plot events 
+            // Possible add ons 
                 // Cursed Object
-                // Beholder/mind fucks
+                // Ghosts
+                // Spell Books//Libraries
+
 
         static void Main(string[] args)
         {

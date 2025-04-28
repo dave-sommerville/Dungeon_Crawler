@@ -187,7 +187,7 @@ namespace Dungeon_Crawler
             {
                 NPC mushroomMan = new NPC();
                 player.MushroomMan = mushroomMan;
-                mushroomMan.InteractWithNpc(player);
+                mushroomMan.InitialInteraction(player);
             } else
             {
                 player.MushroomMan.InteractWithNpc(player);
@@ -254,15 +254,6 @@ namespace Dungeon_Crawler
             Console.WriteLine("Disgusting but harmless, the sludge is difficult to get through and takes twice as much energy");
             player.RestCounter += 1;
         }
-        //public void PrisonerDilemma(Player player, Dungeon dungeon)
-        //{
-        //    if (player.PlayerLevel >= 5 && random.Next(1,5) > 2) 
-        //    {
-        //        player.PrisonerReleased = true;
-        //        NPC prisoner = new NPC("Prisoner", "A desperate figure bound in chains.");
-        //        NPC = prisoner;
-        //    }
-        //}
         public void SearchForLoot(Player player)
         {
             int trapTrigger = Utility.GetRandomIndex(1, 10);

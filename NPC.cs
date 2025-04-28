@@ -6,9 +6,6 @@ namespace Dungeon_Crawler
     {
         // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
         private readonly string[][] _npcDialogue = new string[][]
-        // Oh, I'm sorry, I'm a little chatty sometimes. I try to talk while the people are
-        // still alive, their skeletons are much less talkative. I mean, except to the North. 
-
         {
             // Initial encounter will include constructor and extra, likely hardwritten, dialogue options
             // It is held in an if above the npc event, not with the special events as NPCs should be fairly common? 
@@ -24,18 +21,21 @@ namespace Dungeon_Crawler
             new string[] { "Woooooooowwwww, ok. Kinda rude.\\nI mean, like, how many things have tried to kill you\\nand here I am just looking to chat a little but\\nnooooooo, you're all high and mighty. OK, that's fine.", "It's ok if you ignore me, my mother always did.", "Hmmm, someone doesn't have very good manners" }, // Being ignored text
         };
         public int ArtifactTracker { get; set; } = 0; // Will be used to track if the player has received an item from the NPC
+        public bool HasBag { get; set; } = false; // Will be used to track if the player has received a bag from the NPC
+        public bool HasMap { get; set; } = false; // Will be used to track if the player has received a map from the NPC
         public Item Item { get; set; }
         public NPC() : base()
         {
             Description = "A mysterious figure.";
         }
-        public void Interact(Player player)
+        public void InitialInteraction(Player player)
         {
+            Console.WriteLine(Description);
+            Console.WriteLine("'Hello there', a small and slightly shrill voice calls out to you");
+
             bool InteractionInProgress = true;
             do
             {
-                Console.WriteLine(Description);
-                Console.WriteLine("'Hello there', a small and slightly shrill voice calls out to you");
                 Console.WriteLine("What do you do?");
                 Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
                 Console.WriteLine("2) Say 'Why hello there, what might your name be?");
@@ -82,27 +82,31 @@ namespace Dungeon_Crawler
                         player.Charisma += 1;
                         endResult = "Seeking treasure and fortune";
                         Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
-                        player.AddToInventory(GivePlayerItem());
+                        EquipGreyStoneSpire(player);
+                        onQuestion = false; 
                         break;
                     case 2:
                         player.Charisma += 1;
 
                         endResult = "Seeking acknowledgement and renown";
                         Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
-                        player.AddToInventory(GivePlayerItem());
+                        EquipGreyStoneSpire(player);
+                        onQuestion = false;
                         break;
                     case 3:
                         player.Charisma += 1;
 
                         endResult = "Seeking knowledge and relics";
                         Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
-                        player.AddToInventory(GivePlayerItem());
+                        EquipGreyStoneSpire(player);
+                        onQuestion = false;
 
                         break;
                     case 4:
                         Console.WriteLine("Well, kinda rude. I just have this cool rock that I was gonna give you.");
                         Console.WriteLine("Ah, whatever! Here you go.");
-                        player.AddToInventory(GivePlayerItem());
+                        EquipGreyStoneSpire(player);
+                        onQuestion = false;
                         player.Charisma -= 1;
                         break;
                     default:
@@ -111,7 +115,6 @@ namespace Dungeon_Crawler
                 }
             } while (onQuestion);
         }
-
         public void InteractWithNpc(Player player)
         {
             Console.WriteLine("You encounter a familiar creature in this room.");
@@ -150,6 +153,16 @@ namespace Dungeon_Crawler
                 Console.WriteLine();
             } while (interactionInProgress);
         }
+        public bool CharismaChecker(Player player)
+        {
+            if(player.Charisma > 2 && ArtifactTracker > 2)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
         public bool DialogueNode(Player player)
         {
             int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
@@ -161,8 +174,16 @@ namespace Dungeon_Crawler
             {
                 player.Charisma += 1;
                 Console.WriteLine(_npcDialogue[dialogueIndex][userChoice]);
-
-                // Need to trigger another print menu if there's an object to give (Charisma a recent tracker comparision)
+                if(CharismaChecker(player))
+                {
+                    if(!HasBag)
+                    {
+                        EquipBagOfCarrying(player);
+                    } else if(!HasMap)
+                    {
+                        EquipMap(player);
+                    }
+                }
                 return true;
             }
             else
@@ -172,14 +193,21 @@ namespace Dungeon_Crawler
                 return false;
             }
         }
-        public void GiveItemToPlayer(Player player)
+        public void EquipGreyStoneSpire(Player player)
         {
-            Item item = Inventory[];
-            if (player.Charisma > 10 && ArtifactTracker > 5) {
+            Item greyStoneSpire = new Item();
+            greyStoneSpire.Name = "Grey Stone Spire";
+            greyStoneSpire.Description = "A small stone spire, it is grey and has a small hole in the top";
+            greyStoneSpire.Durability = 1;
+            greyStoneSpire.Value = 0;
+        }
+        public void EquipBagOfCarrying(Player player)
+        {
 
-                player.AddToInventory(item);
-                Console.WriteLine($"You received {item.Name} from the NPC.");
-            }
+        }
+        public void EquipMap(Player player)
+        {
+
         }
         public NPC Prisoner()
         {
