@@ -48,6 +48,7 @@ namespace Dungeon_Crawler
             X = 0;
             LocationId = "00";
             Mana = 3;
+
         }
         private readonly int minAttack = 8;
         private readonly int maxAttack = 12;
@@ -270,10 +271,6 @@ namespace Dungeon_Crawler
             }
             RestCounter += 1;
         }
-        //public void FightActions(Monster monster)
-        //{
-
-        //}
         public void UseWeapon()
         {
             if (Weapon != null)
@@ -373,15 +370,11 @@ namespace Dungeon_Crawler
                 trigger = true;
             }
         }
-        //public void Flee()
-        //{
-
-        //}
         public void PlayerDeathCheck()
         {
             if (Health <= 0)
             {
-                if(PrisonerReleased)
+                if(PrisonerStatus == 1)
                 {
                     Console.WriteLine("Your vision grows dim as you feel the life begin to drain from you.");
                     Console.WriteLine("Then you see a familiar face, that of the prisoner you released");
@@ -425,54 +418,75 @@ namespace Dungeon_Crawler
             int xp = monster.XP;
             XP += xp;
         }
+        public void IncreaseModifier()
+        {
+            Console.WriteLine("You gain an increase to your overall modifier.");
+            Modifier += 1;
+        }
+        public void PointIncreaseWrapper()
+        {
+            Console.WriteLine("You may spend another skill point on Athletics, Perception, or Dexterity");
+            Console.WriteLine("Please enter which skill you choose first");
+            ApplySkillPoint();
+        }
         public void GainHP()
         {
 
         }
         public void XpLevelUp()
         {
-            // Modifier, HP, Skill Point, HP, Mana, HP, Modifier, HP, Skill Point, HP(something bigger)
-            //if (XP >= 500 && Level < 1) { Level = 1; IncreaseHP(10); }
-            //if (XP >= 1000 && Level < 2) { Level = 2; IncreaseHP(10); IncreaseSkillPoints(1); }
-            // etc.
-
-            if (XP > 500)
+            Console.WriteLine("Your experience has granted you a boon.");
+            if (XP > 500 && PlayerLevel == 0)
             {
+                GainHP();
                 PlayerLevel = 1;
             }
-            else if (XP > 1000)
+            else if (XP > 1000 && PlayerLevel == 1)
             {
+                PointIncreaseWrapper();
                 PlayerLevel = 2;
             }
-            else if (XP > 1500)
+            else if (XP > 1500 && PlayerLevel == 2)
             {
+                IncreaseModifier();
                 PlayerLevel = 3;
             }
-            else if (XP > 2000)
+            else if (XP > 2000 & PlayerLevel == 3)
             {
+                GainHP();
                 PlayerLevel = 4;
             }
-            else if (XP > 2500)
+            else if (XP > 2500 && PlayerLevel == 4)
             {
+                PointIncreaseWrapper();
                 PlayerLevel = 5;
             }
-            else if (XP > 3000)
+            else if (XP > 3000 && PlayerLevel == 5)
             {
+                IncreaseModifier();
                 PlayerLevel = 6;
-            } else if(XP > 3500)
+            } else if(XP > 3500 && PlayerLevel == 6)
             {
+                GainHP();
                 PlayerLevel = 7;
-            } else if(XP > 4000)
+            } else if(XP > 4000 && PlayerLevel == 7)
             {
+                PointIncreaseWrapper();
                 PlayerLevel = 8;
-            } else if(XP > 4500)
+            } else if(XP > 4500 && PlayerLevel == 8)
             {
+                IncreaseModifier();
                 PlayerLevel = 9;
-            } else if(XP > 5000)
+            } else if(XP > 5000 && PlayerLevel == 9)
             {
+                GainHP(); // Should be something bigger 
                 PlayerLevel = 10;
             }
         }
+        //public void Flee()
+        //{
+
+        //}
 
         //public void CurseTracker()
         //{

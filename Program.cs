@@ -6,7 +6,6 @@
         // Balance dialogue tree mechanic 
         // Reorganize player properties
         // Write Prisoner event
-        // Levelling events (rotate through skill, modifier and maxHP)
         // NPC Item events
 
         // Spells
