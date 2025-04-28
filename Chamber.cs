@@ -200,14 +200,44 @@ namespace Dungeon_Crawler
         }//
         public void HazardEvent(Player player)//
         {
-            int hazardType = Utility.GetRandomIndex(1,5);
-            if(hazardType == 1)
+            if (player.PrisonerStatus == 0)
             {
-                RustMonsterEvent(player);
-            } else
-            {
-                SlimeEvent();
+                Console.WriteLine("You encounter a prisoner in the chamber.");
+                // This function must change the prisoner status depending on the player's choice
             }
+            else {
+                int hazardType = Utility.GetRandomIndex(1, 5);
+                if (hazardType == 1)
+                {
+                    RustMonsterEvent(player);
+                } else if (hazardType == 2)
+                {
+                    SlimeEvent(player);
+                } else if(hazardType == 3)
+                {
+                    SporesEvent(player);
+                } else
+                {
+                    PoisonGasEvent(player);
+                }
+            }
+        }
+        public void SporesEvent(Player player)
+        {
+            int madnessLvl = 10;
+            Console.WriteLine("You are caught in a cloud of spores. You feel dizzy and disoriented.");
+            Console.WriteLine("Strange visions in the shadows plague you and off");
+            Console.WriteLine("After an indeterminate amount of time the effects wear off but your sanity doesn't full recover");
+            Console.WriteLine($"You lose {madnessLvl} sanity points.");
+            player.Sanity -= madnessLvl;
+        }
+        public void PoisonGasEvent(Player player)
+        {
+            int poisonLvl = 5;
+            Console.WriteLine("You are caught in a cloud of poison gas. You fall to your knees coughing.");
+            Console.WriteLine("You feel your lungs burning but you push through and you can eventually breathe clearly again");
+            Console.WriteLine($"You do take some permanent damage however and lose {poisonLvl} maximum health points");
+            player.MaxHP -= poisonLvl;
         }
         public static void RustMonsterEvent(Player player)
         {
@@ -218,9 +248,11 @@ namespace Dungeon_Crawler
             player.Weapon = null;
             player.Armor = null;
         }
-        public static void SlimeEvent()
+        public static void SlimeEvent(Player player)
         {
-
+            Console.WriteLine("You are caught in a pool of slime. You feel your skin crawling.");
+            Console.WriteLine("Disgusting but harmless, the sludge is difficult to get through and takes twice as much energy");
+            player.RestCounter += 1;
         }
         //public void PrisonerDilemma(Player player, Dungeon dungeon)
         //{

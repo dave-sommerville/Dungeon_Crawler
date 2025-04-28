@@ -10,7 +10,7 @@ namespace Dungeon_Crawler
     {
         //public Random random = new Random();
         //private bool IsCursed = false;
-        public bool PrisonerReleased = false;
+        public int PrisonerStatus = 0;
         public int RestCounter = 0;
         public bool ShieldActive = false;
         public int Y { get; set; }

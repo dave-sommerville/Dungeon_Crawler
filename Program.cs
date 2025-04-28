@@ -3,14 +3,12 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Singular plot events 
-            // Mind Shard
-            // Cursed Object
-            // Prisoner
-            // Beholder/mind fucks
-        // Create dialogue tree mechanic 
-        // Slime event design
-        // Levelling
+        // Balance dialogue tree mechanic 
+        // Reorganize player properties
+        // Write Prisoner event
+        // Levelling events (rotate through skill, modifier and maxHP)
+        // NPC Item events
+
         // Spells
             // Stun
             // Evade
@@ -20,12 +18,12 @@
             // Battlefields
             // More potion classes
             // Artifacts
-            // Relics
-            // Journal
+            // Journal/Spellbook
             // Map
-            // Curses
+            // Possible plot events 
+                // Cursed Object
+                // Beholder/mind fucks
 
-        // Print Inventory, map, spells, 
         static void Main(string[] args)
         {
             GameLaunch(CreatePlayer());
