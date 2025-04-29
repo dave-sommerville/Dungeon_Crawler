@@ -57,6 +57,13 @@ namespace Dungeon_Crawler
         public Trap? Trap { get; set; }
         public Monster? Monster { get; set; }
         public List<Item>? ChamberLoot { get; set; }
+        // Event master control
+        private readonly int TierOne = 3;
+        private readonly int TierTwo = 4;
+        private readonly int TierThree = 80;
+        private readonly int TierFour = 90;
+        private readonly int TierFive = 98;
+        private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
         {
             ChamberId = id;
@@ -113,13 +120,6 @@ namespace Dungeon_Crawler
             }
             return chamberLoot;
         }
-        private readonly int TierOne = 3;
-        private readonly int TierTwo = 4;
-        private readonly int TierThree = 80;
-        private readonly int TierFour = 90;
-        private readonly int TierFive = 98;
-        private readonly int MasterIndex = 100;
-
         public void MasterEventsTree(Player player)
         {
             int randomEvent = Utility.GetRandomIndex(1, MasterIndex);

@@ -8,31 +8,40 @@ namespace Dungeon_Crawler
 {
     public class Player : Character
     {
-        //public Random random = new Random();
-        //private bool IsCursed = false;
+        //  STATUS TRACKERS
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
+        public bool IsPlaying { get; set; } = true;
+        //  LOCATION
         public int Y { get; set; }
         public int X { get; set; }
         public string LocationId { get; set; }
-        public NPC? MushroomMan { get; set; }
+        //  EQIPMENT
         public Armor? Armor { get; set; }
         public Weapon? Weapon { get; set; }
+        //  PERSONAL STATS 
+        public int XP { get; set; } = 0;
+        public int PlayerLevel { get; set; } = 1;
         public int Modifier { get; set; } = 0;
         public int Sanity { get; set; } = 100;
         public int Charisma { get; set; } = 0;
         public int Dexterity { get; set; } = 0;
         public int Athletics { get; set; } = 0;
         public int Perception { get; set; } = 0;
-        public int XP { get; set; } = 0;
+        //  RESOURES
+        public int Mana { get; set; } = 3;
+        public int Gold { get; set; }
         public int MaxHP { get; set; } = 100;
-        public int PlayerLevel { get; set; } = 1;
+        //  PLOT PROGRESSION
         public int PlotOneLvl { get; set; } = 1;
         public int PlotTwoLvl { get; set; } = 1;
         public int PlotThreeLvl { get; set; } = 1;
-        public bool IsPlaying { get; set; } = true;
-        public int Mana { get; set; } = 3;
-        public int Gold { get; set; }
+        public NPC? MushroomMan { get; set; }
+        //  ATTACK RANGES 
+        private readonly int minAttack = 8;
+        private readonly int maxAttack = 12;
+        private readonly int minDamage = 8;
+        private readonly int maxDamage = 12;
         public Player(string name, string description) : base()
         {
             Name = name;
@@ -47,12 +56,7 @@ namespace Dungeon_Crawler
             X = 0;
             LocationId = "00";
             Mana = 3;
-
         }
-        private readonly int minAttack = 8;
-        private readonly int maxAttack = 12;
-        private readonly int minDamage = 8;
-        private readonly int maxDamage = 12;
         public void PrintPlayerDetails()
         {
             Console.WriteLine();
@@ -225,6 +229,17 @@ namespace Dungeon_Crawler
                 }
             }
         }
+        public void PrintInventory()
+        {
+            Console.WriteLine("Current Inventory:");
+            for (int i = 0; i < Inventory.Length; i++)
+            {
+                if (Inventory[i] != null)
+                {
+                    Console.WriteLine($"{i + 1}) {Inventory[i].Name}");
+                }
+            }
+        }
         public void MonsterFight(Monster monster)
         {
             do
@@ -257,6 +272,7 @@ namespace Dungeon_Crawler
                     monster.Attack(this);
                 } else if (decision == 3)
                 {
+                    IsDodging = true;
                     monster.Attack(this);
                     Console.WriteLine("You have attempt to dodge the attack");
                 }
@@ -269,6 +285,10 @@ namespace Dungeon_Crawler
                 XpLevelUp();
             }
             RestCounter += 1;
+        }
+        public void BossFight()
+        {
+
         }
         public void UseWeapon()
         {
@@ -371,16 +391,23 @@ namespace Dungeon_Crawler
         //}
         public void PlayerDeathCheck()
         {
-            if (Health <= 0)
+            if (Sanity > 0)
             {
-                if(PrisonerStatus == 1)
+                if (Health <= 0)
                 {
-                    Console.WriteLine("Your vision grows dim as you feel the life begin to drain from you.");
-                    Console.WriteLine("Then you see a familiar face, that of the prisoner you released");
-                    Console.WriteLine("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
-                    Health += 50;
+                    if (PrisonerStatus == 1)
+                    {
+                        Console.WriteLine("Your vision grows dim as you feel the life begin to drain from you.");
+                        Console.WriteLine("Then you see a familiar face, that of the prisoner you released");
+                        Console.WriteLine("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
+                        Health += 50;
+                    }
+                    Console.WriteLine("You have died");
+                    IsPlaying = false;
                 }
-                Console.WriteLine("You have died");
+            } else
+            {
+                Console.WriteLine("You have lost grip on reality, you can no longer hold yourself together.");
                 IsPlaying = false;
             }
         }
@@ -482,14 +509,5 @@ namespace Dungeon_Crawler
                 PlayerLevel = 10;
             }
         }
-        //public void Flee()
-        //{
-
-        //}
-
-        //public void CurseTracker()
-        //{
-
-        //}
     }
 }

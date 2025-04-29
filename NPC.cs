@@ -4,11 +4,8 @@ namespace Dungeon_Crawler
 {
     public class NPC : Character
     {
-        // Needs a list of the base NPCs as well as dialogue options for them. Probably store prisoner here too
         private readonly string[][] _npcDialogue = new string[][]
         {
-            // Initial encounter will include constructor and extra, likely hardwritten, dialogue options
-            // It is held in an if above the npc event, not with the special events as NPCs should be fairly common? 
             new string[] { "Greetings traveler", "Howdy mate", "Hello there", "Ahoy my friend", "Fair travels" }, // Initial statement [0][Rand]
             new string[] { "Hello", "Mhmm" }, // Only piece of user dialogue, two way to respond(potentially more) [1][0,1]
                                  // No effect on the next
@@ -198,8 +195,9 @@ namespace Dungeon_Crawler
             Item greyStoneSpire = new Item();
             greyStoneSpire.Name = "Grey Stone Spire";
             greyStoneSpire.Description = "A small stone spire, it is grey and has a small hole in the top";
-            greyStoneSpire.Durability = 1;
-            greyStoneSpire.Value = 0;
+            greyStoneSpire.Durability = 1000;
+            greyStoneSpire.Value = 1000;
+            player.Inventory[Inventory.Length - 1] = greyStoneSpire;
         }
         public void EquipBagOfCarrying(Player player)
         {

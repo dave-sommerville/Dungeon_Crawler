@@ -3,13 +3,13 @@
     internal class Program
     {
         public static Random Random = new Random();
-        // Reorganize player properties
         // Add color and typing effects 
-        // Add effect and trigger for insanity (Will need offset for madness as well)
         // Structure relationship between health and max health
         // Allow player to describe their boss kills
-        // Add use item and flee mechanics to monster fight
-        // Add folder structure
+        // Add use item mechanic to monster fight
+        // Print inventory option
+        // Equip functions 
+        // Map
         // Write Prisoner event
         // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
         // Bosses

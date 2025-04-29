@@ -5,6 +5,7 @@ namespace Dungeon_Crawler
     public class Character
     {
         private readonly int _nextId;
+        //  STATUS TRACKERS
         public bool IsDodging = false;
         public bool IsStunned = false;
         public int Id { get; set; }
