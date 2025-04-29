@@ -8,7 +8,6 @@
         // Allow player to describe their boss kills
         // Add use item mechanic to monster fight
         // Print inventory option
-        // Equip functions 
         // Map
         // Write Prisoner event
         // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
@@ -40,6 +39,8 @@
                 Console.WriteLine("e) Move East");
                 Console.WriteLine("w) Move West");
                 Console.WriteLine("p) Display Player Details");
+                Console.WriteLine("l) Look more closely around the chamber");
+                Console.WriteLine("i) View inventory");
                 // Later - show map
                 // Where possible interact with NPC
                 Console.WriteLine("x) Exit Game");
@@ -55,8 +56,11 @@
                     case "p":
                         player.PrintPlayerDetails();
                         break;
-                    case "i":
+                    case "l":
                         dungeon.ExploredChambers[player.LocationId].SearchForLoot(player);
+                        break;
+                    case "i":
+                        player.PrintInventory();
                         break;
                     case "x":
                         IsRunning = false;

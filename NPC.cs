@@ -201,11 +201,16 @@ namespace Dungeon_Crawler
         }
         public void EquipBagOfCarrying(Player player)
         {
-
+            Item[] bagOfCarrying = new Item[20];
+            for(int i = 0; i < Inventory.Length; i++)
+            {
+                bagOfCarrying[i] = Inventory[i];
+            }
+            Inventory = bagOfCarrying;
         }
         public void EquipMap(Player player)
         {
-
+            Console.WriteLine("Map is now equipped");
         }
         public NPC Prisoner()
         {
