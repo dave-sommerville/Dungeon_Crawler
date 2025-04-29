@@ -1,6 +1,6 @@
 ﻿using Dungeon_Crawler;
 
-namespace Dungeon_Crawlerx
+namespace Dungeon_Crawler
 {
     public class Boss : Monster
     {
@@ -8,7 +8,7 @@ namespace Dungeon_Crawlerx
         public string[]? AttackDescriptions { get; set; }
         public int TurnCounter { get; set; } = 0;
         public NPC? MonologueEngine { get; set; }
-        // Should have a turn counter, trigger a terrain event or dialogue
+        public Spell Spell { get; set; } = new Spell();
         public Boss(string name, string description, int numberOfAttacks, string[] attackDescriptions, int playerLvl) : base(playerLvl)
         {
             Name = name;
@@ -18,12 +18,41 @@ namespace Dungeon_Crawlerx
         }
         public override void Attack(Character targetCharacter)
         {
-            for(int i = 0; i < NumberOfAttacks; i++)
+            if (TurnCounter == 2)
             {
-                base.Attack(targetCharacter);
-                if (AttackDescriptions != null) { Console.WriteLine(AttackDescriptions[i]); }
+                // Trigger Terrain effect
+                // 
+            } else if (TurnCounter == 4)
+            {
+                // Cast Spell
+            } else {
+                for (int i = 0; i < NumberOfAttacks; i++)
+                {
+
+                    base.Attack(targetCharacter);
+                    if (AttackDescriptions != null) { Console.WriteLine(AttackDescriptions[i]); }
+                }
+                TurnCounter += 1;
+                if (TurnCounter == 6) { TurnCounter = 0; }
             }
-            TurnCounter += 1;
+        }
+        public void BossDeathCheck()
+        {
+            if (Health <= 0)
+            {
+                Console.WriteLine($"{Name} has been defeated!");
+                Console.WriteLine("Would you like to add a description of your victory blow?\nEnter x to skip");
+                string? victoryBlow = Console.ReadLine();
+                if (victoryBlow != null && victoryBlow != "x")
+                {
+                    Console.WriteLine(victoryBlow);
+                }
+                else
+                {
+                    Console.WriteLine($"You have defeated {Name}");
+                }
+            }
+
         }
     }
 }

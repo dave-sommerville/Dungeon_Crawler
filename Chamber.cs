@@ -86,6 +86,24 @@ namespace Dungeon_Crawler
             EastPassage= Utility.FiftyFifty();
             WestPassage= Utility.FiftyFifty();
         }
+        public void ReturnPassages(string choice)
+        {
+            switch (choice)
+            {
+                case "n":
+                    SouthPassage = true;
+                    break;
+                case "s":
+                    NorthPassage = true;
+                    break;
+                case "e":
+                    WestPassage = true;
+                    break;
+                case "w":
+                    EastPassage = true;
+                    break;
+            }
+        }
         public void DisplayPassages()
         {
             if (NorthPassage)

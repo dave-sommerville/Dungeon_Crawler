@@ -2,7 +2,7 @@
 {
     public class Spell
     {
-        public static void Stun(Character targetCharacter)
+        public void Stun(Character targetCharacter)
         {
             if (targetCharacter.IsStunned)
             {
@@ -14,7 +14,7 @@
                 Console.WriteLine($"{targetCharacter.Name} has been stunned!");
             }
         }
-        public static void Blur(Character targetCharacter)
+        public void Blur(Character targetCharacter)
         {
             if (targetCharacter.IsDodging)
             {
@@ -26,7 +26,7 @@
                 Console.WriteLine($"{targetCharacter.Name} is now dodging!");
             }
         }
-        public static void Heal(Character targetCharacter)
+        public void Heal(Character targetCharacter)
         {
             if (targetCharacter.Health <= 0)
             {
@@ -39,7 +39,7 @@
                 Console.WriteLine($"{targetCharacter.Name} has been healed for {healAmount} health!");
             }
         }
-        public static void Fireball(Character targetCharacter)
+        public void Fireball(Character targetCharacter)
         {
             if (targetCharacter.Health <= 0)
             {
@@ -52,7 +52,7 @@
                 Console.WriteLine($"{targetCharacter.Name} has been hit by a fireball for {damage} damage!");
             }
         }
-        public static void Petrify(Character targetCharacter)
+        public void Petrify(Character targetCharacter)
         {
             if (targetCharacter.IsStunned)
             {

@@ -6,17 +6,17 @@
         // Add color and typing effects 
         // Structure relationship between health and max health
         // Allow player to describe their boss kills
-        // Add use item mechanic to monster fight
-        // Print inventory option
+        // Create useItemMenu method 
+            // Add to fight option
         // Map
         // Write Prisoner event
         // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
         // Bosses
-            // More potion classes
+        // More potion classes
+        // Map
 
         // Later
             // Artifacts
-            // Map
             // Possible add ons 
                 // Cursed Object
                 // Ghosts

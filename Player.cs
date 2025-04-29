@@ -172,21 +172,7 @@ namespace Dungeon_Crawler
                 //if (!trigger)
                 //{
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
-                    switch (decision)
-                    {
-                        case "n":
-                            newChamber.SouthPassage = true;
-                            break;
-                        case "s":
-                            newChamber.NorthPassage = true;
-                            break;
-                        case "e":
-                            newChamber.WestPassage = true;
-                            break;
-                        case "w":
-                            newChamber.EastPassage = true;
-                            break;
-                    }
+                    newChamber.ReturnPassages(decision);
                     Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
                     newChamber.DisplayDescription();
                     RestCounter += 1;
@@ -244,38 +230,7 @@ namespace Dungeon_Crawler
         {
             do
             {
-                Console.WriteLine("What attack action do you wish to take?");
-                Console.WriteLine("1) Attack 2) Mana Blast 3) Dodge");
-                int decision = Utility.PrintMenu(2);
-                if (decision == 1) {
-                    Attack(monster);
-                    monster.Attack(this);
-                }
-                else if (decision == 2)
-                {
-                    if (Mana <= 0)
-                    {
-                        Console.WriteLine("You have no mana to use a mana blast");
-                        continue;
-                    } else
-                    {
-                        int manaDamage = PlayerLevel * 10;
-                        Console.WriteLine($"You have used a mana blast for {manaDamage} points of damage");
-                        monster.Health -= manaDamage;
-                        if (monster.Health <= 0)
-                        {
-                            Console.WriteLine($"You killed the {monster.Name}");
-                        }
-                        Mana -= 1;
-
-                    }
-                    monster.Attack(this);
-                } else if (decision == 3)
-                {
-                    IsDodging = true;
-                    monster.Attack(this);
-                    Console.WriteLine("You have attempt to dodge the attack");
-                }
+                FightMenu(monster);
                 PlayerDeathCheck();
             } while (monster.Health > 0);
             UseAmor();
@@ -286,9 +241,68 @@ namespace Dungeon_Crawler
             }
             RestCounter += 1;
         }
-        public void BossFight()
+        public void BossFight(Dungeon dungeon)
         {
+            // Monster death triggers player option to describe the action
+            // Need loot options
+            Boss boss = new Boss("Boss", "This is a boss", 2, new string[] { "Attack 1", "Attack 2" }, PlayerLevel);
+            Chamber battlefield = dungeon.GenerateChamber(LocationId);
+            battlefield.Monster = boss;
+            dungeon.ExploredChambers[LocationId] = battlefield;
+            do
+            {
+                FightMenu(boss);
+                PlayerDeathCheck();
+                boss.BossDeathCheck();
+            } while (boss.Health > 0);
+            UseAmor();
+            if (RestCounter < 5)
+            {
+                GainXp(boss);
+                XpLevelUp();
+            }
+            RestCounter += 1; // Chamber will already have loot, if anything maybe I could leave the bosses "Relics" or something 
+        }
+        public void FightMenu(Monster monster)
+        {
+            Console.WriteLine("What attack action do you wish to take?");
+            Console.WriteLine("1) Attack 2) Mana Blast 3) Dodge 4) Use Item");
+            int decision = Utility.PrintMenu(4);
+            if (decision == 1)
+            {
+                Attack(monster);
+                monster.Attack(this);
+            }
+            else if (decision == 2)
+            {
+                if (Mana <= 0)
+                {
+                    Console.WriteLine("You have no mana to use a mana blast");
+                }
+                else
+                {
+                    int manaDamage = PlayerLevel * 10;
+                    Console.WriteLine($"You have used a mana blast for {manaDamage} points of damage");
+                    monster.Health -= manaDamage;
+                    if (monster.Health <= 0)
+                    {
+                        Console.WriteLine($"You killed the {monster.Name}");
+                    }
+                    Mana -= 1;
 
+                }
+                monster.Attack(this);
+            }
+            else if (decision == 3)
+            {
+                IsDodging = true;
+                monster.Attack(this);
+                Console.WriteLine("You have attempted to dodge the attack");
+            }
+            else if (decision == 4)
+            {
+                // Use Item
+            }
         }
         public void UseWeapon()
         {
