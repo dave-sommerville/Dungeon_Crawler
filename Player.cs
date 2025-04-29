@@ -1,16 +1,15 @@
-﻿
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
-
-namespace Dungeon_Crawler
+﻿namespace Dungeon_Crawler
 {
     public class Player : Character
     {
         //  STATUS TRACKERS
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
+        private readonly List<Boss> _bosses = new List<Boss>()
+        {
+            new Boss("Giant Rat", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1),
+            new Boss("Giant Spider", "A large spider with a nasty bite", 2, new string[] { "Bite" }, 2)
+        };
         public bool IsPlaying { get; set; } = true;
         //  LOCATION
         public int Y { get; set; }
@@ -167,23 +166,23 @@ namespace Dungeon_Crawler
                 }
             } else
             {
-                //bool trigger = false;
-                //PlotTrigger(trigger, dungeon);
-                //if (!trigger)
-                //{
+                int plotTrigger = PlotTrigger(dungeon);
+                if (plotTrigger == -1)
+                {
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
-                    newChamber.ReturnPassages(decision);
-                    Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
-                    newChamber.DisplayDescription();
-                    RestCounter += 1;
-
+                newChamber.ReturnPassages(decision);
+                Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
+                newChamber.DisplayDescription();
+                RestCounter += 1;
                 newChamber.MasterEventsTree(this);
                 Console.WriteLine("The room is safe. What would you like to do next?");
                 Console.WriteLine("1) Search Room\n2) Rest Here"); 
                 dungeon.ExploredChambers[LocationId] = newChamber;
-                
-                //}
 
+                } else
+                {
+                    BossFight(dungeon, plotTrigger);
+                }
             }
         }
         public void AddToInventory(Item item)
@@ -241,11 +240,11 @@ namespace Dungeon_Crawler
             }
             RestCounter += 1;
         }
-        public void BossFight(Dungeon dungeon)
+        public void BossFight(Dungeon dungeon, int plotIndex)
         {
             // Monster death triggers player option to describe the action
             // Need loot options
-            Boss boss = new Boss("Boss", "This is a boss", 2, new string[] { "Attack 1", "Attack 2" }, PlayerLevel);
+            Boss boss = _bosses[plotIndex];
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
@@ -364,45 +363,41 @@ namespace Dungeon_Crawler
                 }
             }
         }
-        //public void PlotTrigger(bool trigger, Dungeon dungeon)
-        //{
-
-        //    if(X > 5 && Y < 5 && PlotOneLvl == 1)
-        //    {
-        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
-        //        PlotOneLvl = 2;
-        //        trigger = true;
-        //    }else if(X > 10 && Y < 5 && PlotOneLvl == 2)
-        //    {
-        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotOneLvl, LocationId);
-        //        PlotOneLvl = 3;
-        //        trigger = true;
-        //    }
-        //    else if(X < -5 && Y < 5 && PlotTwoLvl == 1)
-        //    {
-        //        Battlefield PlotOneBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
-        //        PlotTwoLvl = 2;
-        //        trigger = true;
-        //    }
-        //    else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
-        //    {
-        //        Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotTwoLvl, LocationId);
-        //        PlotTwoLvl = 3;
-        //        trigger = true;
-        //    }
-        //    else if (Y > 5 && PlotThreeLvl == 1)
-        //    {
-        //        Battlefield PlotTwoBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
-        //        PlotThreeLvl = 2;
-        //        trigger = true;
-        //    }
-        //    else if(Y > 10 && PlotThreeLvl == 2)
-        //    {
-        //        Battlefield PlotThreeBattle = dungeon.GeneratePlotOneBattlefield(PlotThreeLvl, LocationId);
-        //        PlotThreeLvl = 3;
-        //        trigger = true;
-        //    }
-        //}
+        public int PlotTrigger(Dungeon dungeon)
+        {
+            int plotIndex = -1;
+            if (X > 5 && Y < 5 && PlotOneLvl == 1)
+            {
+                PlotOneLvl = 2;
+                plotIndex = 1;
+            }
+            else if (X > 10 && Y < 5 && PlotOneLvl == 2)
+            {
+                PlotOneLvl = 3;
+                plotIndex = 2;
+            }
+            else if (X < -5 && Y < 5 && PlotTwoLvl == 1)
+            {
+                PlotTwoLvl = 2;
+                plotIndex = 3;
+            }
+            else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
+            {
+                PlotTwoLvl = 3;
+                plotIndex = 4;
+            }
+            else if (Y > 5 && PlotThreeLvl == 1)
+            {
+                PlotThreeLvl = 2;
+                plotIndex = 5;
+            }
+            else if (Y > 10 && PlotThreeLvl == 2)
+            {
+                PlotThreeLvl = 3;
+                plotIndex = 6;
+            }
+            return plotIndex;
+        }
         public void PlayerDeathCheck()
         {
             if (Sanity > 0)
