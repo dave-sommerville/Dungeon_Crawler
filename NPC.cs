@@ -42,10 +42,12 @@ namespace Dungeon_Crawler
                 {
                     case 1:
                         AdventureQuestion(player);
+                        InteractionInProgress = false;
                         break;
                     case 2:
                         Console.WriteLine("What's a name? Can you give me a name?");
                         AdventureQuestion(player);
+                        InteractionInProgress = false;
                         break;
                     case 3:
                         Console.WriteLine("'Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnooooooo, you're all high and mighty. OK, that's fine.' the creature says passive aggressively");

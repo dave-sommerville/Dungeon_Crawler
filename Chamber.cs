@@ -272,7 +272,7 @@ namespace Dungeon_Crawler
             Console.WriteLine($"You do take some permanent damage however and lose {poisonLvl} maximum health points");
             player.MaxHP -= poisonLvl;
         }
-        public static void RustMonsterEvent(Player player)
+        public void RustMonsterEvent(Player player)
         {
             Console.WriteLine("Oh no, Rust Monsters!!\nThese disgusting critters couldn't care less about hurting you");
             Console.WriteLine("Unfortunately, they have a ravenous appetite for your weapons and armor.");
@@ -281,11 +281,32 @@ namespace Dungeon_Crawler
             player.Weapon = null;
             player.Armor = null;
         }
-        public static void SlimeEvent(Player player)
+        public void SlimeEvent(Player player)
         {
             Console.WriteLine("You are caught in a pool of slime. You feel your skin crawling.");
             Console.WriteLine("Disgusting but harmless, the sludge is difficult to get through and takes twice as much energy");
             player.RestCounter += 1;
+        }
+        public void AddChamberLoot()
+        {
+            int weaponIndex = Utility.GetRandomIndex(0,10);
+            int armorIndex = Utility.GetRandomIndex(0,10);
+            int potionIndex = Utility.GetRandomIndex(0,10);
+            if (weaponIndex > 5)
+            {
+                Weapon weapon = new Weapon();
+                ChamberLoot.Add(weapon);
+            }
+            if (armorIndex > 5)
+            {
+                Armor armor = new Armor();
+                ChamberLoot.Add(armor);
+            }
+            if (potionIndex > 5)
+            {
+                Potion potion = new Potion();
+                ChamberLoot.Add(potion);
+            }
         }
         public void SearchForLoot(Player player)
         {
@@ -297,6 +318,7 @@ namespace Dungeon_Crawler
             if ((player.Perception + Utility.GetRandomIndex(7,10)) > 5)
             {
                 Console.WriteLine("You search the chamber and discover the following");
+                if(ChamberLoot == null) { Console.WriteLine("No inventory"); }
                 foreach(Item item in ChamberLoot)
                 {
                     Console.WriteLine($"You find a {item.Name}.");

@@ -35,6 +35,7 @@ namespace Dungeon_Crawler
             string description = DungeonChambers[Utility.GetRandomIndex(0, DungeonChambers.Length)];
             Chamber newChamber = new Chamber(newRoomId, description);
             newChamber.RandomizePassages();
+            newChamber.AddChamberLoot();
             return newChamber;
         }
     }

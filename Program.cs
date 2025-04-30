@@ -72,8 +72,11 @@ namespace Dungeon_Crawler
                     case "p":
                         player.PrintPlayerDetails();
                         break;
-                    case "l":
+                    case "1":
                         dungeon.ExploredChambers[player.LocationId].SearchForLoot(player);
+                        break;
+                    case "2":
+                        dungeon.ExploredChambers[player.LocationId].Rest(player);
                         break;
                     case "i":
                         player.PrintInventory();

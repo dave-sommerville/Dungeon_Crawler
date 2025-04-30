@@ -352,10 +352,6 @@
                     Weapon = null;
                 }
             }
-            else
-            {
-                Console.WriteLine("You don't have a weapon to use.");
-            }
         }
         public void UseAmor()
         {
