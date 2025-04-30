@@ -1,26 +1,42 @@
-﻿namespace Dungeon_Crawler
+﻿using System.Runtime.Intrinsics.X86;
+
+namespace Dungeon_Crawler
 {
     internal class Program
     {
         public static Random Random = new Random();
-        // Add color and typing effects 
+        // Add typing and text effects to gameplay 
+        // Add end of game sequence 
+        // Add a way to save the game
+        // Add color
         // Structure relationship between health and max health
-        // Allow player to describe their boss kills
-        // Create useItemMenu method 
-            // Add to fight option
         // Map
-        // Write Prisoner event
-        // Adjust levels a bit so that player starts at 1 and triggers end event at 10 (Good boon at level nine)
-        // Bosses
         // More potion classes
-        // Map
 
-        // Later
-            // Artifacts
-            // Possible add ons 
-                // Cursed Object
-                // Ghosts
-                // Spell Books//Libraries
+        // Marketplace throwing an error
+        // Gold given for every search(Issue with double menu int vs string)
+        // Use item menu not accepting use item to return
+        // Inventory empty message needed
+        // Doesn't need to list that you don't have a weapon to use
+        // Says it's giving a boon, but I see no boon
+        // It's only giving gold
+        // Issue with plot index
+        // The naming npc function
+        // NPC loop not ending
+        // Merchant dialogue options?
+        // Trap descriptions
+
+
+        // Full Release
+        // Artifacts
+        // Cursed Object
+        // Ghosts
+        // Spell Books//Libraries
+        // Shadows of Madness
+        // Aboleth Encounter
+        // Beholder Encounter
+        // Balhannoth encounter 
+        // Elder Brain dialogue system
 
 
         static void Main(string[] args)
@@ -61,6 +77,7 @@
                         break;
                     case "i":
                         player.PrintInventory();
+                        player.UseItemOption();
                         break;
                     case "x":
                         IsRunning = false;
@@ -73,7 +90,7 @@
         }
         public static Player CreatePlayer()
         {
-            Console.WriteLine("Draegmor's Deep"); // ASCI art 
+            PrintIntro();// ASCI art 
             Console.WriteLine("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
             Console.WriteLine("What is your name?");
             Console.WriteLine();
@@ -98,7 +115,7 @@
             Console.WriteLine("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
-        public void PrintIntro()
+        public static void PrintIntro()
         {
             Utility.PrintLines();
             Console.WriteLine("WELCOME TO\nTHE DUNGEON OF BLEEPBLORPP");

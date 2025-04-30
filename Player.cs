@@ -55,6 +55,9 @@
             X = 0;
             LocationId = "00";
             Mana = 3;
+            Inventory[0] = new Armor();
+            Inventory[1] = new Weapon();
+            Inventory[2] = new Potion();
         }
         public void PrintPlayerDetails()
         {
@@ -70,10 +73,11 @@
             if (Perception > 1) Console.Write($"Perception: {Perception}");
             if (Dexterity > 1) Console.Write($"Charisma: {Dexterity}");
             Console.WriteLine($"AC: {ArmorClass} - Modifier: {Modifier}");
-            if(Armor != null)
+            if (Armor != null)
             {
                 Console.WriteLine($"Armor Current Equipped: {Armor.Name} - AC Bonus: {Armor.AC}");
-            } else
+            }
+            else
             {
                 Console.WriteLine("No armor currently equipped");
             }
@@ -88,7 +92,8 @@
         }
         public void NavCase(string decision, Chamber currentChamber)
         {
-            switch (decision) {
+            switch (decision)
+            {
                 case "n":
                     if (currentChamber.NorthPassage)
                     {
@@ -151,35 +156,37 @@
             NavCase(decision, previousChamber);
             LocationId = $"{Y}{X}";
 
-            if(dungeon.ExploredChambers.ContainsKey(LocationId))
+            if (dungeon.ExploredChambers.ContainsKey(LocationId))
             {
                 Chamber currentChamber = dungeon.ExploredChambers[LocationId];
                 Console.WriteLine("You've already explored this room");
                 Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
                 int viewDecision = Utility.PrintMenu(2);
-                if(viewDecision == 1)
+                if (viewDecision == 1)
                 {
                     currentChamber.DisplayDescription();
-                } else
+                }
+                else
                 {
                     return;
                 }
-            } else
+            }
+            else
             {
                 int plotTrigger = PlotTrigger(dungeon);
                 if (plotTrigger == -1)
                 {
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
-                newChamber.ReturnPassages(decision);
-                Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
-                newChamber.DisplayDescription();
-                RestCounter += 1;
-                newChamber.MasterEventsTree(this);
-                Console.WriteLine("The room is safe. What would you like to do next?");
-                Console.WriteLine("1) Search Room\n2) Rest Here"); 
-                dungeon.ExploredChambers[LocationId] = newChamber;
-
-                } else
+                    newChamber.ReturnPassages(decision);
+                    Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
+                    newChamber.DisplayDescription();
+                    RestCounter += 1;
+                    newChamber.MasterEventsTree(this);
+                    Console.WriteLine("The room is safe. What would you like to do next?");
+                    Console.WriteLine("1) Search Room\n2) Rest Here");
+                    dungeon.ExploredChambers[LocationId] = newChamber;
+                }
+                else
                 {
                     BossFight(dungeon, plotTrigger);
                 }
@@ -188,7 +195,7 @@
         public void AddToInventory(Item item)
         {
             bool InventoryFull = true;
-            for(int i = 0; i < Inventory.Length; i++)
+            for (int i = 0; i < Inventory.Length; i++)
             {
                 if (Inventory[i] == null)
                 {
@@ -196,7 +203,7 @@
                     InventoryFull = false;
                 }
             }
-            if (InventoryFull) 
+            if (InventoryFull)
             {
                 Console.WriteLine("Inventory is currently full, please select an item to discard");
                 PrintInventory();
@@ -225,6 +232,38 @@
                 }
             }
         }
+        public void UseItemOption()
+        {
+            Console.WriteLine("1) Use item (y/n)");
+            string choice = Console.ReadLine().ToLower().Trim();
+            if (choice == "y")
+            {
+                UseInventoryItem();
+            }
+        }
+        public void UseInventoryItem()
+        {
+            bool itemFound = false;
+            do
+            {
+                Console.WriteLine("Please select an item to use");
+                Console.WriteLine("Enter 0 to return");
+                int choice = Utility.PrintMenu(Inventory.Length) - 1;
+                if (choice == -1)
+                {
+                    itemFound = true;
+                    break;
+                }
+                if (Inventory[choice] != null)
+                {
+                    Inventory[choice].EquipItem(this);
+                    Inventory[choice] = null;
+                } else
+                {
+                    Console.WriteLine("That inventory slot is empty");
+                }
+            } while (!itemFound);
+        }
         public void MonsterFight(Monster monster)
         {
             do
@@ -242,8 +281,6 @@
         }
         public void BossFight(Dungeon dungeon, int plotIndex)
         {
-            // Monster death triggers player option to describe the action
-            // Need loot options
             Boss boss = _bosses[plotIndex];
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
@@ -300,7 +337,8 @@
             }
             else if (decision == 4)
             {
-                // Use Item
+                PrintInventory();
+                UseInventoryItem();
             }
         }
         public void UseWeapon()
@@ -414,16 +452,18 @@
                     Console.WriteLine("You have died");
                     IsPlaying = false;
                 }
-            } else
+            }
+            else
             {
                 Console.WriteLine("You have lost grip on reality, you can no longer hold yourself together.");
                 IsPlaying = false;
             }
         }
-        public void ApplySkillPoint() 
+        public void ApplySkillPoint()
         {
             bool skillApplied = false;
-            while (!skillApplied) {
+            while (!skillApplied)
+            {
                 string skill = Console.ReadLine().Trim().ToLower();
                 switch (skill)
                 {
@@ -471,51 +511,51 @@
         public void XpLevelUp()
         {
             Console.WriteLine("Your experience has granted you a boon.");
-            if (XP > 500 && PlayerLevel == 0)
+            if (XP > 500 && PlayerLevel == 1)
             {
                 GainHP();
-                PlayerLevel = 1;
-            }
-            else if (XP > 1000 && PlayerLevel == 1)
-            {
-                PointIncreaseWrapper();
                 PlayerLevel = 2;
             }
-            else if (XP > 1500 && PlayerLevel == 2)
+            else if (XP > 1000 && PlayerLevel == 2)
             {
-                IncreaseModifier();
+                PointIncreaseWrapper();
                 PlayerLevel = 3;
             }
-            else if (XP > 2000 & PlayerLevel == 3)
+            else if (XP > 1500 && PlayerLevel == 3)
             {
-                GainHP();
+                IncreaseModifier();
                 PlayerLevel = 4;
             }
-            else if (XP > 2500 && PlayerLevel == 4)
-            {
-                PointIncreaseWrapper();
-                PlayerLevel = 5;
-            }
-            else if (XP > 3000 && PlayerLevel == 5)
-            {
-                IncreaseModifier();
-                PlayerLevel = 6;
-            } else if(XP > 3500 && PlayerLevel == 6)
+            else if (XP > 2000 & PlayerLevel == 4)
             {
                 GainHP();
-                PlayerLevel = 7;
-            } else if(XP > 4000 && PlayerLevel == 7)
+                PlayerLevel = 5;
+            }
+            else if (XP > 2500 && PlayerLevel == 5)
             {
                 PointIncreaseWrapper();
-                PlayerLevel = 8;
-            } else if(XP > 4500 && PlayerLevel == 8)
+                PlayerLevel = 6;
+            }
+            else if (XP > 3000 && PlayerLevel == 6)
             {
                 IncreaseModifier();
-                PlayerLevel = 9;
-            } else if(XP > 5000 && PlayerLevel == 9)
+                PlayerLevel = 7;
+            }
+            else if (XP > 3500 && PlayerLevel == 7)
             {
-                GainHP(); // Should be something bigger 
+                GainHP();
+                PlayerLevel = 8;
+            }
+            else if (XP > 4000 && PlayerLevel == 8)
+            {
+                PointIncreaseWrapper();
+                PlayerLevel = 9;
+            }
+            else if (XP > 4500 && PlayerLevel == 9)
+            {
+                IncreaseModifier();
                 PlayerLevel = 10;
+                Console.WriteLine("You have achieved the highest level possible and completed this stage of the dungeon!");
             }
         }
     }

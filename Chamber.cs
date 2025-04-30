@@ -58,10 +58,10 @@ namespace Dungeon_Crawler
         public Monster? Monster { get; set; }
         public List<Item>? ChamberLoot { get; set; }
         // Event master control
-        private readonly int TierOne = 3;
+        private readonly int TierOne = 2;
         private readonly int TierTwo = 4;
-        private readonly int TierThree = 80;
-        private readonly int TierFour = 90;
+        private readonly int TierThree = 6;
+        private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
@@ -178,7 +178,7 @@ namespace Dungeon_Crawler
             Trap trap = new Trap(player.PlayerLevel);
             Trap = trap;
             return trap;
-        }//
+        }
         public Monster MonsterEvent(Player player)
         {
             Monster monster = new Monster(player.PlayerLevel);
@@ -220,8 +220,23 @@ namespace Dungeon_Crawler
         {
             if (player.PrisonerStatus == 0)
             {
-                Console.WriteLine("You encounter a prisoner in the chamber.");
-                // This function must change the prisoner status depending on the player's choice
+                Console.WriteLine("Inside this chamber is a cage with a prisoner inside.");
+
+                Console.WriteLine("He is in a bad state and begs for help.");
+                Console.WriteLine("He is an Orc standing around six and a half feet tall.");
+                Console.WriteLine("Do you want to free the prisoner? (y/n)");
+                string choice = Console.ReadLine()?.ToLower().Trim();
+                if(choice == "y")
+                {
+                    Console.WriteLine("You free the prisoner. He looms over you for a moment");
+                    Console.WriteLine("Then he thanks you briefly and runs through an entrance and disappears into the dungeon");
+                    player.PrisonerStatus = 1;
+                }
+                else
+                {
+                    Console.WriteLine("You leave the prisoner in the cage.");
+                    player.PrisonerStatus = 2;
+                }
             }
             else {
                 int hazardType = Utility.GetRandomIndex(1, 5);
