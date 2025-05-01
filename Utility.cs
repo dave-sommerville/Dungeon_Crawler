@@ -27,7 +27,7 @@
         }
         public static bool FiftyFifty()
         {
-            int randomInt = GetRandomIndex(0, 1);
+            int randomInt = GetRandomIndex(0, 2);
             if (randomInt == 0)
             {
                 return true;

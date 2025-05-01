@@ -129,15 +129,19 @@ namespace Dungeon_Crawler
                 {
                     case 1:
                         Utility.Print(_npcDialogue[1][0]);
-                        interactionInProgress = DialogueNode(player);
+                        DialogueNode(player);
+                        interactionInProgress = false;
                         player.Charisma += 1;
                         break;
                     case 2:
                         Utility.Print(_npcDialogue[1][1]);
-                        player.Charisma -= 1;
+                        DialogueNode(player);
+                        interactionInProgress = false;
                         break;
                     case 3:
                         Utility.Print(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
+                        player.Charisma -= 1;
+                        interactionInProgress = false;
                         break;
                     case 4:
                         Utility.Print("You kill him instantly, you monster");
@@ -162,17 +166,18 @@ namespace Dungeon_Crawler
                 return false;
             }
         }
-        public bool DialogueNode(Player player)
+        public void DialogueNode(Player player)
         {
-            int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
-            int userChoice = dialogueIndex + 3;
-            Utility.Print(_npcDialogue[2][dialogueIndex]);
+            int dialogueQuestionIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
+            int userChoice = dialogueQuestionIndex + 3;
+            int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[userChoice].Length);
+            Utility.Print(_npcDialogue[2][dialogueQuestionIndex]);
             Utility.Print("1) Yes\n2) No");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
                 player.Charisma += 1;
-                Utility.Print(_npcDialogue[dialogueIndex][userChoice]);
+                Utility.Print(_npcDialogue[userChoice][dialogueIndex]);
                 if(CharismaChecker(player))
                 {
                     if(!HasBag)
@@ -183,13 +188,11 @@ namespace Dungeon_Crawler
                         EquipMap(player);
                     }
                 }
-                return true;
             }
             else
             {
                 player.Charisma -= 1;
                 Utility.Print(_npcDialogue[4][dialogueIndex]);
-                return false;
             }
         }
         public void EquipGreyStoneSpire(Player player)

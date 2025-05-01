@@ -61,8 +61,8 @@ namespace Dungeon_Crawler
         private readonly int TierOne = 2;
         private readonly int TierTwo = 4;
         private readonly int TierThree = 6;
-        private readonly int TierFour = 8;
-        private readonly int TierFive = 10;
+        private readonly int TierFour =96;
+        private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
         {

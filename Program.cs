@@ -5,7 +5,6 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // Add typing and text effects to gameplay 
         // Add color
         // Add end of game sequence 
             // Add a way to save the game
@@ -47,16 +46,21 @@ namespace Dungeon_Crawler
 
             while(IsRunning && player.Health > 0)
             {
-                Utility.Print("n) Move North");
-                Utility.Print("s) Move South");
-                Utility.Print("e) Move East");
-                Utility.Print("w) Move West");
-                Utility.Print("p) Display Player Details");
-                Utility.Print("l) Look more closely around the chamber");
-                Utility.Print("i) View inventory");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("n) Move North");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("s) Move South");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("e) Move East");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("w) Move West");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("p) Display Player Details");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("i) View inventory");
+                Thread.Sleep(Utility.Delay);
                 // Later - show map
-                // Where possible interact with NPC
-                Utility.Print("x) Exit Game");
+                Console.WriteLine("x) Exit Game");
                 string decision = Console.ReadLine()?.ToLower();
                 switch (decision)
                 {
@@ -83,7 +87,8 @@ namespace Dungeon_Crawler
                         IsRunning = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid selection");
+                        Thread.Sleep(Utility.Delay);
+                        Utility.Print("Invalid selection");
                         break;
                 }
             }
