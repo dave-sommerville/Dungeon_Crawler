@@ -35,12 +35,12 @@ namespace Dungeon_Crawler
                 int attack = 5;
                 if (attack > targetCharacter.ArmorClass)
                 {
-                    Console.WriteLine($"{Name} attacked {targetCharacter.Name} and hit for {attack} damage");
+                    Utility.Print($"{Name} attacked {targetCharacter.Name} and hit for {attack} damage");
                     targetCharacter.Health -= attack; // Should check target's health 
                 }
                 else
                 {
-                    Console.WriteLine($"{Name} attacked but missed");
+                    Utility.Print($"{Name} attacked but missed");
                 }
             }
         }

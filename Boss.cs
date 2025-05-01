@@ -30,7 +30,7 @@ namespace Dungeon_Crawler
                 {
 
                     base.Attack(targetCharacter);
-                    if (AttackDescriptions != null) { Console.WriteLine(AttackDescriptions[i]); }
+                    if (AttackDescriptions != null) { Utility.Print(AttackDescriptions[i]); }
                 }
                 TurnCounter += 1;
                 if (TurnCounter == 6) { TurnCounter = 0; }
@@ -40,16 +40,16 @@ namespace Dungeon_Crawler
         {
             if (Health <= 0)
             {
-                Console.WriteLine($"{Name} has been defeated!");
-                Console.WriteLine("Would you like to add a description of your victory blow?\nEnter x to skip");
+                Utility.Print($"{Name} has been defeated!");
+                Utility.Print("Would you like to add a description of your victory blow?\nEnter x to skip");
                 string? victoryBlow = Console.ReadLine();
                 if (victoryBlow != null && victoryBlow != "x")
                 {
-                    Console.WriteLine(victoryBlow);
+                    Utility.Print(victoryBlow);
                 }
                 else
                 {
-                    Console.WriteLine($"You have defeated {Name}");
+                    Utility.Print($"You have defeated {Name}");
                 }
             }
 

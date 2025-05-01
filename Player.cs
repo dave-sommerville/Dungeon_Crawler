@@ -5,10 +5,21 @@
         //  STATUS TRACKERS
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
-        private readonly List<Boss> _bosses = new List<Boss>()
+        public static Boss plotOne = new Boss("Giant Rat one", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+        public static Boss plotTwo = new Boss("Giant Rat two", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+        public static Boss plotThree = new Boss("Giant Rat three", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+        public static Boss plotFour = new Boss("Giant Rat four", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+        public static Boss plotFive = new Boss("Giant Rat five", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+        public static Boss plotSix = new Boss("Giant Rat six", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
+
+        private readonly Boss[] _plotBosses = new Boss[]
         {
-            new Boss("Giant Rat", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1),
-            new Boss("Giant Spider", "A large spider with a nasty bite", 2, new string[] { "Bite" }, 2)
+            plotOne,
+            plotTwo,
+            plotThree,
+            plotFour,
+            plotFive,
+            plotSix
         };
         public bool IsPlaying { get; set; } = true;
         //  LOCATION
@@ -62,32 +73,32 @@
         public void PrintPlayerDetails()
         {
             Console.WriteLine();
-            Console.WriteLine($"Player: {Name} - Level: {PlayerLevel}({XP}xp)");
-            Console.WriteLine($"Location: {LocationId} - Gold: {Gold}");
-            Console.WriteLine($"Description: {Description}");
-            Console.WriteLine($"Current Health: {Health} - Maximum Health: {MaxHP}");
-            Console.WriteLine($"Mana: {Mana} - Sanity: {Sanity}");
-            Console.WriteLine($"Skills:");
+            Utility.Print($"Player: {Name} - Level: {PlayerLevel}({XP}xp)");
+            Utility.Print($"Location: {LocationId} - Gold: {Gold}");
+            Utility.Print($"Description: {Description}");
+            Utility.Print($"Current Health: {Health} - Maximum Health: {MaxHP}");
+            Utility.Print($"Mana: {Mana} - Sanity: {Sanity}");
+            Utility.Print($"Skills:");
             if (Charisma > 1) Console.Write($"Charisma: {Charisma}");
             if (Athletics > 1) Console.Write($"Athletics: {Athletics}");
             if (Perception > 1) Console.Write($"Perception: {Perception}");
             if (Dexterity > 1) Console.Write($"Charisma: {Dexterity}");
-            Console.WriteLine($"AC: {ArmorClass} - Modifier: {Modifier}");
+            Utility.Print($"AC: {ArmorClass} - Modifier: {Modifier}");
             if (Armor != null)
             {
-                Console.WriteLine($"Armor Current Equipped: {Armor.Name} - AC Bonus: {Armor.AC}");
+                Utility.Print($"Armor Current Equipped: {Armor.Name} - AC Bonus: {Armor.AC}");
             }
             else
             {
-                Console.WriteLine("No armor currently equipped");
+                Utility.Print("No armor currently equipped");
             }
             if (Weapon != null)
             {
-                Console.WriteLine($"Armor Current Equipped: {Weapon.Name} - Attack Bonus: {Weapon.Boost}");
+                Utility.Print($"Armor Current Equipped: {Weapon.Name} - Attack Bonus: {Weapon.Boost}");
             }
             else
             {
-                Console.WriteLine("No weapon currently equipped");
+                Utility.Print("No weapon currently equipped");
             }
         }
         public void NavCase(string decision, Chamber currentChamber)
@@ -98,7 +109,7 @@
                     if (currentChamber.NorthPassage)
                     {
                         Y += 1;
-                        Console.WriteLine($"{Y}{X}");
+                        Utility.Print($"{Y}{X}");
                         break;
                     }
                     else
@@ -111,7 +122,7 @@
                     if (currentChamber.SouthPassage)
                     {
                         Y -= 1;
-                        Console.WriteLine($"{Y}{X}");
+                        Utility.Print($"{Y}{X}");
 
                         break;
                     }
@@ -124,7 +135,7 @@
                     if (currentChamber.WestPassage)
                     {
                         X -= 1;
-                        Console.WriteLine($"{Y}{X}");
+                        Utility.Print($"{Y}{X}");
                         break;
                     }
                     else
@@ -136,7 +147,7 @@
                     if (currentChamber.EastPassage)
                     {
                         X += 1;
-                        Console.WriteLine($"{Y}{X}");
+                        Utility.Print($"{Y}{X}");
                         break;
                     }
                     else
@@ -159,8 +170,8 @@
             if (dungeon.ExploredChambers.ContainsKey(LocationId))
             {
                 Chamber currentChamber = dungeon.ExploredChambers[LocationId];
-                Console.WriteLine("You've already explored this room");
-                Console.WriteLine("Would you like to view the description again?\n1) Yes\n2) No");
+                Utility.Print("You've already explored this room");
+                Utility.Print("Would you like to view the description again?\n1) Yes\n2) No");
                 int viewDecision = Utility.PrintMenu(2);
                 if (viewDecision == 1)
                 {
@@ -178,16 +189,18 @@
                 {
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
                     newChamber.ReturnPassages(decision);
-                    Console.WriteLine($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
+                    Utility.Print($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
                     newChamber.DisplayDescription();
                     RestCounter += 1;
                     newChamber.MasterEventsTree(this);
-                    Console.WriteLine("The room is safe. What would you like to do next?");
-                    Console.WriteLine("1) Search Room\n2) Rest Here");
+                    Utility.Print("The room is safe. What would you like to do next?");
+                    Utility.Print("1) Search Room\n2) Rest Here");
                     dungeon.ExploredChambers[LocationId] = newChamber;
                 }
                 else
                 {
+                    Utility.Print("Boss fight");
+                    Utility.Print($"{plotTrigger}");
                     BossFight(dungeon, plotTrigger);
                 }
             }
@@ -205,36 +218,37 @@
             }
             if (InventoryFull)
             {
-                Console.WriteLine("Inventory is currently full, please select an item to discard");
+                Utility.Print("Inventory is currently full, please select an item to discard");
                 PrintInventory();
                 int decision = Utility.PrintMenu(Inventory.Length) - 1;
-                Console.WriteLine($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
+                Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
                 string discardDecision = Console.ReadLine().ToLower();
                 if (discardDecision == "y")
                 {
                     Inventory[decision] = item;
-                    Console.WriteLine($"{item.Name} has been added to your inventory");
+                    Utility.Print($"{item.Name} has been added to your inventory");
                 }
                 else
                 {
-                    Console.WriteLine("Item not added to inventory");
+                    Utility.Print("Item not added to inventory");
                 }
             }
         }
         public void PrintInventory()
         {
-            Console.WriteLine("Current Inventory:");
+            Utility.Print("Current Inventory:");
             for (int i = 0; i < Inventory.Length; i++)
             {
                 if (Inventory[i] != null)
                 {
-                    Console.WriteLine($"{i + 1}) {Inventory[i].Name}");
+                    Utility.Print($"{i + 1}) {Inventory[i].Name}");
                 }
             }
         }
         public void UseItemOption()
         {
-            Console.WriteLine("1) Use item (y/n)");
+            Console.WriteLine();
+            Utility.Print("Use item (y/n)");
             string choice = Console.ReadLine().ToLower().Trim();
             if (choice == "y")
             {
@@ -246,21 +260,22 @@
             bool itemFound = false;
             do
             {
-                Console.WriteLine("Please select an item to use");
-                Console.WriteLine("Enter 0 to return");
-                int choice = Utility.PrintMenu(Inventory.Length) - 1;
+                Utility.Print("Please select an item to use");
+                Utility.Print("Enter 0 to return");
+                int choice = Utility.PrintMenu(Inventory.Length);
+                choice--;
                 if (choice == -1)
                 {
                     itemFound = true;
                     break;
-                }
-                if (Inventory[choice] != null)
+                } else if (Inventory[choice] != null)
                 {
                     Inventory[choice].EquipItem(this);
                     Inventory[choice] = null;
-                } else
+                }
+                else
                 {
-                    Console.WriteLine("That inventory slot is empty");
+                    Utility.Print("That inventory slot is empty");
                 }
             } while (!itemFound);
         }
@@ -281,7 +296,7 @@
         }
         public void BossFight(Dungeon dungeon, int plotIndex)
         {
-            Boss boss = _bosses[plotIndex];
+            Boss boss = _plotBosses[plotIndex];
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
@@ -301,8 +316,8 @@
         }
         public void FightMenu(Monster monster)
         {
-            Console.WriteLine("What attack action do you wish to take?");
-            Console.WriteLine("1) Attack 2) Mana Blast 3) Dodge 4) Use Item");
+            Utility.Print("What attack action do you wish to take?");
+            Utility.Print("1) Attack 2) Mana Blast 3) Dodge 4) Use Item");
             int decision = Utility.PrintMenu(4);
             if (decision == 1)
             {
@@ -313,16 +328,16 @@
             {
                 if (Mana <= 0)
                 {
-                    Console.WriteLine("You have no mana to use a mana blast");
+                    Utility.Print("You have no mana to use a mana blast");
                 }
                 else
                 {
                     int manaDamage = PlayerLevel * 10;
-                    Console.WriteLine($"You have used a mana blast for {manaDamage} points of damage");
+                    Utility.Print($"You have used a mana blast for {manaDamage} points of damage");
                     monster.Health -= manaDamage;
                     if (monster.Health <= 0)
                     {
-                        Console.WriteLine($"You killed the {monster.Name}");
+                        Utility.Print($"You killed the {monster.Name}");
                     }
                     Mana -= 1;
 
@@ -333,7 +348,7 @@
             {
                 IsDodging = true;
                 monster.Attack(this);
-                Console.WriteLine("You have attempted to dodge the attack");
+                Utility.Print("You have attempted to dodge the attack");
             }
             else if (decision == 4)
             {
@@ -348,7 +363,7 @@
                 Weapon.Durability -= 1;
                 if (Weapon.Durability <= 0)
                 {
-                    Console.WriteLine($"Weapon is broken and cannot be used.");
+                    Utility.Print($"Weapon is broken and cannot be used.");
                     Weapon = null;
                 }
             }
@@ -360,7 +375,7 @@
                 Armor.Durability -= 1;
                 if (Weapon.Durability <= 0)
                 {
-                    Console.WriteLine($"Weapon is broken and cannot be used.");
+                    Utility.Print($"Weapon is broken and cannot be used.");
                     ArmorClass -= Armor.AC;
                     Armor = null;
                 }
@@ -384,16 +399,16 @@
                 if (attack > targetCharacter.ArmorClass)
                 {
                     UseWeapon();
-                    Console.WriteLine($"You attacked the {targetCharacter.Name} and hit for {damage} damage");
+                    Utility.Print($"You attacked the {targetCharacter.Name} and hit for {damage} damage");
                     targetCharacter.Health -= damage;
                     if (targetCharacter.Health <= 0)
                     {
-                        Console.WriteLine($"You killed the {targetCharacter.Name}");
+                        Utility.Print($"You killed the {targetCharacter.Name}");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"You attacked but missed");
+                    Utility.Print($"You attacked but missed");
                 }
             }
         }
@@ -440,18 +455,18 @@
                 {
                     if (PrisonerStatus == 1)
                     {
-                        Console.WriteLine("Your vision grows dim as you feel the life begin to drain from you.");
-                        Console.WriteLine("Then you see a familiar face, that of the prisoner you released");
-                        Console.WriteLine("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
+                        Utility.Print("Your vision grows dim as you feel the life begin to drain from you.");
+                        Utility.Print("Then you see a familiar face, that of the prisoner you released");
+                        Utility.Print("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
                         Health += 50;
                     }
-                    Console.WriteLine("You have died");
+                    Utility.Print("You have died");
                     IsPlaying = false;
                 }
             }
             else
             {
-                Console.WriteLine("You have lost grip on reality, you can no longer hold yourself together.");
+                Utility.Print("You have lost grip on reality, you can no longer hold yourself together.");
                 IsPlaying = false;
             }
         }
@@ -479,7 +494,7 @@
                         skillApplied = true;
                         break;
                     default:
-                        Console.WriteLine("Invalid skill");
+                        Utility.Print("Invalid skill");
                         break;
                 }
             }
@@ -491,13 +506,13 @@
         }
         public void IncreaseModifier()
         {
-            Console.WriteLine("You gain an increase to your overall modifier.");
+            Utility.Print("You gain an increase to your overall modifier.");
             Modifier += 1;
         }
         public void PointIncreaseWrapper()
         {
-            Console.WriteLine("You may spend another skill point on Athletics, Perception, or Dexterity");
-            Console.WriteLine("Please enter which skill you choose first");
+            Utility.Print("You may spend another skill point on Athletics, Perception, or Dexterity");
+            Utility.Print("Please enter which skill you choose first");
             ApplySkillPoint();
         }
         public void GainHP()
@@ -506,7 +521,7 @@
         }
         public void XpLevelUp()
         {
-            Console.WriteLine("Your experience has granted you a boon.");
+            Utility.Print("Your experience has granted you a boon.");
             if (XP > 500 && PlayerLevel == 1)
             {
                 GainHP();
@@ -551,7 +566,7 @@
             {
                 IncreaseModifier();
                 PlayerLevel = 10;
-                Console.WriteLine("You have achieved the highest level possible and completed this stage of the dungeon!");
+                Utility.Print("You have achieved the highest level possible and completed this stage of the dungeon!");
             }
         }
     }

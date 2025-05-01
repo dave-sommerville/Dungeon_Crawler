@@ -43,11 +43,11 @@ namespace Dungeon_Crawler
         {
             if (Durability <= 0)
             {
-                Console.WriteLine($"{Name} is broken and cannot be equipped.");
+                Utility.Print($"{Name} is broken and cannot be equipped.");
                 return;
             }
-            Console.WriteLine("Are you sure you want to equip this armor? Anything there will be replaced?");
-            Console.WriteLine("1) Equip item 2) Cancel");
+            Utility.Print("Are you sure you want to equip this armor? Anything there will be replaced?");
+            Utility.Print("1) Equip item 2) Cancel");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
@@ -56,7 +56,7 @@ namespace Dungeon_Crawler
             }
             else
             {
-                Console.WriteLine("Item not equipped.");
+                Utility.Print("Item not equipped.");
             }
         }
     }

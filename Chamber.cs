@@ -61,8 +61,8 @@ namespace Dungeon_Crawler
         private readonly int TierOne = 2;
         private readonly int TierTwo = 4;
         private readonly int TierThree = 6;
-        private readonly int TierFour = 96;
-        private readonly int TierFive = 98;
+        private readonly int TierFour = 8;
+        private readonly int TierFive = 10;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
         {
@@ -76,7 +76,7 @@ namespace Dungeon_Crawler
         }
         public void DisplayDescription()
         {
-            Console.WriteLine(Description);
+            Utility.Print(Description);
             DisplayPassages();
         }
         public void RandomizePassages()
@@ -108,69 +108,54 @@ namespace Dungeon_Crawler
         {
             if (NorthPassage)
             {
-                Console.WriteLine("To the North " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
+                Utility.Print("To the North " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (SouthPassage)
             {
-                Console.WriteLine("To the South " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
+                Utility.Print("To the South " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (EastPassage)
             {
-                Console.WriteLine("To the East " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
+                Utility.Print("To the East " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
             if (WestPassage)
             {
-                Console.WriteLine("To the West " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
+                Utility.Print("To the West " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
-        }
-        public List<Item> AddLootToChamber()
-        {
-            List<Item> chamberLoot = new List<Item>();
-            int lootIndex = Utility.GetRandomIndex(0, 3);
-            if (lootIndex == 0)
-            {
-                int lootCount = Utility.GetRandomIndex(1, 3);
-                for (int i = 0; i < lootCount; i++)
-                {
-                    Item lootItem = PossibleLoot[Utility.GetRandomIndex(0, PossibleLoot.Count)];
-                    chamberLoot.Add(lootItem);
-                }
-            }
-            return chamberLoot;
         }
         public void MasterEventsTree(Player player)
         {
             int randomEvent = Utility.GetRandomIndex(1, MasterIndex);
             if (randomEvent >= 1 && randomEvent <= TierOne)
             {
-                Console.WriteLine("You encounter a hazard in the chamber.");
+                Utility.Print("You encounter a hazard in the chamber.");
                 HazardEvent(player);
             }
             else if (randomEvent > TierOne && randomEvent <= TierTwo)
             {
-                Console.WriteLine("You trigger a trap in the chamber.");
+                Utility.Print("You trigger a trap in the chamber.");
                 Trap chamberTrap = TrapEvent(player);
                 chamberTrap.TrapCheck(player);
             }
             else if (randomEvent > TierTwo && randomEvent <= TierThree)
             {
-                Console.WriteLine("You encounter a monster in the chamber.");
+                Utility.Print("You encounter a monster in the chamber.");
                 Monster chamberMonster = MonsterEvent(player);
                 player.MonsterFight(chamberMonster);
             }
             else if(randomEvent > TierThree && randomEvent <= TierFour)
             {
-                Console.WriteLine("You encounter an NPC in the chamber.");
+                Utility.Print("You encounter an NPC in the chamber.");
                 NpcEvent(player);
             } else if (randomEvent > TierFour && randomEvent <= TierFive)
             {
-                Console.WriteLine("You encounter a merchant in the chamber.");
+                Utility.Print("You encounter a merchant in the chamber.");
                 NPC chamberMerchant = MerchantEvent(player);
                 chamberMerchant.MarketPlace(player);
             }
             else 
                 {
-                Console.WriteLine("Nothing happens.");
+                Utility.Print("Nothing happens.");
             }
         }
         public Trap TrapEvent(Player player)
@@ -186,16 +171,16 @@ namespace Dungeon_Crawler
         }
         public void Rest(Player player)
         {
-            Console.WriteLine("You prepare the room to sleep for the night");
+            Utility.Print("You prepare the room to sleep for the night");
             int restEncounter = Utility.GetRandomIndex(1, 10);
             if (restEncounter <= 3)
             {
-                Console.WriteLine("You are ambushed while you sleep! You get no rest and the monster is attacking.");
+                Utility.Print("You are ambushed while you sleep! You get no rest and the monster is attacking.");
                 Monster chamberMonster = MonsterEvent(player);
                 player.MonsterFight(chamberMonster);
             } else
             {
-                Console.WriteLine("You have a peaceful sleep. You feel fully rested.");
+                Utility.Print("You have a peaceful sleep. You feel fully rested.");
                 player.RestCounter = 0;
             }
         }
@@ -220,21 +205,21 @@ namespace Dungeon_Crawler
         {
             if (player.PrisonerStatus == 0)
             {
-                Console.WriteLine("Inside this chamber is a cage with a prisoner inside.");
+                Utility.Print("Inside this chamber is a cage with a prisoner inside.");
 
-                Console.WriteLine("He is in a bad state and begs for help.");
-                Console.WriteLine("He is an Orc standing around six and a half feet tall.");
-                Console.WriteLine("Do you want to free the prisoner? (y/n)");
+                Utility.Print("He is in a bad state and begs for help.");
+                Utility.Print("He is an Orc standing around six and a half feet tall.");
+                Utility.Print("Do you want to free the prisoner? (y/n)");
                 string choice = Console.ReadLine()?.ToLower().Trim();
                 if(choice == "y")
                 {
-                    Console.WriteLine("You free the prisoner. He looms over you for a moment");
-                    Console.WriteLine("Then he thanks you briefly and runs through an entrance and disappears into the dungeon");
+                    Utility.Print("You free the prisoner. He looms over you for a moment");
+                    Utility.Print("Then he thanks you briefly and runs through an entrance and disappears into the dungeon");
                     player.PrisonerStatus = 1;
                 }
                 else
                 {
-                    Console.WriteLine("You leave the prisoner in the cage.");
+                    Utility.Print("You leave the prisoner in the cage.");
                     player.PrisonerStatus = 2;
                 }
             }
@@ -258,33 +243,33 @@ namespace Dungeon_Crawler
         public void SporesEvent(Player player)
         {
             int madnessLvl = 10;
-            Console.WriteLine("You are caught in a cloud of spores. You feel dizzy and disoriented.");
-            Console.WriteLine("Strange visions in the shadows plague you and off");
-            Console.WriteLine("After an indeterminate amount of time the effects wear off but your sanity doesn't full recover");
-            Console.WriteLine($"You lose {madnessLvl} sanity points.");
+            Utility.Print("You are caught in a cloud of spores. You feel dizzy and disoriented.");
+            Utility.Print("Strange visions in the shadows plague you and off");
+            Utility.Print("After an indeterminate amount of time the effects wear off but your sanity doesn't full recover");
+            Utility.Print($"You lose {madnessLvl} sanity points.");
             player.Sanity -= madnessLvl;
         }
         public void PoisonGasEvent(Player player)
         {
             int poisonLvl = 5;
-            Console.WriteLine("You are caught in a cloud of poison gas. You fall to your knees coughing.");
-            Console.WriteLine("You feel your lungs burning but you push through and you can eventually breathe clearly again");
-            Console.WriteLine($"You do take some permanent damage however and lose {poisonLvl} maximum health points");
+            Utility.Print("You are caught in a cloud of poison gas. You fall to your knees coughing.");
+            Utility.Print("You feel your lungs burning but you push through and you can eventually breathe clearly again");
+            Utility.Print($"You do take some permanent damage however and lose {poisonLvl} maximum health points");
             player.MaxHP -= poisonLvl;
         }
         public void RustMonsterEvent(Player player)
         {
-            Console.WriteLine("Oh no, Rust Monsters!!\nThese disgusting critters couldn't care less about hurting you");
-            Console.WriteLine("Unfortunately, they have a ravenous appetite for your weapons and armor.");
+            Utility.Print("Oh no, Rust Monsters!!\nThese disgusting critters couldn't care less about hurting you");
+            Utility.Print("Unfortunately, they have a ravenous appetite for your weapons and armor.");
             Console.WriteLine();
-            Console.WriteLine("**You are swarmed by these creatures and your weapon and shield dissolve in front of your eyes**");
+            Utility.Print("**You are swarmed by these creatures and your weapon and shield dissolve in front of your eyes**");
             player.Weapon = null;
             player.Armor = null;
         }
         public void SlimeEvent(Player player)
         {
-            Console.WriteLine("You are caught in a pool of slime. You feel your skin crawling.");
-            Console.WriteLine("Disgusting but harmless, the sludge is difficult to get through and takes twice as much energy");
+            Utility.Print("You are caught in a pool of slime. You feel your skin crawling.");
+            Utility.Print("Disgusting but harmless, the sludge is difficult to get through and takes twice as much energy");
             player.RestCounter += 1;
         }
         public void AddChamberLoot()
@@ -317,15 +302,15 @@ namespace Dungeon_Crawler
             }
             if ((player.Perception + Utility.GetRandomIndex(7,10)) > 5)
             {
-                Console.WriteLine("You search the chamber and discover the following");
-                if(ChamberLoot == null) { Console.WriteLine("No inventory"); }
+                Utility.Print("You search the chamber and discover the following");
+                if(ChamberLoot == null) { Utility.Print("No inventory"); }
                 foreach(Item item in ChamberLoot)
                 {
-                    Console.WriteLine($"You find a {item.Name}.");
+                    Utility.Print($"You find a {item.Name}.");
                     player.AddToInventory(item);
                 }
                 int gold = Utility.GetRandomIndex(1,100);
-                Console.WriteLine($"You find {gold} gold coins.");
+                Utility.Print ($"You find {gold} gold coins.");
                 player.Gold += gold;
             }
 

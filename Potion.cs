@@ -18,13 +18,13 @@ namespace Dungeon_Crawler
         }
         public override void DisplayItem()
         {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Worth {Potency} healing points");
+            Utility.Print($"Name: {Name}");
+            Utility.Print($"Worth {Potency} healing points");
         }
         public override void EquipItem(Player player)
         {
             player.Health += Potency;
-            Console.WriteLine($"You drink the {Name} and heal {Potency} health points.");
+            Utility.Print($"You drink the {Name} and heal {Potency} health points.");
         }
     }
 }

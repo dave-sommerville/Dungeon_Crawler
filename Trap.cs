@@ -59,7 +59,7 @@
             int modifer = 8;
             if(player.Perception >= HiddenDifficulty)
             {
-                Console.WriteLine("You see a trap.");
+                Utility.Print("You see a trap.");
                 modifer = 4;
             }
             int trapCheck = Utility.GetRandomIndex(1, modifer);
@@ -68,18 +68,18 @@
                 return;
             } else
             {
-                Console.WriteLine("The trap triggers before you can avoid it.");
+                Utility.Print("The trap triggers before you can avoid it.");
                 TriggerTrap(player);
             }
         }
         public void TriggerTrap(Player player)
         {
-            Console.WriteLine(Description);
+            Utility.Print(Description);
             if(Athletics)
             {
                 if(player.Athletics >= TrapDifficulty)
                 {
-                    Console.WriteLine("Using your strength you manage to reduce some of the damage");
+                    Utility.Print("Using your strength you manage to reduce some of the damage");
                     Damage = Damage / 2;
                 }
             }
@@ -87,12 +87,12 @@
             {
                 if (player.Dexterity >= TrapDifficulty)
                 {
-                    Console.WriteLine("Thanks to your quick reflexes, you avoid some of the damage");
+                    Utility.Print("Thanks to your quick reflexes, you avoid some of the damage");
                     Damage = Damage / 2;
                 }
             }
             player.Health -= Damage;
-            Console.WriteLine($"The trap deals {Damage}");
+            Utility.Print($"The trap deals {Damage}");
             player.PlayerDeathCheck();
         }
     }

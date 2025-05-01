@@ -15,8 +15,8 @@
         }
         public virtual void DisplayItem()
         {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Description: {Description}");
+            Utility.Print($"Name: {Name}");
+            Utility.Print($"Description: {Description}");
         }
         public virtual void EquipItem(Player player)
         {

@@ -6,9 +6,9 @@ namespace Dungeon_Crawler
     {
         public static Random Random = new Random();
         // Add typing and text effects to gameplay 
-        // Add end of game sequence 
-        // Add a way to save the game
         // Add color
+        // Add end of game sequence 
+            // Add a way to save the game
         // Structure relationship between health and max health
         // Map
         // More potion classes
@@ -17,10 +17,7 @@ namespace Dungeon_Crawler
         // Gold given for every search(Issue with double menu int vs string)
         // Use item menu not accepting use item to return
         // Inventory empty message needed
-        // Doesn't need to list that you don't have a weapon to use
         // Says it's giving a boon, but I see no boon
-        // It's only giving gold
-        // Issue with plot index
         // The naming npc function
         // NPC loop not ending
         // Merchant dialogue options?
@@ -50,16 +47,16 @@ namespace Dungeon_Crawler
 
             while(IsRunning && player.Health > 0)
             {
-                Console.WriteLine("n) Move North");
-                Console.WriteLine("s) Move South");
-                Console.WriteLine("e) Move East");
-                Console.WriteLine("w) Move West");
-                Console.WriteLine("p) Display Player Details");
-                Console.WriteLine("l) Look more closely around the chamber");
-                Console.WriteLine("i) View inventory");
+                Utility.Print("n) Move North");
+                Utility.Print("s) Move South");
+                Utility.Print("e) Move East");
+                Utility.Print("w) Move West");
+                Utility.Print("p) Display Player Details");
+                Utility.Print("l) Look more closely around the chamber");
+                Utility.Print("i) View inventory");
                 // Later - show map
                 // Where possible interact with NPC
-                Console.WriteLine("x) Exit Game");
+                Utility.Print("x) Exit Game");
                 string decision = Console.ReadLine()?.ToLower();
                 switch (decision)
                 {
@@ -94,12 +91,12 @@ namespace Dungeon_Crawler
         public static Player CreatePlayer()
         {
             PrintIntro();// ASCI art 
-            Console.WriteLine("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
-            Console.WriteLine("What is your name?");
-            Console.WriteLine();
+            Utility.Print("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
+            Utility.Print("What is your name?");
+            Utility.Print("");
             string playerName = Console.ReadLine().Trim();
-            Console.WriteLine("Very well,\nDo you care to describe yourself?");
-            Console.WriteLine("You may enter 'x' to skip this step");
+            Utility.Print("Very well,\nDo you care to describe yourself?");
+            Utility.Print("You may enter 'x' to skip this step");
             Console.WriteLine(); 
             string playerDesc = Console.ReadLine().Trim();
             if(playerDesc.ToLower() == "x")
@@ -107,27 +104,26 @@ namespace Dungeon_Crawler
                 playerDesc = "";
             }
             Player player = new Player(playerName, playerDesc);
-            Console.WriteLine("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
+            Utility.Print("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
 
-            Console.WriteLine("You have the keys to your own destiny. You have two skills points you can spend now.");
-            Console.WriteLine("You may spend them on Athletics, Perception, or Dexterity");
-            Console.WriteLine("Please enter which skill you choose first");
+            Utility.Print("You have the keys to your own destiny. You have two skills points you can spend now.");
+            Utility.Print("You may spend them on Athletics, Perception, or Dexterity");
+            Utility.Print("Please enter which skill you choose first");
             player.ApplySkillPoint();
-            Console.WriteLine("Please enter which skill you choose second");
+            Utility.Print("Please enter which skill you choose second");
             player.ApplySkillPoint();
-            Console.WriteLine("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
+            Utility.Print("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
         public static void PrintIntro()
         {
             Utility.PrintLines();
-            Console.WriteLine("WELCOME TO\nTHE DUNGEON OF BLEEPBLORPP");
-            Utility.PrintLines();
+            Utility.Print("WELCOME TO\nTHE DUNGEON OF BLEEPBLORPP");
             for (int i = 0; i < Utility.EntranceArt.Length; i++)
             {
-                Thread.Sleep(Utility.Delay);
-                Console.WriteLine(Utility.EntranceArt[i]);
+                Utility.Print(Utility.EntranceArt[i]);
             }
+            Utility.PrintLines();
         }
     }
 }

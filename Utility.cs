@@ -18,6 +18,7 @@
 };
 
         public static int Delay = 120;
+        public static List<string> GameHistory = new List<string>();
         public static int GetRandomIndex(int min, int max)
         {
             Random random = new Random();
@@ -36,6 +37,12 @@
                 return false;
             }
         }
+        public static void Print(string printing)
+        {
+            GameHistory.Add(printing);
+            Thread.Sleep(Delay);
+            Console.WriteLine(printing);
+        }
         public static int PrintMenu(int options)
         {
             int intDecision;
@@ -43,9 +50,10 @@
             do
             {
                 string decision = Console.ReadLine();
-                isValid = int.TryParse(decision, out intDecision) && intDecision >= 1 && intDecision <= options;
+                isValid = int.TryParse(decision, out intDecision) && intDecision >= 0 && intDecision <= options;
                 if (!isValid)
                 {
+                    Thread.Sleep(Delay);
                     Console.WriteLine("Invalid input. Please try again.");
                 }
             } while (!isValid);
@@ -56,6 +64,7 @@
             int lines = 10;
             for (int i = 0; i < lines; i++)
             {
+                Thread.Sleep(Delay);
                 Console.WriteLine();
             }
         }

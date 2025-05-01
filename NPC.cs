@@ -27,16 +27,16 @@ namespace Dungeon_Crawler
         }
         public void InitialInteraction(Player player)
         {
-            Console.WriteLine(Description);
-            Console.WriteLine("'Hello there', a small and slightly shrill voice calls out to you");
+            Utility.Print(Description);
+            Utility.Print("'Hello there', a small and slightly shrill voice calls out to you");
 
             bool InteractionInProgress = true;
             do
             {
-                Console.WriteLine("What do you do?");
-                Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
-                Console.WriteLine("2) Say 'Why hello there, what might your name be?");
-                Console.WriteLine("3) Ignore the creature and continue on your way");
+                Utility.Print("What do you do?");
+                Utility.Print($"1) Nod towards the creature with a stern but calm expression'");
+                Utility.Print("2) Say 'Why hello there, what might your name be?");
+                Utility.Print("3) Ignore the creature and continue on your way");
                 int decision = Utility.PrintMenu(3);
                 switch (decision)
                 {
@@ -45,31 +45,31 @@ namespace Dungeon_Crawler
                         InteractionInProgress = false;
                         break;
                     case 2:
-                        Console.WriteLine("What's a name? Can you give me a name?");
+                        Utility.Print("What's a name? Can you give me a name?");
                         AdventureQuestion(player);
                         InteractionInProgress = false;
                         break;
                     case 3:
-                        Console.WriteLine("'Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnooooooo, you're all high and mighty. OK, that's fine.' the creature says passive aggressively");
+                        Utility.Print("'Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnooooooo, you're all high and mighty. OK, that's fine.' the creature says passive aggressively");
                         break;
 
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Utility.Print("Invalid choice, please try again.");
                         break;
                 }
             } while (InteractionInProgress);
         }
         public void AdventureQuestion(Player player)
         {
-            Console.WriteLine("What kind of adventure are you on?");
+            Utility.Print("What kind of adventure are you on?");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("What do you say?");
-            Console.WriteLine("1) Seeking treasure and fortune");
-            Console.WriteLine("2) Seeking acknowledgement and renown");
-            Console.WriteLine("3) Seeking knowledge and relics");
-            Console.WriteLine("4) Why don't you mind your own business");
+            Utility.Print("What do you say?");
+            Utility.Print("1) Seeking treasure and fortune");
+            Utility.Print("2) Seeking acknowledgement and renown");
+            Utility.Print("3) Seeking knowledge and relics");
+            Utility.Print("4) Why don't you mind your own business");
             string endResult = "";
             bool onQuestion = true;
             do
@@ -80,7 +80,7 @@ namespace Dungeon_Crawler
                     case 1:
                         player.Charisma += 1;
                         endResult = "Seeking treasure and fortune";
-                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false; 
                         break;
@@ -88,7 +88,7 @@ namespace Dungeon_Crawler
                         player.Charisma += 1;
 
                         endResult = "Seeking acknowledgement and renown";
-                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
                         break;
@@ -96,56 +96,56 @@ namespace Dungeon_Crawler
                         player.Charisma += 1;
 
                         endResult = "Seeking knowledge and relics";
-                        Console.WriteLine("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
 
                         break;
                     case 4:
-                        Console.WriteLine("Well, kinda rude. I just have this cool rock that I was gonna give you.");
-                        Console.WriteLine("Ah, whatever! Here you go.");
+                        Utility.Print("Well, kinda rude. I just have this cool rock that I was gonna give you.");
+                        Utility.Print("Ah, whatever! Here you go.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
                         player.Charisma -= 1;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Utility.Print("Invalid choice, please try again.");
                         break;
                 }
             } while (onQuestion);
         }
         public void InteractWithNpc(Player player)
         {
-            Console.WriteLine("You encounter a familiar creature in this room.");
-            Console.WriteLine(Description);
-            Console.WriteLine(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
+            Utility.Print("You encounter a familiar creature in this room.");
+            Utility.Print(Description);
+            Utility.Print(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
             bool interactionInProgress = true;
             do
             {
-                Console.WriteLine($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
-                Console.WriteLine("3) Ignore\n4) Attack");
+                Utility.Print($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
+                Utility.Print("3) Ignore\n4) Attack");
                 int choice = Utility.PrintMenu(4);
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine(_npcDialogue[1][0]);
+                        Utility.Print(_npcDialogue[1][0]);
                         interactionInProgress = DialogueNode(player);
                         player.Charisma += 1;
                         break;
                     case 2:
-                        Console.WriteLine(_npcDialogue[1][1]);
+                        Utility.Print(_npcDialogue[1][1]);
                         player.Charisma -= 1;
                         break;
                     case 3:
-                        Console.WriteLine(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
+                        Utility.Print(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
                         break;
                     case 4:
-                        Console.WriteLine("You kill him instantly, you monster");
+                        Utility.Print("You kill him instantly, you monster");
                         player.Charisma = -5;
                         interactionInProgress = false;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice, please try again.");
+                        Utility.Print("Invalid choice, please try again.");
                         break;
                 }
                 Console.WriteLine();
@@ -166,13 +166,13 @@ namespace Dungeon_Crawler
         {
             int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
             int userChoice = dialogueIndex + 3;
-            Console.WriteLine(_npcDialogue[2][dialogueIndex]);
-            Console.WriteLine("1) Yes\n2) No");
+            Utility.Print(_npcDialogue[2][dialogueIndex]);
+            Utility.Print("1) Yes\n2) No");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
                 player.Charisma += 1;
-                Console.WriteLine(_npcDialogue[dialogueIndex][userChoice]);
+                Utility.Print(_npcDialogue[dialogueIndex][userChoice]);
                 if(CharismaChecker(player))
                 {
                     if(!HasBag)
@@ -188,7 +188,7 @@ namespace Dungeon_Crawler
             else
             {
                 player.Charisma -= 1;
-                Console.WriteLine(_npcDialogue[4][dialogueIndex]);
+                Utility.Print(_npcDialogue[4][dialogueIndex]);
                 return false;
             }
         }
@@ -212,7 +212,7 @@ namespace Dungeon_Crawler
         }
         public void EquipMap(Player player)
         {
-            Console.WriteLine("Map is now equipped");
+            Utility.Print("Map is now equipped");
         }
         public NPC Prisoner()
         {
@@ -221,9 +221,9 @@ namespace Dungeon_Crawler
         }
         public void MarketPlace(Player player) // Expand to allow for descriptions/reconsiderations
         {
-            Console.WriteLine($"Hello adventurer, how brave to come this far.");
-            Console.WriteLine($"I am the humble {Name}, and I have a few items for sale. Do you want to see them?");
-            Console.WriteLine("1) Yes 2) Talk to merchant");
+            Utility.Print($"Hello adventurer, how brave to come this far.");
+            Utility.Print($"I am the humble {Name}, and I have a few items for sale. Do you want to see them?");
+            Utility.Print("1) Yes 2) Talk to merchant");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
@@ -232,10 +232,10 @@ namespace Dungeon_Crawler
                 {
                     foreach (Item item in Inventory)
                     {
-                        Console.WriteLine($"{item.Name}: {item.Value} Gold Pieces");
+                        Utility.Print($"{item.Name}: {item.Value} Gold Pieces");
                     }
-                    Console.WriteLine("What would you like to buy?\nSelect an item");
-                    Console.WriteLine("Be careful what you choose, I don't ask twice");
+                    Utility.Print("What would you like to buy?\nSelect an item");
+                    Utility.Print("Be careful what you choose, I don't ask twice");
                     int selectedItem = Utility.PrintMenu(Inventory.Length) - 1;
                     if (selectedItem == -1) TransactionInProgress = false;
                     if (player.Gold >= Inventory[selectedItem].Value)
@@ -244,12 +244,12 @@ namespace Dungeon_Crawler
                         player.Gold -= Inventory[selectedItem].Value;
                     } else
                     {
-                        Console.WriteLine("You don't have enough gold");
+                        Utility.Print("You don't have enough gold");
                     }
                 } while (TransactionInProgress);
             } else
             {
-                Console.WriteLine("So what's shakin, bacon?");
+                Utility.Print("So what's shakin, bacon?");
             }
         }
     }
