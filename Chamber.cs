@@ -58,10 +58,10 @@ namespace Dungeon_Crawler
         public Monster? Monster { get; set; }
         public List<Item>? ChamberLoot { get; set; }
         // Event master control
-        private readonly int TierOne = 2;
-        private readonly int TierTwo = 4;
-        private readonly int TierThree = 6;
-        private readonly int TierFour = 8;
+        private readonly int TierOne = 20;
+        private readonly int TierTwo = 35;
+        private readonly int TierThree = 50;
+        private readonly int TierFour = 97;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)

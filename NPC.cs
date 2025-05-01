@@ -215,7 +215,7 @@ namespace Dungeon_Crawler
             greyStoneSpire.Description = "A small stone spire, it is grey and has a small hole in the top";
             greyStoneSpire.Durability = 1000;
             greyStoneSpire.Value = 1000;
-            player.Inventory[Inventory.Length - 1] = greyStoneSpire;
+            player.GreyStoneSpire = greyStoneSpire;
         }
         public void EquipBagOfCarrying(Player player)
         {

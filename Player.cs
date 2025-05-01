@@ -47,6 +47,7 @@
         public int PlotTwoLvl { get; set; } = 1;
         public int PlotThreeLvl { get; set; } = 1;
         public NPC? MushroomMan { get; set; }
+        public Item? GreyStoneSpire { get; set; }
         //  ATTACK RANGES 
         private readonly int minAttack = 8;
         private readonly int maxAttack = 12;
@@ -77,28 +78,25 @@
             Utility.Print($"Location: {LocationId} - Gold: {Gold}");
             Utility.Print($"Description: {Description}");
             Utility.Print($"Current Health: {Health} - Maximum Health: {MaxHP}");
-            Utility.Print($"Mana: {Mana} - Sanity: {Sanity}");
+            Utility.Print($"Mana: {Mana} - Sanity: {Sanity} - Exhaustion: {RestCounter}");
             Utility.Print($"Skills:");
-            if (Charisma > 1) Console.Write($"Charisma: {Charisma}");
-            if (Athletics > 1) Console.Write($"Athletics: {Athletics}");
-            if (Perception > 1) Console.Write($"Perception: {Perception}");
-            if (Dexterity > 1) Console.Write($"Charisma: {Dexterity}");
+            if (Charisma > 1) Utility.Print($"Charisma: {Charisma}");
+            if (Athletics > 1) Utility.Print($"Athletics: {Athletics}");
+            if (Perception > 1) Utility.Print($"Perception: {Perception}");
+            if (Dexterity > 1) Utility.Print($"Charisma: {Dexterity}");
             Utility.Print($"AC: {ArmorClass} - Modifier: {Modifier}");
+            Utility.Print($"Equipment:");
             if (Armor != null)
             {
-                Utility.Print($"Armor Current Equipped: {Armor.Name} - AC Bonus: {Armor.AC}");
-            }
-            else
-            {
-                Utility.Print("No armor currently equipped");
+                Utility.Print($"Armor: {Armor.Name} - AC Bonus: {Armor.AC}");
             }
             if (Weapon != null)
             {
-                Utility.Print($"Armor Current Equipped: {Weapon.Name} - Attack Bonus: {Weapon.Boost}");
+                Utility.Print($"Weapon: {Weapon.Name} - Attack Bonus: {Weapon.Boost}");
             }
-            else
+            if (GreyStoneSpire != null)
             {
-                Utility.Print("No weapon currently equipped");
+                Utility.Print($"Artifact: Grey Stone Spire - Details: None");
             }
         }
         public void NavCase(string decision, Chamber currentChamber)
@@ -270,13 +268,22 @@
         {
             Console.WriteLine();
             Utility.Print("Use item (y/n)");
-            string choice = Console.ReadLine().ToLower().Trim();
             bool validChoice = false;
             do
             {
+                string choice = Console.ReadLine().ToLower().Trim();
                 if (choice == "y")
                 {
                     UseInventoryItem();
+                    validChoice = true;
+                }
+                else if (choice == "n")
+                {
+                    validChoice = true;
+                }
+                else
+                {
+                    Utility.Print("Please enter a valid choice");
                 }
             } while (!validChoice);
         }
@@ -547,44 +554,51 @@
         }
         public void XpLevelUp()
         {
-            Utility.Print("Your experience has granted you a boon.");
             if (XP > 500 && PlayerLevel == 1)
             {
+                Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 2;
             }
             else if (XP > 1000 && PlayerLevel == 2)
             {
+                Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 3;
             }
             else if (XP > 1500 && PlayerLevel == 3)
             {
+                Utility.Print("You have gained a level!");
                 IncreaseModifier();
                 PlayerLevel = 4;
             }
             else if (XP > 2000 & PlayerLevel == 4)
             {
+                Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 5;
             }
             else if (XP > 2500 && PlayerLevel == 5)
             {
+                Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 6;
             }
             else if (XP > 3000 && PlayerLevel == 6)
             {
+                Utility.Print("You have gained a level!");
                 IncreaseModifier();
                 PlayerLevel = 7;
             }
             else if (XP > 3500 && PlayerLevel == 7)
             {
+                Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 8;
             }
             else if (XP > 4000 && PlayerLevel == 8)
             {
+                Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 9;
             }

@@ -6,16 +6,23 @@ namespace Dungeon_Crawler
     {
         public static Random Random = new Random();
         // Add color
-        // Fixing the NPC dialogue to have a little more color
+        // Pad the NPC dialogue to make it feel more natural and interactive
+        // Secret question sb y/n
         // General spacing and pacing 
         // Add end of game sequence 
             // Add a way to save the game
+        // Player profile AC to new line, add current location
+        // Edit move instructions to only show available directions (essential for game play)
         // Consider value of items
-        // Inventory maintenance
+        // Monsters can't hit players 
+        // Inventory maintenance (When you add more than one it doesn't give you the option of where to place all)
+        // inventory useItem leads to loops 
+        // Consistency with printmenu and readlines
+        // Marketplace doesn't clear current choice 
         // Map
         // More potion classes
         // Don't allow blank space for name (Or add placeholder)
-
+        // Prevent deletion of Grey Stone Spire 
         // Gold given for every search(Issue with double menu int vs string)
         // The naming npc function
         // Merchant dialogue options?
