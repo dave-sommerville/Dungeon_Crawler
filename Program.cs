@@ -6,19 +6,20 @@ namespace Dungeon_Crawler
     {
         public static Random Random = new Random();
         // Add color
+        // Fixing the NPC dialogue to have a little more color
+        // General spacing and pacing 
         // Add end of game sequence 
             // Add a way to save the game
-        // Structure relationship between health and max health
+        // Issue with Looting (Fill inventory)
+        // Consider value of items
+        // Inventory maintance
         // Map
         // More potion classes
 
-        // Marketplace throwing an error
         // Gold given for every search(Issue with double menu int vs string)
-        // Use item menu not accepting use item to return
         // Inventory empty message needed
         // Says it's giving a boon, but I see no boon
         // The naming npc function
-        // NPC loop not ending
         // Merchant dialogue options?
         // Trap descriptions
 

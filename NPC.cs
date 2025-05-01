@@ -119,6 +119,7 @@ namespace Dungeon_Crawler
             Utility.Print("You encounter a familiar creature in this room.");
             Utility.Print(Description);
             Utility.Print(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
+            ArtifactTracker++;
             bool interactionInProgress = true;
             do
             {
@@ -156,12 +157,25 @@ namespace Dungeon_Crawler
                 Console.WriteLine();
             } while (interactionInProgress);
         }
-        public bool CharismaChecker(Player player)
+        public bool BagChecker(Player player)
         {
-            if(player.Charisma > 2 && ArtifactTracker > 2)
+            Console.WriteLine("Checking charisma");
+            if(player.Charisma > 2 && !HasBag && player.PlayerLevel >= 1)
             {
                 return true;
             } else
+            {
+                return false;
+            }
+        }
+        public bool MapChecker(Player player)
+        {
+            Console.WriteLine("Checking charisma");
+            if (player.Charisma > 2 && !HasMap && player.PlayerLevel >= 2)
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
@@ -178,15 +192,14 @@ namespace Dungeon_Crawler
             {
                 player.Charisma += 1;
                 Utility.Print(_npcDialogue[userChoice][dialogueIndex]);
-                if(CharismaChecker(player))
+                if(BagChecker(player))
                 {
-                    if(!HasBag)
-                    {
-                        EquipBagOfCarrying(player);
-                    } else if(!HasMap)
-                    {
-                        EquipMap(player);
-                    }
+                    Console.WriteLine("Equipping bag");
+                    EquipBagOfCarrying(player);
+                    HasBag = true;
+                } else if(MapChecker(player))
+                {
+                    EquipMap(player);
                 }
             }
             else
@@ -211,7 +224,7 @@ namespace Dungeon_Crawler
             {
                 bagOfCarrying[i] = Inventory[i];
             }
-            Inventory = bagOfCarrying;
+            player.Inventory = bagOfCarrying;
         }
         public void EquipMap(Player player)
         {
@@ -224,6 +237,7 @@ namespace Dungeon_Crawler
         }
         public void MarketPlace(Player player) // Expand to allow for descriptions/reconsiderations
         {
+            StockMarketPlace();
             Utility.Print($"Hello adventurer, how brave to come this far.");
             Utility.Print($"I am the humble {Name}, and I have a few items for sale. Do you want to see them?");
             Utility.Print("1) Yes 2) Talk to merchant");
@@ -233,26 +247,72 @@ namespace Dungeon_Crawler
                 bool TransactionInProgress = true;
                 do
                 {
-                    foreach (Item item in Inventory)
+                    for (int i = 0; i < Inventory.Length; i++)
                     {
-                        Utility.Print($"{item.Name}: {item.Value} Gold Pieces");
+                        if (Inventory[i] == null) continue;
+                        Utility.Print($"{i + 1}) {Inventory[i].Name}: {Inventory[i].Value} Gold Pieces");
                     }
                     Utility.Print("What would you like to buy?\nSelect an item");
                     Utility.Print("Be careful what you choose, I don't ask twice");
-                    int selectedItem = Utility.PrintMenu(Inventory.Length) - 1;
-                    if (selectedItem == -1) TransactionInProgress = false;
-                    if (player.Gold >= Inventory[selectedItem].Value)
+                    Utility.Print("0) To Exit");
+                    int selectedItem = Utility.PrintMenu(Inventory.Length) ;
+                    selectedItem--;
+                    if (selectedItem == -1)
                     {
-                        player.AddToInventory(Inventory[selectedItem]);
-                        player.Gold -= Inventory[selectedItem].Value;
-                    } else
+                        TransactionInProgress = false;
+                    }
+                    else
                     {
-                        Utility.Print("You don't have enough gold");
+                        if (player.Gold >= Inventory[selectedItem].Value)
+                        {
+                            player.AddToInventory(Inventory[selectedItem]);
+                            player.Gold -= Inventory[selectedItem].Value;
+                        }
+                        else
+                        {
+                            Utility.Print("You don't have enough gold");
+                        }
                     }
                 } while (TransactionInProgress);
             } else
             {
                 Utility.Print("So what's shakin, bacon?");
+            }
+        }
+        public void StockMarketPlace()
+        {
+            int weaponIndex = Utility.GetRandomIndex(0, 10);
+            int armorIndex = Utility.GetRandomIndex(0, 10);
+            int potionIndex = Utility.GetRandomIndex(0, 10);
+            if (weaponIndex > 5)
+            {
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    if (Inventory[i] == null)
+                    {
+                        Inventory[i] = new Weapon();
+                    }
+                }
+            }
+            if (armorIndex > 5)
+            {
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    if (Inventory[i] == null)
+                    {
+                        Inventory[i] = new Armor();
+                    }
+                }
+            }
+            if (potionIndex > 5)
+            {
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    if (Inventory[i] == null)
+                    {
+                        Inventory[i] = new Potion();
+                    }
+                }
             }
         }
     }

@@ -239,9 +239,15 @@
             Utility.Print("Current Inventory:");
             for (int i = 0; i < Inventory.Length; i++)
             {
+                bool inventoryEmpty = true;
                 if (Inventory[i] != null)
                 {
                     Utility.Print($"{i + 1}) {Inventory[i].Name}");
+                    inventoryEmpty = false;
+                }
+                if(inventoryEmpty)
+                {
+                    Utility.Print($"Inventory Empty");
                 }
             }
         }

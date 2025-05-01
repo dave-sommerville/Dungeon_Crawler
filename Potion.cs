@@ -24,6 +24,7 @@ namespace Dungeon_Crawler
         public override void EquipItem(Player player)
         {
             player.Health += Potency;
+            if (player.Health > player.MaxHP) { player.Health = player.MaxHP; }
             Utility.Print($"You drink the {Name} and heal {Potency} health points.");
         }
     }
