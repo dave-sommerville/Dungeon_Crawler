@@ -10,15 +10,13 @@ namespace Dungeon_Crawler
         // General spacing and pacing 
         // Add end of game sequence 
             // Add a way to save the game
-        // Issue with Looting (Fill inventory)
         // Consider value of items
-        // Inventory maintance
+        // Inventory maintenance
         // Map
         // More potion classes
+        // Don't allow blank space for name (Or add placeholder)
 
         // Gold given for every search(Issue with double menu int vs string)
-        // Inventory empty message needed
-        // Says it's giving a boon, but I see no boon
         // The naming npc function
         // Merchant dialogue options?
         // Trap descriptions

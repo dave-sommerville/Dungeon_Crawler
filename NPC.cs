@@ -267,6 +267,7 @@ namespace Dungeon_Crawler
                         {
                             player.AddToInventory(Inventory[selectedItem]);
                             player.Gold -= Inventory[selectedItem].Value;
+                            Inventory[selectedItem] = null;
                         }
                         else
                         {
@@ -291,6 +292,7 @@ namespace Dungeon_Crawler
                     if (Inventory[i] == null)
                     {
                         Inventory[i] = new Weapon();
+                        return;
                     }
                 }
             }
@@ -301,6 +303,7 @@ namespace Dungeon_Crawler
                     if (Inventory[i] == null)
                     {
                         Inventory[i] = new Armor();
+                        return;
                     }
                 }
             }
@@ -311,6 +314,7 @@ namespace Dungeon_Crawler
                     if (Inventory[i] == null)
                     {
                         Inventory[i] = new Potion();
+                        return;
                     }
                 }
             }

@@ -207,31 +207,46 @@
         }
         public void AddToInventory(Item item)
         {
-            bool InventoryFull = true;
+            bool inventoryFull = true;
+            bool itemAdded = false;
+
             for (int i = 0; i < Inventory.Length; i++)
             {
-                if (Inventory[i] == null)
+                if (Inventory[i] == null && itemAdded == false)
                 {
                     Inventory[i] = item;
-                    InventoryFull = false;
+                    itemAdded = true;
+                }
+                if (Inventory[i] == null)
+                {
+                    inventoryFull = false;
                 }
             }
-            if (InventoryFull)
+            if (inventoryFull)
             {
                 Utility.Print("Inventory is currently full, please select an item to discard");
                 PrintInventory();
                 int decision = Utility.PrintMenu(Inventory.Length) - 1;
                 Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
-                string discardDecision = Console.ReadLine().ToLower();
-                if (discardDecision == "y")
+                bool validDecision = false;
+                do
                 {
-                    Inventory[decision] = item;
-                    Utility.Print($"{item.Name} has been added to your inventory");
-                }
-                else
-                {
-                    Utility.Print("Item not added to inventory");
-                }
+                    string discardDecision = Console.ReadLine().ToLower();
+                    if (discardDecision == "y")
+                    {
+                        Inventory[decision] = item;
+                        Utility.Print($"{item.Name} has been added to your inventory");
+                    }
+                    else if (discardDecision == "n")
+                    {
+                        Utility.Print("Item not added to inventory");
+                        validDecision = true;
+                    }
+                    else
+                    {
+                        Utility.Print("Please enter a valid choice");
+                    }
+                } while (validDecision);
             }
         }
         public void PrintInventory()
@@ -247,7 +262,7 @@
                 }
                 if(inventoryEmpty)
                 {
-                    Utility.Print($"Inventory Empty");
+                    Utility.Print($"{i + 1}) Inventory Slot Empty");
                 }
             }
         }
@@ -256,10 +271,14 @@
             Console.WriteLine();
             Utility.Print("Use item (y/n)");
             string choice = Console.ReadLine().ToLower().Trim();
-            if (choice == "y")
+            bool validChoice = false;
+            do
             {
-                UseInventoryItem();
-            }
+                if (choice == "y")
+                {
+                    UseInventoryItem();
+                }
+            } while (!validChoice);
         }
         public void UseInventoryItem()
         {
@@ -523,7 +542,8 @@
         }
         public void GainHP()
         {
-
+            Health += 15;
+            MaxHP += 15;
         }
         public void XpLevelUp()
         {
