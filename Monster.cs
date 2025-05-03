@@ -14,8 +14,8 @@ namespace Dungeon_Crawler
         private readonly int maxDamage = 12;
         private readonly int minHealth = 20;
         private readonly int maxHealth = 40;
-        private readonly int minArmorClass = 7;
-        private readonly int maxArmorClass = 10;
+        private readonly int minArmorClass = 2;
+        private readonly int maxArmorClass = 5;
         public string[] monsters = new string[]
         {
             "Giant Rat",
@@ -74,7 +74,7 @@ namespace Dungeon_Crawler
         public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
-            ChallengeRating = playerLvl - 1;
+            ChallengeRating = Math.Max(1,(playerLvl - 1));
             int challengeRatingHigh = ChallengeRating + 5;
             int monsterIndex = Utility.GetRandomIndex(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
@@ -84,15 +84,17 @@ namespace Dungeon_Crawler
         }
         public override void Attack(Character targetCharacter)
         {
-            int max = Math.Min((ChallengeRating * 2), 12);
             if (Health <= 0)
             {
                 return;
             }
             else
             {
-                int attack = Utility.GetRandomIndex(0, max) + 5;
-                int damage = Utility.GetRandomIndex(0, max) + 5;
+                int max = Math.Max(7, (ChallengeRating * 4));
+                int attack = Utility.GetRandomIndex(3, max) + 5;
+                int damage = Utility.GetRandomIndex(3, max) + 5;
+                Console.WriteLine($"Attack: {attack} Damage: {damage}");
+                Console.WriteLine($"ArmorClass: {targetCharacter.ArmorClass}");
                 if (targetCharacter.IsDodging)
                 {
                     attack = attack / 2;

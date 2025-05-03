@@ -57,10 +57,11 @@ namespace Dungeon_Crawler
         public Trap? Trap { get; set; }
         public Monster? Monster { get; set; }
         public List<Item>? ChamberLoot { get; set; }
+        public int ChamberGold { get; set; } = 0;
         // Event master control
         private readonly int TierOne = 20;
-        private readonly int TierTwo = 35;
-        private readonly int TierThree = 50;
+        private readonly int TierTwo = 25;
+        private readonly int TierThree = 95;
         private readonly int TierFour = 97;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
@@ -210,7 +211,7 @@ namespace Dungeon_Crawler
                 Utility.Print("He is in a bad state and begs for help.");
                 Utility.Print("He is an Orc standing around six and a half feet tall.");
                 Utility.Print("Do you want to free the prisoner? (y/n)");
-                string choice = Console.ReadLine()?.ToLower().Trim();
+                string choice = Utility.Read();
                 if(choice == "y")
                 {
                     Utility.Print("You free the prisoner. He looms over you for a moment");
@@ -292,6 +293,11 @@ namespace Dungeon_Crawler
                 Potion potion = new Potion();
                 ChamberLoot.Add(potion);
             }
+            int goldChance = Utility.GetRandomIndex(0, 10);
+            if(goldChance >= 5)
+            {
+                ChamberGold = Utility.GetRandomIndex(25, 1000);
+            }
         }
         public void SearchForLoot(Player player)
         {
@@ -309,9 +315,8 @@ namespace Dungeon_Crawler
                     Utility.Print($"You find a {item.Name}.");
                     player.AddToInventory(item);
                 }
-                int gold = Utility.GetRandomIndex(1,100);
-                Utility.Print ($"You find {gold} gold coins.");
-                player.Gold += gold;
+                Utility.Print ($"You find {ChamberGold} gold coins.");
+                player.Gold += ChamberGold;
             }
 
         }

@@ -42,7 +42,7 @@ namespace Dungeon_Crawler
             {
                 Utility.Print($"{Name} has been defeated!");
                 Utility.Print("Would you like to add a description of your victory blow?\nEnter x to skip");
-                string? victoryBlow = Console.ReadLine();
+                string? victoryBlow = Utility.Read();
                 if (victoryBlow != null && victoryBlow != "x")
                 {
                     Utility.Print(victoryBlow);

@@ -170,8 +170,8 @@
                 Chamber currentChamber = dungeon.ExploredChambers[LocationId];
                 Utility.Print("You've already explored this room");
                 Utility.Print("Would you like to view the description again?\n1) Yes\n2) No");
-                int viewDecision = Utility.PrintMenu(2);
-                if (viewDecision == 1)
+                string viewDecision = Utility.Read();
+                if (viewDecision == "n")
                 {
                     currentChamber.DisplayDescription();
                 }
@@ -222,29 +222,31 @@
             }
             if (inventoryFull)
             {
-                Utility.Print("Inventory is currently full, please select an item to discard");
-                PrintInventory();
-                int decision = Utility.PrintMenu(Inventory.Length) - 1;
-                Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
-                bool validDecision = false;
-                do
-                {
-                    string discardDecision = Console.ReadLine().ToLower();
-                    if (discardDecision == "y")
+                for (int i = 0; i < Inventory.Length; i++) {
+                    Utility.Print("Inventory is currently full, please select an item to discard");
+                    PrintInventory();
+                    int decision = Utility.PrintMenu(Inventory.Length) - 1;
+                    Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
+                    bool validDecision = false;
+                    do
                     {
-                        Inventory[decision] = item;
-                        Utility.Print($"{item.Name} has been added to your inventory");
-                    }
-                    else if (discardDecision == "n")
-                    {
-                        Utility.Print("Item not added to inventory");
-                        validDecision = true;
-                    }
-                    else
-                    {
-                        Utility.Print("Please enter a valid choice");
-                    }
-                } while (validDecision);
+                        string discardDecision = Utility.Read();
+                        if (discardDecision == "y")
+                        {
+                            Inventory[decision] = item;
+                            Utility.Print($"{item.Name} has been added to your inventory");
+                        }
+                        else if (discardDecision == "n")
+                        {
+                            Utility.Print("Item not added to inventory");
+                            validDecision = true;
+                        }
+                        else
+                        {
+                            Utility.Print("Please enter a valid choice");
+                        }
+                    } while (validDecision);
+                }
             }
         }
         public void PrintInventory()
@@ -271,7 +273,7 @@
             bool validChoice = false;
             do
             {
-                string choice = Console.ReadLine().ToLower().Trim();
+                string choice = Utility.Read();
                 if (choice == "y")
                 {
                     UseInventoryItem();
@@ -507,7 +509,7 @@
             bool skillApplied = false;
             while (!skillApplied)
             {
-                string skill = Console.ReadLine().Trim().ToLower();
+                string skill = Utility.Read();
                 switch (skill)
                 {
                     case "athletics":

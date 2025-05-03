@@ -5,42 +5,16 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // Add color
         // Pad the NPC dialogue to make it feel more natural and interactive
-        // Secret question sb y/n
-        // General spacing and pacing 
+        // General spacing and pacing and balancing
         // Add end of game sequence 
-            // Add a way to save the game
-        // Player profile AC to new line, add current location
-        // Edit move instructions to only show available directions (essential for game play)
-        // Consider value of items
-        // Monsters can't hit players 
-        // Inventory maintenance (When you add more than one it doesn't give you the option of where to place all)
-        // inventory useItem leads to loops 
-        // Consistency with printmenu and readlines
-        // Marketplace doesn't clear current choice 
+        // Add a way to save the game
         // Map
         // More potion classes
         // Don't allow blank space for name (Or add placeholder)
-        // Prevent deletion of Grey Stone Spire 
-        // Gold given for every search(Issue with double menu int vs string)
         // The naming npc function
         // Merchant dialogue options?
         // Trap descriptions
-
-
-        // Full Release
-        // Artifacts
-        // Cursed Object
-        // Ghosts
-        // Spell Books//Libraries
-        // Shadows of Madness
-        // Aboleth Encounter
-        // Beholder Encounter
-        // Balhannoth encounter 
-        // Elder Brain dialogue system
-
-
         static void Main(string[] args)
         {
             GameLaunch(CreatePlayer());
@@ -50,16 +24,30 @@ namespace Dungeon_Crawler
             Dungeon dungeon = new Dungeon();
             bool IsRunning = true;
 
-            while(IsRunning && player.Health > 0)
+            while (IsRunning && player.Health > 0)
             {
-                Thread.Sleep(Utility.Delay);
-                Console.WriteLine("n) Move North");
-                Thread.Sleep(Utility.Delay);
-                Console.WriteLine("s) Move South");
-                Thread.Sleep(Utility.Delay);
-                Console.WriteLine("e) Move East");
-                Thread.Sleep(Utility.Delay);
-                Console.WriteLine("w) Move West");
+                Chamber chamber = dungeon.ExploredChambers[player.LocationId];
+                if (chamber.NorthPassage)
+                {
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine("n) Move North");
+                }
+                if (chamber.SouthPassage)
+                {
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine("s) Move South");
+                }
+                if (chamber.EastPassage)
+                {
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine("e) Move East");
+                }
+                if (chamber.WestPassage)
+                {
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine("w) Move West");
+                }
+                Utility.PrintLines();
                 Thread.Sleep(Utility.Delay);
                 Console.WriteLine("p) Display Player Details");
                 Thread.Sleep(Utility.Delay);
@@ -67,7 +55,7 @@ namespace Dungeon_Crawler
                 Thread.Sleep(Utility.Delay);
                 // Later - show map
                 Console.WriteLine("x) Exit Game");
-                string decision = Console.ReadLine()?.ToLower();
+                string decision = Utility.Read();
                 switch (decision)
                 {
                     case "n":
@@ -105,12 +93,12 @@ namespace Dungeon_Crawler
             Utility.Print("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
             Utility.Print("What is your name?");
             Utility.Print("");
-            string playerName = Console.ReadLine().Trim();
-            Utility.Print("Very well,\nDo you care to describe yourself?");
+            string playerName = Utility.Read();
+            Utility.Print($"Very well,\nDo you care to describe yourself?");
             Utility.Print("You may enter 'x' to skip this step");
-            Console.WriteLine(); 
-            string playerDesc = Console.ReadLine().Trim();
-            if(playerDesc.ToLower() == "x")
+            Console.WriteLine();
+            string playerDesc = Utility.Read();
+            if (playerDesc.ToLower() == "x")
             {
                 playerDesc = "";
             }
@@ -135,6 +123,22 @@ namespace Dungeon_Crawler
                 Utility.Print(Utility.EntranceArt[i]);
             }
             Utility.PrintLines();
+        }
+        public static void PrintGameOver()
+        {
+            Utility.Print("You have died");
+            Utility.Print("Game Over");
+            Utility.Print("Would you like to play again? (y/n)");
+            string decision = Utility.Read();
+            if (decision == "y")
+            {
+                File.WriteAllLines("game-history.txt", Utility.GameHistory);
+                Console.WriteLine("Your progress has been saved to file 'game-history.txt'");
+            }
+            else
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }

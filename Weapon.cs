@@ -37,11 +37,13 @@
             if(IsGood) { 
                 Name = goodMeleeWeapons[Utility.GetRandomIndex(0, goodMeleeWeapons.Length)];
                 Boost = 3;
+                Value = 30;
             }
             else
             {
                 Name = midMeleeWeapons[Utility.GetRandomIndex(0, midMeleeWeapons.Length)];
                 Boost = 1;
+                Value = 10;
             }
 
         }

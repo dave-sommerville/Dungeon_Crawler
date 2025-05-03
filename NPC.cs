@@ -17,7 +17,6 @@ namespace Dungeon_Crawler
             new string[] { "OK bye friend", "Smell ya later", "Peace be with you", "Farewell and good luck" }, // Friendly goodbye 
             new string[] { "Woooooooowwwww, ok. Kinda rude.\\nI mean, like, how many things have tried to kill you\\nand here I am just looking to chat a little but\\nnooooooo, you're all high and mighty. OK, that's fine.", "It's ok if you ignore me, my mother always did.", "Hmmm, someone doesn't have very good manners" }, // Being ignored text
         };
-        public int ArtifactTracker { get; set; } = 0; // Will be used to track if the player has received an item from the NPC
         public bool HasBag { get; set; } = false; // Will be used to track if the player has received a bag from the NPC
         public bool HasMap { get; set; } = false; // Will be used to track if the player has received a map from the NPC
         public Item Item { get; set; }
@@ -119,7 +118,6 @@ namespace Dungeon_Crawler
             Utility.Print("You encounter a familiar creature in this room.");
             Utility.Print(Description);
             Utility.Print(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
-            ArtifactTracker++;
             bool interactionInProgress = true;
             do
             {

@@ -31,13 +31,14 @@ namespace Dungeon_Crawler
             {
                 Name = goodArmorMaterials[Utility.GetRandomIndex(0, goodArmorMaterials.Length)];
                 AC = 3;
+                Value = 15;
             }
             else
             {
                 Name = midArmorMaterials[Utility.GetRandomIndex(0, midArmorMaterials.Length)];
                 AC = 1;
+                Value = 5;
             }
-
         }
         public override void EquipItem(Player player)
         {
