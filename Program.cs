@@ -11,7 +11,6 @@ namespace Dungeon_Crawler
         // Add a way to save the game
         // Map
         // More potion classes
-        // Don't allow blank space for name (Or add placeholder)
         // The naming npc function
         // Merchant dialogue options?
         // Trap descriptions
@@ -78,6 +77,7 @@ namespace Dungeon_Crawler
                         player.UseItemOption();
                         break;
                     case "x":
+                        player.GameOver();
                         IsRunning = false;
                         break;
                     default:
@@ -124,21 +124,6 @@ namespace Dungeon_Crawler
             }
             Utility.PrintLines();
         }
-        public static void PrintGameOver()
-        {
-            Utility.Print("You have died");
-            Utility.Print("Game Over");
-            Utility.Print("Would you like to play again? (y/n)");
-            string decision = Utility.Read();
-            if (decision == "y")
-            {
-                File.WriteAllLines("game-history.txt", Utility.GameHistory);
-                Console.WriteLine("Your progress has been saved to file 'game-history.txt'");
-            }
-            else
-            {
-                Environment.Exit(0);
-            }
-        }
+
     }
 }

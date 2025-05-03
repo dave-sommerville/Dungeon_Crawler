@@ -495,13 +495,13 @@
                         Health += 50;
                     }
                     Utility.Print("You have died");
-                    IsPlaying = false;
+                    GameOver();
                 }
             }
             else
             {
                 Utility.Print("You have lost grip on reality, you can no longer hold yourself together.");
-                IsPlaying = false;
+                GameOver();
             }
         }
         public void ApplySkillPoint()
@@ -609,6 +609,23 @@
                 IncreaseModifier();
                 PlayerLevel = 10;
                 Utility.Print("You have achieved the highest level possible and completed this stage of the dungeon!");
+                GameOver();
+            }
+        }
+        public void GameOver()
+        {
+            Utility.Print("You have died");
+            Utility.Print("Game Over");
+            Utility.Print("Would you like to play again? (y/n)");
+            string decision = Utility.Read();
+            if (decision == "y")
+            {
+                File.WriteAllLines("game-history.txt", Utility.GameHistory);
+                Console.WriteLine("Your progress has been saved to file 'game-history.txt'");
+            }
+            else
+            {
+                IsPlaying = false;
             }
         }
     }
