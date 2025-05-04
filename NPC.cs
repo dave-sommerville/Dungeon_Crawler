@@ -20,6 +20,7 @@ namespace Dungeon_Crawler
         public bool HasBag { get; set; } = false; // Will be used to track if the player has received a bag from the NPC
         public bool HasMap { get; set; } = false; // Will be used to track if the player has received a map from the NPC
         public Item Item { get; set; }
+        public bool InteractionInProgress { get; set; }
         public NPC() : base()
         {
             Description = "A mysterious figure.";
@@ -45,6 +46,9 @@ namespace Dungeon_Crawler
                         break;
                     case 2:
                         Utility.Print("What's a name? Can you give me a name?");
+                        Thread.Sleep(Utility.Delay);
+                        Console.WriteLine("Enter a name below");
+                        NameNpc();
                         AdventureQuestion(player);
                         InteractionInProgress = false;
                         break;
@@ -57,6 +61,12 @@ namespace Dungeon_Crawler
                         break;
                 }
             } while (InteractionInProgress);
+        }
+        public void NameNpc()
+        {
+            string name = Utility.Read();
+            Utility.Print($"'Oh, I like that name! {name} it is!'");
+            Name = name;
         }
         public void AdventureQuestion(Player player)
         {

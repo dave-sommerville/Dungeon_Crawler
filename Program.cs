@@ -7,11 +7,8 @@ namespace Dungeon_Crawler
         public static Random Random = new Random();
         // Pad the NPC dialogue to make it feel more natural and interactive
         // General spacing and pacing and balancing
-        // Add end of game sequence 
-        // Add a way to save the game
         // Map
         // More potion classes
-        // The naming npc function
         // Merchant dialogue options?
         // Trap descriptions
         static void Main(string[] args)
