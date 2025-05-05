@@ -2,31 +2,38 @@
 {
     public class DialogueNode
     {
-        public string? InitialStatement { get; set; }
-        public string[] PlayerOptions { get; set; }
-        public string[][] NpcReplies { get; set; }
-        public DialogueNode? FurtherDialogue { get; set; }
-        public DialogueNode(string[] playerOptions, string[][]npcReplies, DialogueNode furtherDialogue)
+        public string Statement { get; set; }
+        public string[]? Response { get; set; }
+        public DialogueNode[][]? FurtherDialogue { get; set; }
+        public DialogueNode(string statement, string[]response, DialogueNode[][] furtherDialogue)
         {
-            PlayerOptions = playerOptions;
-            NpcReplies = npcReplies;
+            Statement = statement;
+            Response = response;
             FurtherDialogue = furtherDialogue;
         }
         public void Node(NPC npc)
         {
-            if (InitialStatement != null) { Utility.Print(InitialStatement); }
-            for (int i = 0; i < PlayerOptions.Length; i++)
-            {
-                Utility.Print($"{i + 1}) {PlayerOptions[i]}");
-            }
-            int choice = Utility.PrintMenu(PlayerOptions.Length);
-            Utility.Print(NpcReplies[choice - 1][Utility.GetRandomIndex(0, NpcReplies[choice - 1].Length)]);
-            if (FurtherDialogue != null)
-            {
-                FurtherDialogue.Node(npc);
+            Utility.Print("What do you do?");
+            Utility.Print(Statement);
+            if (Response != null) {
+                for (int i = 0; i < Response.Length; i++)
+                {
+                    Utility.Print($"{i + 1}) {Response[i]}");
+                }
+                int choice = Utility.PrintMenu(Response.Length);
+                if (FurtherDialogue != null)
+                {
+                    DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)]);
+                    chosenDialogue.Node(npc);
+                } else
+                {
+                    Utility.Print($"{npc.Name} walks away from you");
+                    npc.InteractionInProgress = false;
+                }
             } else
             {
-                npc.InteractionInProgress = false;
+                Utility.Print($"{npc.Name} walks away from you");
+                npc.InteractionInProgress= false;
             }
         }
     }
