@@ -4,6 +4,107 @@ namespace Dungeon_Crawler
 {
     public class NPC : Character
     {
+        // Generic Dialogue arrays 
+        public static string[] YesNo = new string[] {
+            "Say 'Yes'",
+            "Say 'No'"
+            };
+        public static DialogueNode[] Goodbyes = new DialogueNode[]
+        {
+            new DialogueNode("OK bye friend", null, null),
+            new DialogueNode("Smell ya later", null, null),
+            new DialogueNode("Peace be with you", null, null),
+            new DialogueNode("Farewell and good luck", null, null)
+        };
+        public static DialogueNode[] IgnoreStatements= new DialogueNode[]
+        {
+            new DialogueNode("OK bye friend", null, null),
+            new DialogueNode("Smell ya later", null, null),
+            new DialogueNode("Peace be with you", null, null),
+            new DialogueNode("Farewell and good luck", null, null)
+        };
+
+        //  Secrets 
+        public static DialogueNode[] Secrets = new DialogueNode[]
+        {
+            new DialogueNode("I keep a pet pebble named Sir Crunch — everyone laughs, but he’s the only one who listens.", null, null),
+            new DialogueNode("There's a moss spirit that flirts with me... but only when she's bored.", null, null),
+            new DialogueNode("I once tried to grow wings like the fireflies... glued leaves to my back and jumped off a stump. Broke my favorite cap.", null, null)
+        };
+        public static DialogueNode[][] SecretResponses = new DialogueNode[][]
+        {
+            Secrets,
+            Goodbyes
+        };
+        public DialogueNode SecretText = new DialogueNode("Do you wanna know a secret?", YesNo, SecretResponses);
+        // Jokes
+        public static DialogueNode[] Jokes = new DialogueNode[]
+        {
+            new DialogueNode("Why do paladins wear chain mail?\r\n\r\nBecause it’s holy armor.", null, null),
+            new DialogueNode("What do you call a mushroom that makes music?\r\n\r\nA de-composer.", null, null),
+            new DialogueNode("What’s nine feet long, has six legs, and flies?\r\n\r\nThree dead halflings!", null, null),
+            new DialogueNode("Why did the mushroom hate going to school?\r\n\r\nHe was always spored.", null, null)
+        };
+        public static DialogueNode[][] JokeResponses = new DialogueNode[][]
+        {
+            Jokes,
+            Goodbyes
+        };
+        public DialogueNode JokeText = new DialogueNode("Do you want to hear a joke?", YesNo, JokeResponses);
+        // Facts 
+        public static DialogueNode[] Facts = new DialogueNode[]
+        {
+            new DialogueNode("If you hum at just the right frequency, snails will start to dance in sync", null, null),
+            new DialogueNode("Mushrooms can hear compliments. That's why some grow bigger after you tell them they're handsome.", null, null),
+            new DialogueNode("Ants invented the first maps, but nobody could read the handwriting.", null, null)
+        };
+        public static DialogueNode[][] FactResponses = new DialogueNode[][]
+        {
+            Facts,
+            Goodbyes
+        };
+        public static DialogueNode FactText = new DialogueNode("Any chance you want to know a fun science fact?", YesNo, FactResponses)
+        public static string MerchantStatement = "Absolutely, what would you like to ask me?";
+        public static DialogueNode[] MerchantOptions = new DialogueNode[]
+        {
+            new DialogueNode("Say 'How do you even light all these torches? Someone’s gotta be replacing them constantly, right?'", null, null),
+            new DialogueNode("Say 'Do you actually live down here, or is this just your shift?'", YesNo, MerchantResponses),
+            new DialogueNode("Say 'What are you doing with all this gold?'", YesNo, MerchantResponses),
+        };
+        public static DialogueNode[] MerchantResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("A very small dragon does it", null, null),
+            new DialogueNode("Magma sprite with a debt to a wizard. Funny thing is, wizard died a long time ago.", null, null),
+            new DialogueNode("Those are actually just inferno tree roots", null, null)
+        };
+
+        public static DialogueNode[] MerchantResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("Actually I eat the gold and I don't want to set off the traps", null, null),
+            new DialogueNode("I'm actually a figment of my imagination", null, null),
+            new DialogueNode("It's just me, that's what happens when you ask a rock to be your union leader", null, null)
+        };
+
+        public static DialogueNode[] MerchantResponseThree = new DialogueNode[]
+        {
+            new DialogueNode("I just like how shiny it is.", null, null),
+            new DialogueNode("I'm making a statue of my partner, and, let's just say, I like em big", null, null)
+        };
+
+        public static DialogueNode[][] MerchantResponses = new DialogueNode[][]
+        {
+            MerchantResponseOne,
+            MerchantResponseTwo,
+            MerchantResponseThree
+        };
+        // Initial questions 
+        // Merchant
+        // Boss Banter
+            // Drider, Giant Spider, Priestess 
+            // Apprentice, Death knight, Necromancer
+            // Cultist, assassin, gorgon 
+        // Prisoner
+
         private readonly string[][] _npcDialogue = new string[][]
         {
             new string[] { "Greetings traveler", "Howdy mate", "Hello there", "Ahoy my friend", "Fair travels" }, // Initial statement [0][Rand]
@@ -15,7 +116,7 @@ namespace Dungeon_Crawler
             new string[] { "", "I keep a pet pebble named Sir Crunch — everyone laughs, but he’s the only one who listens.", "There's a moss spirit that flirts with me... but only when she's bored.", "I once tried to grow wings like the fireflies... glued leaves to my back and jumped off a stump. Broke my favorite cap.",  }, // Dialogue Theme Two [Output][Rand]
             new string[] { "If you hum at just the right frequency, snails will start to dance in sync", "Mushrooms can hear compliments. That's why some grow bigger after you tell them they're handsome.", "Ants invented the first maps, but nobody could read the handwriting." }, // Dialogue Theme Three [Output][Rand]
             new string[] { "OK bye friend", "Smell ya later", "Peace be with you", "Farewell and good luck" }, // Friendly goodbye 
-            new string[] { "Woooooooowwwww, ok. Kinda rude.\\nI mean, like, how many things have tried to kill you\\nand here I am just looking to chat a little but\\nnooooooo, you're all high and mighty. OK, that's fine.", "It's ok if you ignore me, my mother always did.", "Hmmm, someone doesn't have very good manners" }, // Being ignored text
+            new string[] { "Woooooooowwwww, ok. Kinda rude.\nI mean, like, how many things have tried to kill you\nand here I am just looking to chat a little but\nnnooooooo, you're all high and mighty. OK, that's fine.", "It's ok if you ignore me, my mother always did.", "Hmmm, someone doesn't have very good manners" }, // Being ignored text
         };
         public bool HasBag { get; set; } = false; // Will be used to track if the player has received a bag from the NPC
         public bool HasMap { get; set; } = false; // Will be used to track if the player has received a map from the NPC
@@ -238,12 +339,7 @@ namespace Dungeon_Crawler
         {
             Utility.Print("Map is now equipped");
         }
-        public NPC Prisoner()
-        {
-            NPC prisoner = new NPC();
-            return prisoner;
-        }
-        public void MarketPlace(Player player) // Expand to allow for descriptions/reconsiderations
+        public void MarketPlace(Player player) 
         {
             StockMarketPlace();
             Utility.Print($"Hello adventurer, how brave to come this far.");

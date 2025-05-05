@@ -13,8 +13,8 @@
         }
         public void Node(NPC npc)
         {
-            Utility.Print("What do you do?");
             Utility.Print(Statement);
+            Utility.Print("What do you do?");
             if (Response != null) {
                 for (int i = 0; i < Response.Length; i++)
                 {
@@ -23,7 +23,7 @@
                 int choice = Utility.PrintMenu(Response.Length);
                 if (FurtherDialogue != null)
                 {
-                    DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)]);
+                    DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)];
                     chosenDialogue.Node(npc);
                 } else
                 {
