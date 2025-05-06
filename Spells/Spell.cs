@@ -1,6 +1,6 @@
-﻿using Dungeon_Crawler.Character;
+﻿using Dungeon_Crawler.Characters_and_dialogue;
 
-namespace Dungeon_Crawler.Spell
+namespace Dungeon_Crawler.Spells
 {
     public class Spell
     {

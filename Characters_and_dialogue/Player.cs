@@ -1,6 +1,6 @@
 ﻿using Dungeon_Crawler.Items;
 
-namespace Dungeon_Crawler.Character
+namespace Dungeon_Crawler.Characters_and_dialogue
 {
     public class Player : Character
     {

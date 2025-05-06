@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dungeon_Crawler.Character;
+﻿using Dungeon_Crawler.Characters_and_dialogue;
 
 namespace Dungeon_Crawler.Items
 {

@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using Dungeon_Crawler.Character;
+using Dungeon_Crawler.Characters_and_dialogue;
 using Dungeon_Crawler.Items;
 
 namespace Dungeon_Crawler

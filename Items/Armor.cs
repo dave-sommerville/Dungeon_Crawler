@@ -1,5 +1,5 @@
 ﻿using System;
-using Dungeon_Crawler.Character;
+using Dungeon_Crawler.Characters_and_dialogue;
 
 namespace Dungeon_Crawler.Items
 {
