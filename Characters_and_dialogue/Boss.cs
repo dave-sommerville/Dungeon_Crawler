@@ -1,18 +1,5 @@
 ﻿using Dungeon_Crawler.Characters_and_dialogue;
 using Dungeon_Crawler.Spells;
-
-// Drow
-    // Drider and 2 guards 
-    // Spider Demon
-    // Priestess and 2 Driders 
-// Yuan-Ti
-    // Assassin and two cultists
-    // Naga and Two Snake Headed Guards
-    // Gorgon
-// Necromancer
-    // Apprentice and an Ogre Zombie
-    // Death Knights and three skeletons
-    // Necromancer and undead dragon
     
 namespace Dungeon_Crawler {
     public class Boss : Monster
@@ -96,6 +83,172 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode DrowThreeTextOne = new DialogueNode(DrowThreeStatementOne, DrowThreeOptionsOne, DrowThreeResponses);
         public static DialogueNode DrowThreeTextTwo = new DialogueNode(DrowThreeStatementTwo, DrowThreeOptionsTwo, DrowMonologue);
+
+
+
+
+        public static string SnakeOneStatement = "Ah, look, our master will be pleased to find fresh meat. Wait, what is that gem?";
+        public static string[] SnakeOneOptions = new string[]
+        {
+            "Say 'Why don't you come within my blades reach to find out?",
+            "Say 'I want no trouble.'"
+        };
+        public static DialogueNode[] SnakeOneResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("As you say.", null, null),
+            new DialogueNode("We know what that is, we shall retrieve it.", null, null)
+        };
+        public static DialogueNode[] SnakeOneResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("And yet, it seems trouble wants you.", null, null),
+            new DialogueNode("Your wishes are no concern of mine.", null, null)
+        };
+        public static DialogueNode[][] SnakeOneResponses = new DialogueNode[][]
+        {
+            SnakeOneResponseOne,
+            SnakeOneResponseTwo
+        };
+        public static DialogueNode SnakeOneText = new DialogueNode(SnakeOneStatement, SnakeOneOptions, SnakeOneResponses);
+
+        public static string SnakeTwoStatement = "We sensed your presence and heard those weaklings' screams. You will now give us what belongs to our master.";
+        public static string[] SnakeTwoOptions = new string[]
+        {
+            "Say 'It would seem the stone has chosen to belong to me.'",
+            "Say 'Tell me more about this master of yours'"
+        };
+        public static DialogueNode[] SnakeTwoResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("As a pawn, perhaps. But the stone longs for Master as much as They long for It.", null, null),
+            new DialogueNode("Then it is you we shall have to take.", null, null)
+        };
+        public static DialogueNode[] SnakeTwoResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("Surrender now and survive long enough to meet Them.", null, null),
+            new DialogueNode("That stone is all that stands between Master and Their ascension.", null, null)
+        };
+        public static DialogueNode[][] SnakeTwoResponses = new DialogueNode[][]
+        {
+            SnakeTwoResponseOne,
+            SnakeTwoResponseTwo
+        };
+        public static DialogueNode SnakeTwoText = new DialogueNode(SnakeOneStatement, SnakeOneOptions, SnakeOneResponses);
+
+        public static string SnakeThreeStatementOne = "There you are, little one. Your smell of your blood has been tickling my tongue. How do you wish to die?";
+        public static string SnakeThreeStatementTwo = "";
+        public static string[] SnakeThreeOptionsOne = new string[]
+        {
+            "Say 'Peacefully on a mountain of gold.'",
+            ""
+        };
+        public static string[] SnakeThreeOptionsTwo = new string[]
+        {
+            "There will be no peace to be found in the land once I have that gemstone.",
+            "Hmmm, I guess tearing you limb from limb will do."
+        };
+        public static DialogueNode[] SnakeThreeResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[] SnakeThreeResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[][] SnakeResponses = new DialogueNode[][]
+        {
+            SnakeThreeResponseOne,
+            SnakeThreeResponseTwo
+        };
+        public static DialogueNode[][] SnakeMonologue = new DialogueNode[][] {
+
+            [new DialogueNode("Monologue", null, null)]
+        };
+        public static DialogueNode SnakeThreeTextOne = new DialogueNode(SnakeThreeStatementOne, SnakeThreeOptionsOne, SnakeResponses);
+        public static DialogueNode SnakeThreeTextTwo = new DialogueNode(SnakeThreeStatementTwo, SnakeThreeOptionsTwo, SnakeMonologue);
+
+
+
+
+        public static string NecroOneStatement = "Wow, what a rarity. Don't see Predead creatures like you around much.";
+        public static string[] NecroOneOptions = new string[]
+        {
+            "",
+            ""
+        };
+        public static DialogueNode[] NecroOneResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[] NecroOneResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[][] NecroOneResponses = new DialogueNode[][]
+        {
+            DrowOneResponseOne,
+            DrowOneResponseTwo
+        };
+        public static DialogueNode NecroOneText = new DialogueNode(DrowOneStatement, DrowOneOptions, DrowOneResponses);
+
+        public static string NecroTwoStatement = "I could hear your breathing throughout these tunnels. Imagine relying on air to survive.";
+        public static string[] NecroTwoOptions = new string[]
+        {
+            "Say 'What kind of evil are you?'",
+            "Predead?"
+        };
+        public static DialogueNode[] NecroTwoResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("You know, on breath support, blood filled adventurers.", null, null),
+            new DialogueNode("Don't worry, we will help you on your way to starting your postdeath era.", null, null)
+        };
+        public static DialogueNode[] NecroTwoResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("A lot of people would call my Master and I necromancers. I think of it more like recycling.", null, null),
+            new DialogueNode("Run of the mill dark magic, just making a living in these tunnels.", null, null)
+        };
+        public static DialogueNode[][] NecroTwoResponses = new DialogueNode[][]
+        {
+            DrowTwoResponseOne,
+            DrowTwoResponseTwo
+        };
+        public static DialogueNode NecroTwoText = new DialogueNode(DrowTwoStatement, DrowTwoOptions, DrowTwoResponses);
+
+        public static string NecroThreeStatementOne = "";
+        public static string NecroThreeStatementTwo = "";
+        public static string[] NecroThreeOptionsOne = new string[]
+        {
+            "",
+            ""
+        };
+        public static string[] NecroThreeOptionsTwo = new string[]
+        {
+            "",
+            ""
+        };
+        public static DialogueNode[] NecroThreeResponseOne = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[] NecroThreeResponseTwo = new DialogueNode[]
+        {
+            new DialogueNode("", null, null),
+            new DialogueNode("", null, null)
+        };
+        public static DialogueNode[][] NecroThreeResponses = new DialogueNode[][]
+        {
+            DrowThreeResponseOne,
+            DrowThreeResponseTwo
+        };
+        public static DialogueNode[][] NecroMonologue = new DialogueNode[][] {
+
+            [new DialogueNode("Monologue", null, null)]
+        };
+        public static DialogueNode NecroThreeTextOne = new DialogueNode(DrowThreeStatementOne, DrowThreeOptionsOne, DrowThreeResponses);
+        public static DialogueNode NecroThreeTextTwo = new DialogueNode(DrowThreeStatementTwo, DrowThreeOptionsTwo, DrowMonologue);
 
         public int NumberOfAttacks { get; set; }
         public string[]? AttackDescriptions { get; set; }
