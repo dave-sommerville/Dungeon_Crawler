@@ -1,7 +1,7 @@
-﻿using Dungeon_Crawler;
-using System;
+﻿using System;
+using Dungeon_Crawler.Character;
 
-namespace Dungeon_Crawler
+namespace Dungeon_Crawler.Items
 {
     public class Armor : Item
     {

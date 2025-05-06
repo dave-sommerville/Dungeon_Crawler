@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Dungeon_Crawler
+namespace Dungeon_Crawler.Character
 {
     public class Monster : Character
     {
@@ -74,13 +74,13 @@ namespace Dungeon_Crawler
         public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
-            ChallengeRating = Math.Max(1,(playerLvl - 1));
+            ChallengeRating = Math.Max(1,playerLvl - 1);
             int challengeRatingHigh = ChallengeRating + 5;
             int monsterIndex = Utility.GetRandomIndex(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
             Description = monsterDescriptions[monsterIndex];
-            Health = Utility.GetRandomIndex(minHealth, maxHealth) + (ChallengeRating * 2);
-            ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
+            Health = Utility.GetRandomIndex(minHealth, maxHealth) + ChallengeRating * 2;
+            ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + ChallengeRating * 2;
         }
         public override void Attack(Character targetCharacter)
         {
@@ -90,7 +90,7 @@ namespace Dungeon_Crawler
             }
             else
             {
-                int max = Math.Max(7, (ChallengeRating * 4));
+                int max = Math.Max(7, ChallengeRating * 4);
                 int attack = Utility.GetRandomIndex(3, max) + 5;
                 int damage = Utility.GetRandomIndex(3, max) + 5;
                 Console.WriteLine($"Attack: {attack} Damage: {damage}");

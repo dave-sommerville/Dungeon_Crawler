@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler
+﻿using Dungeon_Crawler.Character;
+
+namespace Dungeon_Crawler.Items
 {
     public class Item
     {

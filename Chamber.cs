@@ -1,4 +1,6 @@
 ﻿using System.Numerics;
+using Dungeon_Crawler.Character;
+using Dungeon_Crawler.Items;
 
 namespace Dungeon_Crawler
 {

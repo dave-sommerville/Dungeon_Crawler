@@ -1,7 +1,17 @@
-﻿using Dungeon_Crawler;
-
-namespace Dungeon_Crawler
+﻿namespace Dungeon_Crawler.Character
 {
+    // Drow
+        // Drider and 2 guards 
+        // Spider Demon
+        // Priestess and 2 Driders 
+    // Yuan-Ti
+        // Assassin and two cultists
+        // Naga and Two Snake Headed Guards
+        // Gorgon
+    // Necromancer
+        // Apprentice and an Ogre Zombie
+        // Death Knights and three skeletons
+        // Necromancer and undead dragon
     public class Boss : Monster
     {
         public int NumberOfAttacks { get; set; }

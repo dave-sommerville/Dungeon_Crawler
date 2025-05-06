@@ -1,4 +1,4 @@
-﻿namespace Dungeon_Crawler
+﻿namespace Dungeon_Crawler.Character
 {
     public class DialogueNode
     {
@@ -21,13 +21,14 @@
                     Utility.Print($"{i + 1}) {Response[i]}");
                 }
                 int choice = Utility.PrintMenu(Response.Length);
-                if (FurtherDialogue != null)
+                if (FurtherDialogue != null && FurtherDialogue.Length > 1)
                 {
                     DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)];
                     chosenDialogue.Node(npc);
-                } else
+                } else if(FurtherDialogue != null)
                 {
-                    Utility.Print($"{npc.Name} walks away from you");
+                    DialogueNode chosenDialogue = FurtherDialogue[0][0];
+                    Utility.Print($"{npc.Name} leaves");
                     npc.InteractionInProgress = false;
                 }
             } else

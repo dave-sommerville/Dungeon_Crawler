@@ -1,4 +1,6 @@
-﻿namespace Dungeon_Crawler
+﻿using Dungeon_Crawler.Items;
+
+namespace Dungeon_Crawler.Character
 {
     public class Player : Character
     {

@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices.Marshalling;
+using Dungeon_Crawler.Items;
 
-namespace Dungeon_Crawler
+namespace Dungeon_Crawler.Character
 {
     public class Character
     {

@@ -1,4 +1,4 @@
-﻿namespace Dungeon_Crawler
+﻿namespace Dungeon_Crawler.Items
 {
     public class Relic : Item
     {

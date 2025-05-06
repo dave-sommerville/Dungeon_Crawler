@@ -1,6 +1,6 @@
-﻿
+﻿using Dungeon_Crawler.Items;
 
-namespace Dungeon_Crawler
+namespace Dungeon_Crawler.Character
 {
     public class NPC : Character
     {
@@ -8,7 +8,7 @@ namespace Dungeon_Crawler
         public static string[] YesNo = new string[] {
             "Say 'Yes'",
             "Say 'No'"
-            };
+        };
         public static DialogueNode[] Goodbyes = new DialogueNode[]
         {
             new DialogueNode("OK bye friend", null, null),
@@ -23,7 +23,6 @@ namespace Dungeon_Crawler
             new DialogueNode("Peace be with you", null, null),
             new DialogueNode("Farewell and good luck", null, null)
         };
-
         //  Secrets 
         public static DialogueNode[] Secrets = new DialogueNode[]
         {
@@ -63,13 +62,14 @@ namespace Dungeon_Crawler
             Facts,
             Goodbyes
         };
-        public static DialogueNode FactText = new DialogueNode("Any chance you want to know a fun science fact?", YesNo, FactResponses)
+        public static DialogueNode FactText = new DialogueNode("Any chance you want to know a fun science fact?", YesNo, FactResponses);
+        // Merchant
         public static string MerchantStatement = "Absolutely, what would you like to ask me?";
-        public static DialogueNode[] MerchantOptions = new DialogueNode[]
+        public static string[] MerchantOptions = new string[]
         {
-            new DialogueNode("Say 'How do you even light all these torches? Someone’s gotta be replacing them constantly, right?'", null, null),
-            new DialogueNode("Say 'Do you actually live down here, or is this just your shift?'", YesNo, MerchantResponses),
-            new DialogueNode("Say 'What are you doing with all this gold?'", YesNo, MerchantResponses),
+            "Say 'How do you even light all these torches? Someone’s gotta be replacing them constantly, right?'",
+            "Say 'Do you actually live down here, or is this just your shift?'",
+            "Say 'What are you doing with all this gold?'"
         };
         public static DialogueNode[] MerchantResponseOne = new DialogueNode[]
         {
@@ -77,33 +77,24 @@ namespace Dungeon_Crawler
             new DialogueNode("Magma sprite with a debt to a wizard. Funny thing is, wizard died a long time ago.", null, null),
             new DialogueNode("Those are actually just inferno tree roots", null, null)
         };
-
         public static DialogueNode[] MerchantResponseTwo = new DialogueNode[]
         {
             new DialogueNode("Actually I eat the gold and I don't want to set off the traps", null, null),
             new DialogueNode("I'm actually a figment of my imagination", null, null),
             new DialogueNode("It's just me, that's what happens when you ask a rock to be your union leader", null, null)
         };
-
         public static DialogueNode[] MerchantResponseThree = new DialogueNode[]
         {
             new DialogueNode("I just like how shiny it is.", null, null),
             new DialogueNode("I'm making a statue of my partner, and, let's just say, I like em big", null, null)
         };
-
         public static DialogueNode[][] MerchantResponses = new DialogueNode[][]
         {
             MerchantResponseOne,
             MerchantResponseTwo,
             MerchantResponseThree
         };
-        // Initial questions 
-        // Merchant
-        // Boss Banter
-            // Drider, Giant Spider, Priestess 
-            // Apprentice, Death knight, Necromancer
-            // Cultist, assassin, gorgon 
-        // Prisoner
+        public static DialogueNode MerchantText = new DialogueNode(MerchantStatement, MerchantOptions,MerchantResponses);
 
         private readonly string[][] _npcDialogue = new string[][]
         {

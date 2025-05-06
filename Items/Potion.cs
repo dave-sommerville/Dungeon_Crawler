@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dungeon_Crawler.Character;
 
-namespace Dungeon_Crawler
+namespace Dungeon_Crawler.Items
 {
     public class Potion : Item 
     {
