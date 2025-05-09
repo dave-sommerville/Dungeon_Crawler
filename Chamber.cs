@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Dungeon_Crawler.Characters_and_dialogue;
 using Dungeon_Crawler.Items;
+using Dungeon_Crawler.Items.Potions;
 
 namespace Dungeon_Crawler
 {
@@ -76,6 +77,10 @@ namespace Dungeon_Crawler
             EastPassage = true;
             WestPassage = true;
             ChamberLoot = new List<Item>();
+            if (Utility.FiftyFifty())
+            {
+                ChamberGold = Utility.GetRandomIndex(25, 1000);
+            }
         }
         public void DisplayDescription()
         {
@@ -292,13 +297,25 @@ namespace Dungeon_Crawler
             }
             if (potionIndex > 5)
             {
-                Potion potion = new Potion();
-                ChamberLoot.Add(potion);
-            }
-            int goldChance = Utility.GetRandomIndex(0, 10);
-            if(goldChance >= 5)
-            {
-                ChamberGold = Utility.GetRandomIndex(25, 1000);
+                int potionType = Utility.GetRandomIndex(0, 700);
+                Potion chamberPotion = null;
+                if (potionType < 30)
+                {
+                    chamberPotion = new PotionOfKnowledge();
+                    ChamberLoot.Add(chamberPotion);
+                } else if (potionType < 120)
+                {
+                    chamberPotion = new PotionOfRestoration();
+                    ChamberLoot.Add(chamberPotion);
+                } else if (potionType < 320)
+                {
+                    chamberPotion = new PotionOfMana();
+                    ChamberLoot.Add(chamberPotion);
+                } else
+                {
+                    chamberPotion = new PotionOfHealing();
+                    ChamberLoot.Add(chamberPotion);
+                }
             }
         }
         public void SearchForLoot(Player player)

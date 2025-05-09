@@ -1,16 +1,16 @@
 ﻿using Dungeon_Crawler.Characters_and_dialogue;
 
-namespace Dungeon_Crawler.Items
+namespace Dungeon_Crawler.Items.Potions
 {
     public class Potion : Item 
     {
         public int Potency { get; set; }
         public Potion() : base()
         {
-            Name = "Potion of Healing"; //I think I will need to add classes to add more potion effects, but this'll do for now
-            Description = "Healing potion";
+            Name = "Dud Potion"; 
+            Description = "Bottle of Water";
             Durability = 1;
-            Potency = 10; // Default potency
+            Potency = 10; 
         }
         public override void DisplayItem()
         {
@@ -19,9 +19,7 @@ namespace Dungeon_Crawler.Items
         }
         public override void EquipItem(Player player)
         {
-            player.Health += Potency;
-            if (player.Health > player.MaxHP) { player.Health = player.MaxHP; }
-            Utility.Print($"You drink the {Name} and heal {Potency} health points.");
+            Utility.Print($"You drink the {Name}. As far as you can tell, nothing happens");
         }
     }
 }
