@@ -6,12 +6,11 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // Pad the NPC dialogue to make it feel more natural and interactive
-        // General spacing and pacing and balancing
-        // Map
         // More potion classes
-        // Merchant dialogue options?
-        // Trap descriptions
+        // Replace NPC methods with dialogue nodes
+        // Finish boss mechanics and add to triggers
+        // Finish boss dialogue 
+
         static void Main(string[] args)
         {
             GameLaunch(CreatePlayer());
