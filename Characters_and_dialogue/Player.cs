@@ -511,7 +511,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             bool skillApplied = false;
             while (!skillApplied)
             {
-                string skill = Utility.Read();
+                string skill = Console.ReadLine().Trim().ToLower();
                 switch (skill)
                 {
                     case "athletics":

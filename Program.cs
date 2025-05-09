@@ -91,7 +91,11 @@ namespace Dungeon_Crawler
             Utility.Print("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
             Utility.Print("What is your name?");
             Utility.Print("");
-            string playerName = Utility.Read();
+            string playerName = Console.ReadLine();
+            if (string.IsNullOrEmpty(playerName))
+            {
+                playerName = "Adventurer";
+            }
             Utility.Print($"Very well,\nDo you care to describe yourself?");
             Utility.Print("You may enter 'x' to skip this step");
             Console.WriteLine();
