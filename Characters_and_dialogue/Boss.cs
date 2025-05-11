@@ -1,4 +1,5 @@
-﻿using Dungeon_Crawler.Characters_and_dialogue;
+﻿using System.Diagnostics;
+using Dungeon_Crawler.Characters_and_dialogue;
 using Dungeon_Crawler.Spells;
     
 namespace Dungeon_Crawler {
@@ -257,13 +258,36 @@ namespace Dungeon_Crawler {
         public int TurnCounter { get; set; } = 0;
         public DialogueNode MonologueEngine { get; set; }
         public Spell Spell { get; set; } = new Spell();
-        public Boss(string name, string description, int numberOfAttacks, string[] attackDescriptions, int playerLvl) : base(playerLvl)
+        public DialogueNode? Dialogue { get; set; }
+        public Boss(string name, string description, int numberOfAttacks, string[] attackDescriptions, DialogueNode dialogue, int playerLvl) : base(playerLvl)
         {
             Name = name;
             Description = description;
             NumberOfAttacks = numberOfAttacks;
             AttackDescriptions = attackDescriptions;
+            Dialogue = dialogue;
         }
+        private static Boss _drowOne = new Boss("Drider and two Drow Warriors", "A monstrous being, half human and half giant spider, followed by two swarthy guards.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, DrowOneText, 1);
+        private static Boss _drowTwo = new Boss("Drow Sorceress", "A tall, slender figure with dark skin and white hair, her eyes glowing with arcane power.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, DrowTwoText, 1);
+        private static Boss _drowThree = new Boss("Drow Priestess", "A tall, slender figure with dark skin and white hair, her eyes glowing with arcane power.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, DrowThreeTextOne, 1);
+        private static Boss _snakeOne = new Boss("Yuan-ti Abomination", "A massive serpent-like creature with a humanoid torso, its scales glistening in the dim light.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, SnakeOneText, 1);
+        private static Boss _snakeTwo = new Boss("Yuan-ti Sorcerer", "A humanoid figure with snake-like features, its eyes glowing with dark magic.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, SnakeTwoText, 1);
+        private static Boss _snakeThree = new Boss("Yuan-ti High Priest", "A tall, serpentine figure with a crown of snakes, its voice echoing with power.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, SnakeThreeTextOne, 1);
+        private static Boss _necroOne = new Boss("Necromancer", "A hooded figure surrounded by a swirling mist, its eyes glowing with dark energy.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, NecroOneText, 1);
+        private static Boss _necroTwo = new Boss("Necromancer", "Huh", 2, new string[] { "Blade slices", "Point pierces"}, NecroTwoText, 2);
+        private static Boss _necroThree = new Boss("Necromancer", "Huh", 2, new string[] { "Blade slices", "Point pierces" }, NecroThreeTextOne, 2);
+        private static Boss[] _dungeonbosses = new Boss[]
+        {
+            _drowOne,
+            _drowTwo,
+            _drowThree,
+            _snakeOne,
+            _snakeTwo,
+            _snakeThree,
+            _necroOne,
+            _necroTwo,
+            _necroThree
+        };
         public override void Attack(Character targetCharacter)
         {
             if (TurnCounter == 2)
@@ -304,6 +328,12 @@ namespace Dungeon_Crawler {
                 }
             }
 
+        }
+        public static Boss GetPlotBoss(int plotIndex)
+        {
+            int bossNum = plotIndex - 1;
+            Boss boss = _dungeonbosses[bossNum];
+            return boss;
         }
     }
 }

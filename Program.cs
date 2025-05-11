@@ -6,10 +6,10 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // More potion classes
         // Replace NPC methods with dialogue nodes
         // Finish boss mechanics and add to triggers
         // Finish boss dialogue 
+        // Figure out spells
 
         static void Main(string[] args)
         {

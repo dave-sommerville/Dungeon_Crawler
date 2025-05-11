@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Items;
+using Dungeon_Crawler.Items.Potions;
 
 namespace Dungeon_Crawler.Characters_and_dialogue
 {
@@ -7,22 +8,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         //  STATUS TRACKERS
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
-        public static Boss plotOne = new Boss("Giant Rat one", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-        public static Boss plotTwo = new Boss("Giant Rat two", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-        public static Boss plotThree = new Boss("Giant Rat three", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-        public static Boss plotFour = new Boss("Giant Rat four", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-        public static Boss plotFive = new Boss("Giant Rat five", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-        public static Boss plotSix = new Boss("Giant Rat six", "A large rat with a nasty bite", 1, new string[] { "Bite" }, 1);
-
-        private readonly Boss[] _plotBosses = new Boss[]
-        {
-            plotOne,
-            plotTwo,
-            plotThree,
-            plotFour,
-            plotFive,
-            plotSix
-        };
         public bool IsPlaying { get; set; } = true;
         //  LOCATION
         public int Y { get; set; }
@@ -332,7 +317,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void BossFight(Dungeon dungeon, int plotIndex)
         {
-            Boss boss = _plotBosses[plotIndex];
+            Boss boss = Boss.GetPlotBoss(plotIndex);
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
