@@ -1,10 +1,19 @@
 ﻿using Dungeon_Crawler.Items;
+using Dungeon_Crawler.Items.Potions;
 
 namespace Dungeon_Crawler.Characters_and_dialogue
 {
     public class NPC : Character
     {
         // Generic Dialogue arrays 
+        public static string[] Hellos = new string[]
+        {
+            "Greetings traveler",
+            "Howdy mate",
+            "Hello there",
+            "Ahoy my friend",
+            "Fair travels"
+        };
         public static string[] YesNo = new string[] {
             "Say 'Yes'",
             "Say 'No'"
@@ -219,43 +228,61 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         {
             Utility.Print("You encounter a familiar creature in this room.");
             Utility.Print(Description);
-            Utility.Print(_npcDialogue[0][Utility.GetRandomIndex(0, _npcDialogue[0].Length)]);
-            bool interactionInProgress = true;
-            do
+            Utility.Print(Hellos[Utility.GetRandomIndex(0, Hellos.Length)]);
+            int interactionIndex = Utility.GetRandomIndex(1, 3);
+            switch (interactionIndex)
             {
-                Utility.Print($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
-                Utility.Print("3) Ignore\n4) Attack");
-                int choice = Utility.PrintMenu(4);
-                switch (choice)
-                {
-                    case 1:
-                        Utility.Print(_npcDialogue[1][0]);
-                        DialogueNode(player);
-                        interactionInProgress = false;
-                        player.Charisma += 1;
-                        break;
-                    case 2:
-                        Utility.Print(_npcDialogue[1][1]);
-                        DialogueNode(player);
-                        interactionInProgress = false;
-                        break;
-                    case 3:
-                        Utility.Print(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
-                        player.Charisma -= 1;
-                        interactionInProgress = false;
-                        break;
-                    case 4:
-                        Utility.Print("You kill him instantly, you monster");
-                        player.Charisma = -5;
-                        interactionInProgress = false;
-                        break;
-                    default:
-                        Utility.Print("Invalid choice, please try again.");
-                        break;
-                }
-                Console.WriteLine();
-                Console.WriteLine();
-            } while (interactionInProgress);
+                case 1:
+                    SecretText.Node(this);
+                    BagChecker(player);
+                    break;
+                case 2:
+                    JokeText.Node(this);
+                    BagChecker(player);
+                    break;
+                case 3:
+                    FactText.Node(this);
+                    BagChecker(player);
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice, please try again.");
+                    break;
+            }
+            //bool interactionInProgress = true;
+            //do
+            //{
+            //    Utility.Print($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
+            //    Utility.Print("3) Ignore\n4) Attack");
+            //    int choice = Utility.PrintMenu(4);
+            //    switch (choice)
+            //    {
+            //        case 1:
+            //            Utility.Print(_npcDialogue[1][0]);
+            //            DialogueNode(player);
+            //            interactionInProgress = false;
+            //            player.Charisma += 1;
+            //            break;
+            //        case 2:
+            //            Utility.Print();
+            //            interactionInProgress = false;
+            //            break;
+            //        case 3:
+            //            Utility.Print(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
+            //            player.Charisma -= 1;
+            //            interactionInProgress = false;
+            //            break;
+            //        case 4:
+            //            Utility.Print("You kill him instantly, you monster");
+            //            player.Charisma = -5;
+            //            interactionInProgress = false;
+            //            break;
+            //        default:
+            //            Utility.Print("Invalid choice, please try again.");
+            //            break;
+            //    }
+            //    Console.WriteLine();
+            //    Console.WriteLine();
+            //} while (interactionInProgress);
         }
         public bool BagChecker(Player player)
         {
@@ -280,34 +307,34 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 return false;
             }
         }
-        public void DialogueNode(Player player)
-        {
-            int dialogueQuestionIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
-            int userChoice = dialogueQuestionIndex + 3;
-            int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[userChoice].Length);
-            Utility.Print(_npcDialogue[2][dialogueQuestionIndex]);
-            Utility.Print("1) Yes\n2) No");
-            int decision = Utility.PrintMenu(2);
-            if (decision == 1)
-            {
-                player.Charisma += 1;
-                Utility.Print(_npcDialogue[userChoice][dialogueIndex]);
-                if(BagChecker(player))
-                {
-                    Console.WriteLine("Equipping bag");
-                    EquipBagOfCarrying(player);
-                    HasBag = true;
-                } else if(MapChecker(player))
-                {
-                    EquipMap(player);
-                }
-            }
-            else
-            {
-                player.Charisma -= 1;
-                Utility.Print(_npcDialogue[4][dialogueIndex]);
-            }
-        }
+        //public void DialogueNode(Player player)
+        //{
+        //    int dialogueQuestionIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
+        //    int userChoice = dialogueQuestionIndex + 3;
+        //    int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[userChoice].Length);
+        //    Utility.Print(_npcDialogue[2][dialogueQuestionIndex]);
+        //    Utility.Print("1) Yes\n2) No");
+        //    int decision = Utility.PrintMenu(2);
+        //    if (decision == 1)
+        //    {
+        //        player.Charisma += 1;
+        //        Utility.Print(_npcDialogue[userChoice][dialogueIndex]);
+        //        if(BagChecker(player))
+        //        {
+        //            Console.WriteLine("Equipping bag");
+        //            EquipBagOfCarrying(player);
+        //            HasBag = true;
+        //        } else if(MapChecker(player))
+        //        {
+        //            EquipMap(player);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        player.Charisma -= 1;
+        //        Utility.Print(_npcDialogue[4][dialogueIndex]);
+        //    }
+        //}
         public void EquipGreyStoneSpire(Player player)
         {
             Item greyStoneSpire = new Item();
@@ -372,7 +399,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 } while (TransactionInProgress);
             } else
             {
-                Utility.Print("So what's shakin, bacon?");
+                Utility.Print("Can I ask you a question?");
+                MerchantText.Node(this); // The shop part above should be isolated so it can be repeated here
             }
         }
         public void StockMarketPlace()

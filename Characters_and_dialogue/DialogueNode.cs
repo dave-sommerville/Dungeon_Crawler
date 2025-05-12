@@ -37,5 +37,34 @@
                 npc.InteractionInProgress= false;
             }
         }
+        public void Node(Boss boss)
+        {
+            Utility.Print(Statement);
+            Utility.Print("What do you do?");
+            if (Response != null)
+            {
+                for (int i = 0; i < Response.Length; i++)
+                {
+                    Utility.Print($"{i + 1}) {Response[i]}");
+                }
+                int choice = Utility.PrintMenu(Response.Length);
+                if (FurtherDialogue != null && FurtherDialogue.Length > 1)
+                {
+                    DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)];
+                    chosenDialogue.Node(boss);
+                }
+                else if (FurtherDialogue != null)
+                {
+                    DialogueNode chosenDialogue = FurtherDialogue[0][0];
+                    Utility.Print($"{boss.Name} leaves");
+                    boss.InteractionInProgress = false;
+                }
+            }
+            else
+            {
+                Utility.Print($"{boss.Name} walks away from you");
+                boss.InteractionInProgress = false;
+            }
+        }
     }
 }

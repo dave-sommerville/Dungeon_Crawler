@@ -256,9 +256,10 @@ namespace Dungeon_Crawler {
         public int NumberOfAttacks { get; set; }
         public string[]? AttackDescriptions { get; set; }
         public int TurnCounter { get; set; } = 0;
-        public DialogueNode MonologueEngine { get; set; }
         public Spell Spell { get; set; } = new Spell();
         public DialogueNode? Dialogue { get; set; }
+        public bool InteractionInProgress { get; set; } = false;
+
         public Boss(string name, string description, int numberOfAttacks, string[] attackDescriptions, DialogueNode dialogue, int playerLvl) : base(playerLvl)
         {
             Name = name;

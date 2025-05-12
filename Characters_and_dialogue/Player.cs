@@ -321,6 +321,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
+            boss.InteractionInProgress = true;
             do
             {
                 FightMenu(boss);
@@ -435,7 +436,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public int PlotTrigger(Dungeon dungeon)
         {
-            int plotIndex = -1;
+            int plotIndex = -1; // Need to add player level to checks or else this'll get out of hand
             if (X > 5 && Y < 5 && PlotOneLvl == 1)
             {
                 PlotOneLvl = 2;

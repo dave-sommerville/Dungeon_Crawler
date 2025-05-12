@@ -43,7 +43,6 @@ namespace Dungeon_Crawler
                     Thread.Sleep(Utility.Delay);
                     Console.WriteLine("w) Move West");
                 }
-                Utility.PrintLines();
                 Thread.Sleep(Utility.Delay);
                 Console.WriteLine("p) Display Player Details");
                 Thread.Sleep(Utility.Delay);
@@ -98,8 +97,8 @@ namespace Dungeon_Crawler
             Utility.Print($"Very well,\nDo you care to describe yourself?");
             Utility.Print("You may enter 'x' to skip this step");
             Console.WriteLine();
-            string playerDesc = Utility.Read();
-            if (playerDesc.ToLower() == "x")
+            string playerDesc = Console.ReadLine();
+            if (playerDesc.ToLower().Trim() == "x")
             {
                 playerDesc = "";
             }
