@@ -64,7 +64,7 @@ namespace Dungeon_Crawler
         // Event master control
         private readonly int TierOne = 2;
         private readonly int TierTwo = 5;
-        private readonly int TierThree = 9;
+        private readonly int TierThree = 94;
         private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
@@ -334,8 +334,11 @@ namespace Dungeon_Crawler
                     Utility.Print($"You find a {item.Name}.");
                     player.AddToInventory(item);
                 }
-                Utility.Print ($"You find {ChamberGold} gold coins.");
-                player.Gold += ChamberGold;
+                if (ChamberGold > 0)
+                {
+                    Utility.Print($"You find {ChamberGold} gold coins.");
+                    player.Gold += ChamberGold;
+                }
             }
 
         }

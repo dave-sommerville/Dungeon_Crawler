@@ -6,9 +6,6 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // Replace NPC methods with dialogue nodes
-        // Finish boss mechanics and add to triggers
-        // Finish boss dialogue 
         // Figure out spells
 
         static void Main(string[] args)
@@ -117,7 +114,7 @@ namespace Dungeon_Crawler
         public static void PrintIntro()
         {
             Utility.PrintLines();
-            Utility.Print("WELCOME TO\nTHE DUNGEON OF BLEEPBLORPP");
+            Utility.Print("WELCOME TO\nTHE DUNGEON OF DRAEGMOR ");
             for (int i = 0; i < Utility.EntranceArt.Length; i++)
             {
                 Utility.Print(Utility.EntranceArt[i]);

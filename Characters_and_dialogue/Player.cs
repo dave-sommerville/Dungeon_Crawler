@@ -322,6 +322,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
             boss.InteractionInProgress = true;
+            boss.Dialogue.Node(boss);
             do
             {
                 FightMenu(boss);
