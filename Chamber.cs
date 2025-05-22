@@ -64,7 +64,7 @@ namespace Dungeon_Crawler
         // Event master control
         private readonly int TierOne = 2;
         private readonly int TierTwo = 5;
-        private readonly int TierThree = 94;
+        private readonly int TierThree = 6;
         private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
@@ -203,12 +203,14 @@ namespace Dungeon_Crawler
             {
                 player.MushroomMan.InteractWithNpc(player);
             }
+            player.ProcessCharisma();
+            Console.WriteLine(player.Charisma);
         }
         public NPC MerchantEvent(Player player)
         {
             NPC merchant = new NPC();
             return merchant;
-        }//
+        }
         public void HazardEvent(Player player)//
         {
             if (player.PrisonerStatus == 0)

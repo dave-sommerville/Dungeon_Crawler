@@ -20,7 +20,7 @@
                 {
                     Utility.Print($"{i + 1}) {Response[i]}");
                 }
-                int choice = Utility.PrintMenu(Response.Length);
+                int choice = Player.CharismaCheck(Response.Length);
                 if (FurtherDialogue != null && FurtherDialogue.Length > 1)
                 {
                     DialogueNode chosenDialogue = FurtherDialogue[choice - 1][Utility.GetRandomIndex(0, FurtherDialogue[choice - 1].Length)];
@@ -56,13 +56,11 @@
                 else if (FurtherDialogue != null)
                 {
                     DialogueNode chosenDialogue = FurtherDialogue[0][0];
-                    Utility.Print($"{boss.Name} leaves");
                     boss.InteractionInProgress = false;
                 }
             }
             else
             {
-                Utility.Print($"{boss.Name} walks away from you");
                 boss.InteractionInProgress = false;
             }
         }

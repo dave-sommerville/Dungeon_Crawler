@@ -8,6 +8,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         //  STATUS TRACKERS
         public int PrisonerStatus = 0;
         public int RestCounter = 0;
+        public static bool PositiveInteraction = false;
         public bool IsPlaying { get; set; } = true;
         //  LOCATION
         public int Y { get; set; }
@@ -615,6 +616,23 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             else
             {
                 IsPlaying = false;
+            }
+        }
+        public static int CharismaCheck(int length)
+        {
+            int choice = Utility.PrintMenu(length);
+            if (choice == 1)
+            {
+                PositiveInteraction = true;
+            }
+            return choice;
+        }
+        public void ProcessCharisma()
+        {
+            if(PositiveInteraction)
+            {
+                Charisma += 1;
+                PositiveInteraction = false;
             }
         }
     }
