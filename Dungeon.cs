@@ -25,8 +25,8 @@ namespace Dungeon_Crawler
 
         public Chamber StartingPoint { get; set; }
         public Dungeon()
-        {                                       //Needs to be an actual description 
-            StartingPoint = new Chamber("00", "And so we begin");
+        {                                       
+            StartingPoint = new Chamber("00", "Welcome to the Dungeon of Draegmor. This is the first chamber.");
             ExploredChambers = new Dictionary<string, Chamber>();
             ExploredChambers.Add("00", StartingPoint);
         }

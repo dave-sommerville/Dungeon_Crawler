@@ -482,10 +482,14 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         Utility.Print("Your vision grows dim as you feel the life begin to drain from you.");
                         Utility.Print("Then you see a familiar face, that of the prisoner you released");
                         Utility.Print("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
+                        PrisonerStatus = 2;
                         Health += 50;
                     }
-                    Utility.Print("You have died");
-                    GameOver();
+                    else
+                    {
+                        Utility.Print("You have died");
+                        GameOver();
+                    }
                 }
             }
             else

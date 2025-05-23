@@ -65,7 +65,7 @@ namespace Dungeon_Crawler
         private readonly int TierOne = 2;
         private readonly int TierTwo = 5;
         private readonly int TierThree = 6;
-        private readonly int TierFour = 96;
+        private readonly int TierFour = 8;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
@@ -84,8 +84,10 @@ namespace Dungeon_Crawler
         }
         public void DisplayDescription()
         {
+            Utility.Print("");
             Utility.Print(Description);
             DisplayPassages();
+            Utility.Print("");
         }
         public void RandomizePassages()
         {
@@ -114,6 +116,7 @@ namespace Dungeon_Crawler
         }
         public void DisplayPassages()
         {
+            Utility.Print("");
             if (NorthPassage)
             {
                 Utility.Print("To the North " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
@@ -130,6 +133,8 @@ namespace Dungeon_Crawler
             {
                 Utility.Print("To the West " + dungeonPassages[Utility.GetRandomIndex(0, dungeonPassages.Length)]);
             }
+            Utility.Print("");
+            Utility.Print("");
         }
         public void MasterEventsTree(Player player)
         {

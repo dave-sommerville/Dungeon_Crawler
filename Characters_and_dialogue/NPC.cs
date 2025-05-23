@@ -1,4 +1,5 @@
-﻿using Dungeon_Crawler.Items;
+﻿using System.Numerics;
+using Dungeon_Crawler.Items;
 using Dungeon_Crawler.Items.Potions;
 
 namespace Dungeon_Crawler.Characters_and_dialogue
@@ -152,7 +153,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void NameNpc()
         {
-            string name = Console.ReadLine().Trim();
+            string name = "Toad";
+            name = Console.ReadLine().Trim();
             Utility.Print($"'Oh, I like that name! {name} it is!'");
             Name = name;
         }
@@ -348,47 +350,60 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         {
             StockMarketPlace();
             Utility.Print($"Hello adventurer, how brave to come this far.");
-            Utility.Print($"I am the humble {Name}, and I have a few items for sale. Do you want to see them?");
+            Utility.Print($"I am {Name}, the humble merchant, and I have a few items for sale. Do you want to see them?");
             Utility.Print("1) Yes 2) Talk to merchant");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
             {
-                bool TransactionInProgress = true;
-                do
+                PrintMerchantShop(player);
+            } else
+            {
+                Utility.Print("You say to the merchant");
+                Utility.Print("'Can I ask you a question?'");
+                MerchantText.Node(this);
+                Utility.Print("");
+                Utility.Print("So, would you like to take a look at my shop?");
+                string choice = Utility.Read();
+                if(choice == "y")
                 {
-                    for (int i = 0; i < Inventory.Length; i++)
+                    PrintMerchantShop(player);
+                }
+                Utility.Print("Very well, we shall meet again perhaps.");
+            }
+        }
+        public void PrintMerchantShop(Player player)
+        {
+            bool TransactionInProgress = true;
+            do
+            {
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    if (Inventory[i] == null) continue;
+                    Utility.Print($"{i + 1}) {Inventory[i].Name}: {Inventory[i].Value} Gold Pieces");
+                }
+                Utility.Print("What would you like to buy?\nSelect an item");
+                Utility.Print("Be careful what you choose, I don't ask twice");
+                Utility.Print("0) To Exit");
+                int selectedItem = Utility.PrintMenu(Inventory.Length);
+                selectedItem--;
+                if (selectedItem == -1)
+                {
+                    TransactionInProgress = false;
+                }
+                else
+                {
+                    if (player.Gold >= Inventory[selectedItem].Value)
                     {
-                        if (Inventory[i] == null) continue;
-                        Utility.Print($"{i + 1}) {Inventory[i].Name}: {Inventory[i].Value} Gold Pieces");
-                    }
-                    Utility.Print("What would you like to buy?\nSelect an item");
-                    Utility.Print("Be careful what you choose, I don't ask twice");
-                    Utility.Print("0) To Exit");
-                    int selectedItem = Utility.PrintMenu(Inventory.Length) ;
-                    selectedItem--;
-                    if (selectedItem == -1)
-                    {
-                        TransactionInProgress = false;
+                        player.AddToInventory(Inventory[selectedItem]);
+                        player.Gold -= Inventory[selectedItem].Value;
+                        Inventory[selectedItem] = null;
                     }
                     else
                     {
-                        if (player.Gold >= Inventory[selectedItem].Value)
-                        {
-                            player.AddToInventory(Inventory[selectedItem]);
-                            player.Gold -= Inventory[selectedItem].Value;
-                            Inventory[selectedItem] = null;
-                        }
-                        else
-                        {
-                            Utility.Print("You don't have enough gold");
-                        }
+                        Utility.Print("You don't have enough gold");
                     }
-                } while (TransactionInProgress);
-            } else
-            {
-                Utility.Print("Can I ask you a question?");
-                MerchantText.Node(this); // The shop part above should be isolated so it can be repeated here
-            }
+                }
+            } while (TransactionInProgress);
         }
         public void StockMarketPlace()
         {
