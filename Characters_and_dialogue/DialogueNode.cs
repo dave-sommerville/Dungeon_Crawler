@@ -13,8 +13,10 @@
         }
         public void Node(NPC npc)
         {
+            Utility.Print("");
             Utility.Print(Statement);
             Utility.Print("What do you do?");
+            Utility.Print("");
             if (Response != null) {
                 for (int i = 0; i < Response.Length; i++)
                 {

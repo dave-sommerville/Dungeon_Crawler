@@ -62,10 +62,10 @@ namespace Dungeon_Crawler
         public List<Item>? ChamberLoot { get; set; }
         public int ChamberGold { get; set; } = 0;
         // Event master control
-        private readonly int TierOne = 2;
-        private readonly int TierTwo = 5;
-        private readonly int TierThree = 6;
-        private readonly int TierFour = 8;
+        private readonly int TierOne = 90;
+        private readonly int TierTwo = 92;
+        private readonly int TierThree = 94;
+        private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
         public Chamber(string id, string description)
@@ -214,6 +214,7 @@ namespace Dungeon_Crawler
         public NPC MerchantEvent(Player player)
         {
             NPC merchant = new NPC();
+            merchant.Name = "Jeff";
             return merchant;
         }
         public void HazardEvent(Player player)//
