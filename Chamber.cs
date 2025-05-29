@@ -335,12 +335,18 @@ namespace Dungeon_Crawler
             }
             if ((player.Perception + Utility.GetRandomIndex(7,10)) > 5)
             {
-                Utility.Print("You search the chamber and discover the following");
-                if(ChamberLoot == null) { Utility.Print("No inventory"); }
-                foreach(Item item in ChamberLoot)
+                Utility.Print("You search around the chamber.");
+                if (ChamberLoot == null)
                 {
-                    Utility.Print($"You find a {item.Name}.");
-                    player.AddToInventory(item);
+                    Utility.Print("No items are found.");
+                }
+                else
+                {
+                    foreach (Item item in ChamberLoot)
+                    {
+                        Utility.Print($"You find a {item.Name}.");
+                        player.AddToInventory(item);
+                    }
                 }
                 if (ChamberGold > 0)
                 {

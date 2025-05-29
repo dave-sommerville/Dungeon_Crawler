@@ -15,9 +15,9 @@ namespace Dungeon_Crawler
         public static void GameLaunch(Player player)
         {
             Dungeon dungeon = new Dungeon();
-            bool IsRunning = true;
+            player.IsPlaying = true;
 
-            while (IsRunning && player.Health > 0)
+            while (player.IsPlaying && player.Health > 0)
             {
                 Chamber chamber = dungeon.ExploredChambers[player.LocationId];
                 if (chamber.NorthPassage)
@@ -71,7 +71,7 @@ namespace Dungeon_Crawler
                         break;
                     case "x":
                         player.GameOver();
-                        IsRunning = false;
+                        player.IsPlaying = false;
                         break;
                     default:
                         Thread.Sleep(Utility.Delay);

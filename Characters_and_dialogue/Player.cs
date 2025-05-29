@@ -264,6 +264,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 string choice = Utility.Read();
                 if (choice == "y")
                 {
+                    PrintInventory();
                     UseInventoryItem();
                     validChoice = true;
                 }
