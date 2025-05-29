@@ -609,17 +609,14 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         {
             Utility.Print("You have died");
             Utility.Print("Game Over");
-            Utility.Print("Would you like to play again? (y/n)");
+            Utility.Print("Would you like to save your game to a file? (y/n)");
             string decision = Utility.Read();
             if (decision == "y")
             {
                 File.WriteAllLines("game-history.txt", Utility.GameHistory);
                 Console.WriteLine("Your progress has been saved to file 'game-history.txt'");
             }
-            else
-            {
-                IsPlaying = false;
-            }
+            IsPlaying = false;
         }
         public static int CharismaCheck(int length)
         {

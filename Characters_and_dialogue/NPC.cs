@@ -275,7 +275,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public bool BagChecker(Player player)
         {
-            Console.WriteLine("Checking charisma");
             if(player.Charisma > 2 && !HasBag && player.PlayerLevel >= 1)
             {
                 return true;
@@ -335,12 +334,18 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void EquipBagOfCarrying(Player player)
         {
-            Item[] bagOfCarrying = new Item[20];
-            for(int i = 0; i < Inventory.Length; i++)
-            {
-                bagOfCarrying[i] = Inventory[i];
+            if (BagChecker(player)) {
+                {
+
+                }
+                Item[] bagOfCarrying = new Item[20];
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    bagOfCarrying[i] = Inventory[i];
+                }
+                player.Inventory = bagOfCarrying;
+                Utility.Print("Y'know what, I rather like you. Here, take this magical loot bag!");
             }
-            player.Inventory = bagOfCarrying;
         }
         public void EquipMap(Player player)
         {

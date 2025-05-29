@@ -62,7 +62,7 @@ namespace Dungeon_Crawler
         public List<Item>? ChamberLoot { get; set; }
         public int ChamberGold { get; set; } = 0;
         // Event master control
-        private readonly int TierOne = 90;
+        private readonly int TierOne = 2;
         private readonly int TierTwo = 92;
         private readonly int TierThree = 94;
         private readonly int TierFour = 96;
@@ -209,7 +209,7 @@ namespace Dungeon_Crawler
                 player.MushroomMan.InteractWithNpc(player);
             }
             player.ProcessCharisma();
-            Console.WriteLine(player.Charisma);
+            player.MushroomMan.EquipBagOfCarrying(player);
         }
         public NPC MerchantEvent(Player player)
         {
