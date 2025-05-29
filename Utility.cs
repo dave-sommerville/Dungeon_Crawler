@@ -66,12 +66,19 @@
             do
             {
                 decision = Console.ReadLine().Trim().ToLower();
-                isValid = decision.Length > 0 && decision.Length < 2;
-                isValid = new[] { 's', 'e', 'n', 'w', '1', '2', 'x', 'i', 'p', 'y' }.Contains(decision[0]);
-                if (!isValid)
+                if (decision == "" || decision == null)
                 {
-                    Thread.Sleep(Delay);
-                    Console.WriteLine("Invalid input. Please try again.");
+                    break;
+                }
+                else
+                {
+                    isValid = decision.Length > 0 && decision.Length < 2;
+                    isValid = new[] { 's', 'e', 'n', 'w', '1', '2', 'x', 'i', 'p', 'y' }.Contains(decision[0]);
+                    if (!isValid)
+                    {
+                        Thread.Sleep(Delay);
+                        Console.WriteLine("Invalid input. Please try again.");
+                    }
                 }
             } while (!isValid);
             return decision;

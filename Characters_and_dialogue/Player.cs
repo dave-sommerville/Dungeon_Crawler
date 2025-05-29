@@ -364,9 +364,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         Utility.Print($"You killed the {monster.Name}");
                     }
                     Mana -= 1;
-
+                    monster.Attack(this);
                 }
-                monster.Attack(this);
             }
             else if (decision == 3)
             {

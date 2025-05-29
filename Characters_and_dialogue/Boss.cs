@@ -300,17 +300,13 @@ namespace Dungeon_Crawler {
             {
                 // Cast Spell
             }
-            else
-            {
                 for (int i = 0; i < NumberOfAttacks; i++)
                 {
 
                     base.Attack(targetCharacter);
-                    if (AttackDescriptions != null) { Utility.Print(AttackDescriptions[i]); }
                 }
                 TurnCounter += 1;
                 if (TurnCounter == 6) { TurnCounter = 0; }
-            }
         }
         public void BossDeathCheck()
         {
