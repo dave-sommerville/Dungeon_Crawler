@@ -331,6 +331,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             greyStoneSpire.Durability = 1000;
             greyStoneSpire.Value = 1000;
             player.GreyStoneSpire = greyStoneSpire;
+            
         }
         public void EquipBagOfCarrying(Player player)
         {

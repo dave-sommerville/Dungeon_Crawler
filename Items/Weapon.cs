@@ -40,12 +40,14 @@ namespace Dungeon_Crawler.Items
                 Name = goodMeleeWeapons[Utility.GetRandomIndex(0, goodMeleeWeapons.Length)];
                 Boost = 3;
                 Value = 30;
+                Durability = 20;
             }
             else
             {
                 Name = midMeleeWeapons[Utility.GetRandomIndex(0, midMeleeWeapons.Length)];
                 Boost = 1;
                 Value = 10;
+                Durability = 10;
             }
 
         }
@@ -62,6 +64,7 @@ namespace Dungeon_Crawler.Items
             if (decision == 1)
             {
                 player.Weapon = this;
+                Console.WriteLine(player.Weapon.Name);
             }
             else
             {

@@ -46,7 +46,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Name = name;
             Description = description;
             ArmorClass = 8;
-            Health = 10;
+            Health = 1000;
             Gold = 10;
             Dexterity = 0;
             Athletics = 0;
@@ -168,7 +168,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     return;
                 }
             }
-            else if(IsPlaying)
+            else
             {
                 int plotTrigger = PlotTrigger(dungeon);
                 if (plotTrigger == -1)
@@ -179,9 +179,11 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     newChamber.DisplayDescription();
                     RestCounter += 1;
                     newChamber.MasterEventsTree(this);
-                    Utility.Print("The room is safe. What would you like to do next?");
-                    Utility.Print("1) Search Room\n2) Rest Here");
-                    dungeon.ExploredChambers[LocationId] = newChamber;
+                    if (IsPlaying) {
+                        Utility.Print("The room is safe. What would you like to do next?");
+                        Utility.Print("1) Search Room\n2) Rest Here");
+                        dungeon.ExploredChambers[LocationId] = newChamber;
+                    }
                 }
                 else
                 {
@@ -385,6 +387,9 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             if (Weapon != null)
             {
                 Weapon.Durability -= 1;
+                Console.WriteLine(Weapon);
+                Console.WriteLine(Weapon.Durability);
+                Console.WriteLine(Weapon.Name);
                 if (Weapon.Durability <= 0)
                 {
                     Utility.Print($"Weapon is broken and cannot be used.");
@@ -397,7 +402,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             if (Armor != null)
             {
                 Armor.Durability -= 1;
-                if (Weapon.Durability <= 0)
+                if (Armor.Durability <= 0)
                 {
                     Utility.Print($"Weapon is broken and cannot be used.");
                     ArmorClass -= Armor.AC;
