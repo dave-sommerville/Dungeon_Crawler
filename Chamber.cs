@@ -63,7 +63,7 @@ namespace Dungeon_Crawler
         public int ChamberGold { get; set; } = 0;
         // Event master control
         private readonly int TierOne = 2;
-        private readonly int TierTwo = 92;
+        private readonly int TierTwo = 4;
         private readonly int TierThree = 94;
         private readonly int TierFour = 96;
         private readonly int TierFive = 98;
@@ -303,19 +303,19 @@ namespace Dungeon_Crawler
                 Armor armor = new Armor();
                 ChamberLoot.Add(armor);
             }
-            if (potionIndex > 5)
+            if (potionIndex > 4)
             {
                 int potionType = Utility.GetRandomIndex(0, 700);
                 Potion chamberPotion = null;
-                if (potionType < 30)
+                if (potionType < 20)
                 {
                     chamberPotion = new PotionOfKnowledge();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 120)
+                } else if (potionType < 900)
                 {
                     chamberPotion = new PotionOfRestoration();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 320)
+                } else if (potionType < 280)
                 {
                     chamberPotion = new PotionOfMana();
                     ChamberLoot.Add(chamberPotion);

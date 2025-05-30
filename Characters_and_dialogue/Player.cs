@@ -46,7 +46,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Name = name;
             Description = description;
             ArmorClass = 8;
-            Health = 100;
+            Health = 10;
             Gold = 10;
             Dexterity = 0;
             Athletics = 0;
@@ -168,7 +168,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     return;
                 }
             }
-            else
+            else if(IsPlaying)
             {
                 int plotTrigger = PlotTrigger(dungeon);
                 if (plotTrigger == -1)
@@ -308,7 +308,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             {
                 FightMenu(monster);
                 PlayerDeathCheck();
-            } while (monster.Health > 0);
+            } while (monster.Health > 0 && IsPlaying);
             UseAmor();
             if (RestCounter < 5)
             {
@@ -330,7 +330,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 FightMenu(boss);
                 PlayerDeathCheck();
                 boss.BossDeathCheck();
-            } while (boss.Health > 0);
+            } while (boss.Health > 0 && IsPlaying);
             UseAmor();
             if (RestCounter < 5)
             {
@@ -608,7 +608,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void GameOver()
         {
-            Utility.Print("You have died");
             Utility.Print("Game Over");
             Utility.Print("Would you like to save your game to a file? (y/n)");
             string decision = Utility.Read();
