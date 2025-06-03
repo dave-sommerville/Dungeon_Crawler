@@ -15,9 +15,9 @@
         {
             Utility.Print("");
             Utility.Print(Statement);
-            Utility.Print("What do you do?");
             Utility.Print("");
             if (Response != null) {
+                Utility.Print("What do you do?");
                 for (int i = 0; i < Response.Length; i++)
                 {
                     Utility.Print($"{i + 1}) {Response[i]}");
@@ -42,9 +42,9 @@
         public void Node(Boss boss)
         {
             Utility.Print(Statement);
-            Utility.Print("What do you do?");
             if (Response != null)
             {
+                Utility.Print("What do you do?");
                 for (int i = 0; i < Response.Length; i++)
                 {
                     Utility.Print($"{i + 1}) {Response[i]}");

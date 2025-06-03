@@ -4,7 +4,7 @@
     {
         public Random random = new Random();
         public static string[] EntranceArt = new string[]
-{
+        {
             "          ____    ___    ____           ",
             "         /    \\__/   \\__/    \\         ",
             "        /      /       \\      \\        ",
@@ -15,7 +15,7 @@
             "/     |      | |      |  |      |     \\",
             "\\     |      | |      |  |      |     /",
             " \\____|______|_|______|__|______|____/ "
-};
+         };
 
         public static int Delay = 120;
         public static List<string> GameHistory = new List<string>();
@@ -91,6 +91,11 @@
                 Thread.Sleep(Delay);
                 Console.WriteLine();
             }
+        }
+        public static int GetRandomNumber(int min, int max)
+        {
+            Random random = new Random();
+            return random.Next(min, max);
         }
 
     }

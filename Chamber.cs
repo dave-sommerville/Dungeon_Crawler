@@ -64,7 +64,7 @@ namespace Dungeon_Crawler
         // Event master control
         private readonly int TierOne = 2;
         private readonly int TierTwo = 4;
-        private readonly int TierThree = 94;
+        private readonly int TierThree = 6;
         private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
@@ -79,7 +79,7 @@ namespace Dungeon_Crawler
             ChamberLoot = new List<Item>();
             if (Utility.FiftyFifty())
             {
-                ChamberGold = Utility.GetRandomIndex(25, 1000);
+                ChamberGold = Utility.GetRandomIndex(2, 20);
             }
         }
         public void DisplayDescription()
@@ -158,7 +158,6 @@ namespace Dungeon_Crawler
             }
             else if(randomEvent > TierThree && randomEvent <= TierFour)
             {
-                Utility.Print("You encounter an NPC in the chamber.");
                 NpcEvent(player);
             } else if (randomEvent > TierFour && randomEvent <= TierFive)
             {
@@ -202,10 +201,12 @@ namespace Dungeon_Crawler
             if (player.MushroomMan == null)
             {
                 NPC mushroomMan = new NPC();
+                mushroomMan.RandomizeAttributes();
                 player.MushroomMan = mushroomMan;
                 mushroomMan.InitialInteraction(player);
             } else
             {
+                player.MushroomMan.RandomizeAttributes();
                 player.MushroomMan.InteractWithNpc(player);
             }
             player.ProcessCharisma();

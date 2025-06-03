@@ -6,6 +6,24 @@ namespace Dungeon_Crawler.Characters_and_dialogue
 {
     public class NPC : Character
     {
+
+        public static string[] Colors = { "red", "blue", "green", "yellow", "purple", "orange" };
+        public static string[] myconidFeatures = new string[]
+        {
+            "a mushroom cap shaped like a wizard hat, complete with natural frills.",
+            "eyeballs that peek out from under the gills of their cap.",
+            "tiny toadstools growing symmetrically down each arm.",
+            "a beard made of soft, dangling moss and miniature fungi.",
+            "legs resembling twisted mushroom stalks with polka dots.",
+            "fingers constantly sprouting and shedding glittery spores.",
+            "one shoulder hosting a sleepy snail frozen upon it.",
+            "a patch of turf where tiny insects host parties on its back.",
+            "a belly glowing faintly with shifting colors like a lava lamp.",
+            "a belt made of woven roots and acorn buttons."
+        };
+
+
+
         // Generic Dialogue arrays 
         public static string[] Hellos = new string[]
         {
@@ -122,18 +140,25 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             bool InteractionInProgress = true;
             do
             {
-                Utility.Print("What do you do?");
-                Utility.Print($"1) Nod towards the creature with a stern but calm expression'");
-                Utility.Print("2) Say 'Why hello there, what might your name be?");
-                Utility.Print("3) Ignore the creature and continue on your way");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("What do you do?");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine($"1) Nod towards the creature with a stern but calm expression'");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("2) Say 'Why hello there, what might your name be?");
+                Thread.Sleep(Utility.Delay);
+                Console.WriteLine("3) Ignore the creature and continue on your way");
+                Thread.Sleep(Utility.Delay);
                 int decision = Utility.PrintMenu(3);
                 switch (decision)
                 {
                     case 1:
+                        Utility.Print("You nod towards the creature with a stern but calm expression");
                         AdventureQuestion(player);
                         InteractionInProgress = false;
                         break;
                     case 2:
+                        Utility.Print("'Why hello there, what might your name be?' you say to the creature");
                         Utility.Print("What's a name? Can you give me a name?");
                         Thread.Sleep(Utility.Delay);
                         Console.WriteLine("Enter a name below");
@@ -160,15 +185,21 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void AdventureQuestion(Player player)
         {
-            Utility.Print("What kind of adventure are you on?");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Utility.Print("What do you say?");
-            Utility.Print("1) Seeking treasure and fortune");
-            Utility.Print("2) Seeking acknowledgement and renown");
-            Utility.Print("3) Seeking knowledge and relics");
-            Utility.Print("4) Why don't you mind your own business");
+            Utility.Print("It says to you 'What kind of adventure are you on?'");
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("What do you say?");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("1) Seeking treasure and fortune");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("2) Seeking acknowledgement and renown");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("3) Seeking knowledge and relics");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("4) Why don't you mind your own business!");
+
             string endResult = "";
             bool onQuestion = true;
             do
@@ -179,28 +210,31 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     case 1:
                         player.Charisma += 1;
                         endResult = "Seeking treasure and fortune";
-                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print($"You reply '{endResult}'");
+
+                        Utility.Print($"'Cool cool cool. I just sort of hang out.' {Name} says. 'I found this neat rock you can have.'");
                         EquipGreyStoneSpire(player);
                         onQuestion = false; 
                         break;
                     case 2:
                         player.Charisma += 1;
-
                         endResult = "Seeking acknowledgement and renown";
+                        Utility.Print($"You reply '{endResult}'");
                         Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
                         break;
                     case 3:
                         player.Charisma += 1;
-
                         endResult = "Seeking knowledge and relics";
+                        Utility.Print($"You reply '{endResult}'");
                         Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
 
                         break;
                     case 4:
+                        Utility.Print($"You reply 'Why don't you mind your own business!'");
                         Utility.Print("Well, kinda rude. I just have this cool rock that I was gonna give you.");
                         Utility.Print("Ah, whatever! Here you go.");
                         EquipGreyStoneSpire(player);
@@ -295,34 +329,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 return false;
             }
         }
-        //public void DialogueNode(Player player)
-        //{
-        //    int dialogueQuestionIndex = Utility.GetRandomIndex(0, _npcDialogue[2].Length);
-        //    int userChoice = dialogueQuestionIndex + 3;
-        //    int dialogueIndex = Utility.GetRandomIndex(0, _npcDialogue[userChoice].Length);
-        //    Utility.Print(_npcDialogue[2][dialogueQuestionIndex]);
-        //    Utility.Print("1) Yes\n2) No");
-        //    int decision = Utility.PrintMenu(2);
-        //    if (decision == 1)
-        //    {
-        //        player.Charisma += 1;
-        //        Utility.Print(_npcDialogue[userChoice][dialogueIndex]);
-        //        if(BagChecker(player))
-        //        {
-        //            Console.WriteLine("Equipping bag");
-        //            EquipBagOfCarrying(player);
-        //            HasBag = true;
-        //        } else if(MapChecker(player))
-        //        {
-        //            EquipMap(player);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        player.Charisma -= 1;
-        //        Utility.Print(_npcDialogue[4][dialogueIndex]);
-        //    }
-        //}
         public void EquipGreyStoneSpire(Player player)
         {
             Item greyStoneSpire = new Item();
@@ -449,6 +455,12 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     }
                 }
             }
+        }
+        public void RandomizeAttributes()
+        {
+            string color = Colors[Utility.GetRandomIndex(0, Colors.Length)];
+            string feature = myconidFeatures[Utility.GetRandomIndex(0, myconidFeatures.Length)];
+            this.Description = $"A foot tall {color} mushroom; with {feature}";
         }
     }
 }
