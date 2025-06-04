@@ -159,7 +159,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         break;
                     case 2:
                         Utility.Print("'Why hello there, what might your name be?' you say to the creature");
-                        Utility.Print("What's a name? Can you give me a name?");
+                        Utility.Print("'What's a name?' it says, 'Can you give me a name?'");
                         Thread.Sleep(Utility.Delay);
                         Console.WriteLine("Enter a name below");
                         NameNpc();
@@ -220,7 +220,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         player.Charisma += 1;
                         endResult = "Seeking acknowledgement and renown";
                         Utility.Print($"You reply '{endResult}'");
-                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print($"Cool cool cool. I just sort of hang out. {Name} says.I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
                         break;
@@ -228,7 +228,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         player.Charisma += 1;
                         endResult = "Seeking knowledge and relics";
                         Utility.Print($"You reply '{endResult}'");
-                        Utility.Print("Cool cool cool. I just sort of hang out. I found this neat rock you can have.");
+                        Utility.Print($"Cool cool cool. I just sort of hang out. {Name} says. I found this neat rock you can have.");
                         EquipGreyStoneSpire(player);
                         onQuestion = false;
 
@@ -251,7 +251,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         {
             Utility.Print("You encounter a familiar creature in this room.");
             Utility.Print(Description);
-            Utility.Print(Hellos[Utility.GetRandomIndex(0, Hellos.Length)]);
+            Utility.Print($"'{Hellos[Utility.GetRandomIndex(0, Hellos.Length)]}' {Name} says");
             int interactionIndex = Utility.GetRandomIndex(1, 3);
             switch (interactionIndex)
             {
@@ -271,41 +271,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     Console.WriteLine("Invalid choice, please try again.");
                     break;
             }
-            //bool interactionInProgress = true;
-            //do
-            //{
-            //    Utility.Print($"What do you?\n1) Say '{_npcDialogue[1][0]}'\n2) Say'{_npcDialogue[1][1]}'");
-            //    Utility.Print("3) Ignore\n4) Attack");
-            //    int choice = Utility.PrintMenu(4);
-            //    switch (choice)
-            //    {
-            //        case 1:
-            //            Utility.Print(_npcDialogue[1][0]);
-            //            DialogueNode(player);
-            //            interactionInProgress = false;
-            //            player.Charisma += 1;
-            //            break;
-            //        case 2:
-            //            Utility.Print();
-            //            interactionInProgress = false;
-            //            break;
-            //        case 3:
-            //            Utility.Print(_npcDialogue[7][Utility.GetRandomIndex(0, _npcDialogue[7].Length)]);
-            //            player.Charisma -= 1;
-            //            interactionInProgress = false;
-            //            break;
-            //        case 4:
-            //            Utility.Print("You kill him instantly, you monster");
-            //            player.Charisma = -5;
-            //            interactionInProgress = false;
-            //            break;
-            //        default:
-            //            Utility.Print("Invalid choice, please try again.");
-            //            break;
-            //    }
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //} while (interactionInProgress);
+
         }
         public bool BagChecker(Player player)
         {
@@ -331,13 +297,19 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void EquipGreyStoneSpire(Player player)
         {
+            Utility.Print("The stone given to you feels warm to your hand.");
+            Utility.Print("You feel a strange connection to it, before it begins shining a bright light throughout the room.");
+            Utility.Print("The stone levitates out of your hand. It then hovers in front of you briefly, still glowing with an intense white.");
+            Utility.Print("The stone rockets towards your head, embedding itself inside your forehead.");
+            Utility.Print("Although a violent act, you feel no pain nor do you take any damage. In fact, you feel more powerful than before in a strange way.");
             Item greyStoneSpire = new Item();
             greyStoneSpire.Name = "Grey Stone Spire";
             greyStoneSpire.Description = "A small stone spire, it is grey and has a small hole in the top";
             greyStoneSpire.Durability = 1000;
             greyStoneSpire.Value = 1000;
             player.GreyStoneSpire = greyStoneSpire;
-            
+            player.MaxHP += 10;
+            player.Health += 10;
         }
         public void EquipBagOfCarrying(Player player)
         {

@@ -202,6 +202,7 @@ namespace Dungeon_Crawler
             {
                 NPC mushroomMan = new NPC();
                 mushroomMan.RandomizeAttributes();
+                mushroomMan.Name = "The creature";
                 player.MushroomMan = mushroomMan;
                 mushroomMan.InitialInteraction(player);
             } else
