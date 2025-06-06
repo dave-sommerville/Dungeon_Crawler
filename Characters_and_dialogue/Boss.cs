@@ -267,6 +267,7 @@ namespace Dungeon_Crawler {
             NumberOfAttacks = numberOfAttacks;
             AttackDescriptions = attackDescriptions;
             Dialogue = dialogue;
+            XP = Utility.GetRandomIndex(ChallengeRating * 100, ChallengeRating * 200);
         }
         private static Boss _drowOne = new Boss("Drider and two Drow Warriors", "A monstrous being, half human and half giant spider, followed by two swarthy guards.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, DrowOneText, 1);
         private static Boss _drowTwo = new Boss("Drow Sorceress", "A tall, slender figure with dark skin and white hair, her eyes glowing with arcane power.", 2, new string[] { "The drow lunges at you with her dagger, but you dodge out ", "The blade slices your skin" }, DrowTwoText, 1);

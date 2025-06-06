@@ -74,13 +74,15 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
-            ChallengeRating = Math.Max(1,playerLvl - 1);
+            int crFactor = Math.Max(1, playerLvl);
+            ChallengeRating = crFactor;
             int challengeRatingHigh = ChallengeRating + 5;
             int monsterIndex = Utility.GetRandomIndex(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
             Description = monsterDescriptions[monsterIndex];
             Health = Utility.GetRandomIndex(minHealth, maxHealth) + ChallengeRating * 2;
             ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + ChallengeRating * 2;
+            XP = Utility.GetRandomIndex(ChallengeRating * 10, ChallengeRating * 20);
         }
         public override void Attack(Character targetCharacter)
         {
@@ -90,11 +92,9 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             }
             else
             {
-                int max = Math.Max(7, ChallengeRating * 4);
-                int attack = Utility.GetRandomIndex(3, max) + 5;
-                int damage = Utility.GetRandomIndex(3, max) + 5;
-                Console.WriteLine($"Attack: {attack} Damage: {damage}");
-                Console.WriteLine($"ArmorClass: {targetCharacter.ArmorClass}");
+                int max = Math.Max(5, ChallengeRating * 4);
+                int attack = Utility.GetRandomIndex(3, max) + 2;
+                int damage = Utility.GetRandomIndex(3, max) + 2;
                 if (targetCharacter.IsDodging)
                 {
                     attack = attack / 2;

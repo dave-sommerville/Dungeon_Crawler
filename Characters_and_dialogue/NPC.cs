@@ -247,6 +247,12 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 }
             } while (onQuestion);
         }
+        public void RandomizeAttributes()
+        {
+            string color = Colors[Utility.GetRandomIndex(0, Colors.Length)];
+            string feature = myconidFeatures[Utility.GetRandomIndex(0, myconidFeatures.Length)];
+            this.Description = $"A foot tall {color} mushroom; with {feature}";
+        }
         public void InteractWithNpc(Player player)
         {
             Utility.Print("You encounter a familiar creature in this room.");
@@ -391,48 +397,45 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void StockMarketPlace()
         {
-            int weaponIndex = Utility.GetRandomIndex(0, 10);
-            int armorIndex = Utility.GetRandomIndex(0, 10);
-            int potionIndex = Utility.GetRandomIndex(0, 10);
-            if (weaponIndex > 5)
-            {
-                for (int i = 0; i < Inventory.Length; i++)
+            int stockCycles = Utility.GetRandomIndex(1, 3);
+            for (int i = 0; i < stockCycles; i++) {
+                int weaponIndex = Utility.GetRandomIndex(0, 8);
+                int armorIndex = Utility.GetRandomIndex(0, 8);
+                int potionIndex = Utility.GetRandomIndex(0, 7);
+                if (weaponIndex > 5)
                 {
-                    if (Inventory[i] == null)
+                    for (int j = 0; j < Inventory.Length; j++)
                     {
-                        Inventory[i] = new Weapon();
-                        return;
+                        if (Inventory[j] == null)
+                        {
+                            Inventory[j] = new Weapon();
+                            return;
+                        }
+                    }
+                }
+                if (armorIndex > 5)
+                {
+                    for (int j = 0; j < Inventory.Length; i++)
+                    {
+                        if (Inventory[j] == null)
+                        {
+                            Inventory[j] = new Armor();
+                            return;
+                        }
+                    }
+                }
+                if (potionIndex > 5)
+                {
+                    for (int j = 0; j < Inventory.Length; i++)
+                    {
+                        if (Inventory[j] == null)
+                        {
+                            Inventory[j] = new Potion();
+                            return;
+                        }
                     }
                 }
             }
-            if (armorIndex > 5)
-            {
-                for (int i = 0; i < Inventory.Length; i++)
-                {
-                    if (Inventory[i] == null)
-                    {
-                        Inventory[i] = new Armor();
-                        return;
-                    }
-                }
-            }
-            if (potionIndex > 5)
-            {
-                for (int i = 0; i < Inventory.Length; i++)
-                {
-                    if (Inventory[i] == null)
-                    {
-                        Inventory[i] = new Potion();
-                        return;
-                    }
-                }
-            }
-        }
-        public void RandomizeAttributes()
-        {
-            string color = Colors[Utility.GetRandomIndex(0, Colors.Length)];
-            string feature = myconidFeatures[Utility.GetRandomIndex(0, myconidFeatures.Length)];
-            this.Description = $"A foot tall {color} mushroom; with {feature}";
         }
     }
 }

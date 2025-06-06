@@ -387,9 +387,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             if (Weapon != null)
             {
                 Weapon.Durability -= 1;
-                Console.WriteLine(Weapon);
-                Console.WriteLine(Weapon.Durability);
-                Console.WriteLine(Weapon.Name);
                 if (Weapon.Durability <= 0)
                 {
                     Utility.Print($"Weapon is broken and cannot be used.");

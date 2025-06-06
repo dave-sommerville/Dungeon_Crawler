@@ -64,7 +64,7 @@ namespace Dungeon_Crawler
         // Event master control
         private readonly int TierOne = 2;
         private readonly int TierTwo = 4;
-        private readonly int TierThree = 6;
+        private readonly int TierThree = 94;
         private readonly int TierFour = 96;
         private readonly int TierFive = 98;
         private readonly int MasterIndex = 100;
