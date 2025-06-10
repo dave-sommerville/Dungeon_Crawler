@@ -5,21 +5,31 @@ namespace Dungeon_Crawler.Items
 {
     public class Armor : Item
     {
-        private readonly string[] midArmorMaterials = new string[]
-        {
-            "Leather",
-            "Chainmail",
-            "Bronze",
-            "Iron"
-        };
-
         private readonly string[] goodArmorMaterials = new string[]
         {
-            "Mythril",
-            "Dragonhide",
-            "Adamantite",
-            "Runesteel"
+            "Cured Leather",
+            "Forged Chainmail",
+            "Polished Bronzeplate",
+            "Tempered Ironmail",
+            "Hardened Studded Leather",
+            "Scaled Hide Vest",
+            "Wrought Iron Lamellar",
+            "Beaten Copper Guard"
         };
+
+
+        private readonly string[] midArmorMaterials = new string[]
+        {
+            "Thin Leather",
+            "Rusty Chainmail",
+            "Dull Bronzeplate",
+            "Brittle Ironmail",
+            "Scuffed Studded Leather",
+            "Faded Hide Vest",
+            "Light Wrought Iron Lamellar",
+            "Bent Copper Guard"
+        };
+
 
         public int AC { get; set; } 
 

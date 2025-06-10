@@ -46,7 +46,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Name = name;
             Description = description;
             ArmorClass = 8;
-            Health = 1000;
+            Health = 100;
             Gold = 10;
             Dexterity = 0;
             Athletics = 0;
