@@ -62,12 +62,20 @@ namespace Dungeon_Crawler
         public List<Item>? ChamberLoot { get; set; }
         public int ChamberGold { get; set; } = 0;
         // Event master control
-        private readonly int TierOne = 2;
-        private readonly int TierTwo = 4;
-        private readonly int TierThree = 94;
-        private readonly int TierFour = 96;
-        private readonly int TierFive = 98;
-        private readonly int MasterIndex = 100;
+
+        private static readonly int HazardChance = 20;
+        private static readonly int TrapChance = 20;
+        private static readonly int MonsterChance = 20;
+        private static readonly int NpcChance = 20;
+        private static readonly int MerchantChance = 20;
+        private static readonly int MasterIndex = 100;
+
+
+        private static readonly int TierOne = 0 + HazardChance;
+        private static readonly int TierTwo = TierOne + TrapChance;
+        private static readonly int TierThree = TierTwo + MonsterChance;
+        private static readonly int TierFour = TierThree + NpcChance;
+        private static readonly int TierFive = TierFour + MerchantChance;
         public Chamber(string id, string description)
         {
             ChamberId = id;
@@ -80,6 +88,40 @@ namespace Dungeon_Crawler
             if (Utility.FiftyFifty())
             {
                 ChamberGold = Utility.GetRandomIndex(2, 20);
+            }
+        }
+        public void MasterEventsTree(Player player)
+        {
+            int randomEvent = Utility.GetRandomIndex(1, MasterIndex);
+            if (randomEvent >= 1 && randomEvent <= TierOne)
+            {
+                Utility.Print("You encounter a hazard in the chamber.");
+                HazardEvent(player);
+            }
+            else if (randomEvent > TierOne && randomEvent <= TierTwo)
+            {
+                Utility.Print("You trigger a trap in the chamber.");
+                Trap chamberTrap = TrapEvent(player);
+                chamberTrap.TrapCheck(player);
+            }
+            else if (randomEvent > TierTwo && randomEvent <= TierThree)
+            {
+                Utility.Print("You encounter a monster in the chamber.");
+                Monster chamberMonster = MonsterEvent(player);
+                player.MonsterFight(chamberMonster);
+            }
+            else if(randomEvent > TierThree && randomEvent <= TierFour)
+            {
+                NpcEvent(player);
+            } else if (randomEvent > TierFour && randomEvent <= TierFive)
+            {
+                Utility.Print("You encounter a merchant in the chamber.");
+                NPC chamberMerchant = MerchantEvent(player);
+                chamberMerchant.MarketPlace(player);
+            }
+            else 
+                {
+                Utility.Print("Nothing happens.");
             }
         }
         public void DisplayDescription()
@@ -135,40 +177,6 @@ namespace Dungeon_Crawler
             }
             Utility.Print("");
             Utility.Print("");
-        }
-        public void MasterEventsTree(Player player)
-        {
-            int randomEvent = Utility.GetRandomIndex(1, MasterIndex);
-            if (randomEvent >= 1 && randomEvent <= TierOne)
-            {
-                Utility.Print("You encounter a hazard in the chamber.");
-                HazardEvent(player);
-            }
-            else if (randomEvent > TierOne && randomEvent <= TierTwo)
-            {
-                Utility.Print("You trigger a trap in the chamber.");
-                Trap chamberTrap = TrapEvent(player);
-                chamberTrap.TrapCheck(player);
-            }
-            else if (randomEvent > TierTwo && randomEvent <= TierThree)
-            {
-                Utility.Print("You encounter a monster in the chamber.");
-                Monster chamberMonster = MonsterEvent(player);
-                player.MonsterFight(chamberMonster);
-            }
-            else if(randomEvent > TierThree && randomEvent <= TierFour)
-            {
-                NpcEvent(player);
-            } else if (randomEvent > TierFour && randomEvent <= TierFive)
-            {
-                Utility.Print("You encounter a merchant in the chamber.");
-                NPC chamberMerchant = MerchantEvent(player);
-                chamberMerchant.MarketPlace(player);
-            }
-            else 
-                {
-                Utility.Print("Nothing happens.");
-            }
         }
         public Trap TrapEvent(Player player)
         {

@@ -39,7 +39,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         };
         public static DialogueNode[] Goodbyes = new DialogueNode[]
         {
-            new DialogueNode("OK bye friend", null, null),
+            new DialogueNode("'OK bye friend'\nThe creature walks away from you gloomily", null, null),
             new DialogueNode("Smell ya later", null, null),
             new DialogueNode("Peace be with you", null, null),
             new DialogueNode("Farewell and good luck", null, null)
@@ -134,8 +134,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void InitialInteraction(Player player)
         {
-            Utility.Print(Description);
             Utility.Print("'Hello there', a small and slightly shrill voice calls out to you");
+            Utility.Print(Description);
 
             bool InteractionInProgress = true;
             do
@@ -256,8 +256,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public void InteractWithNpc(Player player)
         {
             Utility.Print("You encounter a familiar creature in this room.");
-            Utility.Print(Description);
             Utility.Print($"'{Hellos[Utility.GetRandomIndex(0, Hellos.Length)]}' {Name} says");
+            Utility.Print(Description);
             int interactionIndex = Utility.GetRandomIndex(1, 3);
             switch (interactionIndex)
             {

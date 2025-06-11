@@ -5,9 +5,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
 {
     public class Monster : Character
     {
-        // This is good for control, but they are hard wired for monsters. Either they need to be set by method
-        // or they need to be set by the constructor ooooor I add a public modifer property 
-        private readonly int attackBase = 8;
         private readonly int minAttack = 8;
         private readonly int maxAttack = 12;
         private readonly int minDamage = 8;
@@ -74,15 +71,15 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
-            int crFactor = Math.Max(1, playerLvl);
+            int crFactor = playerLvl;
             ChallengeRating = crFactor;
-            int challengeRatingHigh = ChallengeRating + 5;
+            int challengeRatingHigh = ChallengeRating + 5; // The challengeRatingHigh establishes which character is displayed so the stronger they are, the more vicious sounding the monster. 
             int monsterIndex = Utility.GetRandomIndex(ChallengeRating, Math.Min(challengeRatingHigh, monsters.Length));
             Name = monsters[monsterIndex];
             Description = monsterDescriptions[monsterIndex];
-            Health = Utility.GetRandomIndex(minHealth, maxHealth) + ChallengeRating * 2;
-            ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + ChallengeRating * 2;
-            XP = Utility.GetRandomIndex(ChallengeRating * 10, ChallengeRating * 20);
+            Health = Utility.GetRandomIndex(minHealth, maxHealth) + (ChallengeRating * 2);
+            ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
+            XP = ChallengeRating * 50;
         }
         public override void Attack(Character targetCharacter)
         {
@@ -93,8 +90,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             else
             {
                 int max = Math.Max(5, ChallengeRating * 4);
-                int attack = Utility.GetRandomIndex(3, max) + 2;
-                int damage = Utility.GetRandomIndex(3, max) + 2;
+                int attack = Utility.GetRandomIndex(minAttack, maxAttack) + (ChallengeRating * 2);
+                int damage = Utility.GetRandomIndex(minDamage, maxDamage) + (ChallengeRating * 2);
                 if (targetCharacter.IsDodging)
                 {
                     attack = attack / 2;
