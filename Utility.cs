@@ -16,6 +16,71 @@
             "\\     |      | |      |  |      |     /",
             " \\____|______|_|______|__|______|____/ "
          };
+        string[] asciiArt = new string[]
+{
+    "                        .",
+    "                        .",
+    "              /^\\     .",
+    "         /\\   \"V\"",
+    "        /__\\   I      O  o",
+    "       //..\\\\  I     .",
+    "       \\].`[/  I",
+    "       /l\\/j\\  (]    .  O",
+    "      /. ~~ ,\\/I          .",
+    "      \\\\L__j^\\/I       o",
+    "       \\/--v}  I     o   .",
+    "       |    |  I   _________",
+    "       |    |  I c(`       ')o",
+    "       |    l  I   \\.     ,/",
+    "     _/j  L l\\_!  _//^---^\\\\_    -Row",
+    "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+};
+        string[] asciiArtWin = new string[]
+        {
+    "                        /\\",
+    "                        ||",
+    "                        ||",
+    "                        ||",
+    "                        ||                                               ~-----~",
+    "                        ||                                            /===--  ---~~~",
+    "                        ||                   ;'                 /==~- --   -    ---~~~",
+    "                        ||                (/ ('              /=----         ~~_  --(  '",
+    "                        ||             ' / ;'             /=----               \\__~",
+    "     '                ~==_=~          '('             ~-~~      ~~~~        ~~~--\\~'",
+    "     \\\\                (c_\\_        .i.             /~--    ~~~--   -~     (     '",
+    "      `\\               (}| /       / : \\           / ~~------~     ~~\\   (",
+    "      \\ '               ||/ \\      |===|          /~/             ~~~ \\ \\(",
+    "      ``~\\              ~~\\  )~.~_ >._.< _~-~     |`_          ~~-~     )\\",
+    "       '-~                 {  /  ) \\___/ (   \\   |` ` _       ~~         '",
+    "       \\ -~\\                -<__/  -   -  L~ -;   \\\\    \\ _ _/",
+    "       `` ~~=\\                  {    :    }\\ ,\\    ||   _ :(",
+    "        \\  ~~=\\__                \\ _/ \\_ /  )  } _//   ( `|'",
+    "        ``    , ~\\--~=\\           \\     /  / _/ / '    (   '",
+    "         \\`    } ~ ~~ -~=\\   _~_  / \\ / \\ )^ ( // :_  / '",
+    "         |    ,          _~-'   '~~__-_  / - |/     \\ (",
+    "          \\  ,_--_     _/              \\_'---', -~ .   \\",
+    "           )/      /\\ / /\\   ,~,         \\__ _}     \\_  \"~_",
+    "           ,      { ( _ )'} ~ - \\_    ~\\  (-:-)       \"\\   ~ ",
+    "                  /'' ''  )~ \\~_ ~\\   )->  \\ :|    _,       \" ",
+    "                 (\\  _/)''} | \\~_ ~  /~(   | :)   /          }",
+    "                <``  >;,,/  )= \\~__ {{{ '  \\ =(  ,   ,       ;",
+    "               {o_o }_/     |v  '~__  _    )-v|  \"  :       ,\"",
+    "               {/\"\\_)       {_/'  \\~__ ~\\_ \\\\_} '  {        /~\\",
+    "               ,/!          '_/    '~__ _-~ \\_' :  '      ,\"  ~ ",
+    "              (''`                  /,'~___~    | /     ,\"  \\ ~' ",
+    "             '/, )                 (-)  '~____~\";     ,\"     , }",
+    "           /,')                    / \\         /  ,~-\"       '~'",
+    "       (  ''/                     / ( '       /  /          '~'",
+    "    ~ ~  ,, /) ,                 (/( \\)      ( -)          /~'",
+    "  (  ~~ )`  ~}                   '  \\)'     _/ /           ~'",
+    " { |) /`,--.(  }'                    '     (  /          /~'",
+    "(` ~ ( c|~~| `}   )                        '/:\\         ,'",
+    " ~ )/``) )) '|),                          (/ | \\)                 -sjm",
+    "  (` (-~(( `~`'  )                        ' (/ '",
+    "   `~'    )'`')                              '",
+    "     ` ``"
+        };
+
 
         public static int Delay = 120;
         public static List<string> GameHistory = new List<string>();
@@ -98,5 +163,23 @@
             return random.Next(min, max);
         }
 
+        public static void SaveGameHistory()
+        {
+            try
+            {
+                string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                string folderPath = Path.Combine(documentsPath, "GameSaves");
+                Directory.CreateDirectory(folderPath);
+                string fileName = $"game-history-{DateTime.Now:yyyyMMdd-HHmmss}.txt";
+                string fullPath = Path.Combine(folderPath, fileName);
+                File.WriteAllLines(fullPath, GameHistory);
+                Console.WriteLine($"Your progress has been saved to file '{fullPath}'");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to save game: {ex.Message}");
+            }
+            
+        }
     }
 }

@@ -321,6 +321,9 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void BossFight(Dungeon dungeon, int plotIndex)
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;    // Text color
+            Console.BackgroundColor = ConsoleColor.Blue;      // Background color
+            Console.Clear();
             Boss boss = Boss.GetPlotBoss(plotIndex);
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
@@ -339,7 +342,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 GainXp(boss);
                 XpLevelUp();
             }
-            RestCounter += 1; // Chamber will already have loot, if anything maybe I could leave the bosses "Relics" or something 
+            RestCounter += 1; // Chamber will already have loot, if anything maybe I could leave the bosses "Relics" or something
+            Console.ResetColor();
         }
         public void FightMenu(Monster monster)
         {
@@ -615,8 +619,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             string decision = Utility.Read();
             if (decision == "y")
             {
-                File.WriteAllLines("game-history.txt", Utility.GameHistory);
-                Console.WriteLine("Your progress has been saved to file 'game-history.txt'");
+                Utility.SaveGameHistory();
             }
             IsPlaying = false;
         }
