@@ -323,11 +323,11 @@ namespace Dungeon_Crawler
                 {
                     chamberPotion = new PotionOfKnowledge();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 900)
+                } else if (potionType < 140)
                 {
                     chamberPotion = new PotionOfRestoration();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 280)
+                } else if (potionType < 260)
                 {
                     chamberPotion = new PotionOfMana();
                     ChamberLoot.Add(chamberPotion);
