@@ -14,7 +14,7 @@ namespace Dungeon_Crawler
         }
         public static void GameLaunch(Player player)
         {
-            Dungeon dungeon = new Dungeon();
+            Dungeon dungeon = Dungeon.GetInstance();
             player.IsPlaying = true;
 
             while (player.IsPlaying && player.Health > 0)

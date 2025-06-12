@@ -4,6 +4,9 @@ namespace Dungeon_Crawler
 {
     public class Dungeon
     {
+        private static Dungeon _dungeonInstance;
+        private static readonly object _lock = new object();
+        
         public  Dictionary<string, Chamber> ExploredChambers { get; set; }
         // List of monsters by challenge rating, monsters by storyline, battlefields, 
         private readonly int _nextId = 1; // Descriptions belong in the chambers class, should be generated at creation (as well as passageway descriptions)
@@ -24,11 +27,28 @@ namespace Dungeon_Crawler
 
 
         public Chamber StartingPoint { get; set; }
-        public Dungeon()
-        {                                       
+        private Dungeon() 
+        {
             StartingPoint = new Chamber("00", "Welcome to the Dungeon of Draegmor. This is the first chamber.");
-            ExploredChambers = new Dictionary<string, Chamber>();
-            ExploredChambers.Add("00", StartingPoint);
+            ExploredChambers = new Dictionary<string, Chamber>
+    {
+        { "00", StartingPoint }
+    };
+        }
+
+        public static Dungeon GetInstance()
+        {
+            if (_dungeonInstance == null)
+            {
+                lock (_lock)
+                {
+                    if (_dungeonInstance == null)
+                    {
+                        _dungeonInstance = new Dungeon();
+                    }
+                }
+            }
+            return _dungeonInstance;
         }
         public Chamber GenerateChamber(string newRoomId)
         {
