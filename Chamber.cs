@@ -63,10 +63,10 @@ namespace Dungeon_Crawler
         public int ChamberGold { get; set; } = 0;
         // Event master control
 
-        private static readonly int HazardChance = 5;
-        private static readonly int TrapChance = 5;
-        private static readonly int MonsterChance = 5;
-        private static readonly int NpcChance = 80;
+        private static readonly int HazardChance = 10;
+        private static readonly int TrapChance = 18;
+        private static readonly int MonsterChance = 28;
+        private static readonly int NpcChance = 10;
         private static readonly int MerchantChance = 5;
         private static readonly int MasterIndex = 100;
 
@@ -84,6 +84,7 @@ namespace Dungeon_Crawler
             SouthPassage = false;
             EastPassage = true;
             WestPassage = true;
+            RandomizePassages();
             ChamberLoot = new List<Item>();
             if (Utility.FiftyFifty())
             {
@@ -133,10 +134,10 @@ namespace Dungeon_Crawler
         }
         public void RandomizePassages()
         {
-            NorthPassage = Utility.FiftyFifty();
-            SouthPassage= Utility.FiftyFifty();
-            EastPassage= Utility.FiftyFifty();
-            WestPassage= Utility.FiftyFifty();
+            NorthPassage = Utility.ChanceBool(70);
+            SouthPassage= Utility.ChanceBool(70);
+            EastPassage= Utility.ChanceBool(70);
+            WestPassage= Utility.ChanceBool(70);
         }
         public void ReturnPassages(string choice)
         {

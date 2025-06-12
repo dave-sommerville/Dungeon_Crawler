@@ -122,7 +122,6 @@ namespace Dungeon_Crawler
             Utility.PrintLines();
             Utility.Print("WELCOME TO\nTHE DUNGEON OF DRAEGMOR ");
             PrintASCII(Utility.Wizard);
-            Utility.PrintLines();
         }
         public static void PrintASCII(string[] ascii)
         {

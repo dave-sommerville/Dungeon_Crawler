@@ -15,7 +15,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public int ArmorClass { get; set; }
         public int Health { get; set; }
         public int XP { get; set; } = 0;
-        public Item[] Inventory { get; set; } = new Item[4];
+        public Item[] Inventory { get; set; } = new Item[10];
 
         public Character()
         {

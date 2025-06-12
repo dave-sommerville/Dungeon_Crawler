@@ -29,7 +29,7 @@ namespace Dungeon_Crawler
             "A large stone slab blocks your path, requiring you to lift or roll it away to continue forward."
         };
 
-        public int HiddenDifficulty { get; set; }
+        //public int HiddenDifficulty { get; set; }
         public int TrapDifficulty { get; set; }
         public int Damage { get; set; }
         public string Description { get; set; }
@@ -38,19 +38,19 @@ namespace Dungeon_Crawler
         
         public Trap(int trapLvl)
         {
-            Athletics = Utility.FiftyFifty();
-            Dexterity = !Athletics;
+            //Athletics = Utility.FiftyFifty();
+            //Dexterity = !Athletics;
             Description = DescribeTrap();
-            HiddenDifficulty = 12;
+            //HiddenDifficulty = 12;
             Damage = trapLvl * 10;
         }
         public string DescribeTrap()
         {
             string description = "";
-            if(Athletics)
+            if(Utility.FiftyFifty())
             {
                 description = strengthTraps[Utility.GetRandomIndex(0, strengthTraps.Length)];
-            } else if(Dexterity)
+            } else
             {
                 description = dexterityTraps[Utility.GetRandomIndex(0, dexterityTraps.Length)];
             }
@@ -58,44 +58,35 @@ namespace Dungeon_Crawler
         }
         public void TrapCheck(Player player)
         {
-            int modifer = 8;
-            if(player.Perception >= HiddenDifficulty)
+            //int modifer = 8;
+            //if(player.Perception >= HiddenDifficulty)
+            //{
+            //    Utility.Print("You see a trap.");
+            //    modifer = 4;
+            //}
+            //int trapCheck = Utility.GetRandomIndex(1, modifer);
+            //if(trapCheck == 1)
+            //{
+            //    return;
+            //} else
+            //{
+            //    Utility.Print("The trap triggers before you can avoid it.");
+            //    TriggerTrap(player);
+            //}
+            TrapDifficulty = Utility.GetRandomIndex(2, 20);
+            Damage = Utility.GetRandomIndex(1, 10) * TrapDifficulty;
+            Utility.Print($"You notice a trap.\n");
+            Utility.Print($"{Description}");
+            if (TrapDifficulty > 9)
             {
-                Utility.Print("You see a trap.");
-                modifer = 4;
-            }
-            int trapCheck = Utility.GetRandomIndex(1, modifer);
-            if(trapCheck == 1)
-            {
-                return;
+                Utility.Print($"You failed to avoid the trap and you take full damage.");
             } else
             {
-                Utility.Print("The trap triggers before you can avoid it.");
-                TriggerTrap(player);
+                Damage = Damage / 2;
+                Utility.Print($"You manage to avoid the trap and take less damage.");
             }
-        }
-        public void TriggerTrap(Player player)
-        {
-            Utility.Print(Description);
-            if(Athletics)
-            {
-                if(player.Athletics >= TrapDifficulty)
-                {
-                    Utility.Print("Using your strength you manage to reduce some of the damage");
-                    Damage = Damage / 2;
-                }
-            }
-            if (Dexterity)
-            {
-                if (player.Dexterity >= TrapDifficulty)
-                {
-                    Utility.Print("Thanks to your quick reflexes, you avoid some of the damage");
-                    Damage = Damage / 2;
-                }
-            }
-            player.Health -= Damage;
-            Utility.Print($"The trap deals {Damage}");
-            player.PlayerDeathCheck();
+            Utility.Print($"You take {Damage} points of damage.");
+
         }
     }
 }

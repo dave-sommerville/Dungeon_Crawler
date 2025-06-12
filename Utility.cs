@@ -166,6 +166,18 @@
             Random random = new Random();
             return random.Next(min, max);
         }
+        public static bool ChanceBool(int chanceIndex)
+        {
+            int chance = GetRandomNumber(1, 101);
+            if (chance <= chanceIndex) 
+            {
+                return true; 
+            }
+            else
+            {
+                return false; 
+            }
+        }
 
         public static void SaveGameHistory()
         {
