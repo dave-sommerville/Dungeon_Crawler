@@ -100,6 +100,12 @@ namespace Dungeon_Crawler
                 playerDesc = "";
             }
             Player player = new Player(playerName, playerDesc);
+
+            Utility.Print($"Welcome {player.Name} to the Dungeon of Draegmor.\nYou are about to embark on a journey that will test your skills, courage, and resolve.");
+            Utility.Print("");
+            Utility.Print("");
+            PrintASCII(Utility.Door);
+            Utility.Print("");
             //Utility.Print("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
 
             //Utility.Print("You have the keys to your own destiny. You have two skills points you can spend now.");
@@ -115,12 +121,15 @@ namespace Dungeon_Crawler
         {
             Utility.PrintLines();
             Utility.Print("WELCOME TO\nTHE DUNGEON OF DRAEGMOR ");
-            for (int i = 0; i < Utility.EntranceArt.Length; i++)
-            {
-                Utility.Print(Utility.EntranceArt[i]);
-            }
+            PrintASCII(Utility.Wizard);
             Utility.PrintLines();
         }
-
+        public static void PrintASCII(string[] ascii)
+        {
+            foreach (string line in ascii)
+            {
+                Utility.Print(line);
+            }
+        }
     }
 }
