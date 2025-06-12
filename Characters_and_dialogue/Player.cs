@@ -212,31 +212,30 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             }
             if (inventoryFull)
             {
-                for (int i = 0; i < Inventory.Length; i++) {
-                    Utility.Print("Inventory is currently full, please select an item to discard");
-                    PrintInventory();
-                    int decision = Utility.PrintMenu(Inventory.Length) - 1;
-                    Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
-                    bool validDecision = false;
-                    do
+                Utility.Print("Inventory is currently full, please select an item to discard");
+                PrintInventory();
+                int decision = Utility.PrintMenu(Inventory.Length) - 1;
+                Utility.Print($"You have selected {Inventory[decision].Name} to discard. Continue? Y/N");
+                bool validDecision = false;
+                do
+                {
+                    string discardDecision = Utility.Read();
+                    if (discardDecision == "y")
                     {
-                        string discardDecision = Utility.Read();
-                        if (discardDecision == "y")
-                        {
-                            Inventory[decision] = item;
-                            Utility.Print($"{item.Name} has been added to your inventory");
-                        }
-                        else if (discardDecision == "n")
-                        {
-                            Utility.Print("Item not added to inventory");
-                            validDecision = true;
-                        }
-                        else
-                        {
-                            Utility.Print("Please enter a valid choice");
-                        }
-                    } while (validDecision);
-                }
+                        Inventory[decision] = item;
+                        Utility.Print($"{item.Name} has been added to your inventory");
+                        validDecision = true;
+                    }
+                    else if (discardDecision == "n")
+                    {
+                        Utility.Print("Item not added to inventory");
+                        validDecision = true;
+                    }
+                    else
+                    {
+                        Utility.Print("Please enter a valid choice");
+                    }
+                } while (!validDecision);
             }
         }
         public void PrintInventory()
@@ -306,6 +305,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void MonsterFight(Monster monster)
         {
+            Utility.Print("");
+            Utility.Print("");
             do
             {
                 FightMenu(monster);
@@ -321,14 +322,26 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void BossFight(Dungeon dungeon, int plotIndex)
         {
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
             Console.ForegroundColor = ConsoleColor.Yellow;    // Text color
             Console.BackgroundColor = ConsoleColor.Blue;      // Background color
             Console.Clear();
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
+
             Boss boss = Boss.GetPlotBoss(plotIndex);
             Chamber battlefield = dungeon.GenerateChamber(LocationId);
             battlefield.Monster = boss;
             dungeon.ExploredChambers[LocationId] = battlefield;
             boss.InteractionInProgress = true;
+            Utility.Print($"{boss.Name} stands before you!");
+            Utility.Print($"{boss.Description}");
+            Utility.Print("");
             boss.Dialogue.Node(boss);
             do
             {
@@ -343,6 +356,10 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 XpLevelUp();
             }
             RestCounter += 1; // Chamber will already have loot, if anything maybe I could leave the bosses "Relics" or something
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
+            Utility.Print("");
             Console.ResetColor();
         }
         public void FightMenu(Monster monster)

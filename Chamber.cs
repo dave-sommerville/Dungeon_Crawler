@@ -63,11 +63,11 @@ namespace Dungeon_Crawler
         public int ChamberGold { get; set; } = 0;
         // Event master control
 
-        private static readonly int HazardChance = 20;
-        private static readonly int TrapChance = 20;
-        private static readonly int MonsterChance = 20;
-        private static readonly int NpcChance = 20;
-        private static readonly int MerchantChance = 20;
+        private static readonly int HazardChance = 5;
+        private static readonly int TrapChance = 5;
+        private static readonly int MonsterChance = 5;
+        private static readonly int NpcChance = 80;
+        private static readonly int MerchantChance = 5;
         private static readonly int MasterIndex = 100;
 
 
@@ -187,6 +187,8 @@ namespace Dungeon_Crawler
         public Monster MonsterEvent(Player player)
         {
             Monster monster = new Monster(player.PlayerLevel);
+            Utility.Print($"{monster.Name} appears before you.");
+            Utility.Print($"{monster.Description}");
             return monster;
         }
         public void Rest(Player player)

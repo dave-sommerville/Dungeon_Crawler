@@ -100,15 +100,15 @@ namespace Dungeon_Crawler
                 playerDesc = "";
             }
             Player player = new Player(playerName, playerDesc);
-            Utility.Print("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
+            //Utility.Print("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
 
-            Utility.Print("You have the keys to your own destiny. You have two skills points you can spend now.");
-            Utility.Print("You may spend them on Athletics, Perception, or Dexterity");
-            Utility.Print("Please enter which skill you choose first");
-            player.ApplySkillPoint();
-            Utility.Print("Please enter which skill you choose second");
-            player.ApplySkillPoint();
-            Utility.Print("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
+            //Utility.Print("You have the keys to your own destiny. You have two skills points you can spend now.");
+            //Utility.Print("You may spend them on Athletics, Perception, or Dexterity");
+            //Utility.Print("Please enter which skill you choose first");
+            //player.ApplySkillPoint();
+            //Utility.Print("Please enter which skill you choose second");
+            //player.ApplySkillPoint();
+            //Utility.Print("You have chosen your skills wisely, now find all the bravery your heart has to muster and proceed");
             return player;
         }
         public static void PrintIntro()

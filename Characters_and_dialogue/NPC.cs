@@ -263,15 +263,15 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             {
                 case 1:
                     SecretText.Node(this);
-                    BagChecker(player);
+                    EquipBagOfCarrying(player);
                     break;
                 case 2:
                     JokeText.Node(this);
-                    BagChecker(player);
+                    EquipBagOfCarrying(player);
                     break;
                 case 3:
                     FactText.Node(this);
-                    BagChecker(player);
+                    EquipBagOfCarrying(player);
                     break;
                 default:
                     Console.WriteLine("Invalid choice, please try again.");
@@ -281,7 +281,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public bool BagChecker(Player player)
         {
-            if(player.Charisma > 2 && !HasBag && player.PlayerLevel >= 1)
+            if(player.Charisma > 5 && !HasBag && player.PlayerLevel >= 3)
             {
                 return true;
             } else
@@ -319,16 +319,15 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void EquipBagOfCarrying(Player player)
         {
-            if (BagChecker(player)) {
-                {
-
-                }
+            if (BagChecker(player))
+            {
                 Item[] bagOfCarrying = new Item[20];
-                for (int i = 0; i < Inventory.Length; i++)
+                for (int i = 0; i < player.Inventory.Length; i++)
                 {
-                    bagOfCarrying[i] = Inventory[i];
+                    bagOfCarrying[i] = player.Inventory[i];
                 }
                 player.Inventory = bagOfCarrying;
+                HasBag = true; // Mark as given
                 Utility.Print("Y'know what, I rather like you. Here, take this magical loot bag!");
             }
         }

@@ -99,12 +99,12 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 }
                 if (attack > targetCharacter.ArmorClass)
                 {
-                    Utility.Print($"{Name} attacked {targetCharacter.Name} and hit for {damage} damage");
+                    Utility.Print($"You attacked {targetCharacter.Name} and hit for {damage} damage");
                     targetCharacter.Health -= damage;
                 }
                 else
                 {
-                    Utility.Print($"{Name} attacked but missed");
+                    Utility.Print($"You attacked but missed");
                 }
             }
         }
