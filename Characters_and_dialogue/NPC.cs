@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Dungeon_Crawler.Items;
 using Dungeon_Crawler.Items.Potions;
+using Dungeon_Crawler.Utilities;
 
 namespace Dungeon_Crawler.Characters_and_dialogue
 {
@@ -332,10 +333,11 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 Utility.Print("Y'know what, I rather like you. Here, take this magical loot bag!");
             }
         }
-        public void EquipMap(Player player)
-        {
-            Utility.Print("Map is now equipped");
-        }
+
+        //public void EquipMap(Player player)
+        //{
+        //    Utility.Print("Map is now equipped");
+        //}
         public void MarketPlace(Player player) 
         {
             StockMarketPlace();

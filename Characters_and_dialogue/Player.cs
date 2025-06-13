@@ -1,5 +1,6 @@
 ﻿using Dungeon_Crawler.Items;
 using Dungeon_Crawler.Items.Potions;
+using Dungeon_Crawler.Utilities;
 
 namespace Dungeon_Crawler.Characters_and_dialogue
 {
@@ -84,7 +85,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             }
             if (GreyStoneSpire != null)
             {
-                Utility.Print($"Artifact: Grey Stone Spire - Details: None");
+                Utility.Print($"Artifact: Greystone Crystal - Details: {GreyStoneSpire.Description}");
             }
         }
         public void NavCase(string decision, Chamber currentChamber)
@@ -236,18 +237,21 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void PrintInventory()
         {
-            Utility.Print("Current Inventory:");
+            Thread.Sleep(Utility.Delay);
+            Console.WriteLine("Current Inventory:");
             for (int i = 0; i < Inventory.Length; i++)
             {
                 bool inventoryEmpty = true;
                 if (Inventory[i] != null)
                 {
-                    Utility.Print($"{i + 1}) {Inventory[i].Name}");
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine($"{i + 1}) {Inventory[i].Name}");
                     inventoryEmpty = false;
                 }
                 if(inventoryEmpty)
                 {
-                    Utility.Print($"{i + 1}) Inventory Slot Empty");
+                    Thread.Sleep(Utility.Delay);
+                    Console.WriteLine($"{i + 1}) Inventory Slot Empty");
                 }
             }
         }
@@ -517,35 +521,36 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 GameOver();
             }
         }
-        public void ApplySkillPoint()
-        {
-            bool skillApplied = false;
-            while (!skillApplied)
-            {
-                string skill = Console.ReadLine().Trim().ToLower();
-                switch (skill)
-                {
-                    case "athletics":
-                    case "ath":
-                        Athletics += 1;
-                        skillApplied = true;
-                        break;
-                    case "perception":
-                    case "per":
-                        Perception += 1;
-                        skillApplied = true;
-                        break;
-                    case "dexterity":
-                    case "dex":
-                        Dexterity += 1;
-                        skillApplied = true;
-                        break;
-                    default:
-                        Utility.Print("Invalid skill");
-                        break;
-                }
-            }
-        }
+
+        //public void ApplySkillPoint()
+        //{
+        //    bool skillApplied = false;
+        //    while (!skillApplied)
+        //    {
+        //        string skill = Console.ReadLine().Trim().ToLower();
+        //        switch (skill)
+        //        {
+        //            case "athletics":
+        //            case "ath":
+        //                Athletics += 1;
+        //                skillApplied = true;
+        //                break;
+        //            case "perception":
+        //            case "per":
+        //                Perception += 1;
+        //                skillApplied = true;
+        //                break;
+        //            case "dexterity":
+        //            case "dex":
+        //                Dexterity += 1;
+        //                skillApplied = true;
+        //                break;
+        //            default:
+        //                Utility.Print("Invalid skill");
+        //                break;
+        //        }
+        //    }
+        //}
         public void GainXp(Monster monster)
         {
             int xp = monster.XP;
@@ -556,12 +561,13 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Utility.Print("You gain an increase to your overall modifier.");
             Modifier += 1;
         }
-        public void PointIncreaseWrapper()
-        {
-            Utility.Print("You may spend another skill point on Athletics, Perception, or Dexterity");
-            Utility.Print("Please enter which skill you choose first");
-            ApplySkillPoint();
-        }
+
+        //public void PointIncreaseWrapper()
+        //{
+        //    Utility.Print("You may spend another skill point on Athletics, Perception, or Dexterity");
+        //    Utility.Print("Please enter which skill you choose first");
+        //    ApplySkillPoint();
+        //}
         public void GainHP()
         {
             Health += 15;
@@ -578,7 +584,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             else if (XP > 200 && PlayerLevel == 2)
             {
                 Utility.Print("You have gained a level!");
-                PointIncreaseWrapper();
+                //PointIncreaseWrapper();
                 PlayerLevel = 3;
             }
             else if (XP > 300 && PlayerLevel == 3)
@@ -596,7 +602,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             else if (XP > 500 && PlayerLevel == 5)
             {
                 Utility.Print("You have gained a level!");
-                PointIncreaseWrapper();
+                //PointIncreaseWrapper();
                 PlayerLevel = 6;
             }
             else if (XP > 600 && PlayerLevel == 6)
@@ -614,7 +620,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             else if (XP > 800 && PlayerLevel == 8)
             {
                 Utility.Print("You have gained a level!");
-                PointIncreaseWrapper();
+                //PointIncreaseWrapper();
                 PlayerLevel = 9;
             }
             else if (XP > 900 && PlayerLevel == 9)

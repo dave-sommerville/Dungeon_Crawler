@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Intrinsics.X86;
 using Dungeon_Crawler.Characters_and_dialogue;
+using Dungeon_Crawler.Utilities;
 
 namespace Dungeon_Crawler
 {
@@ -103,7 +104,7 @@ namespace Dungeon_Crawler
             Utility.Print($"Welcome {player.Name} to the Dungeon of Draegmor.\nYou are about to embark on a journey that will test your skills, courage, and resolve.");
             Utility.Print("");
             Utility.Print("");
-            PrintASCII(Utility.Door);
+            PrintASCII(ASCII.Door);
             Utility.Print("");
             //Utility.Print("You have three  skills that you will be tested on,\non top of maintaining your health and sanity");
 
@@ -119,12 +120,12 @@ namespace Dungeon_Crawler
         public static void PrintIntro()
         {
             Utility.PrintLines();
-            Utility.Print(" THE");
-            Utility.Print("DUNGEON");
-            Utility.Print(" OF");
-            Utility.Print("DRAEGMOR");
+            Utility.Print("             THE");
+            Utility.Print("           DUNGEONS");
+            Utility.Print("              OF");
+            Utility.Print("           DRAEGMOR");
 
-            PrintASCII(Utility.Wizard);
+            PrintASCII(ASCII.Wizard);
         }
         public static void PrintASCII(string[] ascii)
         {

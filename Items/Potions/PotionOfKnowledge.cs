@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Characters_and_dialogue;
+using Dungeon_Crawler.Utilities;
 namespace Dungeon_Crawler.Items.Potions
 {
     public class PotionOfKnowledge : Potion
@@ -12,7 +13,7 @@ namespace Dungeon_Crawler.Items.Potions
         public override void EquipItem(Player player)
         {
             Utility.Print("You feel a sure of ability well up in you. You can spend one skill point on a skill of your choice");
-            player.ApplySkillPoint();
+            player.IncreaseModifier();
         }
     }
 }

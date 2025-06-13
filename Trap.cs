@@ -1,4 +1,5 @@
 ﻿using Dungeon_Crawler.Characters_and_dialogue;
+using Dungeon_Crawler.Utilities;
 
 namespace Dungeon_Crawler
 {//Mimic
@@ -74,7 +75,7 @@ namespace Dungeon_Crawler
             //    TriggerTrap(player);
             //}
             TrapDifficulty = Utility.GetRandomIndex(2, 20);
-            Damage = Utility.GetRandomIndex(1, 10) * TrapDifficulty;
+            Damage = Utility.GetRandomIndex((player.PlayerLevel * 5), (player.PlayerLevel * 10));
             Utility.Print($"You notice a trap.\n");
             Utility.Print($"{Description}");
             if (TrapDifficulty > 9)

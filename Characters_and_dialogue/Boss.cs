@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using Dungeon_Crawler.Characters_and_dialogue;
 using Dungeon_Crawler.Spells;
-    
+using Dungeon_Crawler.Utilities;
+
 namespace Dungeon_Crawler {
     public class Boss : Monster
     {
