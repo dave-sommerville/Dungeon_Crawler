@@ -10,7 +10,7 @@ namespace Dungeon_Crawler {
         public static string DrowOneStatement = "Who dares trespass in the Kingdom of Mother Lolth";
         public static string[] DrowOneOptions = new string[]
         {
-            "Please have mercy.",
+            "Please have mercy!",
             "It is I"
         };
         public static DialogueNode[] DrowOneResponseOne = new DialogueNode[]
@@ -20,8 +20,8 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] DrowOneResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("These halls weren't forged by mercy.", null, null),
-            new DialogueNode("Cowards deserve a truly terrible demise.", null, null)
+            new DialogueNode("You say 'Please have mercy!'\nYour enemy replies, 'These halls weren't forged by mercy.\nPrepare to die.'", null, null),
+            new DialogueNode("You say 'Please have mercy!'\nYour enemy replies, 'Cowards deserve a truly terrible demise.'", null, null)
         };
         public static DialogueNode[][] DrowOneResponses = new DialogueNode[][]
         {
@@ -30,21 +30,21 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode DrowOneText = new DialogueNode(DrowOneStatement, DrowOneOptions, DrowOneResponses);
 
-        public static string DrowTwoStatement = "I have heard the stone singing, she calls for Mother.";
+        public static string DrowTwoStatement = "I have heard our sweet Crystal's song, she calls for Mother.";
         public static string[] DrowTwoOptions = new string[]
         {
-            "Say 'What are you, fowl beast?'",
+            "Say 'What are you, foul beast?'",
             "Say 'The only singing shall be my blade beast.'"
         };
         public static DialogueNode[] DrowTwoResponseOne = new DialogueNode[]
         {
-            new DialogueNode("Before the light, I was. When the light is no longer, still I shall be.", null, null),
-            new DialogueNode("I am your mortality coming to meet you.", null, null)
+            new DialogueNode("You say 'What are you, foul beast?'\nYour enemy replies, 'Before the light, I was. When the light is no longer, still I shall be.'", null, null),
+            new DialogueNode("You say 'What are you, foul beast?'\nYour enemy replies, 'I am your mortality coming to meet you.'", null, null)
         };
         public static DialogueNode[] DrowTwoResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("Many blades have whispered in my presence, yet all silent now.", null, null),
-            new DialogueNode("What is a blade to a demon.", null, null)
+            new DialogueNode("You say 'The only singing shall be my blade, beast.'\nYour enemy replies, 'Many blades have whispered in my presence, yet all silent now.'", null, null),
+            new DialogueNode("You say 'The only singing shall be my blade, beast.'\nYour enemy replies, 'What is a blade to a demon.'", null, null)
         };
         public static DialogueNode[][] DrowTwoResponses = new DialogueNode[][] 
         { 
@@ -67,13 +67,13 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] DrowThreeResponseOne = new DialogueNode[]
         {
-            new DialogueNode("Goddess you say? What you killed was hardly a child compared to my Goddess.", null, null),
-            new DialogueNode("That was merely a baby you slaughtered. You have no idea what awaits beyond me.", null, null)
+            new DialogueNode("You say 'Your Goddess has already been bested.'\nYour enemy replies, 'Goddess you say? What you killed was hardly a child compared to my Goddess.'", null, null),
+            new DialogueNode("You say 'Your Goddess has already been bested.'\nYour enemy replies, 'That was merely a baby you slaughtered. You have no idea what awaits beyond me.'", null, null)
         };
         public static DialogueNode[] DrowThreeResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("Their lives are small sacrifices for the new Age that is upon us. The Age of the Spider.", null, null),
-            new DialogueNode("Only whimpering excuses for creatures believe in friends.", null, null)
+            new DialogueNode("You say 'Come to join the fate of your friends, have we?'\nYour enemy replies, 'Their lives are small sacrifices for the new Age that is upon us. The Age of the Spider.", null, null),
+            new DialogueNode("You say 'Come to join the fate of your friends, have we?'\nYour enemy replies, 'Only whimpering excuses for creatures believe in friends.'", null, null)
         };
         public static DialogueNode[][] DrowThreeResponses = new DialogueNode[][]
         {
@@ -98,13 +98,13 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] SnakeOneResponseOne = new DialogueNode[]
         {
-            new DialogueNode("As you say.", null, null),
-            new DialogueNode("We know what that is, we shall retrieve it.", null, null)
+            new DialogueNode("You say 'Why don't you come within my blades reach to find out?'\nYour enemy replies, 'As you say.'", null, null),
+            new DialogueNode("You say 'Why don't you come within my blades reach to find out?'\nYour enemy replies, 'We know what that is, we shall retrieve it.'", null, null)
         };
         public static DialogueNode[] SnakeOneResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("And yet, it seems trouble wants you.", null, null),
-            new DialogueNode("Your wishes are no concern of mine.", null, null)
+            new DialogueNode("You say 'I want no trouble.'\nYour enemy replies, 'And yet, it seems trouble wants you.", null, null),
+            new DialogueNode("You say 'I want no trouble.'\nYour enemy replies, 'Your wishes are no concern of mine.", null, null)
         };
         public static DialogueNode[][] SnakeOneResponses = new DialogueNode[][]
         {
@@ -121,13 +121,13 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] SnakeTwoResponseOne = new DialogueNode[]
         {
-            new DialogueNode("As a pawn, perhaps. But the stone longs for Master as much as They long for It.", null, null),
-            new DialogueNode("Then it is you we shall have to take.", null, null)
+            new DialogueNode("You say 'It would seem the stone has chosen to belong to me.'\nYour enemy replies, 'As a pawn, perhaps. But the stone longs for Master as much as They long for It.", null, null),
+            new DialogueNode("You say 'It would seem the stone has chosen to belong to me.'\nYour enemy replies, 'Then it is you we shall have to take.", null, null)
         };
         public static DialogueNode[] SnakeTwoResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("Surrender now and survive long enough to meet Them.", null, null),
-            new DialogueNode("That stone is all that stands between Master and Their ascension.", null, null)
+            new DialogueNode("You say 'Tell me more about this master of yours'\nYour enemy replies, 'Surrender now and survive long enough to meet Them.", null, null),
+            new DialogueNode("You say 'Tell me more about this master of yours'\nYour enemy replies, 'That stone is all that stands between Master and Their ascension.", null, null)
         };
         public static DialogueNode[][] SnakeTwoResponses = new DialogueNode[][]
         {
@@ -145,18 +145,18 @@ namespace Dungeon_Crawler {
         };
         public static string[] SnakeThreeOptionsTwo = new string[]
         {
-            "Then today shall be the day you almost became a god.",
-            "Why would you belive such a thing?"
+            "Say 'Then today shall be the day you almost became a god.'",
+            "Say 'Why would you believe such a thing?'"
         };
         public static DialogueNode[] SnakeThreeResponseOne = new DialogueNode[]
 {
-            new DialogueNode("Peace will be forgotten throughout the land once I have that gemstone.", null, null),
-            new DialogueNode("Hmmm, how about tearing you limb from limb?", null, null)
+            new DialogueNode("You say 'Peacefully on a mountain of gold.'\nYour enemy replies, 'Peace will be forgotten throughout the land once I have that gemstone.", null, null),
+            new DialogueNode("You say 'Peacefully on a mountain of gold.'\nYour enemy replies, 'Hmmm, how about tearing you limb from limb?", null, null)
 };
         public static DialogueNode[] SnakeThreeResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("I respect that. I do. But I often respect my food.", null, null),
-            new DialogueNode("Perhaps just a slow bleed for the day then.", null, null)
+            new DialogueNode("You say 'I fear not death nor shall it be mine today'\nYour enemy replies, 'I respect that. I do. But I often respect my food.", null, null),
+            new DialogueNode("You say 'I fear not death nor shall it be mine today'\nYour enemy replies, 'Perhaps just a slow bleed for the day then.", null, null)
         };
 
         public static DialogueNode[][] SnakeResponses = new DialogueNode[][]
@@ -182,13 +182,13 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] NecroOneResponseOne = new DialogueNode[]
         {
-            new DialogueNode("We have been called evil, but we think of it as more of recycling than anything.", null, null),
-            new DialogueNode("We may look evil to you. You look useable to us. Especially that gemstone.", null, null)
+            new DialogueNode("You say 'What kind of evil are you?'\nYour enemy replies, 'We have been called evil, but we think of it as more of recycling than anything.", null, null),
+            new DialogueNode("You say 'What kind of evil are you?'\nYour enemy replies, 'We may look evil to you. You look useable to us. Especially that gemstone.", null, null)
         };
         public static DialogueNode[] NecroOneResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("You know, on breath support, blood filled adventurers.", null, null),
-            new DialogueNode("Don't worry, we will help you on your way to starting your postdeath transition as seamless as possible.", null, null)
+            new DialogueNode("You say 'Predead?'\nYour enemy replies, 'You know, on breath support, blood filled adventurers.", null, null),
+            new DialogueNode("You say 'Predead?'\nYour enemy replies, 'Don't worry, we will help you on your way to starting your postdeath transition as seamless as possible.", null, null)
         };
         public static DialogueNode[][] NecroOneResponses = new DialogueNode[][]
         {
@@ -205,13 +205,13 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[] NecroTwoResponseOne = new DialogueNode[]
         {
-            new DialogueNode("You're funny. I hope you keep that sense of humor postdeath.", null, null),
-            new DialogueNode("No worries, we'll remedy that for you.", null, null)
+            new DialogueNode("You say 'I'd like to not be breathing, I wouldn't have to smell you.'\nYour enemy replies, 'You're funny. I hope you keep that sense of humor postdeath.", null, null),
+            new DialogueNode("You say 'I'd like to not be breathing, I wouldn't have to smell you.'\nYour enemy replies, 'No worries, we'll remedy that for you.", null, null)
         };
         public static DialogueNode[] NecroTwoResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("Let's test that steel to steel.", null, null),
-            new DialogueNode("You're funny. I hope you keep that sense of humor postdeath.", null, null)
+            new DialogueNode("You say 'Here you are relying on my grace to survive.'\nYour enemy replies, 'Let's test that steel to steel.", null, null),
+            new DialogueNode("You say 'Here you are relying on my grace to survive.'\nYour enemy replies, 'You're funny. I hope you keep that sense of humor postdeath.", null, null)
         };
         public static DialogueNode[][] NecroTwoResponses = new DialogueNode[][]
         {
@@ -229,18 +229,18 @@ namespace Dungeon_Crawler {
         };
         public static string[] NecroThreeOptionsTwo = new string[]
         {
-            "Sounds like a rotten idea to me.",
-            "What's so special about the gemstone anyway?"
+            "Say 'Sounds like a rotten idea to me.'",
+            "Say 'What's so special about the gemstone anyway?'"
         };
         public static DialogueNode[] NecroThreeResponseOne = new DialogueNode[]
         {
-            new DialogueNode("Would you like to keep that smile in the next life? That can be arranged/.", null, null),
-            new DialogueNode("I'm unconcerned about your perceived abilities.", null, null)
+            new DialogueNode("You say 'My charming personality, was it?'\nYour enemy replies, 'Would you like to keep that smile in the next life? That can be arranged/.", null, null),
+            new DialogueNode("You say 'My charming personality, was it?'\nYour enemy replies, 'I'm unconcerned about your perceived abilities.", null, null)
         };
         public static DialogueNode[] NecroThreeResponseTwo = new DialogueNode[]
         {
-            new DialogueNode("Place holder", null, null),
-            new DialogueNode("Place holder", null, null)
+            new DialogueNode("You say 'Soon you will see how they were eliminated.'\nYour enemy replies, 'Place holder", null, null),
+            new DialogueNode("You say 'Soon you will see how they were eliminated.'\nYour enemy replies, 'Place holder", null, null)
         };
         public static DialogueNode[][] NecroThreeResponses = new DialogueNode[][]
         {

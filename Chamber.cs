@@ -65,9 +65,9 @@ namespace Dungeon_Crawler
         // Event master control
 
         private static readonly int HazardChance = 10;
-        private static readonly int TrapChance = 18;
-        private static readonly int MonsterChance = 28;
-        private static readonly int NpcChance = 10;
+        private static readonly int TrapChance = 20;
+        private static readonly int MonsterChance = 35;
+        private static readonly int NpcChance = 15;
         private static readonly int MerchantChance = 5;
         private static readonly int MasterIndex = 100;
 

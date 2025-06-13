@@ -510,6 +510,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     }
                     else
                     {
+                        Program.PrintASCII(ASCII.Death);
                         Utility.Print("You have died");
                         GameOver();
                     }

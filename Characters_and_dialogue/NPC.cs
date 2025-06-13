@@ -305,14 +305,17 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void EquipGreyStoneSpire(Player player)
         {
-            Utility.Print("The stone given to you feels warm to your hand.");
-            Utility.Print("You feel a strange connection to it, before it begins shining a bright light throughout the room.");
-            Utility.Print("The stone levitates out of your hand. It then hovers in front of you briefly, still glowing with an intense white.");
-            Utility.Print("The stone rockets towards your head, embedding itself inside your forehead.");
-            Utility.Print("Although a violent act, you feel no pain nor do you take any damage. In fact, you feel more powerful than before in a strange way.");
+            Utility.Print("The stone given, about the size of your thumb, to you is grey and rough, but looks like a crystal.");
+            Utility.Print("It's warm to the touch and you feel like it's trying to communicate with you.");
+            Utility.Print("SUDDENLY, it begins shining a bright light throughout the room.");
+            Program.PrintASCII(ASCII.Magic);
+            Utility.Print("The crystal levitates out of your hand. It then hovers in front of you briefly, still glowing with an intense white.");
+            Utility.Print("It rockets towards your head, embedding itself inside your forehead.");
+            Utility.Print("Although a violent act, you feel no pain nor do you take any damage.");
+            Utility.Print("In fact, you feel more powerful than before in a strange way. Nothing else seems to happen.");
             Item greyStoneSpire = new Item();
-            greyStoneSpire.Name = "Grey Stone Spire";
-            greyStoneSpire.Description = "A small stone spire, it is grey and has a small hole in the top";
+            greyStoneSpire.Name = "Greystone Crystal";
+            greyStoneSpire.Description = "A small dull, grey crystal, stuck into your forehead.";
             greyStoneSpire.Durability = 1000;
             greyStoneSpire.Value = 1000;
             player.GreyStoneSpire = greyStoneSpire;
