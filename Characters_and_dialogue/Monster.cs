@@ -15,29 +15,29 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         private readonly int maxArmorClass = 5;
         public string[] monsters = new string[]
         {
-            "Giant Rat",
-            "Giant Spider",
-            "Skeleton Warrior",
-            "Kobold",
-            "Deep Gnome",
-            "Grimlock",
-            "Troglodyte",
-            "Goblin Scout",
-            "Animated Armor",
-            "Spectre",
-            "Wight",
-            "Ogre",
-            "Cave Troll",
-            "Stone Golem",
-            "Mummy",
-            "Pit Crawler",
-            "Bone Naga",
-            "Land Shark",
-            "Drake",
-            "Hydra",
-            "Chimera",
-            "Wyvern",
-            "Purple Worm"
+            "a Giant Rat",
+            "a Giant Spider",
+            "a Skeleton Warrior",
+            "a Kobold",
+            "a Deep Gnome",
+            "a Grimlock",
+            "a Troglodyte",
+            "a Goblin Scout",
+            "an Animated Suit of Armor",
+            "a Spectre",
+            "a  Wight",
+            "an Ogre",
+            "a Cave Troll",
+            "a Stone Golem",
+            "a Mummy",
+            "a Pit Crawler",
+            "a Bone Naga",
+            "a Land Shark",
+            "a Drake",
+            "a Hydra",
+            "a Chimera",
+            "a Wyvern",
+            "a Purple Worm"
         };
 
         public string[] monsterDescriptions = new string[]
@@ -67,7 +67,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             "Titanic worm with a gaping maw, capable of devouring adventurers whole."
         };
 
-        public int ChallengeRating = 0;
+        public int ChallengeRating = 1;
         public int TurnCounter { get; set; } = 0;
         public Monster(int playerLvl) : base()
         {
@@ -79,7 +79,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Description = monsterDescriptions[monsterIndex];
             Health = Utility.GetRandomIndex(minHealth, maxHealth) + (ChallengeRating * 2);
             ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
-            XP = ChallengeRating * 50;
+            XP = ChallengeRating * 20;
         }
         public override void Attack(Character targetCharacter)
         {

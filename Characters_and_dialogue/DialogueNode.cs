@@ -30,12 +30,10 @@
                 } else if(FurtherDialogue != null)
                 {
                     DialogueNode chosenDialogue = FurtherDialogue[0][0];
-                    Utility.Print($"{npc.Name} shuffles away from you, quickly blending into the shadows and ruins.");
                     npc.InteractionInProgress = false;
                 }
             } else
             {
-                Utility.Print($"{npc.Name} shuffles away from you, quickly blending into the shadows and ruins.");
                 npc.InteractionInProgress= false;
             }
         }

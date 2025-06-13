@@ -6,7 +6,6 @@ namespace Dungeon_Crawler
     internal class Program
     {
         public static Random Random = new Random();
-        // Figure out spells
 
         static void Main(string[] args)
         {
@@ -45,7 +44,7 @@ namespace Dungeon_Crawler
                 Thread.Sleep(Utility.Delay);
                 Console.WriteLine("i) View inventory");
                 Thread.Sleep(Utility.Delay);
-                // Later - show map
+                // Map functionality coming soon
                 Console.WriteLine("x) Exit Game");
                 string decision = Utility.Read();
                 switch (decision)
@@ -82,8 +81,8 @@ namespace Dungeon_Crawler
         }
         public static Player CreatePlayer()
         {
-            PrintIntro();// ASCI art 
-            Utility.Print("Welcome Adventurer,\nBefore we begin, please tell me some things about yourself");
+            PrintIntro();
+            Utility.Print("Hello Adventurer,\nBefore we begin, please tell me some things about yourself");
             Utility.Print("What is your name?");
             Utility.Print("");
             string playerName = Console.ReadLine();
@@ -120,7 +119,11 @@ namespace Dungeon_Crawler
         public static void PrintIntro()
         {
             Utility.PrintLines();
-            Utility.Print("WELCOME TO\nTHE DUNGEON OF DRAEGMOR ");
+            Utility.Print(" THE");
+            Utility.Print("DUNGEON");
+            Utility.Print(" OF");
+            Utility.Print("DRAEGMOR");
+
             PrintASCII(Utility.Wizard);
         }
         public static void PrintASCII(string[] ascii)

@@ -96,7 +96,6 @@ namespace Dungeon_Crawler
             int randomEvent = Utility.GetRandomIndex(1, MasterIndex);
             if (randomEvent >= 1 && randomEvent <= TierOne)
             {
-                Utility.Print("You encounter a hazard in the chamber.");
                 HazardEvent(player);
             }
             else if (randomEvent > TierOne && randomEvent <= TierTwo)
@@ -134,10 +133,10 @@ namespace Dungeon_Crawler
         }
         public void RandomizePassages()
         {
-            NorthPassage = Utility.ChanceBool(70);
-            SouthPassage= Utility.ChanceBool(70);
-            EastPassage= Utility.ChanceBool(70);
-            WestPassage= Utility.ChanceBool(70);
+            NorthPassage = Utility.ChanceBool(65);
+            SouthPassage= Utility.ChanceBool(60);
+            EastPassage= Utility.ChanceBool(60);
+            WestPassage= Utility.ChanceBool(60);
         }
         public void ReturnPassages(string choice)
         {
@@ -341,15 +340,8 @@ namespace Dungeon_Crawler
         }
         public void SearchForLoot(Player player)
         {
-            int trapTrigger = Utility.GetRandomIndex(1, 10);
-            if (trapTrigger < 3)
-            {
-                TrapEvent(player);
-            }
-            if ((player.Perception + Utility.GetRandomIndex(7,10)) > 5)
-            {
                 Utility.Print("You search around the chamber.");
-                if (ChamberLoot == null)
+                if (ChamberLoot == null || ChamberLoot.Count() <= 0)
                 {
                     Utility.Print("No items are found.");
                 }
@@ -366,7 +358,6 @@ namespace Dungeon_Crawler
                     Utility.Print($"You find {ChamberGold} gold coins.");
                     player.Gold += ChamberGold;
                 }
-            }
 
         }
     }

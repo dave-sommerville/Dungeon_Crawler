@@ -277,6 +277,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     Console.WriteLine("Invalid choice, please try again.");
                     break;
             }
+            Utility.Print($"{Name} shuffles away from you, quickly blending into the shadows and ruins.");
 
         }
         public bool BagChecker(Player player)
@@ -370,6 +371,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     if (Inventory[i] == null) continue;
                     Utility.Print($"{i + 1}) {Inventory[i].Name}: {Inventory[i].Value} Gold Pieces");
                 }
+                Utility.Print($"You currently have {player.Gold} gold pieces.");
                 Utility.Print("What would you like to buy?\nSelect an item");
                 Utility.Print("Be careful what you choose, I don't ask twice");
                 Utility.Print("0) To Exit");

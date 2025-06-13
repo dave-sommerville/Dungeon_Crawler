@@ -95,38 +95,35 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     if (currentChamber.NorthPassage)
                     {
                         Y += 1;
-                        Utility.Print($"{Y}{X}");
                         break;
                     }
                     else
                     {
 
-                        Console.Write("You can't go this way\n");
+                        Utility.Print("You can't go this way\n");
                         break;
                     }
                 case "s":
                     if (currentChamber.SouthPassage)
                     {
                         Y -= 1;
-                        Utility.Print($"{Y}{X}");
 
                         break;
                     }
                     else
                     {
-                        Console.Write("You can't go this way\n");
+                        Utility.Print("You can't go this way\n");
                         break;
                     }
                 case "w":
                     if (currentChamber.WestPassage)
                     {
                         X -= 1;
-                        Utility.Print($"{Y}{X}");
                         break;
                     }
                     else
                     {
-                        Console.Write("You can't go this way\n");
+                        Utility.Print("You can't go this way\n");
                         break;
                     }
                 case "e":
@@ -138,7 +135,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     }
                     else
                     {
-                        Console.Write("You can't go this way\n");
+                        Utility.Print("You can't go this way\n");
                         break;
                     }
                 default:
@@ -175,7 +172,6 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 {
                     Chamber newChamber = dungeon.GenerateChamber(LocationId);
                     newChamber.ReturnPassages(decision);
-                    Utility.Print($"E {newChamber.EastPassage},W {newChamber.WestPassage},N {newChamber.NorthPassage},S {newChamber.SouthPassage}");
                     newChamber.DisplayDescription();
                     RestCounter += 1;
                     newChamber.MasterEventsTree(this);
@@ -326,12 +322,12 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Utility.Print("");
             Utility.Print("");
             Utility.Print("");
-            Console.ForegroundColor = ConsoleColor.Yellow;    // Text color
-            Console.BackgroundColor = ConsoleColor.Blue;      // Background color
+            Console.ForegroundColor = ConsoleColor.Black;    // Text color
+            Console.BackgroundColor = ConsoleColor.Green;      // Background color
             Console.Clear();
             Utility.Print("");
             Utility.Print("");
-            Utility.Print("");
+            Utility.Print("YOU ENCOUNTER A SERIOUS THREAT!");
             Utility.Print("");
 
             Boss boss = Boss.GetPlotBoss(plotIndex);
@@ -365,7 +361,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public void FightMenu(Monster monster)
         {
             Utility.Print("What attack action do you wish to take?");
-            Utility.Print("1) Attack 2) Mana Blast 3) Dodge 4) Use Item");
+            Utility.Print("1) Attack 2) Mana Blast 3) Dodge");
             int decision = Utility.PrintMenu(4);
             if (decision == 1)
             {
@@ -397,11 +393,11 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 monster.Attack(this);
                 Utility.Print("You have attempted to dodge the attack");
             }
-            else if (decision == 4)
-            {
-                PrintInventory();
-                UseInventoryItem();
-            }
+            //else if (decision == 4)
+            //{
+            //    PrintInventory();
+            //    UseInventoryItem();
+            //}
         }
         public void UseWeapon()
         {
@@ -573,55 +569,55 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void XpLevelUp()
         {
-            if (XP > 500 && PlayerLevel == 1)
+            if (XP > 100 && PlayerLevel == 1)
             {
                 Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 2;
             }
-            else if (XP > 1000 && PlayerLevel == 2)
+            else if (XP > 200 && PlayerLevel == 2)
             {
                 Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 3;
             }
-            else if (XP > 1500 && PlayerLevel == 3)
+            else if (XP > 300 && PlayerLevel == 3)
             {
                 Utility.Print("You have gained a level!");
                 IncreaseModifier();
                 PlayerLevel = 4;
             }
-            else if (XP > 2000 & PlayerLevel == 4)
+            else if (XP > 400 & PlayerLevel == 4)
             {
                 Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 5;
             }
-            else if (XP > 2500 && PlayerLevel == 5)
+            else if (XP > 500 && PlayerLevel == 5)
             {
                 Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 6;
             }
-            else if (XP > 3000 && PlayerLevel == 6)
+            else if (XP > 600 && PlayerLevel == 6)
             {
                 Utility.Print("You have gained a level!");
                 IncreaseModifier();
                 PlayerLevel = 7;
             }
-            else if (XP > 3500 && PlayerLevel == 7)
+            else if (XP > 700 && PlayerLevel == 7)
             {
                 Utility.Print("You have gained a level!");
                 GainHP();
                 PlayerLevel = 8;
             }
-            else if (XP > 4000 && PlayerLevel == 8)
+            else if (XP > 800 && PlayerLevel == 8)
             {
                 Utility.Print("You have gained a level!");
                 PointIncreaseWrapper();
                 PlayerLevel = 9;
             }
-            else if (XP > 4500 && PlayerLevel == 9)
+            else if (XP > 900 && PlayerLevel == 9)
             {
                 IncreaseModifier();
                 PlayerLevel = 10;

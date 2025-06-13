@@ -37,7 +37,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 if (attack > targetCharacter.ArmorClass)
                 {
                     Utility.Print($"{Name} attacked {targetCharacter.Name} and hit for {attack} damage");
-                    targetCharacter.Health -= attack; // Should check target's health 
+                    targetCharacter.Health -= attack; 
                 }
                 else
                 {
