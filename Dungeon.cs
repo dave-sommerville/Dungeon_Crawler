@@ -41,10 +41,14 @@ namespace Dungeon_Crawler
         private Dungeon() 
         {
             StartingPoint = new Chamber("00", "Welcome to the Dungeon of Draegmor. This is the first chamber.");
+            StartingPoint.NorthPassage = true;
+            StartingPoint.EastPassage = true;
+            StartingPoint.WestPassage = true;
+            StartingPoint.SouthPassage = false;
             ExploredChambers = new Dictionary<string, Chamber>
-    {
-        { "00", StartingPoint }
-    };
+            {
+                { "00", StartingPoint }
+            };
         }
 
         public static Dungeon GetInstance()

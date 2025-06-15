@@ -8,8 +8,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
     {
         private readonly int minAttack = 6;
         private readonly int maxAttack = 10;
-        private readonly int minDamage = 8;
-        private readonly int maxDamage = 12;
+        private readonly int minDamage = 4;
+        private readonly int maxDamage = 10;
         private readonly int minHealth = 20;
         private readonly int maxHealth = 40;
         private readonly int minArmorClass = 2;

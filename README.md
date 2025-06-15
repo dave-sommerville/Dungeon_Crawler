@@ -21,7 +21,7 @@ As extensive as this program currently is, this is only the first step. An expan
 I'm pleased with the game play I've achieved, but what I'm most proud of in this project is the script itself. If you are a programmer, I would love your opinion on my code and design behind the scenes: full code available [here](https://github.com/dave-sommerville/Dungeon_Crawler) I didn't include the code as part of the feedback form, so feel free to reach out to me via email or on my personal website [DS Code](https://ds-code.ca)
 ## Screenshots
 
-[![App Screenshot](images/preview.png)]
+![App Screenshot](https://dave-sommerville.github.io/ds-code-releases/img/dungeon-preview.png)
 
 
 ## Features
