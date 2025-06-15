@@ -305,7 +305,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void EquipGreyStoneSpire(Player player)
         {
-            Utility.Print("The stone given, about the size of your thumb, to you is grey and rough, but looks like a crystal.");
+            Utility.Print("The stone, about the size of your thumb, given to you is grey and rough, but looks like a crystal.");
             Utility.Print("It's warm to the touch and you feel like it's trying to communicate with you.");
             Utility.Print("SUDDENLY, it begins shining a bright light throughout the room.");
             Program.PrintASCII(ASCII.Magic);
@@ -403,11 +403,11 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public void StockMarketPlace()
         {
-            int stockCycles = Utility.GetRandomIndex(1, 3);
+            int stockCycles = Utility.GetRandomIndex(1, 5);
             for (int i = 0; i < stockCycles; i++) {
                 int weaponIndex = Utility.GetRandomIndex(0, 12);
                 int armorIndex = Utility.GetRandomIndex(0, 12);
-                int potionIndex = Utility.GetRandomIndex(0, 15);
+                int potionIndex = Utility.GetRandomIndex(0, 18);
                 if (weaponIndex > 5)
                 {
                     for (int j = 0; j < Inventory.Length; j++)

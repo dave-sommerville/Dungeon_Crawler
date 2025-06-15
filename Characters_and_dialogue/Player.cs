@@ -718,6 +718,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             {
                 Utility.SaveGameHistory();
             }
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
             IsPlaying = false;
         }
         public static int CharismaCheck(int length)

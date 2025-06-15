@@ -22,7 +22,7 @@ namespace Dungeon_Crawler
             if(choice == 1)
             {
                 Console.WriteLine("Great! Let's get started.");
-                Thread.Sleep(360);
+                Thread.Sleep(1000);
                 Console.Clear();
                 GameLaunch(CreatePlayer());
             } else
@@ -110,9 +110,9 @@ namespace Dungeon_Crawler
             {
                 playerName = "Adventurer";
             }
-            Utility.Print($"Very well,\nDo you care to describe yourself?");
+            Utility.Print($"Nice name\nDo you care to describe yourself?");
             Utility.Print("You may enter 'x' to skip this step");
-            Console.WriteLine();
+            Utility.Print("");
             string playerDesc = Console.ReadLine();
             if (playerDesc.ToLower().Trim() == "x")
             {
@@ -121,6 +121,7 @@ namespace Dungeon_Crawler
             Player player = new Player(playerName, playerDesc);
 
             Utility.Print($"Welcome {player.Name} to the Dungeon of Draegmor.\nYou are about to embark on a journey that will test your skills, courage, and resolve.");
+            Utility.Print("Be mindful of your limitations. Don't forget to use your items well and rest every now and then.");
             Utility.Print("");
             Utility.Print("");
             PrintASCII(ASCII.Door);

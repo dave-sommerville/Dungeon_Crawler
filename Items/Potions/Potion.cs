@@ -11,7 +11,8 @@ namespace Dungeon_Crawler.Items.Potions
             Name = "Dud Potion"; 
             Description = "Bottle of Water";
             Durability = 1;
-            Potency = 10; 
+            Potency = 10;
+            Value = Utility.GetRandomIndex(5, 15); // Random value between 5 and 15
         }
         public override void DisplayItem()
         {

@@ -189,7 +189,7 @@ namespace Dungeon_Crawler
         public Monster MonsterEvent(Player player)
         {
             Monster monster = new Monster(player.PlayerLevel);
-            Utility.Print($"{monster.Name} appears before you.");
+            Utility.Print($"A {monster.Name} appears before you.");
             Utility.Print($"{monster.Description}");
             return monster;
         }
@@ -206,6 +206,11 @@ namespace Dungeon_Crawler
             {
                 Utility.Print("You have a peaceful sleep. You feel fully rested.");
                 player.RestCounter = 0;
+                player.Health += 15;
+                if (player.Health > player.MaxHP)
+                {
+                    player.Health = player.MaxHP;
+                }
             }
         }
         public void NpcEvent(Player player)
