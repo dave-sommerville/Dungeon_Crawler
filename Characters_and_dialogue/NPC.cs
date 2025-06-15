@@ -344,8 +344,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public void MarketPlace(Player player) 
         {
             StockMarketPlace();
-            Utility.Print($"Hello adventurer, how brave to come this far.");
-            Utility.Print($"I am {Name}, the humble merchant, and I have a few items for sale. Do you want to see them?");
+            Utility.Print($"'Hello adventurer, how brave to come this far.' a strange character who seems to blend into the shadows.");
+            Utility.Print($"'I am {Name}, the humble merchant, and I have a few items for sale. Do you want to see them?'");
             Utility.Print("1) Yes 2) Talk to merchant");
             int decision = Utility.PrintMenu(2);
             if (decision == 1)
@@ -357,7 +357,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 Utility.Print("'Can I ask you a question?'");
                 MerchantText.Node(this);
                 Utility.Print("");
-                Utility.Print("So, would you like to take a look at my shop?");
+                Utility.Print("So, would you like to take a look at my shop? (y/n)");
                 string choice = Utility.Read();
                 if(choice == "y")
                 {
@@ -405,9 +405,9 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         {
             int stockCycles = Utility.GetRandomIndex(1, 3);
             for (int i = 0; i < stockCycles; i++) {
-                int weaponIndex = Utility.GetRandomIndex(0, 8);
-                int armorIndex = Utility.GetRandomIndex(0, 8);
-                int potionIndex = Utility.GetRandomIndex(0, 7);
+                int weaponIndex = Utility.GetRandomIndex(0, 12);
+                int armorIndex = Utility.GetRandomIndex(0, 12);
+                int potionIndex = Utility.GetRandomIndex(0, 15);
                 if (weaponIndex > 5)
                 {
                     for (int j = 0; j < Inventory.Length; j++)
@@ -431,6 +431,17 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                     }
                 }
                 if (potionIndex > 5)
+                {
+                    for (int j = 0; j < Inventory.Length; i++)
+                    {
+                        if (Inventory[j] == null)
+                        {
+                            Inventory[j] = new Potion();
+                            return;
+                        }
+                    }
+                }
+                if (potionIndex > 10)
                 {
                     for (int j = 0; j < Inventory.Length; i++)
                     {

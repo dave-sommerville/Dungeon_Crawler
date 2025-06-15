@@ -66,8 +66,8 @@ namespace Dungeon_Crawler
 
         private static readonly int HazardChance = 10;
         private static readonly int TrapChance = 20;
-        private static readonly int MonsterChance = 35;
-        private static readonly int NpcChance = 15;
+        private static readonly int MonsterChance = 30;
+        private static readonly int NpcChance = 20;
         private static readonly int MerchantChance = 5;
         private static readonly int MasterIndex = 100;
 
@@ -151,6 +151,7 @@ namespace Dungeon_Crawler
                     break;
                 case "e":
                     WestPassage = true;
+
                     break;
                 case "w":
                     EastPassage = true;
@@ -316,19 +317,19 @@ namespace Dungeon_Crawler
                 Armor armor = new Armor();
                 ChamberLoot.Add(armor);
             }
-            if (potionIndex > 4)
+            if (potionIndex > 3)
             {
                 int potionType = Utility.GetRandomIndex(0, 700);
                 Potion chamberPotion = null;
-                if (potionType < 20)
+                if (potionType < 10)
                 {
                     chamberPotion = new PotionOfKnowledge();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 140)
+                } else if (potionType < 80)
                 {
                     chamberPotion = new PotionOfRestoration();
                     ChamberLoot.Add(chamberPotion);
-                } else if (potionType < 260)
+                } else if (potionType < 180)
                 {
                     chamberPotion = new PotionOfMana();
                     ChamberLoot.Add(chamberPotion);

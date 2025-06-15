@@ -182,6 +182,19 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         dungeon.ExploredChambers[LocationId] = newChamber;
                     }
                 }
+                else if (plotTrigger == 3 || plotTrigger == 6 || plotTrigger == 9)
+                {
+                    Utility.Print("Boss fight");
+                    Utility.Print($"{plotTrigger}");
+                    BossFight(dungeon, plotTrigger);
+                    Utility.Print("You win!");
+                    Utility.Print("");
+                    Program.PrintASCII(ASCII.Victory);
+                    Utility.Print("");
+                    Utility.Print("You have achieved the highest level possible and completed this stage of the dungeon!");
+                    GameOver();
+
+                }
                 else
                 {
                     Utility.Print("Boss fight");
@@ -310,7 +323,11 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             do
             {
                 FightMenu(monster);
-                PlayerDeathCheck();
+                int deathCehck = PlayerDeathCheck();
+                if (deathCehck == 1)
+                {
+                    monster.Health = 0; // Player was revived by the prisoner, so boss health is set to 0
+                }
             } while (monster.Health > 0 && IsPlaying);
             UseAmor();
             if (RestCounter < 5)
@@ -346,21 +363,30 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             do
             {
                 FightMenu(boss);
-                PlayerDeathCheck();
                 boss.BossDeathCheck();
+                int deathCehck = PlayerDeathCheck();
+                if(deathCehck == 1)
+                {
+                    boss.Health = 0; // Player was revived by the prisoner, so boss health is set to 0
+                }
             } while (boss.Health > 0 && IsPlaying);
             UseAmor();
-            if (RestCounter < 5)
+            if (RestCounter > 8)
+            {
+                Utility.Print("You need to rest before you can gain experience.");
+            } else
             {
                 GainXp(boss);
                 XpLevelUp();
-            }
+            };
             RestCounter += 1; // Chamber will already have loot, if anything maybe I could leave the bosses "Relics" or something
             Utility.Print("");
             Utility.Print("");
             Utility.Print("");
             Utility.Print("");
             Console.ResetColor();
+            Utility.Print("");
+            Utility.Print("");
         }
         public void FightMenu(Monster monster)
         {
@@ -380,7 +406,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                 }
                 else
                 {
-                    int manaDamage = PlayerLevel * 10;
+                    int manaDamage = PlayerLevel * 15;
                     Utility.Print($"You have used a mana blast for {manaDamage} points of damage");
                     monster.Health -= manaDamage;
                     if (monster.Health <= 0)
@@ -461,7 +487,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         }
         public int PlotTrigger(Dungeon dungeon)
         {
-            int plotIndex = -1; // Need to add player level to checks or else this'll get out of hand
+            int plotIndex = -1;
             if (X > 5 && Y < 5 && PlotOneLvl == 1)
             {
                 PlotOneLvl = 2;
@@ -471,30 +497,42 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             {
                 PlotOneLvl = 3;
                 plotIndex = 2;
+            } else if (X > 15 && Y < 5 && PlotOneLvl == 3)
+            {
+                PlotOneLvl = 4;
+                plotIndex = 3;
             }
             else if (X < -5 && Y < 5 && PlotTwoLvl == 1)
             {
                 PlotTwoLvl = 2;
-                plotIndex = 3;
+                plotIndex = 4;
             }
             else if (X < -10 && Y < 5 && PlotTwoLvl == 2)
             {
                 PlotTwoLvl = 3;
-                plotIndex = 4;
+                plotIndex = 5;
+            }
+            else if(X < -15 && Y < 5 && PlotTwoLvl == 3) {
+                PlotTwoLvl = 4;
+                plotIndex = 6;
             }
             else if (Y > 5 && PlotThreeLvl == 1)
             {
                 PlotThreeLvl = 2;
-                plotIndex = 5;
+                plotIndex = 7;
             }
-            else if (Y > 10 && PlotThreeLvl == 2)
+            else if (Y > 12 && PlotThreeLvl == 2)
             {
                 PlotThreeLvl = 3;
-                plotIndex = 6;
+                plotIndex = 8;
+            } else if (Y > 16 && PlotThreeLvl == 3)
+            {
+                PlotThreeLvl = 4;
+                plotIndex = 9;
             }
-            return plotIndex;
+                return plotIndex;
         }
-        public void PlayerDeathCheck()
+        public int PlayerDeathCheck()
         {
             if (Sanity > 0)
             {
@@ -507,59 +545,64 @@ namespace Dungeon_Crawler.Characters_and_dialogue
                         Utility.Print("They burst into blinding white light both vanquishing your enemies as well and sending a healing surge through your body");
                         PrisonerStatus = 2;
                         Health += 50;
+                        return 1; // Player is revived by the prisoner
                     }
                     else
                     {
-                        Program.PrintASCII(ASCII.Death);
                         Utility.Print("You have died");
+                        Utility.Print("");
+                        Program.PrintASCII(ASCII.Death);
+                        Utility.Print("");
                         GameOver();
+                        return 0; // Player has died
                     }
                 }
+                return 0;
             }
             else
             {
                 Utility.Print("You have lost grip on reality, you can no longer hold yourself together.");
                 GameOver();
+                return 0; // Player has lost sanity
             }
         }
 
-        //public void ApplySkillPoint()
-        //{
-        //    bool skillApplied = false;
-        //    while (!skillApplied)
-        //    {
-        //        string skill = Console.ReadLine().Trim().ToLower();
-        //        switch (skill)
-        //        {
-        //            case "athletics":
-        //            case "ath":
-        //                Athletics += 1;
-        //                skillApplied = true;
-        //                break;
-        //            case "perception":
-        //            case "per":
-        //                Perception += 1;
-        //                skillApplied = true;
-        //                break;
-        //            case "dexterity":
-        //            case "dex":
-        //                Dexterity += 1;
-        //                skillApplied = true;
-        //                break;
-        //            default:
-        //                Utility.Print("Invalid skill");
-        //                break;
-        //        }
-        //    }
-        //}
-        public void GainXp(Monster monster)
+        public void ApplySkillPoint()
         {
+            bool skillApplied = false;
+            while (!skillApplied)
+            {
+                string skill = Console.ReadLine().Trim().ToLower();
+                switch (skill)
+                {
+                    case "athletics":
+                    case "ath":
+                        Athletics += 1;
+                        skillApplied = true;
+                        break;
+                    case "perception":
+                    case "per":
+                        Perception += 1;
+                        skillApplied = true;
+                        break;
+                    case "dexterity":
+                    case "dex":
+                        Dexterity += 1;
+                        skillApplied = true;
+                        break;
+                    default:
+                        Utility.Print("Invalid skill");
+                        break;
+                }
+            }
+        }
+        public void GainXp(Monster monster)
+        { 
             int xp = monster.XP;
             XP += xp;
         }
         public void IncreaseModifier()
         {
-            Utility.Print("You gain an increase to your overall modifier.");
             Modifier += 1;
         }
 
@@ -571,63 +614,97 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         //}
         public void GainHP()
         {
-            Health += 15;
-            MaxHP += 15;
+            Health += 20;
+            MaxHP += 20;
         }
         public void XpLevelUp()
         {
             if (XP > 100 && PlayerLevel == 1)
             {
-                Utility.Print("You have gained a level!");
+                Utility.Print("You have gained a level! Your max health has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
                 GainHP();
                 PlayerLevel = 2;
+                Health = MaxHP; // Restore health on level up
             }
             else if (XP > 200 && PlayerLevel == 2)
             {
-                Utility.Print("You have gained a level!");
-                //PointIncreaseWrapper();
+                Utility.Print("You have gained a level! Your max health has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
+                GainHP();                //PointIncreaseWrapper();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 3;
             }
             else if (XP > 300 && PlayerLevel == 3)
             {
-                Utility.Print("You have gained a level!");
+                Utility.Print("You have gained a level! Your base modifier has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
                 IncreaseModifier();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 4;
             }
             else if (XP > 400 & PlayerLevel == 4)
             {
-                Utility.Print("You have gained a level!");
+                Utility.Print("You have gained a level! Your max health has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
                 GainHP();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 5;
             }
             else if (XP > 500 && PlayerLevel == 5)
             {
-                Utility.Print("You have gained a level!");
-                //PointIncreaseWrapper();
+                Utility.Print("You have gained a level! Your max health has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
+                GainHP();                //PointIncreaseWrapper();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 6;
             }
             else if (XP > 600 && PlayerLevel == 6)
             {
-                Utility.Print("You have gained a level!");
+                Utility.Print("You have gained a level! Your base modifier has increased.");
                 IncreaseModifier();
                 PlayerLevel = 7;
             }
             else if (XP > 700 && PlayerLevel == 7)
             {
-                Utility.Print("You have gained a level!");
+                Utility.Print("You have gained a level! Your max health has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
                 GainHP();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 8;
             }
             else if (XP > 800 && PlayerLevel == 8)
             {
-                Utility.Print("You have gained a level!");
-                //PointIncreaseWrapper();
+                Utility.Print("You have gained a level! Your base modifier has increased.");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
+                IncreaseModifier();               //PointIncreaseWrapper();
+                Health = MaxHP; // Restore health on level up
                 PlayerLevel = 9;
             }
             else if (XP > 900 && PlayerLevel == 9)
             {
-                IncreaseModifier();
+                Utility.Print("");
+                Program.PrintASCII(ASCII.LvlUp);
+                Utility.Print("");
                 PlayerLevel = 10;
+                Utility.Print("You win!");
+                Utility.Print("");
+                Program.PrintASCII(ASCII.Victory);
+                Utility.Print("");
                 Utility.Print("You have achieved the highest level possible and completed this stage of the dungeon!");
                 GameOver();
             }
@@ -635,7 +712,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         public void GameOver()
         {
             Utility.Print("Game Over");
-            Utility.Print("Would you like to save your game to a file? (y/n)");
+            Utility.Print("Would you like to save your game to a file (Documents/GameSaves)? (y/n)");
             string decision = Utility.Read();
             if (decision == "y")
             {

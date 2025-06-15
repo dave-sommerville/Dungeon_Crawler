@@ -6,8 +6,8 @@ namespace Dungeon_Crawler.Characters_and_dialogue
 {
     public class Monster : Character
     {
-        private readonly int minAttack = 8;
-        private readonly int maxAttack = 12;
+        private readonly int minAttack = 6;
+        private readonly int maxAttack = 10;
         private readonly int minDamage = 8;
         private readonly int maxDamage = 12;
         private readonly int minHealth = 20;
@@ -16,29 +16,29 @@ namespace Dungeon_Crawler.Characters_and_dialogue
         private readonly int maxArmorClass = 5;
         public string[] monsters = new string[]
         {
-            "a Giant Rat",
-            "a Giant Spider",
-            "a Skeleton Warrior",
-            "a Kobold",
-            "a Deep Gnome",
-            "a Grimlock",
-            "a Troglodyte",
-            "a Goblin Scout",
-            "an Animated Suit of Armor",
-            "a Spectre",
-            "a  Wight",
-            "an Ogre",
-            "a Cave Troll",
-            "a Stone Golem",
-            "a Mummy",
-            "a Pit Crawler",
-            "a Bone Naga",
-            "a Land Shark",
-            "a Drake",
-            "a Hydra",
-            "a Chimera",
-            "a Wyvern",
-            "a Purple Worm"
+            "A Giant Rat",
+            "A Giant Spider",
+            "A Skeleton Warrior",
+            "A Kobold",
+            "A Deep Gnome",
+            "A Grimlock",
+            "A Troglodyte",
+            "A Goblin Scout",
+            "An Animated Suit of Armor",
+            "A Spectre",
+            "A  Wight",
+            "An Ogre",
+            "A Cave Troll",
+            "A Stone Golem",
+            "A Mummy",
+            "A Pit Crawler",
+            "A Bone Naga",
+            "A Land Shark",
+            "A Drake",
+            "A Hydra",
+            "A Chimera",
+            "A Wyvern",
+            "A Purple Worm"
         };
 
         public string[] monsterDescriptions = new string[]
@@ -80,7 +80,7 @@ namespace Dungeon_Crawler.Characters_and_dialogue
             Description = monsterDescriptions[monsterIndex];
             Health = Utility.GetRandomIndex(minHealth, maxHealth) + (ChallengeRating * 2);
             ArmorClass = Utility.GetRandomIndex(minArmorClass, maxArmorClass) + (ChallengeRating * 2);
-            XP = ChallengeRating * 20;
+            XP = ChallengeRating * 35;
         }
         public override void Attack(Character targetCharacter)
         {

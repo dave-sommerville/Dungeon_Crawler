@@ -35,6 +35,14 @@ I'm pleased with the game play I've achieved, but what I'm most proud of in this
 #### Optional - Ambiance Music
 [Music By **Yasuko N**]("https://pixabay.com/users/_yasuko_-33309096/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=204107")
 
+### Upcoming Features
+
+Once I manage to get the Beta balanced and all the bugs out, I'm very excited to introduce some further features to game play. Including: 
+- Spells
+- Player skills
+- Expanded dialogue options
+- Expanded World Lore
+
 #### Other Resources
 - [ASCII Art]()
 - Descriptions and Entities generated with assistance from [ChatGPT](https://chat.openai.com/chat)

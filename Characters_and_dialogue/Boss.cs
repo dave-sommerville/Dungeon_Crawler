@@ -82,7 +82,7 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[][] DrowMonologue = new DialogueNode[][] {
 
-            [new DialogueNode("Monologue", null, null)]
+            [new DialogueNode("There is an evil monologue here... in the full version", null, null)]
         };
         public static DialogueNode DrowThreeTextOne = new DialogueNode(DrowThreeStatementOne, DrowThreeOptionsOne, DrowThreeResponses);
         public static DialogueNode DrowThreeTextTwo = new DialogueNode(DrowThreeStatementTwo, DrowThreeOptionsTwo, DrowMonologue);
@@ -136,7 +136,7 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode SnakeTwoText = new DialogueNode(SnakeOneStatement, SnakeOneOptions, SnakeOneResponses);
 
-        public static string SnakeThreeStatementOne = "There you are, little one. Your smell of your blood has been tickling my tongue. How do you wish to die?";
+        public static string SnakeThreeStatementOne = "There you are, little one. The smell of your blood has been tickling my tongue. How do you wish to die?";
         public static string SnakeThreeStatementTwo = "That gemstone on your head is my key to godhood. You are not prepared for how desperately I desire it.";
         public static string[] SnakeThreeOptionsOne = new string[]
         {
@@ -166,7 +166,7 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[][] SnakeMonologue = new DialogueNode[][] {
 
-            [new DialogueNode("Monologue", null, null)]
+            [new DialogueNode("There is an evil monologue here... in the full version", null, null)]
         };
         public static DialogueNode SnakeThreeTextOne = new DialogueNode(SnakeThreeStatementOne, SnakeThreeOptionsOne, SnakeResponses);
         public static DialogueNode SnakeThreeTextTwo = new DialogueNode(SnakeThreeStatementTwo, SnakeThreeOptionsTwo, SnakeMonologue);
@@ -249,7 +249,7 @@ namespace Dungeon_Crawler {
         };
         public static DialogueNode[][] NecroMonologue = new DialogueNode[][] {
 
-            [new DialogueNode("Monologue", null, null)]
+            [new DialogueNode("There is an evil monologue here... in the full version", null, null)]
         };
         public static DialogueNode NecroThreeTextOne = new DialogueNode(NecroThreeStatementOne, NecroThreeOptionsOne, NecroThreeResponses);
         public static DialogueNode NecroThreeTextTwo = new DialogueNode(NecroThreeStatementTwo, NecroThreeOptionsTwo, NecroMonologue);
@@ -267,6 +267,7 @@ namespace Dungeon_Crawler {
             Description = description;
             NumberOfAttacks = numberOfAttacks;
             AttackDescriptions = attackDescriptions;
+            Health = Utility.GetRandomIndex((ChallengeRating * 30), (ChallengeRating * 40));
             Dialogue = dialogue;
             XP = Utility.GetRandomIndex(ChallengeRating * 100, ChallengeRating * 200);
         }

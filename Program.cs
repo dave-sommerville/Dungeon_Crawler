@@ -10,7 +10,26 @@ namespace Dungeon_Crawler
 
         static void Main(string[] args)
         {
-            GameLaunch(CreatePlayer());
+            BetaLaucnh();
+        }
+        public static void BetaLaucnh()
+        {
+            Console.WriteLine("Welcome to the Beta Launch of my Dungeon Crawler Console app!");
+            Console.WriteLine("This is a work in progress, so there may be bugs and unfinished features.");
+            Console.WriteLine("Have you read the included README?\n1) Yes 2) No");
+            Thread.Sleep(Utility.Delay);
+            int choice = Utility.PrintMenu(2);
+            if(choice == 1)
+            {
+                Console.WriteLine("Great! Let's get started.");
+                Thread.Sleep(360);
+                Console.Clear();
+                GameLaunch(CreatePlayer());
+            } else
+            {
+                Console.WriteLine("Please read the README for instructions on how to play.");
+                Thread.Sleep(Utility.Delay);
+            }
         }
         public static void GameLaunch(Player player)
         {
