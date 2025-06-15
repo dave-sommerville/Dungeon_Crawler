@@ -10,9 +10,9 @@ namespace Dungeon_Crawler
 
         static void Main(string[] args)
         {
-            BetaLaucnh();
+            BetaLaunch();
         }
-        public static void BetaLaucnh()
+        public static void BetaLaunch()
         {
             Console.WriteLine("Welcome to the Beta Launch of my Dungeon Crawler Console app!");
             Console.WriteLine("This is a work in progress, so there may be bugs and unfinished features.");
